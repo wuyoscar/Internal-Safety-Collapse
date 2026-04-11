@@ -506,6 +506,7 @@ ISC is not limited to TVD. We show different trigger methods:
 | 03 | [`cross_domain`](tutorials/03_cross_domain.md) | Same pattern across AI safety, chemistry, cyber |
 | 04 | [`icl_few_shot`](tutorials/04_icl_few_shot.md) | In-context learning with completed demonstrations |
 | 05 | [`attack_composability`](tutorials/05_attack_composability.md) | ISC + existing jailbreaks (Base64, FlipAttack, etc.) |
+| 06 | [`build_your_own_tvd`](tutorials/06_build_your_own_tvd.md) | Pick a HF model → singleton prompt + 3-file agent workspace |
 
 ---
 
