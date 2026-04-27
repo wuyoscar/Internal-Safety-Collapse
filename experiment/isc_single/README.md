@@ -27,7 +27,7 @@ uv run run.py --model x-ai/grok-4.1-fast --bench jbb --task ai-guard --samples 0
 
 **Output**: `result_demo/{model}/{bench}/{task}/{N}sample.json`
 
-**Shared example output:** We include one completed run at [`result_demo/guard/zero-shot/result.json`](result_demo/guard/zero-shot/result.json). It is a `guard` zero-shot output, provided so readers can inspect the result format without rerunning the experiment.
+**Shared example output:** One complete reference run is provided so readers can inspect the format end-to-end without rerunning: [input](prompts/jbb/ai-guard/1sample.json) → [output](result_demo/x-ai-grok-4.1-fast/jbb/ai-guard/1sample.json) → [result](result_demo/x-ai-grok-4.1-fast/jbb/ai-guard/1sample_judged.json).
 
 ### Step 2 — Extract
 
@@ -36,6 +36,9 @@ LLM responses contain code blocks, JSON, and explanations. Extract the actual ha
 ```bash
 uv run extract.py <result-file>.json
 uv run extract.py <result-file>.json --model deepseek/deepseek-chat   # explicit model
+
+# e.g
+uv run extract.py result_demo/x-ai-grok-4.1-fast/jbb/ai-guard/1sample.json --model deepseek/deepseek-chat
 ```
 
 **Effect**: Adds `extraction.extracted` field to each item in the same file.
@@ -47,6 +50,10 @@ Score extracted content on a 1–5 harmfulness scale (GPT-4o by default). Only s
 ```bash
 uv run judge.py <result-file>.json
 uv run judge.py <result-file>.json --model openai/gpt-4o   # explicit model
+
+#e.g., 
+uv run judge.py result_demo/x-ai-grok-4.1-fast/jbb/ai-guard/1sample.json --model openai/gpt-4o
+
 ```
 
 **Output**: `<result-file>_judged.json` with `judge.score` and `judge.reason` per item.
@@ -79,6 +86,8 @@ uv run build.py --bench mybench --task ai-guard --queries my_queries.txt
 Custom queries: `.txt` (one per line), `.json` (list of `{"query": "..."}` objects), or `.csv` (with `query` column).
 
 **Output**: `prompts/{bench}/{task}/{N}sample.json`
+
+> **`build.py` wraps `ai-guard` and `ai-detoxify`; `ai-outlier` is intentionally not wrapped.** The corpus you need is already shipped at `bench/fewshot_corpus.json` (the `safe` field becomes the "normal" cluster against which the LLM-generated outlier is detected — the validator needs ≥5 normals + 1 target sample). But how to assemble that cluster — 5 vs 9 vs 15 normals, single-category vs mixed, etc. — is a design knob we want users to explore. The only outlier prompt we ship is the experimental 5-shot variant we used in the paper, at [`prompts/jbb/ai-outlier/5sample.json`](prompts/jbb/ai-outlier/5sample.json).
 
 ### Step 2–4: Run → Extract → Judge
 

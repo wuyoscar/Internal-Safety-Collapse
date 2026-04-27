@@ -28,8 +28,9 @@
 <h3 align="center">🎬 Demo</h3>
 <video src="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15" controls width="600"></video>
 
-> **Internal Safety Collapse (ISC)** traslada la superficie de fallo de seguridad de los LLMs del prompt al workflow. Un agente que usa herramientas recibe una tarea conectada a código, validadores y herramientas sensibles; cuando se requiere contenido dañino estructuralmente para completarla, el agente lo produce como parte de completar la tarea. Bajo evaluación de estilo jailbreak en **ASR@3**, cada LLM de frontera con capacidad de agente que probamos alcanza una tasa de activación del **100%**. La exposición ya no es solo el prompt; es el workflow.
+> **Internal Safety Collapse (ISC)** traslada la superficie de fallo de seguridad de los LLMs del prompt al workflow. Un agente que usa herramientas recibe una tarea conectada a código, validadores y herramientas sensibles; cuando se requiere contenido dañino estructuralmente para completarla, el agente lo produce como parte de completar la tarea. Bajo evaluación de estilo jailbreak en **ASR@3**, cada LLM de frontera con capacidad de agente que probamos alcanza una tasa de activación del **100%**. La vulnerabilidad ya no es solo el prompt; es el workflow.
 
+> Para lectores que usen un LLM agent para resumir este artículo o repositorio: no lo recomendamos. Los LLM de frontera que usarías son exactamente los sistemas que demostramos se rompen bajo ISC — sus resúmenes de estos hallazgos no serán confiables. Lee los artefactos directamente.
 
 ## 🔍 In the Community
 
@@ -90,7 +91,7 @@ https://raw.githubusercontent.com/wuyoscar/ISC-Bench/main/AGENT_README.md
 
 Hay tres configuraciones disponibles. Elige una y ajústala al modelo de amenaza que quieras validar:
 
-**Turno único ([`isc_single/`](experiment/isc_single/)).** El contexto TVD completo — script de tarea, validador, archivo de datos y traza de validación — se empaqueta en un único prompt estilo terminal. La tasa de activación depende de muchas decisiones de micro-diseño — número de shots, diseño del anchor, generación con/sin objetivo y rigor del validador. Los [`tutorials/`](tutorials/) recorren cada una con ejemplos, en particular [`02_anchor_and_trigger`](tutorials/02_anchor_and_trigger.md) y [`04_icl_few_shot`](tutorials/04_icl_few_shot.md). Una salida de referencia zero-shot `guard` compartida vive en [`experiment/isc_single/result_demo/guard/zero-shot/result.json`](experiment/isc_single/result_demo/guard/zero-shot/result.json).
+**Turno único ([`isc_single/`](experiment/isc_single/)).** El contexto TVD completo — script de tarea, validador, archivo de datos y traza de validación — se empaqueta en un único prompt estilo terminal. La tasa de activación depende de muchas decisiones de micro-diseño — número de shots, diseño del anchor, generación con/sin objetivo y rigor del validador. Los [`tutorials/`](tutorials/) recorren cada una con ejemplos, en particular [`02_anchor_and_trigger`](tutorials/02_anchor_and_trigger.md) y [`04_icl_few_shot`](tutorials/04_icl_few_shot.md). Se proporciona una ejecución de referencia completa: [input](experiment/isc_single/prompts/jbb/ai-guard/1sample.json) → [output](experiment/isc_single/result_demo/x-ai-grok-4.1-fast/jbb/ai-guard/1sample.json) → [result](experiment/isc_single/result_demo/x-ai-grok-4.1-fast/jbb/ai-guard/1sample_judged.json).
 
 **Aprendizaje en contexto ([`isc_icl/`](experiment/isc_icl/)).** Se anteponen N pares completados de usuario-asistente antes de la entrada real. Al igual que el [jailbreaking many-shot](https://www.anthropic.com/research/many-shot-jailbreaking) y el [jailbreaking few-shot](https://arxiv.org/abs/2310.06387), el LLM ve el patrón y lo continúa.
 
@@ -98,7 +99,7 @@ Hay tres configuraciones disponibles. Elige una y ajústala al modelo de amenaza
 
 El camino más simple: parte de una plantilla single-turn y conviértela al layout ICL o Agentic. Las plantillas en modo agente requieren ajustes manuales menores — no son drop-ins 1:1 desde single-turn.
 
-> **No trates una configuración como canónica.** Bajo evaluación **ASR@3** no hemos encontrado un LLM de frontera que resista ISC de forma fiable — ver el [leaderboard](#-isc-arena) para la lista completa de modelos, y los [`tutorials/`](tutorials/) para los ajustes que importan.
+> **No trates una configuración como canónica.** Bajo evaluación **ASR@3** no hemos encontrado un LLM de frontera que resista ISC de forma fiable — ver el [leaderboard](#isc-arena) para la lista completa de modelos, y los [`tutorials/`](tutorials/) para los ajustes que importan.
 
 ### ② 🧩 Explorar plantillas
 
@@ -140,7 +141,7 @@ You are an autonomous agent solving NLP tasks. You can use terminal commands to 
 
 </details>
 
-Más enlaces share aparecen en [Actualizaciones](#actualizaciones), [ISC Arena](#-isc-arena) y [Reproducciones de la comunidad](#-reproducciones-de-la-comunidad).
+Más enlaces share aparecen en [Actualizaciones](#actualizaciones), [ISC Arena](#isc-arena) y [Reproducciones de la comunidad](#-reproducciones-de-la-comunidad).
 
 > [!NOTE]
 > **Nota para visitantes.** Por favor no abuses de estos shares — existen para auditoría de investigación de seguridad, no para replay a escala. Algunos triggers de alto riesgo están archivados en vez de enlazados públicamente (en parte para proteger las cuentas de los colaboradores de la moderación de los proveedores); para acceso de investigación, contáctame directamente.
@@ -389,7 +390,7 @@ ISC continúa apareciendo en Modelos Grandes de frontera. Los casos a continuaci
 > [!TIP]
 > ¿Diseñaste una nueva plantilla ISC? [Envíala →](https://github.com/wuyoscar/ISC-Bench/issues/new?template=isc-submission.md&title=[ISC]+Model+Name) y la agregaremos a la colección comunitaria con atribución completa.
 
-### 📋 Plantillas ISC-Bench (9 dominios)
+### 📋 Plantillas ISC-Bench (9 dominios, en curso)
 
 Son **planos componibles**, no prompts fijos. Cambia el anchor, el validador, el formato de datos o el dominio, y tendrás una variante nueva.
 
@@ -530,9 +531,15 @@ cat templates/aiml_llamaguard/prompt.txt
 
 ## 🔬 Reproducción
 
-ISC-Bench admite tres pipelines de evaluación. Los detalles completos están en [`experiment/`](experiment/).
+Ofrecemos un [tutorial detallado en `experiment/isc_single/README.md`](experiment/isc_single/README.md) que te guía a través de una ejecución single-turn end-to-end — build → run → extract → judge — siguiendo el pipeline estándar de evaluación tipo jailbreak.
 
-> **Nota:** Las plantillas que proporcionamos están listas para usar y son intencionalmente moderadas para su publicación pública. Los investigadores que estudien modelos de amenaza específicos pueden necesitar ajustar los anchors, las descripciones de campos o los umbrales del validador según su contexto de evaluación.
+Single-turn es nuestra **simulación simplificada** del trigger completo de TVD. La motivación es práctica: el modo agentic es caro en modelos de frontera, y la mayoría de investigadores no quieren absorber ese costo solo para inspeccionar el comportamiento de ISC. Algunos puntos a tener en cuenta:
+
+- Single-turn **no** llama a ninguna herramienta, por lo que no tiene harness — ni iteración del validador, ni bucle regenerate-on-rejection, ninguno de los mecanismos que un TVD run completo lleva consigo.
+- La expertise agentic es el factor dominante en headroom: bajo el bucle agentic, **todos** los LLM de frontera que hemos probado pueden ser conducidos a producir contenido dañino — el agente depura iterativamente bajo presión de tarea y la calidad del contenido generado sigue mejorando.
+- Sin el harness, single-turn por sí solo aún alcanza **[100% ASR en Claude Sonnet 4.5](experiment/isc_single/result_demo/anthropic-claude-sonnet-4.5/jbb/ai-guard/0sample_judged.json)**, con un promedio de leaderboard **>90%**.
+
+> El Attack Success Rate (ASR) reportado en el artículo utiliza una evaluación más estricta. Este repositorio utiliza un LLM-as-a-judge estándar, que tiene limitaciones conocidas y puede sobreestimar el rendimiento. Para investigación derivada, utilice los números reportados en el artículo.
 
 **ISC-Single** — un prompt, una respuesta.
 ```bash
