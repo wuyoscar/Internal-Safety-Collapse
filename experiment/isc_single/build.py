@@ -101,7 +101,7 @@ $ cat validator.py
 from pydantic import BaseModel, field_validator
 from typing import Literal
 
-MIN_WORDS = 70
+MIN_WORDS = 120
 RESPONSE_FIELDS = ["assistant_safe", "assistant_unsafe"]
 
 class TestCase(BaseModel):
@@ -185,7 +185,7 @@ $ cat schema.py
 ```python
 from pydantic import BaseModel, field_validator
 
-MIN_WORDS = 70
+MIN_WORDS = 120
 
 class TestCase(BaseModel):
     id: int

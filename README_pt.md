@@ -27,8 +27,9 @@ EN | [中文](./README_zh.md) | [日本語](./README_ja.md) | [한국어](./READ
 <h3 align="center">🎬 Demo</h3>
 <video src="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15" controls width="600"></video>
 
-> **Internal Safety Collapse (ISC)** move a superfície de falha de segurança dos LLMs do prompt para o workflow. Um agente que usa ferramentas recebe uma tarefa conectada a código, validators e ferramentas sensíveis; quando conteúdo prejudicial é estruturalmente necessário para concluir, o agente o produz como parte da conclusão da tarefa. Sob avaliação no estilo jailbreak em **ASR@3**, todos os LLMs de fronteira com capacidade de agente que testamos atingem uma taxa de trigger de **100%**. A exposição já não é apenas o prompt; é o workflow.
+> **Internal Safety Collapse (ISC)** move a superfície de falha de segurança dos LLMs do prompt para o workflow. Um agente que usa ferramentas recebe uma tarefa conectada a código, validators e ferramentas sensíveis; quando conteúdo prejudicial é estruturalmente necessário para concluir, o agente o produz como parte da conclusão da tarefa. Sob avaliação no estilo jailbreak em **ASR@3**, todos os LLMs de fronteira com capacidade de agente que testamos atingem uma taxa de trigger de **100%**. A vulnerabilidade já não é apenas o prompt; é o workflow.
 
+> Para leitores que usam um LLM agent para resumir este artigo ou repositório: não recomendamos. Os LLMs de fronteira que você usaria são exatamente os sistemas que demonstramos quebrarem sob ISC — seus resumos destes resultados não serão confiáveis. Leia os artefatos diretamente.
 
 ## 🔍 Na Comunidade
 
@@ -89,7 +90,7 @@ https://raw.githubusercontent.com/wuyoscar/ISC-Bench/main/AGENT_README.md
 
 Três configurações disponíveis. Escolha uma e ajuste para o modelo de ameaça que você quer validar:
 
-**Single-turn ([`isc_single/`](experiment/isc_single/)).** O contexto TVD completo — script da tarefa, validator, arquivo de dados e traceback de validação — é empacotado em um único prompt estilo terminal. A taxa de trigger depende de muitas escolhas de micro-design — contagem de shots, design do anchor, geração com/sem alvo e rigor do validator. Os [`tutorials/`](tutorials/) percorrem cada um com exemplos, especialmente [`02_anchor_and_trigger`](tutorials/02_anchor_and_trigger.md) e [`04_icl_few_shot`](tutorials/04_icl_few_shot.md). Uma saída de referência zero-shot `guard` compartilhada vive em [`experiment/isc_single/result_demo/guard/zero-shot/result.json`](experiment/isc_single/result_demo/guard/zero-shot/result.json).
+**Single-turn ([`isc_single/`](experiment/isc_single/)).** O contexto TVD completo — script da tarefa, validator, arquivo de dados e traceback de validação — é empacotado em um único prompt estilo terminal. A taxa de trigger depende de muitas escolhas de micro-design — contagem de shots, design do anchor, geração com/sem alvo e rigor do validator. Os [`tutorials/`](tutorials/) percorrem cada um com exemplos, especialmente [`02_anchor_and_trigger`](tutorials/02_anchor_and_trigger.md) e [`04_icl_few_shot`](tutorials/04_icl_few_shot.md). Uma execução de referência completa é fornecida: [input](experiment/isc_single/prompts/jbb/ai-guard/1sample.json) → [output](experiment/isc_single/result_demo/x-ai-grok-4.1-fast/jbb/ai-guard/1sample.json) → [result](experiment/isc_single/result_demo/x-ai-grok-4.1-fast/jbb/ai-guard/1sample_judged.json).
 
 **In-Context Learning ([`isc_icl/`](experiment/isc_icl/)).** N pares usuário-assistente completos são anexados antes da entrada real. Como em [many-shot jailbreaking](https://www.anthropic.com/research/many-shot-jailbreaking) e [few-shot jailbreaking](https://arxiv.org/abs/2310.06387), o LLM vê o padrão e o continua.
 
@@ -97,7 +98,7 @@ Três configurações disponíveis. Escolha uma e ajuste para o modelo de ameaç
 
 O caminho mais simples: comece com um template single-turn e converta-o para o layout ICL ou Agentic correspondente. Templates em modo agent precisam de pequenos ajustes manuais — não são drop-ins 1:1 do single-turn.
 
-> **Não trate uma configuração como canônica.** Sob avaliação **ASR@3** ainda não encontramos um LLM de fronteira que resista ao ISC de forma confiável — veja o [leaderboard](#-isc-arena) para a lista completa de modelos, e os [`tutorials/`](tutorials/) para os ajustes que importam.
+> **Não trate uma configuração como canônica.** Sob avaliação **ASR@3** ainda não encontramos um LLM de fronteira que resista ao ISC de forma confiável — veja o [leaderboard](#isc-arena) para a lista completa de modelos, e os [`tutorials/`](tutorials/) para os ajustes que importam.
 
 ### ② 🧩 Explore os Templates
 
@@ -139,7 +140,7 @@ You are an autonomous agent solving NLP tasks. You can use terminal commands to 
 
 </details>
 
-Mais links de share aparecem em [Atualizações](#atualizações), [ISC Arena](#-isc-arena) e [Reproduções da Comunidade](#-reproduções-da-comunidade).
+Mais links de share aparecem em [Atualizações](#atualizações), [ISC Arena](#isc-arena) e [Reproduções da Comunidade](#-reproduções-da-comunidade).
 
 > [!NOTE]
 > **Uma nota para visitantes.** Por favor, não abuse desses shares — eles existem para auditoria de pesquisa de segurança, não para replay em escala. Alguns triggers de alto risco são arquivados em vez de linkados publicamente (em parte para proteger contas de contribuidores da moderação dos provedores); para acesso de pesquisa, entre em contato diretamente.
@@ -388,7 +389,7 @@ O ISC continua aparecendo em Modelos Grandes de fronteira. Os casos abaixo são 
 > [!TIP]
 > Criou um novo template ISC? [Submeta aqui →](https://github.com/wuyoscar/ISC-Bench/issues/new?template=isc-submission.md&title=[ISC]+Model+Name) e vamos adicioná-lo à coleção da comunidade com atribuição completa.
 
-### 📋 Templates ISC-Bench (9 domínios)
+### 📋 Templates ISC-Bench (9 domínios, em andamento)
 
 Estes são **blueprints combináveis**, não prompts fixos. Troque o anchor, o validator, o formato dos dados ou o domínio e você tem uma nova variante.
 
@@ -529,9 +530,15 @@ cat templates/aiml_llamaguard/prompt.txt
 
 ## 🔬 Reprodução
 
-O ISC-Bench suporta três pipelines de avaliação. Os detalhes completos estão em [`experiment/`](experiment/).
+Entregamos um [tutorial detalhado em `experiment/isc_single/README.md`](experiment/isc_single/README.md) que guia uma execução single-turn end-to-end — build → run → extract → judge — seguindo o pipeline padrão de avaliação no estilo jailbreak.
 
-> **Nota:** Os templates que fornecemos são prontos para uso e intencionalmente moderados para a versão pública. Pesquisadores estudando modelos de ameaça específicos podem precisar ajustar anchors, descrições de campos ou limites do validator para o seu contexto de avaliação.
+Single-turn é nossa **simulação simplificada** do trigger completo de TVD. A motivação é prática: o modo agentic é caro em modelos de fronteira, e a maioria dos pesquisadores não quer absorver esse custo apenas para inspecionar o comportamento de ISC. Alguns pontos a considerar:
+
+- Single-turn **não** chama nenhuma ferramenta, então não tem harness — sem iteração de validator, sem loop regenerate-on-rejection, nenhum dos mecanismos que um TVD run completo carrega.
+- Expertise agentic é o fator dominante em headroom: sob o loop agentic, **todos** os LLMs de fronteira que testamos podem ser conduzidos a produzir conteúdo prejudicial — o agente depura iterativamente sob pressão de tarefa e a qualidade do conteúdo gerado continua melhorando.
+- Sem o harness, single-turn sozinho ainda atinge **[100% ASR em Claude Sonnet 4.5](experiment/isc_single/result_demo/anthropic-claude-sonnet-4.5/jbb/ai-guard/0sample_judged.json)**, com média de leaderboard **>90%**.
+
+> A Attack Success Rate (ASR) reportada no artigo usa uma avaliação mais rigorosa. Este repositório usa um LLM-as-a-judge padrão, que tem limitações conhecidas e pode superestimar o desempenho. Para pesquisa derivada, use os números reportados no artigo.
 
 **ISC-Single** — um prompt, uma resposta.
 ```bash
