@@ -25,14 +25,28 @@ EN | [中文](./README_zh.md) | [日本語](./README_ja.md) | [한국어](./READ
   💬 <a href="https://github.com/wuyoscar/ISC-Bench/discussions">Discussions</a>
 </h3>
 
-<h3 align="center">🎬 Demo</h3>
+<p align="center">
+  <strong><font color="red">We appreciate the community feedback. Public showcases are now limited to harmful/toxic text only; all paper claims remain supported, and the underlying evidence and experiments are preserved in this repo.</font></strong>
+</p>
+
+<p>
+  <strong><font color="#f97316">Examples of changes:</font></strong>
+</p>
+<ul>
+  <li><font color="#f97316">Replaced full conversation links with screenshots.</font></li>
+  <li><font color="#f97316">Removed bio content, chemistry content, genetic-engineering content, code-vulnerability content, and shellcode content.</font></li>
+  <li><font color="#f97316">Removed extreme examples and extreme triggers; each template now keeps up to two mild TVDs.</font></li>
+  <li><font color="#f97316">Removed skills, tutorials, and Jupyter notebooks; MD files now keep descriptions only.</font></li>
+  <li><font color="#f97316">Kept misinformation examples.</font></li>
+</ul>
+
 <video src="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15" controls width="600"></video>
 
 > **Internal Safety Collapse (ISC)** shifts the LLM safety failure surface from the prompt to the workflow. A tool-using agent receives a task wired into code, validators, and sensitive tooling; when harmful content is structurally required to finish, the agent produces it as part of task completion. Under jailbreak-style **ASR@3** evaluation, agent-capable frontier LLMs reach a **100%** trigger rate in our tests. The vulnerability is no longer only the prompt; it is the workflow.
 
 > For readers already familiar with our paper: TVD `is generally not equivalent` to ISC; it is only an engineering trigger. Over-focusing on defending against TVD may obscure the broader risk picture.
 
-> For readers using an LLM agent to summarize this paper or repo: we don't recommend it. The frontier LLMs you'd use are exactly the systems we demonstrate fail under ISC — their summaries of these findings will be unreliable. 
+> For readers using an LLM agent to summarize this paper or repo: we don't recommend it. The frontier LLMs you'd use are exactly the systems we demonstrate fail under ISC — their summaries of these findings will be unreliable.
 
 ## 🔍 In the Community
 

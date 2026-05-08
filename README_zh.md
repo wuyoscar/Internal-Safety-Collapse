@@ -13,7 +13,7 @@
   <a href="https://arxiv.org/abs/2603.23509"><img src="https://img.shields.io/badge/arXiv-2603.23509-b31b1b.svg"></a>
   <a href="https://www.youtube.com/watch?v=Kur0wMzuJgY"><img src="https://img.shields.io/badge/▶_YouTube-Explainer-FF0000.svg" alt="YouTube"></a>
   <a href="https://podcasts.apple.com/tr/podcast/internal-safety-collapse-in-frontier-llms/id1835878324?i=1000759288088"><img src="https://img.shields.io/badge/🎙️_Podcast-AI_Post_Transformers-8B5CF6.svg" alt="Podcast"></a>
-</p>  
+</p>
 
 <p align="center">
   <a href="https://github.com/wuyoscar/ISC-Bench/stargazers"><img src="https://img.shields.io/github/stars/wuyoscar/ISC-Bench" alt="Stars"></a>
@@ -28,7 +28,20 @@
   💬 <a href="https://github.com/wuyoscar/ISC-Bench/discussions">Discussions</a>
 </h3>
 
-<h3 align="center">🎬 Demo</h3>
+<p align="center">
+  <strong><font color="red">感谢社区反馈。公开 showcase 现在仅限于 harmful/toxic text（有害/有毒文本）层级；论文中的所有 claim 不受影响，相关证据和实验均已保留在本 repo 中。</font></strong>
+</p>
+
+<p>
+  <strong><font color="#f97316">具体调整包括：</font></strong>
+</p>
+<ul>
+  <li><font color="#f97316">完整 conversation link 改为截图。</font></li>
+  <li><font color="#f97316">移除生物、化学、基因改造、代码漏洞和 shellcode 内容。</font></li>
+  <li><font color="#f97316">移除极端例子和极端 trigger；每个 template 现在最多保留两个较温和 TVD。</font></li>
+  <li><font color="#f97316">移除 skill、tutorial 和 Jupyter Notebook；MD 文件仅保留 description。</font></li>
+  <li><font color="#f97316">保留 misinformation 示例。</font></li>
+</ul>
 
 <video src="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15" controls width="600"></video>
 

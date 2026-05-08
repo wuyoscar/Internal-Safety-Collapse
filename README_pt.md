@@ -9,7 +9,7 @@ EN | [中文](./README_zh.md) | [日本語](./README_ja.md) | [한국어](./READ
   <a href="https://arxiv.org/abs/2603.23509"><img src="https://img.shields.io/badge/arXiv-2603.23509-b31b1b.svg"></a>
   <a href="https://www.youtube.com/watch?v=Kur0wMzuJgY"><img src="https://img.shields.io/badge/▶_YouTube-Explainer-FF0000.svg" alt="YouTube"></a>
   <a href="https://podcasts.apple.com/tr/podcast/internal-safety-collapse-in-frontier-llms/id1835878324?i=1000759288088"><img src="https://img.shields.io/badge/🎙️_Podcast-AI_Post_Transformers-8B5CF6.svg" alt="Podcast"></a>
-</p>  
+</p>
 
 <p align="center">
   <a href="https://github.com/wuyoscar/ISC-Bench/stargazers"><img src="https://img.shields.io/github/stars/wuyoscar/ISC-Bench" alt="Stars"></a>
@@ -24,7 +24,21 @@ EN | [中文](./README_zh.md) | [日本語](./README_ja.md) | [한국어](./READ
   💬 <a href="https://github.com/wuyoscar/ISC-Bench/discussions">Discussões</a>
 </h3>
 
-<h3 align="center">🎬 Demo</h3>
+<p align="center">
+  <strong><font color="red">Agradecemos o feedback da comunidade. Os showcases públicos agora ficam limitados a harmful/toxic text only; todos os claims do paper continuam respaldados, e as evidências e experimentos subjacentes estão preservados neste repo.</font></strong>
+</p>
+
+<p>
+  <strong><font color="#f97316">Exemplos de mudanças:</font></strong>
+</p>
+<ul>
+  <li><font color="#f97316">Substituímos links completos de conversas por screenshots.</font></li>
+  <li><font color="#f97316">Removemos conteúdo de biologia, química, modificação genética, vulnerabilidades de código e shellcode.</font></li>
+  <li><font color="#f97316">Removemos exemplos e triggers extremos; cada template mantém até dois TVDs moderados.</font></li>
+  <li><font color="#f97316">Removemos Skills, tutoriais e Jupyter Notebooks; arquivos MD mantêm apenas descrições.</font></li>
+  <li><font color="#f97316">Mantivemos exemplos de misinformation.</font></li>
+</ul>
+
 <video src="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15" controls width="600"></video>
 
 > **Internal Safety Collapse (ISC)** move a superfície de falha de segurança dos LLMs do prompt para o workflow. Um agente que usa ferramentas recebe uma tarefa conectada a código, validators e ferramentas sensíveis; quando conteúdo prejudicial é estruturalmente necessário para concluir, o agente o produz como parte da conclusão da tarefa. Sob avaliação no estilo jailbreak em **ASR@3**, todos os LLMs de fronteira com capacidade de agente que testamos atingem uma taxa de trigger de **100%**. A vulnerabilidade já não é apenas o prompt; é o workflow.
@@ -74,7 +88,7 @@ EN | [中文](./README_zh.md) | [日本語](./README_ja.md) | [한국어](./READ
 > [!CAUTION]
 > Apenas para uso em pesquisa. O ISC-Bench é disponibilizado exclusivamente para pesquisa acadêmica em segurança de IA, avaliação e trabalho de mitigação. **Não aprovamos nem permitimos qualquer uso desses materiais para fins maliciosos ou para causar danos reais.**
 
-## 🤖 **Entrada para agentes (Quick Start)** 
+## 🤖 **Entrada para agentes (Quick Start)**
 
 Cole isto em Claude Code, Gemini, OpenClaw ou Codex:
 ```text
