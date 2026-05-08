@@ -10,7 +10,7 @@
   <a href="https://arxiv.org/abs/2603.23509"><img src="https://img.shields.io/badge/arXiv-2603.23509-b31b1b.svg"></a>
   <a href="https://www.youtube.com/watch?v=Kur0wMzuJgY"><img src="https://img.shields.io/badge/▶_YouTube-Explainer-FF0000.svg" alt="YouTube"></a>
   <a href="https://podcasts.apple.com/tr/podcast/internal-safety-collapse-in-frontier-llms/id1835878324?i=1000759288088"><img src="https://img.shields.io/badge/🎙️_Podcast-AI_Post_Transformers-8B5CF6.svg" alt="Podcast"></a>
-</p>  
+</p>
 
 <p align="center">
   <a href="https://github.com/wuyoscar/ISC-Bench/stargazers"><img src="https://img.shields.io/github/stars/wuyoscar/ISC-Bench" alt="Stars"></a>
@@ -25,7 +25,21 @@
   💬 <a href="https://github.com/wuyoscar/ISC-Bench/discussions">Discusiones</a>
 </h3>
 
-<h3 align="center">🎬 Demo</h3>
+<p align="center">
+  <strong><font color="red">Agradecemos los comentarios de la comunidad. Los showcases públicos ahora se limitan a harmful/toxic text only; todos los claims del paper siguen respaldados, y la evidencia y los experimentos subyacentes se preservan en este repo.</font></strong>
+</p>
+
+<p>
+  <strong><font color="#f97316">Ejemplos de cambios:</font></strong>
+</p>
+<ul>
+  <li><font color="#f97316">Reemplazamos enlaces completos a conversaciones por capturas.</font></li>
+  <li><font color="#f97316">Retiramos contenido de biología, química, modificación genética, vulnerabilidades de código y shellcode.</font></li>
+  <li><font color="#f97316">Retiramos ejemplos y triggers extremos; cada template conserva hasta dos TVD moderados.</font></li>
+  <li><font color="#f97316">Retiramos Skills, tutoriales y Jupyter Notebooks; los MD conservan solo descripciones.</font></li>
+  <li><font color="#f97316">Mantenemos ejemplos de misinformation.</font></li>
+</ul>
+
 <video src="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15" controls width="600"></video>
 
 > **Internal Safety Collapse (ISC)** traslada la superficie de fallo de seguridad de los LLMs del prompt al workflow. Un agente que usa herramientas recibe una tarea conectada a código, validadores y herramientas sensibles; cuando se requiere contenido dañino estructuralmente para completarla, el agente lo produce como parte de completar la tarea. Bajo evaluación de estilo jailbreak en **ASR@3**, cada LLM de frontera con capacidad de agente que probamos alcanza una tasa de activación del **100%**. La vulnerabilidad ya no es solo el prompt; es el workflow.
@@ -75,7 +89,7 @@
 > [!CAUTION]
 > Solo para uso en investigación. ISC-Bench se publica exclusivamente para investigación académica en seguridad, evaluación y trabajo de mitigación. **No aprobamos ni permitimos ningún uso de estos materiales con fines maliciosos o para causar daño en el mundo real.**
 
-## 🤖 **Entrada para agentes (Inicio rápido)** 
+## 🤖 **Entrada para agentes (Inicio rápido)**
 
 Pega esto en Claude Code, Gemini, OpenClaw o Codex:
 ```text
