@@ -28,17 +28,6 @@ EN | [中文](./README_zh.md) | [日本語](./README_ja.md) | [한국어](./READ
   <strong><font color="red">Chúng tôi trân trọng phản hồi từ cộng đồng. Showcase công khai hiện chỉ giới hạn ở harmful/toxic text only; mọi claim trong paper vẫn được hỗ trợ, và bằng chứng cùng thí nghiệm nền tảng được giữ lại trong repo này.</font></strong>
 </p>
 
-<p>
-  <strong><font color="#f97316">Ví dụ về thay đổi:</font></strong>
-</p>
-<ul>
-  <li><font color="#f97316">Thay link hội thoại đầy đủ bằng ảnh chụp màn hình.</font></li>
-  <li><font color="#f97316">Gỡ nội dung sinh học, hóa học, chỉnh sửa gen, lỗ hổng mã và shellcode.</font></li>
-  <li><font color="#f97316">Gỡ ví dụ và trigger cực đoan; mỗi template hiện giữ tối đa hai TVD nhẹ hơn.</font></li>
-  <li><font color="#f97316">Gỡ Skills, tutorial và Jupyter Notebook; file MD chỉ giữ description.</font></li>
-  <li><font color="#f97316">Giữ lại ví dụ về misinformation.</font></li>
-</ul>
-
 <video src="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15" controls width="600"></video>
 
 > **Internal Safety Collapse (ISC)** chuyển bề mặt thất bại an toàn của LLM từ prompt sang workflow. Một agent có khả năng dùng công cụ nhận một task được gắn với code, validator và công cụ nhạy cảm; khi nội dung có hại là yêu cầu cấu trúc để hoàn thành, agent sẽ tạo ra nó như một phần của việc hoàn thành task. Dưới đánh giá kiểu jailbreak trên **ASR@3**, mọi LLM tiên tiến có khả năng agent mà chúng tôi kiểm thử đều đạt tỷ lệ kích hoạt **100%**. Lỗ hổng không còn chỉ nằm ở prompt; nó nằm ở workflow.
@@ -67,23 +56,6 @@ EN | [中文](./README_zh.md) | [日本語](./README_ja.md) | [한국어](./READ
 - [promptfoo](https://www.promptfoo.dev/lm-security-db/vuln/frontier-llm-safety-collapse-908a4285) - framework red-team nguồn mở cho LLM; LM Security DB liệt kê ISC như một lớp lỗ hổng với LLM bị ảnh hưởng và ghi chú về giảm thiểu.
 - [Gist.Science](https://gist.science/paper/2603.23509) - tóm tắt dễ hiểu của paper ISC cho người đọc phổ thông.
 - [模安局](https://mp.weixin.qq.com/s/pFNCcA5Y-HlPerpfzJFvrQ) - phân tích chuyên sâu tiếng Trung về an toàn AI / LLM, cho rằng ISC đẩy điều kiện kích hoạt từ lớp prompt sang lớp workflow.
-
----
-
-### 🚨 Tổng quan Tác động
-
-<table>
-<tr>
-<td width="33%" align="center" valign="top">🎯<br><b>Top-25 đã kích hoạt</b><br><sub><b>52 / 100</b> được xác nhận trên <a href="https://arena.ai/leaderboard/text">Chatbot Arena</a></sub></td>
-<td width="33%" align="center" valign="top">🔴<br><b>100% ASR@3</b><br><sub>trên mọi LLM tiên tiến<br>có khả năng agent đã kiểm thử</sub></td>
-<td width="33%" align="center" valign="top">🌐<br><b>Phạm vi rộng</b><br><sub>chat · agent · tool-use<br>MCP · workflow tự động</sub></td>
-</tr>
-<tr>
-<td align="center" valign="top">🔧<br><b>Công cụ dual-use</b><br><sub>LLM Hugging Face · gói<br>Python · domain API</sub></td>
-<td align="center" valign="top">🧠<br><b>Task chính là trigger</b><br><sub>nội dung có hại đến từ cấu trúc,<br>không phải adversarial prompt</sub></td>
-<td align="center" valign="top">📦<br><b>Gây hại ở quy mô dataset</b><br><sub>một trigger có thể tạo<br>một corpus có cấu trúc</sub></td>
-</tr>
-</table>
 
 > [!CAUTION]
 > Chỉ dành cho mục đích nghiên cứu. ISC-Bench được phát hành dành riêng cho nghiên cứu an toàn AI học thuật, đánh giá, và công việc giảm thiểu. **Chúng tôi không ủng hộ hoặc cho phép bất kỳ việc sử dụng nào các tài liệu này cho mục đích độc hại hoặc gây hại trong thực tế.**

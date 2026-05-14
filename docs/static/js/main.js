@@ -5,7 +5,6 @@ const REPO_RAW = "https://raw.githubusercontent.com/wuyoscar/ISC-Bench/main";
 
 // ====== Fallback data (used if fetch fails) ======
 const FALLBACK_CASES = {
-  "Claude Opus 4.7 Thinking": { demos: [{ link: "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus47-agent-qwenguard", by: "wuyoscar" }] },
   "Claude Opus 4.6": { demos: [{ link: "https://claude.ai/share/407d33f5-4655-4479-b3e3-0a6dc6639d34", by: "wuyoscar" }] },
   "Claude Opus 4.5": { demos: [{ link: "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus45-share", by: "wuyoscar" }] },
   "Claude Sonnet 4.6": { demos: [{ link: "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudesonnet46-share", by: "wuyoscar" }] },
@@ -119,7 +118,7 @@ function populateLeaderboard(models, cases) {
 
   models.forEach(model => {
     const displayName = slugToDisplay(model.name);
-    const isc = findCaseForModel(model.name, displayName, cases);
+    const isc = cases[displayName];
     const tr = document.createElement("tr");
 
     let statusHTML, demoHTML = "", byHTML = "";
@@ -150,136 +149,54 @@ function populateLeaderboard(models, cases) {
 }
 
 // ====== Demo Cards (Marquee) ======
-// Curated live-case showcase. Hand-picked, not auto-populated from isc_cases.json.
-// Each entry: { name, domain (for favicon), by, link, tag? }
-const CURATED_DEMOS = [
-  // Row 1 — frontier Large Models, mixed labs + Kimi presence
-  { name: "Claude Opus 4.7 Thinking", domain: "anthropic.com", by: "wuyoscar", link: "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus47-agent-qwenguard", tag: "agentic · 12 langs" },
-  { name: "Gemini 3.1 Pro Preview", domain: "google.com", by: "wuyoscar", link: "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-42-gemini31pro-agent-qwenguard", tag: "agentic TVD" },
-  { name: "GPT-5.4 High", domain: "openai.com", by: "wuyoscar", link: "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-57-gpt54-moderation-api", tag: "moderation API" },
-  { name: "Kimi K2.6 (zh)", domain: "moonshot.ai", by: "wuyoscar", link: "https://www.kimi.com/share/19db5b43-c122-86e0-8000-0000aa1d70ff", tag: "web share · zh" },
-  // Row 2 — more frontier variety + Kimi second demo
-  { name: "Grok 4.20 Beta", domain: "x.ai", by: "HanxunH", link: "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-9-grok420beta", tag: "guard test-gen" },
-  { name: "DeepSeek V3.2", domain: "deepseek.com", by: "wuyoscar", link: "https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseek-v32-share", tag: "single-turn" },
-  { name: "Kimi K2.6 (zh)", domain: "moonshot.ai", by: "wuyoscar", link: "https://www.kimi.com/share/19db5b4b-3752-8323-8000-00001e3951e5", tag: "web share · zh" },
-  { name: "Qwen 3.5 Max Preview", domain: "alibabacloud.com", by: "wuyoscar", link: "https://github.com/wuyoscar/ISC-Bench/tree/main/community/qwen35maxpreview-web-share", tag: "web" },
-  // Row 3 — more coverage, includes older Kimi variants
-  { name: "Claude Opus 4.6 Thinking", domain: "anthropic.com", by: "wuyoscar", link: "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus46thinking-guard-attack", tag: "adversarial prompts" },
-  { name: "Kimi K2.5 Thinking", domain: "moonshot.ai", by: "wuyoscar", link: "https://github.com/wuyoscar/ISC-Bench/tree/main/community/kimi-k25-thinking-share", tag: "share" },
-  { name: "Kimi K2.5 Instant", domain: "moonshot.ai", by: "fresh-ma", link: "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-31-kimik25instant", tag: "long-form" },
-  { name: "GLM-5", domain: "z.ai", by: "wuyoscar", link: "https://github.com/wuyoscar/ISC-Bench/tree/main/community/glm5-share", tag: "share" },
-  { name: "Grok 4.1", domain: "x.ai", by: "wuyoscar", link: "https://grok.com/share/c2hhcmQtMi1jb3B5_54de710c-9331-4fca-a953-6c35775156fb", tag: "web share" },
-];
-
-function populateDemos(_cases) {
+function populateDemos(cases) {
   const container = document.getElementById("demo-grid");
   if (!container) return;
   container.innerHTML = "";
 
-  function makeCard(d) {
-    const icon = d.domain
-      ? `<img src="https://www.google.com/s2/favicons?domain=${d.domain}&sz=64" width="22" style="vertical-align:middle;border-radius:4px;">`
+  const favicons = {
+    "claude": "anthropic.com", "gemini": "google.com", "gpt": "openai.com", "chatgpt": "openai.com",
+    "grok": "x.ai", "kimi": "moonshot.ai", "qwen": "alibabacloud.com", "deepseek": "deepseek.com",
+    "glm": "z.ai", "ernie": "baidu.com", "o3": "openai.com", "dola": "volcengine.com",
+  };
+
+  // Build card HTML
+  function makeCard(name, data) {
+    const demo = data.demos[0];
+    const key = Object.keys(favicons).find(k => name.toLowerCase().includes(k)) || "";
+    const domain = favicons[key] || "";
+    const icon = domain
+      ? `<img src="https://www.google.com/s2/favicons?domain=${domain}&sz=32" width="20" style="vertical-align:middle;border-radius:3px;">`
       : "🤖";
-    const tagHTML = d.tag ? `<span class="demo-tag">${d.tag}</span>` : "";
-    return `<a href="${d.link}" target="_blank" rel="noopener" class="demo-card">
+    return `<div class="demo-card">
       <div class="demo-icon">${icon}</div>
-      <div class="demo-info">
-        <h4>${d.name}</h4>
-        <p>by @${d.by}${tagHTML}</p>
-      </div>
-      <span class="demo-link">View →</span>
-    </a>`;
+      <div class="demo-info"><h4>${name}</h4><p>by @${demo.by}</p></div>
+      <a href="${demo.link}" target="_blank" class="demo-link">View →</a>
+    </div>`;
   }
 
-  // Split CURATED_DEMOS into N rows roughly evenly.
-  const ROW_COUNT = 3;
-  const rowSize = Math.ceil(CURATED_DEMOS.length / ROW_COUNT);
-  const rowItems = Array.from({ length: ROW_COUNT }, (_, i) =>
-    CURATED_DEMOS.slice(i * rowSize, (i + 1) * rowSize)
-  ).filter(arr => arr.length > 0);
+  const entries = Object.entries(cases);
+  const mid = Math.ceil(entries.length / 2);
+  const row1Items = entries.slice(0, mid);
+  const row2Items = entries.slice(mid);
 
-  // Alternate direction per row. Base speed per row (px/frame), slightly varied.
-  const BASE_SPEEDS = [0.55, 0.65, 0.50];
-  const STEP_PX = 330; // per-arrow-click nudge (~ one card + gap)
-
-  rowItems.forEach((items, rowIdx) => {
-    const wrap = document.createElement("div");
-    wrap.className = "marquee-row-wrap";
-
-    const prev = document.createElement("button");
-    prev.type = "button";
-    prev.className = "marquee-arrow marquee-arrow-prev";
-    prev.setAttribute("aria-label", "Scroll left");
-    prev.textContent = "‹";
-
+  // Create two marquee rows
+  [row1Items, row2Items].forEach(items => {
     const row = document.createElement("div");
     row.className = "marquee-row";
     const inner = document.createElement("div");
     inner.className = "marquee-inner";
-    // Duplicate once so the JS-driven loop can wrap seamlessly.
-    const html = items.map(makeCard).join("");
-    inner.innerHTML = html + html;
+    // Original + duplicate for seamless loop
+    const cardsHTML = items.map(([n, d]) => makeCard(n, d)).join("");
+    inner.innerHTML = cardsHTML + cardsHTML;
     row.appendChild(inner);
-
-    const next = document.createElement("button");
-    next.type = "button";
-    next.className = "marquee-arrow marquee-arrow-next";
-    next.setAttribute("aria-label", "Scroll right");
-    next.textContent = "›";
-
-    wrap.appendChild(prev);
-    wrap.appendChild(row);
-    wrap.appendChild(next);
-    container.appendChild(wrap);
-
-    // JS rAF scroller (replaces CSS keyframe animation).
-    const direction = rowIdx % 2 === 0 ? 1 : -1; // row 0: left→right scroll, row 1: right→left, row 2: left→right
-    const speed = BASE_SPEEDS[rowIdx % BASE_SPEEDS.length];
-    const singleWidth = () => inner.scrollWidth / 2;
-
-    let offset = direction > 0 ? 0 : singleWidth();
-    let paused = false;
-
-    function wrapOffset(o, w) {
-      if (w <= 0) return 0;
-      return ((o % w) + w) % w;
-    }
-
-    function tick() {
-      if (!paused) {
-        const w = singleWidth();
-        if (w > 0) {
-          offset = wrapOffset(offset + direction * speed, w);
-          inner.style.transform = `translateX(${-offset}px)`;
-        }
-      }
-      requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-
-    // Hover pause
-    wrap.addEventListener("mouseenter", () => { paused = true; });
-    wrap.addEventListener("mouseleave", () => { paused = false; });
-
-    // Arrow nudges (pause briefly, then resume)
-    let resumeTimer = null;
-    function nudge(delta) {
-      const w = singleWidth();
-      if (w <= 0) return;
-      offset = wrapOffset(offset + delta, w);
-      inner.style.transform = `translateX(${-offset}px)`;
-      paused = true;
-      clearTimeout(resumeTimer);
-      resumeTimer = setTimeout(() => { paused = false; }, 1200);
-    }
-    prev.addEventListener("click", () => nudge(-STEP_PX));
-    next.addEventListener("click", () => nudge(STEP_PX));
+    container.appendChild(row);
   });
 }
 
 // ====== Update Stats ======
 function updateStats(arena, cases) {
-  const confirmed = arena.filter(model => findCaseForModel(model.name, slugToDisplay(model.name), cases)).length;
+  const confirmed = Object.keys(cases).length;
   const total = arena.length || 100;
 
   // Update stat cards if they exist
@@ -311,7 +228,7 @@ function setupSearch() {
 
     const filtered = allModels.filter(m => {
       const name = slugToDisplay(m.name).toLowerCase();
-      const isc = findCaseForModel(m.name, slugToDisplay(m.name), cases);
+      const isc = cases[slugToDisplay(m.name)];
       const nameMatch = name.includes(query) || m.org.toLowerCase().includes(query);
       const statusMatch = filter === "all" || (filter === "jailbroken" && isc) || (filter === "safe" && !isc);
       return nameMatch && statusMatch;
@@ -340,8 +257,6 @@ function setupSearch() {
 
 // ====== Name Conversion ======
 const DISPLAY_NAMES = {
-  "claude-opus-4-7": "Claude Opus 4.7 Thinking",
-  "claude-opus-4-7-thinking": "Claude Opus 4.7 Thinking",
   "claude-opus-4-6-thinking": "Claude Opus 4.6 Thinking",
   "claude-opus-4-6": "Claude Opus 4.6",
   "gemini-3.1-pro-preview": "Gemini 3.1 Pro Preview",
@@ -394,23 +309,8 @@ const DISPLAY_NAMES = {
   "qwen3-max-2025-09-23": "Qwen 3 Max 2025-09-23",
 };
 
-const CASE_NAME_ALIASES = {
-  "Claude Opus 4.7 Thinking": ["Claude Opus 4.7"],
-  "Claude Opus 4.7": ["Claude Opus 4.7 Thinking"],
-};
-
 function slugToDisplay(slug) {
   return DISPLAY_NAMES[slug] || slug.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
-}
-
-function findCaseForModel(slug, displayName, cases) {
-  const candidates = [displayName, slugToDisplay(slug)];
-  (CASE_NAME_ALIASES[displayName] || []).forEach(name => candidates.push(name));
-
-  for (const name of candidates) {
-    if (cases[name]) return cases[name];
-  }
-  return null;
 }
 
 // ====== Nav ======
