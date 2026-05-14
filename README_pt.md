@@ -28,17 +28,6 @@ EN | [中文](./README_zh.md) | [日本語](./README_ja.md) | [한국어](./READ
   <strong><font color="red">Agradecemos o feedback da comunidade. Os showcases públicos agora ficam limitados a harmful/toxic text only; todos os claims do paper continuam respaldados, e as evidências e experimentos subjacentes estão preservados neste repo.</font></strong>
 </p>
 
-<p>
-  <strong><font color="#f97316">Exemplos de mudanças:</font></strong>
-</p>
-<ul>
-  <li><font color="#f97316">Substituímos links completos de conversas por screenshots.</font></li>
-  <li><font color="#f97316">Removemos conteúdo de biologia, química, modificação genética, vulnerabilidades de código e shellcode.</font></li>
-  <li><font color="#f97316">Removemos exemplos e triggers extremos; cada template mantém até dois TVDs moderados.</font></li>
-  <li><font color="#f97316">Removemos Skills, tutoriais e Jupyter Notebooks; arquivos MD mantêm apenas descrições.</font></li>
-  <li><font color="#f97316">Mantivemos exemplos de misinformation.</font></li>
-</ul>
-
 <video src="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15" controls width="600"></video>
 
 > **Internal Safety Collapse (ISC)** move a superfície de falha de segurança dos LLMs do prompt para o workflow. Um agente que usa ferramentas recebe uma tarefa conectada a código, validators e ferramentas sensíveis; quando conteúdo prejudicial é estruturalmente necessário para concluir, o agente o produz como parte da conclusão da tarefa. Sob avaliação no estilo jailbreak em **ASR@3**, todos os LLMs de fronteira com capacidade de agente que testamos atingem uma taxa de trigger de **100%**. A vulnerabilidade já não é apenas o prompt; é o workflow.
@@ -67,23 +56,6 @@ EN | [中文](./README_zh.md) | [日本語](./README_ja.md) | [한국어](./READ
 - [promptfoo](https://www.promptfoo.dev/lm-security-db/vuln/frontier-llm-safety-collapse-908a4285) - framework open-source de red-teaming para LLMs; seu LM Security DB cataloga ISC como uma classe de vulnerabilidade com LLMs afetados e ressalvas sobre mitigação.
 - [Gist.Science](https://gist.science/paper/2603.23509) - resumo em linguagem simples do paper ISC para leitores não especializados.
 - [模安局](https://mp.weixin.qq.com/s/pFNCcA5Y-HlPerpfzJFvrQ) - análise em chinês sobre segurança de IA / LLM defendendo que o ISC move a condição de disparo da camada do prompt para a do workflow.
-
----
-
-### 🚨 Impacto em Resumo
-
-<table>
-<tr>
-<td width="33%" align="center" valign="top">🎯<br><b>Top-25 acionados</b><br><sub><b>52 / 100</b> confirmados no <a href="https://arena.ai/leaderboard/text">Chatbot Arena</a></sub></td>
-<td width="33%" align="center" valign="top">🔴<br><b>100% ASR@3</b><br><sub>em cada LLM de fronteira<br>com capacidade de agente testado</sub></td>
-<td width="33%" align="center" valign="top">🌐<br><b>Ampla cobertura</b><br><sub>chat · agent · tool-use<br>MCP · workflows automatizados</sub></td>
-</tr>
-<tr>
-<td align="center" valign="top">🔧<br><b>Ferramentas de uso dual</b><br><sub>LLMs Hugging Face · pacotes<br>Python · APIs de domínio</sub></td>
-<td align="center" valign="top">🧠<br><b>A tarefa é o trigger</b><br><sub>o dano vem da estrutura da tarefa,<br>não de um prompt adversarial</sub></td>
-<td align="center" valign="top">📦<br><b>Dano em nível de dataset</b><br><sub>um único trigger pode produzir<br>um corpus prejudicial estruturado</sub></td>
-</tr>
-</table>
 
 > [!CAUTION]
 > Apenas para uso em pesquisa. O ISC-Bench é disponibilizado exclusivamente para pesquisa acadêmica em segurança de IA, avaliação e trabalho de mitigação. **Não aprovamos nem permitimos qualquer uso desses materiais para fins maliciosos ou para causar danos reais.**

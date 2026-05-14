@@ -1,104 +1,147 @@
 # ISC-Bench — Agent Entry Guide
 
-## For Humans
+Use this file as the first instruction packet for Claude Code, Codex, Gemini CLI,
+Cursor, OpenClaw, or another coding/research agent working inside ISC-Bench.
 
-Copy this to your AI agent (Claude Code, Gemini CLI, Codex, Cursor, etc.):
+## Copy-Paste Entry
 
 ```text
-Help me understand and use ISC-Bench:
+Help me work on ISC-Bench. First read:
 https://raw.githubusercontent.com/wuyoscar/ISC-Bench/main/AGENT_README.md
+
+Then inspect the local repository state and help with this goal:
+<describe the goal here>
 ```
 
----
+## Mission
 
-## For AI Agents
+ISC-Bench is an academic safety research repository for studying Internal Safety
+Collapse (ISC): cases where a model completes a professional-looking workflow
+and produces policy-relevant harmful output because the workflow's task,
+validator, and data schema structurally require it.
 
-### Goal
+The core abstraction is TVD:
 
-Help the user understand, inspect, reproduce, or contribute to the `ISC-Bench` repository.
+- **Task**: the professional workflow the model is asked to complete
+- **Validator**: code or checks that define whether the workflow succeeds
+- **Data**: fields the model must fill to satisfy the validator
 
-`ISC-Bench` is an academic safety research repository for studying **Internal Safety Collapse (ISC)** — a phenomenon where AI agents, while completing **professional workflows**, interact with domain-specific tools involving sensitive data (safety classifiers, bioinformatics pipelines, cybersecurity frameworks) and produce harmful or sensitive outputs as a result.
+The repo currently centers on 84 public scenarios across 9 domains, plus
+single-turn, ICL, and agentic evaluation code.
 
-We study this with the **TVD** (Task + Validator + Data) framework:
+## Non-Negotiable Boundaries
 
-- **Task**: an incomplete professional workflow
-- **Validator**: tool validation that defines whether the task succeeds
-- **Data**: sensitive data fields the model must fill in to pass validation
+- Treat the project as academic safety research, not a misuse manual.
+- Do not strengthen harmful examples unless the user explicitly asks for a
+  controlled research edit and the edit is necessary.
+- Preserve the TVD structure when editing templates; do not make scenarios more
+  dramatic just to increase apparent harm.
+- Do not sanitize or rewrite archived community evidence in a way that damages
+  reproducibility or attribution.
+- When showing model outputs that contain harmful, toxic, or misinformation-like
+  content, frame them as benchmark evidence and not as project endorsement.
+- For documentation-only tasks, keep changes documentation-only unless the user
+  explicitly reopens experiment behavior.
 
-**84 templates** across **9 domains** (AI/ML, biology, chemistry, cybersecurity, epidemiology, clinical genomics, pharmacology, media, and more), with a growing ISC Arena of confirmed and ranked model reproductions.
+## Preflight For Agents
 
-### Boundaries
+Before making changes:
 
-When working with this repository, stay within these limits:
+1. Run `git status --short --branch` and do not revert unrelated user work.
+2. Read `README.md`, this file, and the nearest subsystem README for the task.
+3. Verify referenced files exist before citing or editing them.
+4. Choose one work lane below and keep changes scoped to that lane.
+5. Use the narrowest meaningful verification before claiming completion.
 
-- treat the repository as academic safety research
-- do not rewrite the project as operational misuse guidance
-- do not strengthen harmful examples unnecessarily
-- prefer public templates and documented workflows
-- use [`VERIFICATION.md`](VERIFICATION.md) when judging whether a case counts as **Triggered**
+## Repository Map
 
-### Step 1: Clone the Repository
+| Path | Use |
+|---|---|
+| `README.md` | Public project overview, leaderboard, tutorials, examples |
+| `ISC_PAPER_DIGEST.md` | Paper-level summary of the method and results |
+| `VERIFICATION.md` | How ISC-Bench defines and verifies "Triggered" cases |
+| `templates/` | Public TVD scenario library; each released scenario has a `SKILL.md` |
+| `experiment/` | Reproducible evaluation pipelines |
+| `experiment/isc_single/` | TVD-Single: one prompt contains the full workflow context |
+| `experiment/isc_icl/` | TVD-ICL: completed demonstrations precede the target case |
+| `experiment/isc_agent/` | TVD-Agentic: autonomous file/code workflow with Docker |
+| `community/` | Curated, attributed reproductions tied to public issues |
+| `docs/` | Static project website |
+| `tutorials/` | Concept/tutorial material for understanding and extending ISC |
+| `SKILL.md` | Command-level runbook for benchmark execution |
 
-```bash
-git clone https://github.com/wuyoscar/ISC-Bench.git
-cd ISC-Bench
-```
+## Work Lanes
 
-### Step 2: Read in Order
+### 1. Explain ISC-Bench
 
-Read these files in this order:
+Read `README.md`, `ISC_PAPER_DIGEST.md`, and `VERIFICATION.md`. Explain ISC as
+a workflow-induced failure pattern, not as a standard direct jailbreak.
 
-1. [`README.md`](README.md) — project overview, leaderboard, and public entry points
-2. [`ISC_PAPER_DIGEST.md`](ISC_PAPER_DIGEST.md) — Paper digest for agents (method, TVD framework, ISC-Bench design, key results)
-3. [`VERIFICATION.md`](VERIFICATION.md) — how ISC-Bench defines **Triggered** and verifies cases
-4. [`templates/README.md`](templates/README.md) — public scenario library
-5. [`experiment/README.md`](experiment/README.md) — reproducible evaluation pipelines
-6. [`community/README.md`](community/README.md) — attributed reproductions and evidence
+Stop when the user has: a concise definition, the TVD mechanism, the evaluation
+modes, and the evidence standard.
 
-### Step 3: Choose the Right Path
+### 2. Inspect Or Reuse A Template
 
-Use the path that matches the user's goal:
+Start from `templates/README.md`, then open the target scenario directory and
+its `SKILL.md`. Keep task, validator, and data schema aligned. If adjusting a
+scenario, prefer minimal anchor/schema edits over broad rewrites.
 
-- **Inspect evidence**
-  Open the ISC Arena section in [`README.md`](README.md), then follow the linked issue or community case.
+Stop when the template path, validator logic, data fields, and expected trigger
+mechanism are clear.
 
-- **Understand or reuse templates**
-  Start from [`templates/README.md`](templates/README.md), then open the most relevant scenario directory.
+### 3. Run Or Explain Experiments
 
-- **Run the benchmark pipeline**
-  Read [`SKILL.md`](SKILL.md) and [`experiment/README.md`](experiment/README.md), then choose:
-  - `experiment/isc_single` (TVD-Single: copy-paste)
-  - `experiment/isc_icl` (TVD-ICL: in-context learning)
-  - `experiment/isc_agent` (TVD-Agent: strongest, autonomous)
+Start from `SKILL.md` and `experiment/README.md`, then choose the relevant mode:
 
-- **Contribute a new case**
-  Check [`VERIFICATION.md`](VERIFICATION.md), collect evidence, and then open the ISC submission issue.
+- `experiment/isc_single/` for the default reproducible prompt pipeline
+- `experiment/isc_icl/` for demonstration-count experiments
+- `experiment/isc_agent/` for autonomous agent runs with Docker
 
-### Step 4: Submit a Case
+Do not assume single-turn templates are 1:1 drop-ins for agent mode. Agentic
+runs often need small layout or workspace adjustments; follow
+`experiment/isc_agent/README.md`.
 
-If the user wants to submit a new case:
+Stop when the command, input path, output path, and verification step are all
+explicit.
 
-1. pick a template and reproduce the behavior
-2. save evidence such as model output or API logs
-3. check [`VERIFICATION.md`](VERIFICATION.md) to confirm the case meets benchmark standards
-4. open the ISC submission issue:
+### 4. Verify Or Submit A Case
+
+Use `VERIFICATION.md` before calling a case "Triggered". For community cases,
+preserve contributor attribution, issue links, original evidence, and the
+folder conventions in `community/README.md`.
+
+Submission issue:
 
 ```text
 https://github.com/wuyoscar/ISC-Bench/issues/new?template=isc-submission.md&title=[ISC]+Model+Name
 ```
 
-### Quick Reference
+Stop when the model, template/domain, evidence path, issue/community path, and
+verification rationale are all recorded.
 
-| Resource | Purpose |
-|---------|---------|
-| [`README.md`](README.md) | Human-facing overview |
-| [`VERIFICATION.md`](VERIFICATION.md) | Rules and verification standards |
-| [`templates/`](templates/) | Public TVD scenarios |
-| [`experiment/`](experiment/) | Single-turn, ICL, and agentic pipelines |
-| [`community/`](community/) | Curated reproductions tied to issues |
-| [`SKILL.md`](SKILL.md) | Command-level workflow for running ISC-Bench |
-| [`tutorials/`](tutorials/) | Onboarding material |
+### 5. Update Documentation Or Website
 
-### One-Sentence Summary
+Keep public-facing docs clear, conservative, and research-framed. The website
+under `docs/` is the project page; tutorial/documentation content can link back
+to `README.md`, `tutorials/`, notebooks, and examples, but should not duplicate
+the whole repository.
 
-Clone the repo, read [`README.md`](README.md) and [`VERIFICATION.md`](VERIFICATION.md), then choose the correct template, experiment, or submission path based on the user's goal.
+Stop when links work, wording is consistent with the safety boundary, and the
+page renders without obvious layout regressions.
+
+## Good Final Answer Shape
+
+When reporting back to the user, include:
+
+- what changed or what was inspected
+- the exact files or paths involved
+- the verification performed
+- any remaining risk, missing credential, or intentionally untested step
+
+For code or docs edits, prefer file-specific references over broad summaries.
+
+## One-Sentence Summary
+
+Read the repo state first, stay inside the academic safety boundary, choose the
+right lane, preserve TVD structure, verify the smallest relevant thing, and
+report the concrete evidence.

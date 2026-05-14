@@ -32,17 +32,6 @@
   <strong><font color="red">感谢社区反馈。公开 showcase 现在仅限于 harmful/toxic text（有害/有毒文本）层级；论文中的所有 claim 不受影响，相关证据和实验均已保留在本 repo 中。</font></strong>
 </p>
 
-<p>
-  <strong><font color="#f97316">具体调整包括：</font></strong>
-</p>
-<ul>
-  <li><font color="#f97316">完整 conversation link 改为截图。</font></li>
-  <li><font color="#f97316">移除生物、化学、基因改造、代码漏洞和 shellcode 内容。</font></li>
-  <li><font color="#f97316">移除极端例子和极端 trigger；每个 template 现在最多保留两个较温和 TVD。</font></li>
-  <li><font color="#f97316">移除 skill、tutorial 和 Jupyter Notebook；MD 文件仅保留 description。</font></li>
-  <li><font color="#f97316">保留 misinformation 示例。</font></li>
-</ul>
-
 <video src="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15" controls width="600"></video>
 
 > **Internal Safety Collapse（ISC）** 把 LLM 安全的失效面从 prompt 转移到 workflow。一个具备工具能力的 agent 接到一个嵌入代码、validator 与敏感工具的任务；当完成任务结构性地要求有害内容时，agent 会作为任务完成的一部分生成它。在基于 **ASR@3** 的 jailbreak 风格评测下，我们测试的每个具备 agent 能力的前沿 LLM 都达到 **100%** 触发率。漏洞已不再只在 prompt，而在 workflow。
@@ -71,23 +60,6 @@
 - [promptfoo](https://www.promptfoo.dev/lm-security-db/vuln/frontier-llm-safety-collapse-908a4285) - 开源 LLM 红队测试框架；其 LM Security DB 把 ISC 作为一类漏洞收录，附受影响 LLM 与缓解方案的注意事项。
 - [Gist.Science](https://gist.science/paper/2603.23509) - 面向非专业读者的 ISC 论文通俗解读。
 - [模安局](https://mp.weixin.qq.com/s/pFNCcA5Y-HlPerpfzJFvrQ) - 关注 AI 与 LLM 安全的中文深度解读，认为 ISC 把触发条件从 prompt 层推进到 workflow 层。
-
----
-
-### 🚨 Impact at a Glance
-
-<table>
-<tr>
-<td width="33%" align="center" valign="top">🎯<br><b>Top-25 已触发</b><br><sub><b>52 / 100</b> 已在 <a href="https://arena.ai/leaderboard/text">Chatbot Arena</a> 上确认</sub></td>
-<td width="33%" align="center" valign="top">🔴<br><b>100% ASR@3</b><br><sub>我们测试过的每一个<br>具备 agent 能力的前沿 LLM</sub></td>
-<td width="33%" align="center" valign="top">🌐<br><b>覆盖范围广</b><br><sub>chat · agent · tool-use<br>MCP · 自动化 workflow</sub></td>
-</tr>
-<tr>
-<td align="center" valign="top">🔧<br><b>双用途工具</b><br><sub>Hugging Face LLM · Python<br>package · 领域 API</sub></td>
-<td align="center" valign="top">🧠<br><b>任务本身是触发器</b><br><sub>有害内容来自任务结构，<br>而非对抗性 prompt</sub></td>
-<td align="center" valign="top">📦<br><b>数据集级别的有害输出</b><br><sub>单个触发器即可生成<br>结构化的有害语料</sub></td>
-</tr>
-</table>
 
 > [!CAUTION]
 > 仅供研究使用。ISC-Bench 仅用于学术安全研究、评测与缓解工作。**我们不允许也不支持将这些材料用于任何恶意目的或造成现实世界的伤害。**
