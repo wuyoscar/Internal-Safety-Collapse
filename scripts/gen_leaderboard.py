@@ -4,12 +4,13 @@
 # dependencies = []
 # ///
 """
-Generate ISC Leaderboard table from arena_cache.json + isc_cases.json.
-Replaces the leaderboard section in README.md between markers.
+Generate the ISC Arena table from arena_cache.json + isc_cases.json.
+Sorts by Arena score, keeps the top 100, and rewrites the ISC Arena section
+(Split 1 / Split 2 / Split 3) in README.md and every README_<lang>.md,
+preserving each file's translated History block.
 
 Usage:
     uv run scripts/gen_leaderboard.py
-    uv run scripts/gen_leaderboard.py --top 100  # show top N in main table
 """
 import json
 import re
@@ -25,6 +26,7 @@ README = ROOT / "README.md"
 # Model name slug → display name overrides
 DISPLAY_NAMES: dict[str, str] = {
     "claude-opus-4-8": "Claude Opus 4.8",
+    "kimi-k2.6": "Kimi K2.6",
     "claude-haiku-4-5-20251001": "Claude Haiku 4.5",
     "claude-opus-4-7-thinking": "Claude Opus 4.7 Thinking",
     "claude-opus-4-6-thinking": "Claude Opus 4.6 Thinking",
@@ -139,84 +141,66 @@ def gen_row(model: dict, isc_cases: dict) -> str:
     return f"| {icon} {display} | {status} | {demo_str} | {by_str} |"
 
 
+# Per-language ISC Arena table header (rows are language-independent; only the
+# header is translated and split labels stay as the neutral "Split N").
+ALIGN = "|-------|:------:|:----:|:--:|"
+LANG_HEADERS: dict[str, str] = {
+    "README.md": "| Model | Triggered | Link | By |",
+    "README_zh.md": "| Model | Triggered | Link | By |",
+    "README_es.md": "| Modelo | Activado | Enlace | Por |",
+    "README_ja.md": "| モデル | トリガー | リンク | 投稿者 |",
+    "README_ko.md": "| 모델 | 트리거됨 | 링크 | 기여자 |",
+    "README_pt.md": "| Modelo | Acionado | Link | Por |",
+    "README_vi.md": "| Mô hình | Đã kích hoạt | Liên kết | Bởi |",
+}
+
+CHART = (
+    '<p align="center">\n'
+    '  <img src="assets/leaderboard_progress.svg" width="80%">\n'
+    '</p>'
+)
+
+
+def build_section(header: str, tiers: list[list[str]]) -> str:
+    """Assemble the ISC Arena section. Splits are labelled Split 1/2/3."""
+    full_header = f"{header}\n{ALIGN}"
+    lines = ["## 🏆 ISC Arena", "", CHART, "", "**Split 1**", "", full_header]
+    lines.extend(tiers[0])
+    for label, tier in (("Split 2", tiers[1]), ("Split 3", tiers[2])):
+        if not tier:
+            continue
+        lines += ["", "<details>", f"<summary><b>{label}</b></summary>", "", full_header]
+        lines.extend(tier)
+        lines += ["", "</details>"]
+    return "\n".join(lines)
+
+
 def main() -> None:
-    import argparse
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--top", type=int, default=50, help="Models in main table")
-    args = parser.parse_args()
-
-    arena_full = json.loads(ARENA.read_text())
+    arena = sorted(json.loads(ARENA.read_text()), key=lambda m: -m["score"])[:100]
     isc_cases = json.loads(ISC.read_text())
-
-    # Cap at top 100
-    arena = arena_full[:100]
-
     confirmed = sum(1 for m in arena if slug_to_display(m["name"]) in isc_cases)
-    total = len(arena)
-    today = date.today().isoformat()
 
-    table_header = "| Model | Triggered | Link | By |\n|-------|:------:|:----:|:--:|"
-
-    # Split into 3 tiers: 1-25, 26-50, 51-100
-    tier1 = [gen_row(m, isc_cases) for m in arena[:25]]
-    tier2 = [gen_row(m, isc_cases) for m in arena[25:50]]
-    tier3 = [gen_row(m, isc_cases) for m in arena[50:100]]
-
-    chart = (
-        '<p align="center">\n'
-        '  <img src="assets/leaderboard_progress.svg" width="80%">\n'
-        '</p>'
-    )
-
-    lines = [
-        "## 🏆 ISC Arena",
-        "",
-        chart,
-        "",
-        table_header,
+    tiers = [
+        [gen_row(m, isc_cases) for m in arena[:25]],
+        [gen_row(m, isc_cases) for m in arena[25:50]],
+        [gen_row(m, isc_cases) for m in arena[50:100]],
     ]
-    lines.extend(tier1)
 
-    if tier2:
-        lines.append("")
-        lines.append("<details>")
-        lines.append("<summary><b>26–50</b></summary>")
-        lines.append("")
-        lines.append(table_header)
-        lines.extend(tier2)
-        lines.append("")
-        lines.append("</details>")
+    for fname, header in LANG_HEADERS.items():
+        path = ROOT / fname
+        readme = path.read_text()
+        start = readme.index("## 🏆 ISC Arena")
+        # Preserve the (translated) History block: cut at the <details> that opens it.
+        hist = readme.find("📜", start)
+        if hist == -1:
+            print(f"ERROR: no History marker in {fname}")
+            sys.exit(1)
+        end = readme.rfind("<details>", start, hist)
+        section = build_section(header, tiers)
+        path.write_text(readme[:start] + section + "\n\n" + readme[end:])
 
-    if tier3:
-        lines.append("")
-        lines.append("<details>")
-        lines.append("<summary><b>51–100</b></summary>")
-        lines.append("")
-        lines.append(table_header)
-        lines.extend(tier3)
-        lines.append("")
-        lines.append("</details>")
-
-    section = "\n".join(lines)
-
-    # Replace in README — only replace table, preserve History section
-    readme = README.read_text()
-    start = readme.index("## 🏆 ISC Arena")
-    # End boundary: either History <details> or the next --- section
-    history_marker = readme.find("<details>\n<summary><b>📜 ISC Arena History</b>", start)
-    fallback_marker = re.search(r'\n---\n\n## ⚡', readme[start:])
-    if history_marker > start:
-        end = history_marker
-    elif fallback_marker:
-        end = start + fallback_marker.start()
-    else:
-        print("ERROR: Could not find section end marker")
-        sys.exit(1)
-
-    new_readme = readme[:start] + section + "\n\n" + readme[end:]
-    README.write_text(new_readme)
-
-    print(f"Updated README: {confirmed}/{total} ISC cases (top 100), tiers: {len(tier1)}+{len(tier2)}+{len(tier3)}")
+    print(f"Updated {len(LANG_HEADERS)} READMEs: {confirmed}/{len(arena)} ISC cases, "
+          f"splits: {len(tiers[0])}+{len(tiers[1])}+{len(tiers[2])}")
 
 
 if __name__ == "__main__":

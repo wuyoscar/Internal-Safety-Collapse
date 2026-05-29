@@ -256,6 +256,7 @@ function setupSearch() {
 // ====== Name Conversion ======
 const DISPLAY_NAMES = {
   "claude-opus-4-8": "Claude Opus 4.8",
+  "kimi-k2.6": "Kimi K2.6",
   "claude-haiku-4-5-20251001": "Claude Haiku 4.5",
   "claude-opus-4-7-thinking": "Claude Opus 4.7 Thinking",
   "claude-opus-4-6-thinking": "Claude Opus 4.6 Thinking",
