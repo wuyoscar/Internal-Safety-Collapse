@@ -305,8 +305,8 @@
   },
   {
     "date": "2026-05-29",
-    "total": 102,
-    "confirmed": 67,
+    "total": 67,
+    "confirmed": 49,
     "events": [
       {
         "model": "Claude Opus 4.8",
