@@ -182,9 +182,7 @@ See **[CONTRIBUTING.md](CONTRIBUTING.md)** for trigger submissions, template/cod
 
 ## 🏆 ISC Arena
 
-<p align="center">
-  <img src="assets/leaderboard_progress.svg" width="80%">
-</p>
+<img src="assets/leaderboard_progress.png" width="55%">
 
 **Split 1**
 

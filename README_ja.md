@@ -178,9 +178,7 @@ You are an autonomous agent solving NLP tasks. You can use terminal commands to 
 
 ## 🏆 ISC Arena
 
-<p align="center">
-  <img src="assets/leaderboard_progress.svg" width="80%">
-</p>
+<img src="assets/leaderboard_progress.png" width="55%">
 
 **Split 1**
 
