@@ -151,6 +151,7 @@ You are an autonomous agent solving NLP tasks. You can use terminal commands to 
 
 | | 日付 | 更新内容 |
 |:-:|:-----|:-------|
+| 🔴 | 2026-05-29 | **Claude Sonnet 4（エージェント）：** シングルターンでは回避したが、エージェントループで突破 — 6/6 の攻撃プロンプトが flagged。[community/claudesonnet4-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudesonnet4-guard-attack) を参照。 |
 | 🔴 | 2026-05-29 | **シングルターン一括（II）：** 緑だった 7 モデルがトリガー — Kimi K2、DeepSeek V3、Mimo V2 Flash（OpenRouter）；GPT-5、o1、o4-mini、GPT-5 Mini（直接 API）。証拠：[result_direct](https://github.com/wuyoscar/ISC-Bench/tree/main/experiment/isc_single/result_direct)。 |
 | 🔴 | 2026-05-29 | **直接テンプレ一括：** `aiml_detoxify` をモデルに直接入力（シングルターン、エージェントなし）し、これまで緑だった 12 モデルがトリガー — DeepSeek V3.1 Terminus と V3.2 Exp、MiniMax M2.5、Step 3.5 Flash、Mimo V2 Pro、Qwen 3.x 系 7 種。証拠：[result_direct](https://github.com/wuyoscar/ISC-Bench/tree/main/experiment/isc_single/result_direct)。 |
 | 🔴 | 2026-05-29 | **Claude Haiku 4.5：** これまで未トリガー（緑）のモデル — `aiml_guard_attack` でのエージェント型 TVD が通過、6 件の攻撃プロンプトすべてが flagged。[community/claudehaiku45-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudehaiku45-guard-attack) を参照。 |
@@ -258,7 +259,7 @@ You are an autonomous agent solving NLP tasks. You can use terminal commands to 
 | <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3.5 Flash | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3.5 35B | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/isc_single/result_direct/qwen-qwen3.5-35b-a3b/aiml_detoxify.json) | [@wuyoscar](https://github.com/wuyoscar) |
 | <img src="https://www.google.com/s2/favicons?domain=meituan.com&sz=32" width="14"> LongCat Flash | 🟢 |  |  |
-| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Sonnet 4 | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Sonnet 4 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudesonnet4-guard-attack) | [@wuyoscar](https://github.com/wuyoscar) |
 | <img src="https://www.google.com/s2/favicons?domain=tencent.com&sz=32" width="14"> Hunyuan Vision 1.5 | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=32" width="14"> DeepSeek V3 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/isc_single/result_direct/openrouter_deepseek-deepseek-chat-v3-0324/aiml_offensive.json) | [@wuyoscar](https://github.com/wuyoscar) |
 | <img src="https://www.google.com/s2/favicons?domain=microsoft.com&sz=32" width="14"> MAI-1 | 🟢 |  |  |

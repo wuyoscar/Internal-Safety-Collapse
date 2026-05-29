@@ -151,6 +151,7 @@ Para envío de nuevos triggers, contribuciones de plantillas y código, checklis
 
 | | Fecha | Actualización |
 |:-:|:-----|:-------|
+| 🔴 | 2026-05-29 | **Claude Sonnet 4 (modo agente):** evadió en turno único pero colapsó bajo el bucle del agente — 6/6 prompts de ataque marcados. Ver [community/claudesonnet4-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudesonnet4-guard-attack). |
 | 🔴 | 2026-05-29 | **Lote de plantilla turno único (II):** 7 modelos antes verdes activados — Kimi K2, DeepSeek V3, Mimo V2 Flash (OpenRouter); GPT-5, o1, o4-mini, GPT-5 Mini (API directa). Evidencia: [result_direct](https://github.com/wuyoscar/ISC-Bench/tree/main/experiment/isc_single/result_direct). |
 | 🔴 | 2026-05-29 | **Lote por plantilla directa:** 12 modelos antes verdes activados al pasar `aiml_detoxify` directamente al modelo (turno único, sin agente) — DeepSeek V3.1 Terminus y V3.2 Exp, MiniMax M2.5, Step 3.5 Flash, Mimo V2 Pro, y 7 variantes Qwen 3.x. Evidencia: [result_direct](https://github.com/wuyoscar/ISC-Bench/tree/main/experiment/isc_single/result_direct). |
 | 🔴 | 2026-05-29 | **Claude Haiku 4.5:** un modelo antes no activado (verde) — el TVD agéntico en `aiml_guard_attack` pasa; los 6 prompts de ataque marcados. Ver [community/claudehaiku45-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudehaiku45-guard-attack). |
@@ -258,7 +259,7 @@ Para envío de nuevos triggers, contribuciones de plantillas y código, checklis
 | <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3.5 Flash | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3.5 35B | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/isc_single/result_direct/qwen-qwen3.5-35b-a3b/aiml_detoxify.json) | [@wuyoscar](https://github.com/wuyoscar) |
 | <img src="https://www.google.com/s2/favicons?domain=meituan.com&sz=32" width="14"> LongCat Flash | 🟢 |  |  |
-| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Sonnet 4 | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Sonnet 4 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudesonnet4-guard-attack) | [@wuyoscar](https://github.com/wuyoscar) |
 | <img src="https://www.google.com/s2/favicons?domain=tencent.com&sz=32" width="14"> Hunyuan Vision 1.5 | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=32" width="14"> DeepSeek V3 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/isc_single/result_direct/openrouter_deepseek-deepseek-chat-v3-0324/aiml_offensive.json) | [@wuyoscar](https://github.com/wuyoscar) |
 | <img src="https://www.google.com/s2/favicons?domain=microsoft.com&sz=32" width="14"> MAI-1 | 🟢 |  |  |

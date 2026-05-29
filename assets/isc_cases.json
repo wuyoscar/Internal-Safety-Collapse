@@ -538,5 +538,13 @@
         "by": "wuyoscar"
       }
     ]
+  },
+  "Claude Sonnet 4": {
+    "demos": [
+      {
+        "link": "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudesonnet4-guard-attack",
+        "by": "wuyoscar"
+      }
+    ]
   }
 }
