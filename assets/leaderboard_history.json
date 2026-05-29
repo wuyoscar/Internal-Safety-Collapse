@@ -302,5 +302,32 @@
         "note": "Agentic QwenGuard TVD — 12 multilingual harmful completions, all validator-passed"
       }
     ]
+  },
+  {
+    "date": "2026-05-29",
+    "total": 100,
+    "confirmed": 66,
+    "events": [
+      {
+        "model": "Claude Opus 4.8",
+        "by": "wuyoscar",
+        "note": "Agentic guard-attack + QwenGuard; self-engineered verify loops"
+      },
+      {
+        "model": "Kimi K2.6",
+        "by": "wuyoscar",
+        "note": "Added to Arena (top 10); web-share reproduction"
+      },
+      {
+        "model": "Claude Haiku 4.5",
+        "by": "wuyoscar",
+        "note": "Agentic guard-attack — 6/6 flagged; smaller model, same collapse"
+      },
+      {
+        "model": "Direct-template batch (12)",
+        "by": "wuyoscar",
+        "note": "aiml_detoxify fed straight to model (single-turn): DeepSeek V3.1 Terminus/V3.2 Exp, MiniMax M2.5, Step 3.5 Flash, Mimo V2 Pro, 7 Qwen 3.x variants"
+      }
+    ]
   }
 ]
