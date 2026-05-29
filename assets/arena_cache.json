@@ -467,5 +467,26 @@
     "org": "StepFun",
     "score": 1389,
     "domain": "stepfun.com"
+  },
+  {
+    "rank": 68,
+    "name": "mistral-large",
+    "org": "Mistral",
+    "score": 1388,
+    "domain": "mistral.ai"
+  },
+  {
+    "rank": 69,
+    "name": "amazon-nova-pro",
+    "org": "Amazon",
+    "score": 1387,
+    "domain": "amazon.com"
+  },
+  {
+    "rank": 70,
+    "name": "llama-4-scout",
+    "org": "Meta",
+    "score": 1386,
+    "domain": "meta.com"
   }
 ]

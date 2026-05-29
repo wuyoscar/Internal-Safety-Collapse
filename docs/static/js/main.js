@@ -256,6 +256,9 @@ function setupSearch() {
 
 // ====== Name Conversion ======
 const DISPLAY_NAMES = {
+  "mistral-large": "Mistral Large",
+  "amazon-nova-pro": "Amazon Nova Pro",
+  "llama-4-scout": "Llama 4 Scout",
   "claude-opus-4-8": "Claude Opus 4.8",
   "claude-opus-4-7-thinking": "Claude Opus 4.7",
   "claude-opus-4-6-thinking": "Claude Opus 4.6",
