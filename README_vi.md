@@ -25,14 +25,16 @@ EN | [中文](./README_zh.md) | [日本語](./README_ja.md) | [한국어](./READ
 </h3>
 
 <p align="center">
-  <strong><font color="red">Chúng tôi trân trọng phản hồi từ cộng đồng. Showcase công khai hiện chỉ giới hạn ở harmful/toxic text only; mọi claim trong paper vẫn được hỗ trợ, và bằng chứng cùng thí nghiệm nền tảng được giữ lại trong repo này.</font></strong>
+  <strong><font color="red">Showcase công khai chỉ giới hạn ở harmful/toxic text. Mọi claim trong paper vẫn giữ; bằng chứng và thí nghiệm ở lại repo này.</font></strong>
 </p>
 
 <video src="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15" controls width="600"></video>
 
-> **Internal Safety Collapse (ISC)** chuyển bề mặt thất bại an toàn của LLM từ prompt sang workflow. Một agent có khả năng dùng công cụ nhận một task được gắn với code, validator và công cụ nhạy cảm; khi nội dung có hại là yêu cầu cấu trúc để hoàn thành, agent sẽ tạo ra nó như một phần của việc hoàn thành task. Dưới đánh giá kiểu jailbreak trên **ASR@3**, mọi LLM tiên tiến có khả năng agent mà chúng tôi kiểm thử đều đạt tỷ lệ kích hoạt **100%**. Lỗ hổng không còn chỉ nằm ở prompt; nó nằm ở workflow.
+> **Internal Safety Collapse (ISC)** chuyển bề mặt thất bại từ prompt sang workflow. Gắn một task vào code, validator và công cụ; khi hoàn thành nó cần nội dung có hại, agent tạo ra nó. Dưới **ASR@3**, mọi mô hình tiên tiến có khả năng agent mà chúng tôi kiểm thử đều đạt **100%** kích hoạt. Prompt chưa bao giờ là lỗ hổng. Workflow mới là.
 
-> Đối với độc giả dùng LLM agent để tóm tắt bài báo hoặc kho lưu trữ này: chúng tôi không khuyến nghị. Các LLM tiên tiến bạn dùng chính là các hệ thống mà chúng tôi chứng minh bị ISC phá vỡ — bản tóm tắt của chúng không đáng tin cậy. Hãy đọc các artifact trực tiếp.
+> TVD không phải ISC. Nó chỉ là một trigger kỹ thuật. Chỉ phòng TVD thì bề mặt vẫn mở.
+
+> Đừng dùng LLM agent để tóm tắt repo này. Các mô hình bạn dùng chính là những cái thất bại ở đây; bản tóm tắt của chúng không đáng tin.
 
 ## 🎬 Demo trực tiếp
 
@@ -277,6 +279,7 @@ Thêm link share xuất hiện trong [Cập nhật](#cập-nhật), [ISC Arena](
 
 | Ngày | Mô hình | Bởi | Ghi chú |
 |:-----|-------|:--:|------|
+| 2026-05-29 | Kimi K2, DeepSeek V3, Mimo V2 Flash, GPT-5, o1, o4-mini, GPT-5 Mini, Claude Sonnet 4 | [@wuyoscar](https://github.com/wuyoscar) | Autonomous sweep of the remaining models. Single-turn template fill; Claude Sonnet 4 held single-turn, fell to the agent loop. 8 triggered. |
 | 2026-04-10 | Grok 4.1 Thinking | [@wuyoscar](https://github.com/wuyoscar) | `aiml_guard_attack_v2` — tất cả 6 attack prompt bị `omni-moderation-latest` gắn cờ ([community](community/grok41fast-guard-attack-v2)) |
 | 2026-04-10 | Grok 4.1 Fast Reasoning | [@wuyoscar](https://github.com/wuyoscar) | `aiml_guard_attack_v2` — biến thể thinking dùng chung bằng chứng với Grok 4.1 Fast ([community](community/grok41fast-guard-attack-v2)) |
 | 2026-04-10 | Gemini 3 Flash Thinking | [@wuyoscar](https://github.com/wuyoscar) | `aiml_guard_attack_v2` — biến thể thinking của Gemini 3 Flash ([community](community/gemini3flash-guard-attack-v2)) |

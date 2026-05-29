@@ -25,14 +25,16 @@ EN | [中文](./README_zh.md) | [日本語](./README_ja.md) | [한국어](./READ
 </h3>
 
 <p align="center">
-  <strong><font color="red">Agradecemos o feedback da comunidade. Os showcases públicos agora ficam limitados a harmful/toxic text only; todos os claims do paper continuam respaldados, e as evidências e experimentos subjacentes estão preservados neste repo.</font></strong>
+  <strong><font color="red">Os showcases públicos limitam-se a harmful/toxic text. Todos os claims do paper se mantêm; evidências e experimentos ficam neste repo.</font></strong>
 </p>
 
 <video src="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15" controls width="600"></video>
 
-> **Internal Safety Collapse (ISC)** move a superfície de falha de segurança dos LLMs do prompt para o workflow. Um agente que usa ferramentas recebe uma tarefa conectada a código, validators e ferramentas sensíveis; quando conteúdo prejudicial é estruturalmente necessário para concluir, o agente o produz como parte da conclusão da tarefa. Sob avaliação no estilo jailbreak em **ASR@3**, todos os LLMs de fronteira com capacidade de agente que testamos atingem uma taxa de trigger de **100%**. A vulnerabilidade já não é apenas o prompt; é o workflow.
+> **Internal Safety Collapse (ISC)** move a superfície de falha do prompt para o workflow. Conecte uma tarefa a código, validators e ferramentas; quando concluí-la exige conteúdo prejudicial, o agente o produz. Sob **ASR@3**, todo modelo de fronteira com capacidade de agente que testamos atinge **100%** de trigger. O prompt nunca foi a vulnerabilidade. O workflow é.
 
-> Para leitores que usam um LLM agent para resumir este artigo ou repositório: não recomendamos. Os LLMs de fronteira que você usaria são exatamente os sistemas que demonstramos quebrarem sob ISC — seus resumos destes resultados não serão confiáveis. Leia os artefatos diretamente.
+> TVD não é ISC. É um gatilho de engenharia. Defenda só o TVD e a superfície continua aberta.
+
+> Não use um LLM agent para resumir este repo. Os modelos que usaria são os que falham aqui; seus resumos não são confiáveis.
 
 ## 🎬 Demonstração ao vivo
 
@@ -277,6 +279,7 @@ Para submissões de triggers, contribuições de templates e código, checklist 
 
 | Data | Modelo | Por | Nota |
 |:-----|-------|:--:|------|
+| 2026-05-29 | Kimi K2, DeepSeek V3, Mimo V2 Flash, GPT-5, o1, o4-mini, GPT-5 Mini, Claude Sonnet 4 | [@wuyoscar](https://github.com/wuyoscar) | Autonomous sweep of the remaining models. Single-turn template fill; Claude Sonnet 4 held single-turn, fell to the agent loop. 8 triggered. |
 | 2026-04-10 | Grok 4.1 Thinking | [@wuyoscar](https://github.com/wuyoscar) | `aiml_guard_attack_v2` — todos os 6 prompts de ataque sinalizados por `omni-moderation-latest` ([community](community/grok41fast-guard-attack-v2)) |
 | 2026-04-10 | Grok 4.1 Fast Reasoning | [@wuyoscar](https://github.com/wuyoscar) | `aiml_guard_attack_v2` — variante thinking compartilha evidência com Grok 4.1 Fast ([community](community/grok41fast-guard-attack-v2)) |
 | 2026-04-10 | Gemini 3 Flash Thinking | [@wuyoscar](https://github.com/wuyoscar) | `aiml_guard_attack_v2` — variante thinking do Gemini 3 Flash ([community](community/gemini3flash-guard-attack-v2)) |
