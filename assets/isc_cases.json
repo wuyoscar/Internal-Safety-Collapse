@@ -602,5 +602,21 @@
         "by": "wuyoscar"
       }
     ]
+  },
+  "Step 3.5 Flash": {
+    "demos": [
+      {
+        "link": "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/isc_single/result_direct/stepfun-step-3.5-flash/aiml_detoxify.json",
+        "by": "wuyoscar"
+      }
+    ]
+  },
+  "Mimo V2 Pro": {
+    "demos": [
+      {
+        "link": "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/isc_single/result_direct/xiaomi-mimo-v2-pro/aiml_detoxify.json",
+        "by": "wuyoscar"
+      }
+    ]
   }
 }

@@ -150,7 +150,7 @@ Thêm link share xuất hiện trong [Cập nhật](#cập-nhật), [ISC Arena](
 
 | | Ngày | Cập nhật |
 |:-:|:-----|:-------|
-| 🔴 | 2026-05-29 | **Lô template trực tiếp:** 10 mô hình trước đây xanh bị kích hoạt khi đưa thẳng `aiml_detoxify` vào mô hình (một lượt, không agent) — DeepSeek V3.1 Terminus & V3.2 Exp, MiniMax M2.5, và 7 biến thể Qwen 3.x. Bằng chứng: [result_direct](https://github.com/wuyoscar/ISC-Bench/tree/main/experiment/isc_single/result_direct). |
+| 🔴 | 2026-05-29 | **Lô template trực tiếp:** 12 mô hình trước đây xanh bị kích hoạt khi đưa thẳng `aiml_detoxify` vào mô hình (một lượt, không agent) — DeepSeek V3.1 Terminus & V3.2 Exp, MiniMax M2.5, Step 3.5 Flash, Mimo V2 Pro, và 7 biến thể Qwen 3.x. Bằng chứng: [result_direct](https://github.com/wuyoscar/ISC-Bench/tree/main/experiment/isc_single/result_direct). |
 | 🔴 | 2026-05-29 | **Claude Haiku 4.5:** một mô hình trước đây chưa kích hoạt (xanh) — TVD dạng agent trên `aiml_guard_attack` đạt; cả 6 prompt tấn công đều bị gắn cờ. Xem [community/claudehaiku45-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudehaiku45-guard-attack). |
 | 🔴 | 2026-05-29 | **Claude Opus 4.8:** TVD dạng agent trên `aiml_qwen3guard` và `aiml_guard_attack` — cả hai validator đều đạt. Xem [community/claudeopus48-agent-qwenguard](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-agent-qwenguard) và [community/claudeopus48-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-guard-attack). |
 | 🔴 | 2026-04-23 | **Kimi K2.6 (tiếng Trung):** Trigger qua share tiếng Trung trên kimi.com. Xem [community/kimi-k26-share](https://github.com/wuyoscar/ISC-Bench/tree/main/community/kimi-k26-share). |
@@ -221,7 +221,7 @@ Thêm link share xuất hiện trong [Cập nhật](#cập-nhật), [ISC Arena](
 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.1 Thinking | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus41-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
 | <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32" width="14"> Gemini 2.5 Pro | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-52-gemini25pro-latex-fraud) | [@wuyoscar](https://github.com/wuyoscar) |
 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.1 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus41-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
-| <img src="https://www.google.com/s2/favicons?domain=mi.com&sz=32" width="14"> Mimo V2 Pro | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=mi.com&sz=32" width="14"> Mimo V2 Pro | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/isc_single/result_direct/xiaomi-mimo-v2-pro/aiml_detoxify.json) | [@wuyoscar](https://github.com/wuyoscar) |
 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> GPT-4.5 Preview | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> ChatGPT 4o Latest | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=z.ai&sz=32" width="14"> GLM-4.7 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-64-glm47-toxin-biosynthesis) | [@wuyoscar](https://github.com/wuyoscar) |
@@ -297,7 +297,7 @@ Thêm link share xuất hiện trong [Cập nhật](#cập-nhật), [ISC Arena](
 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> O4 Mini 2025.04.16 | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> Gpt 5 Mini High | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Sonnet 4.20250514 | 🟢 |  |  |
-| <img src="https://www.google.com/s2/favicons?domain=stepfun.com&sz=32" width="14"> Step 3.5 Flash | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=stepfun.com&sz=32" width="14"> Step 3.5 Flash | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/isc_single/result_direct/stepfun-step-3.5-flash/aiml_detoxify.json) | [@wuyoscar](https://github.com/wuyoscar) |
 
 </details>
 

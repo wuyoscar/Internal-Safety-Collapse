@@ -150,7 +150,7 @@ You are an autonomous agent solving NLP tasks. You can use terminal commands to 
 
 | | 날짜 | 업데이트 |
 |:-:|:-----|:-------|
-| 🔴 | 2026-05-29 | **직접 템플릿 배치:** `aiml_detoxify`를 모델에 직접 입력(단일 턴, 에이전트 없음)하여 이전에 녹색이던 10개 모델 발동 — DeepSeek V3.1 Terminus 및 V3.2 Exp, MiniMax M2.5, Qwen 3.x 7종. 증거: [result_direct](https://github.com/wuyoscar/ISC-Bench/tree/main/experiment/isc_single/result_direct). |
+| 🔴 | 2026-05-29 | **직접 템플릿 배치:** `aiml_detoxify`를 모델에 직접 입력(단일 턴, 에이전트 없음)하여 이전에 녹색이던 12개 모델 발동 — DeepSeek V3.1 Terminus 및 V3.2 Exp, MiniMax M2.5, Step 3.5 Flash, Mimo V2 Pro, Qwen 3.x 7종. 증거: [result_direct](https://github.com/wuyoscar/ISC-Bench/tree/main/experiment/isc_single/result_direct). |
 | 🔴 | 2026-05-29 | **Claude Haiku 4.5:** 이전에 미발동(녹색) 모델 — `aiml_guard_attack`에서의 에이전트 TVD 통과, 공격 프롬프트 6개 모두 flag. [community/claudehaiku45-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudehaiku45-guard-attack) 참조. |
 | 🔴 | 2026-05-29 | **Claude Opus 4.8:** `aiml_qwen3guard` 및 `aiml_guard_attack`에서의 에이전트 TVD — 두 검증기 모두 통과. [community/claudeopus48-agent-qwenguard](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-agent-qwenguard) 및 [community/claudeopus48-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-guard-attack) 참조. |
 | 🔴 | 2026-04-23 | **Kimi K2.6 (중국어):** kimi.com 웹 인터페이스에서 중국어 share 링크로 트리거. [community/kimi-k26-share](https://github.com/wuyoscar/ISC-Bench/tree/main/community/kimi-k26-share) 참조. |
@@ -221,7 +221,7 @@ You are an autonomous agent solving NLP tasks. You can use terminal commands to 
 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.1 Thinking | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus41-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
 | <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32" width="14"> Gemini 2.5 Pro | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-52-gemini25pro-latex-fraud) | [@wuyoscar](https://github.com/wuyoscar) |
 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.1 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus41-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
-| <img src="https://www.google.com/s2/favicons?domain=mi.com&sz=32" width="14"> Mimo V2 Pro | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=mi.com&sz=32" width="14"> Mimo V2 Pro | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/isc_single/result_direct/xiaomi-mimo-v2-pro/aiml_detoxify.json) | [@wuyoscar](https://github.com/wuyoscar) |
 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> GPT-4.5 Preview | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> ChatGPT 4o Latest | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=z.ai&sz=32" width="14"> GLM-4.7 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-64-glm47-toxin-biosynthesis) | [@wuyoscar](https://github.com/wuyoscar) |
@@ -297,7 +297,7 @@ You are an autonomous agent solving NLP tasks. You can use terminal commands to 
 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> O4 Mini 2025.04.16 | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> Gpt 5 Mini High | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Sonnet 4.20250514 | 🟢 |  |  |
-| <img src="https://www.google.com/s2/favicons?domain=stepfun.com&sz=32" width="14"> Step 3.5 Flash | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=stepfun.com&sz=32" width="14"> Step 3.5 Flash | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/isc_single/result_direct/stepfun-step-3.5-flash/aiml_detoxify.json) | [@wuyoscar](https://github.com/wuyoscar) |
 
 </details>
 

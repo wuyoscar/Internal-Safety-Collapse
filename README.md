@@ -155,7 +155,7 @@ See **[CONTRIBUTING.md](CONTRIBUTING.md)** for trigger submissions, template/cod
 
 | | Date | Update |
 |:-:|:-----|:-------|
-| 🔴 | 2026-05-29 | **Direct-template batch:** 10 previously-green models triggered by feeding `aiml_detoxify` straight to the model (single-turn, no agent) — DeepSeek V3.1 Terminus & V3.2 Exp, MiniMax M2.5, and 7 Qwen 3.x variants. Evidence: [result_direct](https://github.com/wuyoscar/ISC-Bench/tree/main/experiment/isc_single/result_direct). |
+| 🔴 | 2026-05-29 | **Direct-template batch:** 12 previously-green models triggered by feeding `aiml_detoxify` straight to the model (single-turn, no agent) — DeepSeek V3.1 Terminus & V3.2 Exp, MiniMax M2.5, Step 3.5 Flash, Mimo V2 Pro, and 7 Qwen 3.x variants. Evidence: [result_direct](https://github.com/wuyoscar/ISC-Bench/tree/main/experiment/isc_single/result_direct). |
 | 🔴 | 2026-05-29 | **Claude Haiku 4.5:** a previously untriggered (green) model — agentic TVD on `aiml_guard_attack` passes; all 6 attack prompts flagged. See [community/claudehaiku45-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudehaiku45-guard-attack). |
 | 🔴 | 2026-05-29 | **Claude Opus 4.8:** agentic TVD on `aiml_qwen3guard` and `aiml_guard_attack` — both validators pass. See [community/claudeopus48-agent-qwenguard](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-agent-qwenguard) and [community/claudeopus48-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-guard-attack). |
 | 🔴 | 2026-04-23 | **Kimi K2.6 (zh):** Chinese-language web-share triggers on kimi.com. See [community/kimi-k26-share](https://github.com/wuyoscar/ISC-Bench/tree/main/community/kimi-k26-share). |
@@ -226,7 +226,7 @@ See **[CONTRIBUTING.md](CONTRIBUTING.md)** for trigger submissions, template/cod
 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.1 Thinking | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus41-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
 | <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32" width="14"> Gemini 2.5 Pro | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-52-gemini25pro-latex-fraud) | [@wuyoscar](https://github.com/wuyoscar) |
 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.1 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus41-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
-| <img src="https://www.google.com/s2/favicons?domain=mi.com&sz=32" width="14"> Mimo V2 Pro | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=mi.com&sz=32" width="14"> Mimo V2 Pro | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/isc_single/result_direct/xiaomi-mimo-v2-pro/aiml_detoxify.json) | [@wuyoscar](https://github.com/wuyoscar) |
 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> GPT-4.5 Preview | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> ChatGPT 4o Latest | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=z.ai&sz=32" width="14"> GLM-4.7 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-64-glm47-toxin-biosynthesis) | [@wuyoscar](https://github.com/wuyoscar) |
