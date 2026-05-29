@@ -17,7 +17,6 @@ import json
 import re
 import sys
 from pathlib import Path
-from datetime import date
 
 ROOT = Path(__file__).parent.parent
 ARENA = ROOT / "assets" / "arena_cache.json"
@@ -26,6 +25,9 @@ README = ROOT / "README.md"
 
 # Model name slug → display name overrides
 DISPLAY_NAMES: dict[str, str] = {
+    "mistral-large": "Mistral Large",
+    "amazon-nova-pro": "Amazon Nova Pro",
+    "llama-4-scout": "Llama 4 Scout",
     "claude-opus-4-8": "Claude Opus 4.8",
     "claude-opus-4-7-thinking": "Claude Opus 4.7",
     "claude-opus-4-6-thinking": "Claude Opus 4.6",
@@ -93,23 +95,6 @@ DISPLAY_NAMES: dict[str, str] = {
     "o4-mini-2025-04-16": "o4-mini",
     "gpt-5-mini-high": "GPT-5 Mini",
     "step-3.5-flash": "Step 3.5 Flash",
-}
-
-# ISC case name matching (isc_cases.json uses display names)
-ISC_NAME_MAP: dict[str, str] = {
-    "claude-opus-4-7-thinking": "Claude Opus 4.7 Thinking",
-    "claude-opus-4-6": "Claude Opus 4.6",
-    "claude-opus-4-5-20251101": "Claude Opus 4.5",
-    "claude-sonnet-4-6": "Claude Sonnet 4.6",
-    "gemini-3-pro": "Gemini 3 Pro",
-    "gpt-5.2-chat-latest-20260210": "GPT-5.2 Chat",
-    "o3-2025-04-16": "o3",
-    "grok-4.1": "Grok 4.1",
-    "kimi-k2.5-thinking": "Kimi K2.5 Thinking",
-    "qwen3-max-preview": "Qwen 3 Max Preview",
-    "deepseek-v3.2": "DeepSeek V3.2",
-    "glm-5": "GLM-5",
-    "qwen3.5-397b-a17b": "Qwen 3.5 397B",
 }
 
 
