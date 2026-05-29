@@ -181,7 +181,9 @@ Thêm link share xuất hiện trong [Cập nhật](#cập-nhật), [ISC Arena](
 
 ## 🏆 ISC Arena
 
-<img src="assets/leaderboard_progress.png" width="55%">
+<p align="center">
+  <img src="assets/leaderboard_progress.png" width="55%">
+</p>
 
 **Split 1**
 

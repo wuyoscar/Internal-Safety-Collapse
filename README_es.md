@@ -182,7 +182,9 @@ Para envío de nuevos triggers, contribuciones de plantillas y código, checklis
 
 ## 🏆 ISC Arena
 
-<img src="assets/leaderboard_progress.png" width="55%">
+<p align="center">
+  <img src="assets/leaderboard_progress.png" width="55%">
+</p>
 
 **Split 1**
 

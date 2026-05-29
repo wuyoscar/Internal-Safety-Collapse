@@ -181,7 +181,9 @@ Para submissões de triggers, contribuições de templates e código, checklist 
 
 ## 🏆 ISC Arena
 
-<img src="assets/leaderboard_progress.png" width="55%">
+<p align="center">
+  <img src="assets/leaderboard_progress.png" width="55%">
+</p>
 
 **Split 1**
 
