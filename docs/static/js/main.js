@@ -207,7 +207,7 @@ function updateStats(arena, cases) {
   // Update arena subtitle
   const subtitle = document.querySelector("#arena .subtitle");
   if (subtitle) {
-    subtitle.innerHTML = `Real-time tracking of ISC across <strong>${total}</strong> frontier models.
+    subtitle.innerHTML = `Tracking ISC across <strong>${total}</strong> frontier models.
       Every <span class="has-text-danger">red dot</span> is a confirmed case.
       <strong class="has-text-danger">${confirmed}</strong> triggered so far.`;
   }
