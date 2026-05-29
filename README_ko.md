@@ -150,6 +150,7 @@ You are an autonomous agent solving NLP tasks. You can use terminal commands to 
 
 | | 날짜 | 업데이트 |
 |:-:|:-----|:-------|
+| 🔴 | 2026-05-29 | **Claude Haiku 4.5:** 이전에 미발동(녹색) 모델 — `aiml_guard_attack`에서의 에이전트 TVD 통과, 공격 프롬프트 6개 모두 flag. [community/claudehaiku45-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudehaiku45-guard-attack) 참조. |
 | 🔴 | 2026-05-29 | **Claude Opus 4.8:** `aiml_qwen3guard` 및 `aiml_guard_attack`에서의 에이전트 TVD — 두 검증기 모두 통과. [community/claudeopus48-agent-qwenguard](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-agent-qwenguard) 및 [community/claudeopus48-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-guard-attack) 참조. |
 | 🔴 | 2026-04-23 | **Kimi K2.6 (중국어):** kimi.com 웹 인터페이스에서 중국어 share 링크로 트리거. [community/kimi-k26-share](https://github.com/wuyoscar/ISC-Bench/tree/main/community/kimi-k26-share) 참조. |
 | 🔴 | 2026-04-17 | **Claude Opus 4.7:** 몇 초 안에 Claude Opus 4.7 jailbreak 성공. [community/claudeopus47-agent-qwenguard](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus47-agent-qwenguard) 참조. |
@@ -272,7 +273,7 @@ You are an autonomous agent solving NLP tasks. You can use terminal commands to 
 | <img src="https://www.google.com/s2/favicons?domain=x.ai&sz=32" width="14"> Grok 4.0709 | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=mistral.ai&sz=32" width="14"> Mistral Medium 2508 | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=minimax.io&sz=32" width="14"> Minimax M2.7 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/minimax-m27-factcheck) | [@wuyoscar](https://github.com/wuyoscar) |
-| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Haiku 4.5 20251001 | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Haiku 4.5 20251001 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudehaiku45-guard-attack) | [@wuyoscar](https://github.com/wuyoscar) |
 | <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3.5.27B | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=minimax.io&sz=32" width="14"> Minimax M2.5 | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32" width="14"> Gemini 2.5 Flash Preview 09.2025 | 🟢 |  |  |

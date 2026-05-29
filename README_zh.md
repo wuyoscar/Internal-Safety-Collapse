@@ -156,15 +156,16 @@ You are an autonomous agent solving NLP tasks. You can use terminal commands to 
 
 | | 日期 | 更新 |
 |:-:|:-----|:-----|
+| 🔴 | 2026-05-29 | **Claude Haiku 4.5：** 此前未触发（绿色）的模型——在 `aiml_guard_attack` 上的 agentic TVD 通过，6 个攻击串全部被 flag。见 [community/claudehaiku45-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudehaiku45-guard-attack)。 |
 | 🔴 | 2026-05-29 | **Claude Opus 4.8：** 在 `aiml_qwen3guard` 和 `aiml_guard_attack` 上的 agentic TVD —— 两个验证器均通过。见 [community/claudeopus48-agent-qwenguard](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-agent-qwenguard) 与 [community/claudeopus48-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-guard-attack)。 |
 | 🔴 | 2026-04-23 | **Kimi K2.6（中文）：** kimi.com 网页端中文 share 触发。见 [community/kimi-k26-share](https://github.com/wuyoscar/ISC-Bench/tree/main/community/kimi-k26-share)。 |
 | 🔴 | 2026-04-17 | **Claude Opus 4.7：** 几秒内 jailbreak Claude Opus 4.7。见 [community/claudeopus47-agent-qwenguard](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus47-agent-qwenguard)。 |
-| 🔴 | 2026-04-10 | **Claude Opus 4.6 Thinking（第 1 名）：** ISC 诱导模型直接生成对抗性提示（PAIR、PAP、DAN）。见 [community/claudeopus46thinking-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus46thinking-guard-attack)。 |
-| 🔴 | 2026-03-30 | **GLM-4.7**（第 34 名）和 **GLM-4.6**（第 47 名）：单轮毒素合成、神经毒剂对接、放射性扩散（[#64](https://github.com/wuyoscar/ISC-Bench/issues/64)、[#65](https://github.com/wuyoscar/ISC-Bench/issues/65)）。28/100 已确认。 |
-| 🔴 | 2026-03-29 | **Mistral Large 3**（第 64 名）：单轮 survival analysis，生成带有 LD50 和作用机制的投毒 cohort 数据（[#60](https://github.com/wuyoscar/ISC-Bench/issues/60)）。26/100 已确认。 |
-| 🔴 | 2026-03-29 | **GPT-5.4 High**（第 6 名）：agentic 输入审查与 prompt-injection 生成（[#57](https://github.com/wuyoscar/ISC-Bench/issues/57)）。 |
+| 🔴 | 2026-04-10 | **Claude Opus 4.6 Thinking：** ISC 诱导模型直接生成对抗性提示（PAIR、PAP、DAN）。见 [community/claudeopus46thinking-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus46thinking-guard-attack)。 |
+| 🔴 | 2026-03-30 | **GLM-4.7**和 **GLM-4.6**：单轮毒素合成、神经毒剂对接、放射性扩散（[#64](https://github.com/wuyoscar/ISC-Bench/issues/64)、[#65](https://github.com/wuyoscar/ISC-Bench/issues/65)）。28/100 已确认。 |
+| 🔴 | 2026-03-29 | **Mistral Large 3**：单轮 survival analysis，生成带有 LD50 和作用机制的投毒 cohort 数据（[#60](https://github.com/wuyoscar/ISC-Bench/issues/60)）。26/100 已确认。 |
+| 🔴 | 2026-03-29 | **GPT-5.4 High**：agentic 输入审查与 prompt-injection 生成（[#57](https://github.com/wuyoscar/ISC-Bench/issues/57)）。 |
 | 🔴 | 2026-03-28 | **Gemini 2.5 Pro：** 使用全新的 LaTeX 模板完成复现，不需要代码或 Python（[#52](https://github.com/wuyoscar/ISC-Bench/issues/52)）。 |
-| 🔴 | 2026-03-27 | **Gemini 3.1 Pro Preview**（第 3 名）：通过 agentic TVD 成功复现（[#42](https://github.com/wuyoscar/ISC-Bench/issues/42)）；当前 Google/OpenAI 旗舰模型通常更依赖 agentic execution。 |
+| 🔴 | 2026-03-27 | **Gemini 3.1 Pro Preview**：通过 agentic TVD 成功复现（[#42](https://github.com/wuyoscar/ISC-Bench/issues/42)）；当前 Google/OpenAI 旗舰模型通常更依赖 agentic execution。 |
 | 🧩 | 2026-03-27 | 社区复现：[@fresh-ma](https://github.com/fresh-ma) 确认 **Claude Sonnet 4.5 Thinking**、**Claude Sonnet 4.5**、**Kimi K2.5 Instant**；[@zry29](https://github.com/zry29) 确认 **GPT-5.4**。 |
 
 ## 动态
@@ -281,7 +282,7 @@ You are an autonomous agent solving NLP tasks. You can use terminal commands to 
 | <img src="https://www.google.com/s2/favicons?domain=x.ai&sz=32" width="14"> Grok 4.0709 | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=mistral.ai&sz=32" width="14"> Mistral Medium 2508 | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=minimax.io&sz=32" width="14"> Minimax M2.7 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/minimax-m27-factcheck) | [@wuyoscar](https://github.com/wuyoscar) |
-| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Haiku 4.5 20251001 | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Haiku 4.5 20251001 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudehaiku45-guard-attack) | [@wuyoscar](https://github.com/wuyoscar) |
 | <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3.5.27B | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=minimax.io&sz=32" width="14"> Minimax M2.5 | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32" width="14"> Gemini 2.5 Flash Preview 09.2025 | 🟢 |  |  |

@@ -25,6 +25,7 @@ README = ROOT / "README.md"
 # Model name slug → display name overrides
 DISPLAY_NAMES: dict[str, str] = {
     "claude-opus-4-8": "Claude Opus 4.8",
+    "claude-haiku-4-5-20251001": "Claude Haiku 4.5",
     "claude-opus-4-7-thinking": "Claude Opus 4.7 Thinking",
     "claude-opus-4-6-thinking": "Claude Opus 4.6 Thinking",
     "claude-opus-4-6": "Claude Opus 4.6",

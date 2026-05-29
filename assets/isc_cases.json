@@ -514,5 +514,13 @@
         "by": "wuyoscar"
       }
     ]
+  },
+  "Claude Haiku 4.5": {
+    "demos": [
+      {
+        "link": "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudehaiku45-guard-attack",
+        "by": "wuyoscar"
+      }
+    ]
   }
 }

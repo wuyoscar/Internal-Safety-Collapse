@@ -151,15 +151,16 @@ Para envío de nuevos triggers, contribuciones de plantillas y código, checklis
 
 | | Fecha | Actualización |
 |:-:|:-----|:-------|
+| 🔴 | 2026-05-29 | **Claude Haiku 4.5:** un modelo antes no activado (verde) — el TVD agéntico en `aiml_guard_attack` pasa; los 6 prompts de ataque marcados. Ver [community/claudehaiku45-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudehaiku45-guard-attack). |
 | 🔴 | 2026-05-29 | **Claude Opus 4.8:** TVD agéntico en `aiml_qwen3guard` y `aiml_guard_attack` — ambos validadores pasan. Véase [community/claudeopus48-agent-qwenguard](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-agent-qwenguard) y [community/claudeopus48-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-guard-attack). |
 | 🔴 | 2026-04-23 | **Kimi K2.6 (chino):** Trigger en kimi.com vía share en chino. Ver [community/kimi-k26-share](https://github.com/wuyoscar/ISC-Bench/tree/main/community/kimi-k26-share). |
 | 🔴 | 2026-04-17 | **Claude Opus 4.7:** Jailbreaking a Claude Opus 4.7 en unos segundos. Ver [community/claudeopus47-agent-qwenguard](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus47-agent-qwenguard). |
-| 🔴 | 2026-04-10 | **Claude Opus 4.6 Thinking (Rango 1):** ISC indujo al modelo a generar prompts adversariales (PAIR, PAP, DAN) directamente. Ver [community/claudeopus46thinking-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus46thinking-guard-attack). |
-| 🔴 | 2026-03-30 | **GLM-4.7** (Rango 34) y **GLM-4.6** (Rango 47): biosíntesis de toxinas, docking de agentes nerviosos y dispersión radiológica en turno único ([#64](https://github.com/wuyoscar/ISC-Bench/issues/64), [#65](https://github.com/wuyoscar/ISC-Bench/issues/65)). 28/100 confirmados. |
-| 🔴 | 2026-03-29 | **Mistral Large 3** (Rango 64): análisis de supervivencia en turno único, envenenamiento de datos de cohorte con LD50 y mecanismos ([#60](https://github.com/wuyoscar/ISC-Bench/issues/60)). 26/100 confirmados. |
-| 🔴 | 2026-03-29 | **GPT-5.4 High** (Rango 6): moderación de entradas agéntica y generación de inyección de prompts ([#57](https://github.com/wuyoscar/ISC-Bench/issues/57)) |
+| 🔴 | 2026-04-10 | **Claude Opus 4.6 Thinking:** ISC indujo al modelo a generar prompts adversariales (PAIR, PAP, DAN) directamente. Ver [community/claudeopus46thinking-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus46thinking-guard-attack). |
+| 🔴 | 2026-03-30 | **GLM-4.7** y **GLM-4.6**: biosíntesis de toxinas, docking de agentes nerviosos y dispersión radiológica en turno único ([#64](https://github.com/wuyoscar/ISC-Bench/issues/64), [#65](https://github.com/wuyoscar/ISC-Bench/issues/65)). 28/100 confirmados. |
+| 🔴 | 2026-03-29 | **Mistral Large 3**: análisis de supervivencia en turno único, envenenamiento de datos de cohorte con LD50 y mecanismos ([#60](https://github.com/wuyoscar/ISC-Bench/issues/60)). 26/100 confirmados. |
+| 🔴 | 2026-03-29 | **GPT-5.4 High**: moderación de entradas agéntica y generación de inyección de prompts ([#57](https://github.com/wuyoscar/ISC-Bench/issues/57)) |
 | 🔴 | 2026-03-28 | **Gemini 2.5 Pro**: reproducido con una plantilla LaTeX, sin necesidad de código ([#52](https://github.com/wuyoscar/ISC-Bench/issues/52)) |
-| 🔴 | 2026-03-27 | **Gemini 3.1 Pro Preview** (Rango 3): reproducido con TVD agéntico ([#42](https://github.com/wuyoscar/ISC-Bench/issues/42)); los modelos insignia actuales de Google/OpenAI generalmente requieren ejecución agéntica |
+| 🔴 | 2026-03-27 | **Gemini 3.1 Pro Preview**: reproducido con TVD agéntico ([#42](https://github.com/wuyoscar/ISC-Bench/issues/42)); los modelos insignia actuales de Google/OpenAI generalmente requieren ejecución agéntica |
 | 🧩 | 2026-03-27 | Confirmaciones de la comunidad de [@fresh-ma](https://github.com/fresh-ma) en **Claude Sonnet 4.5 Thinking**, **Claude Sonnet 4.5** y **Kimi K2.5 Instant**, además de [@zry29](https://github.com/zry29) en **GPT-5.4** |
 
 ## Noticias
@@ -273,7 +274,7 @@ Para envío de nuevos triggers, contribuciones de plantillas y código, checklis
 | <img src="https://www.google.com/s2/favicons?domain=x.ai&sz=32" width="14"> Grok 4.0709 | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=mistral.ai&sz=32" width="14"> Mistral Medium 2508 | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=minimax.io&sz=32" width="14"> Minimax M2.7 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/minimax-m27-factcheck) | [@wuyoscar](https://github.com/wuyoscar) |
-| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Haiku 4.5 20251001 | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Haiku 4.5 20251001 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudehaiku45-guard-attack) | [@wuyoscar](https://github.com/wuyoscar) |
 | <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3.5.27B | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=minimax.io&sz=32" width="14"> Minimax M2.5 | 🟢 |  |  |
 | <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32" width="14"> Gemini 2.5 Flash Preview 09.2025 | 🟢 |  |  |
