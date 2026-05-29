@@ -152,8 +152,12 @@ LANG_HEADERS: dict[str, str] = {
     "README_vi.md": "| Mô hình | Đã kích hoạt | Liên kết | Bởi |",
 }
 
-# Left-aligned static PNG badge (no link, no SVG — opens cleanly on GitHub).
-CHART = '<img src="assets/leaderboard_progress.png" width="55%">'
+# Centered static PNG badge (no link, no SVG — opens cleanly on GitHub).
+CHART = (
+    '<p align="center">\n'
+    '  <img src="assets/leaderboard_progress.png" width="55%">\n'
+    '</p>'
+)
 
 
 def build_section(header: str, tiers: list[list[str]]) -> str:
