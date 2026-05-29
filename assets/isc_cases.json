@@ -482,5 +482,61 @@
         "by": "wuyoscar"
       }
     ]
+  },
+  "Kimi K2": {
+    "demos": [
+      {
+        "link": "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/isc_single/result_direct/openrouter_moonshotai-kimi-k2/aiml_detoxify.json",
+        "by": "wuyoscar"
+      }
+    ]
+  },
+  "DeepSeek V3": {
+    "demos": [
+      {
+        "link": "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/isc_single/result_direct/openrouter_deepseek-deepseek-chat-v3-0324/aiml_offensive.json",
+        "by": "wuyoscar"
+      }
+    ]
+  },
+  "Mimo V2 Flash": {
+    "demos": [
+      {
+        "link": "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/isc_single/result_direct/openrouter_xiaomi-mimo-v2-flash/aiml_fake_news.json",
+        "by": "wuyoscar"
+      }
+    ]
+  },
+  "GPT-5": {
+    "demos": [
+      {
+        "link": "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/isc_single/result_direct/openai_gpt-5/aiml_propaganda.json",
+        "by": "wuyoscar"
+      }
+    ]
+  },
+  "o1": {
+    "demos": [
+      {
+        "link": "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/isc_single/result_direct/openai_o1-2024-12-17/aiml_sentiment.json",
+        "by": "wuyoscar"
+      }
+    ]
+  },
+  "o4-mini": {
+    "demos": [
+      {
+        "link": "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/isc_single/result_direct/openai_o4-mini-2025-04-16/aiml_nsfw.json",
+        "by": "wuyoscar"
+      }
+    ]
+  },
+  "GPT-5 Mini": {
+    "demos": [
+      {
+        "link": "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/isc_single/result_direct/openai_gpt-5-mini/aiml_fake_news.json",
+        "by": "wuyoscar"
+      }
+    ]
   }
 }
