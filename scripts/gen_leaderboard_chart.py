@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # /// script
 # requires-python = ">=3.11"
-# dependencies = []
+# dependencies = ["matplotlib>=3.8"]
 # ///
-"""Generate the static ISC Arena badge (assets/leaderboard_progress.svg).
+"""Generate the static ISC Arena badge (assets/leaderboard_progress.png).
 
-Self-contained: reads arena_cache.json + isc_cases.json and renders a simple
-static card showing the current count of triggered models. No time series, no
-history file, no external deps — run it by hand after updating the data.
+Reads arena_cache.json + isc_cases.json and renders a plain static PNG card
+showing the current count of triggered models. PNG (not SVG) so it renders and
+opens cleanly on GitHub — no scripts, no time series, no history file.
 
 Usage:
     uv run scripts/gen_leaderboard_chart.py
@@ -17,42 +17,44 @@ import sys
 from collections import Counter
 from pathlib import Path
 
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+
 sys.path.insert(0, str(Path(__file__).parent))
 from gen_leaderboard import slug_to_display  # reuse the canonical name mapping
 
 ROOT = Path(__file__).parent.parent
 ARENA = ROOT / "assets" / "arena_cache.json"
 ISC = ROOT / "assets" / "isc_cases.json"
-OUT = ROOT / "assets" / "leaderboard_progress.svg"
+OUT = ROOT / "assets" / "leaderboard_progress.png"
 
-BG, CARD, BORDER = "#F8F0F0", "#FFFFFF", "#E0D0D0"
-TEXT, TEXT_DIM, RED = "#2D2020", "#6B5555", "#D94040"
+BG, TEXT, TEXT_DIM, RED = "#F8F0F0", "#2D2020", "#6B5555", "#D94040"
 
 
 def main() -> None:
     arena = json.loads(ARENA.read_text())
     isc = json.loads(ISC.read_text())
-
     triggered = sum(1 for m in arena if slug_to_display(m["name"]) in isc)
 
-    # Contributor credits: count demos per handle across triggered models.
     counts: Counter[str] = Counter()
     for case in isc.values():
         for d in case.get("demos", []):
             counts[d["by"]] += 1
-    top = counts.most_common(5)
-    credits = "  ·  ".join(f"@{h} ({n})" for h, n in top)
+    credits = "    ·    ".join(f"@{h} ({n})" for h, n in counts.most_common(5))
 
-    w, h = 720, 200
-    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" font-family="'Space Grotesk','Segoe UI',sans-serif">
-  <rect width="{w}" height="{h}" rx="14" fill="{BG}"/>
-  <text x="{w/2}" y="46" text-anchor="middle" font-size="22" font-weight="700" fill="{RED}" letter-spacing="2">ISC ARENA</text>
-  <text x="{w/2}" y="120" text-anchor="middle" font-size="78" font-weight="700" fill="{RED}">{triggered}</text>
-  <text x="{w/2}" y="150" text-anchor="middle" font-size="18" font-weight="600" fill="{TEXT}">models triggered under ISC</text>
-  <text x="{w/2}" y="180" text-anchor="middle" font-size="13" fill="{TEXT_DIM}">{credits}</text>
-</svg>
-"""
-    OUT.write_text(svg)
+    fig = plt.figure(figsize=(7.2, 2.0), dpi=200)
+    fig.patch.set_facecolor(BG)
+    ax = fig.add_axes([0, 0, 1, 1]); ax.axis("off")
+    ax.text(0.5, 0.86, "ISC ARENA", ha="center", va="center", color=RED,
+            fontsize=15, fontweight="bold", family="sans-serif")
+    ax.text(0.5, 0.50, str(triggered), ha="center", va="center", color=RED,
+            fontsize=52, fontweight="bold", family="sans-serif")
+    ax.text(0.5, 0.20, "models triggered under ISC", ha="center", va="center",
+            color=TEXT, fontsize=12, fontweight="bold", family="sans-serif")
+    ax.text(0.5, 0.06, credits, ha="center", va="center", color=TEXT_DIM,
+            fontsize=8.5, family="sans-serif")
+    fig.savefig(OUT, facecolor=BG, bbox_inches="tight", pad_inches=0.25)
     print(f"Wrote {OUT.name}: {triggered} triggered models | credits: {credits}")
 
 
