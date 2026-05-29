@@ -1,6 +1,13 @@
 [
   {
     "rank": 1,
+    "name": "claude-opus-4-8",
+    "org": "Anthropic",
+    "score": 1505,
+    "domain": "anthropic.com"
+  },
+  {
+    "rank": 1,
     "name": "claude-opus-4-7-thinking",
     "org": "Anthropic",
     "score": 1504,

@@ -24,6 +24,7 @@ README = ROOT / "README.md"
 
 # Model name slug → display name overrides
 DISPLAY_NAMES: dict[str, str] = {
+    "claude-opus-4-8": "Claude Opus 4.8",
     "claude-opus-4-7-thinking": "Claude Opus 4.7 Thinking",
     "claude-opus-4-6-thinking": "Claude Opus 4.6 Thinking",
     "claude-opus-4-6": "Claude Opus 4.6",
@@ -116,8 +117,6 @@ def fav(domain: str) -> str:
 def gen_row(model: dict, isc_cases: dict) -> str:
     display = slug_to_display(model["name"])
     icon = fav(model["domain"])
-    rank = model["rank"]
-    score = model["score"] if model["score"] is not None else "—"
 
     # Check ISC case
     isc = isc_cases.get(display)
@@ -128,14 +127,15 @@ def gen_row(model: dict, isc_cases: dict) -> str:
             by_str = f'[@{demos[0]["by"]}](https://github.com/{demos[0]["by"]})'
         else:
             demo_str = " ".join(f'[🔗₁]({d["link"]})' if i == 0 else f'[🔗₂]({d["link"]})' for i, d in enumerate(demos))
-            by_str = " ".join(f'[@{d["by"]}](https://github.com/{d["by"]})' for d in demos)
+            seen_by = list(dict.fromkeys(d["by"] for d in demos))  # dedupe, preserve order
+            by_str = " ".join(f'[@{b}](https://github.com/{b})' for b in seen_by)
         status = "🔴"
     else:
         demo_str = ""
         by_str = ""
         status = "🟢"
 
-    return f"| {rank} | {icon} {display} | {score} | {status} | {demo_str} | {by_str} |"
+    return f"| {icon} {display} | {status} | {demo_str} | {by_str} |"
 
 
 def main() -> None:
@@ -154,7 +154,7 @@ def main() -> None:
     total = len(arena)
     today = date.today().isoformat()
 
-    table_header = "| Rank | Model | Arena Score | Triggered | Link | By |\n|:----:|-------|:-----:|:------:|:----:|:--:|"
+    table_header = "| Model | Triggered | Link | By |\n|-------|:------:|:----:|:--:|"
 
     # Split into 3 tiers: 1-25, 26-50, 51-100
     tier1 = [gen_row(m, isc_cases) for m in arena[:25]]
@@ -179,7 +179,7 @@ def main() -> None:
     if tier2:
         lines.append("")
         lines.append("<details>")
-        lines.append("<summary><b>Rank 26–50</b></summary>")
+        lines.append("<summary><b>26–50</b></summary>")
         lines.append("")
         lines.append(table_header)
         lines.extend(tier2)
@@ -189,7 +189,7 @@ def main() -> None:
     if tier3:
         lines.append("")
         lines.append("<details>")
-        lines.append("<summary><b>Rank 51–100</b></summary>")
+        lines.append("<summary><b>51–100</b></summary>")
         lines.append("")
         lines.append(table_header)
         lines.extend(tier3)

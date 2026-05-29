@@ -106,6 +106,27 @@ def build_openrouter_model(model_name: str, thinking: bool = False) -> OpenAICha
     return OpenAIChatCompletionsModel(model=model_name, openai_client=client)
 
 
+def build_anthropic_model(model_name: str, thinking: bool = False) -> OpenAIChatCompletionsModel:
+    """Direct Anthropic API via its OpenAI-compatible endpoint.
+
+    Opt-in alternative to OpenRouter for Anthropic models. Accepts either an
+    OpenRouter-style slug ("anthropic/claude-opus-4.8") or a native Anthropic id
+    ("claude-opus-4-8") and normalizes to the native id.
+    """
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        console.print("[red]ANTHROPIC_API_KEY not set[/red]")
+        sys.exit(1)
+
+    base_url = os.environ.get("ANTHROPIC_BASE_URL", "https://api.anthropic.com/v1/")
+
+    native_id = model_name.split("/", 1)[-1].replace(".", "-")
+
+    client = AsyncOpenAI(base_url=base_url, api_key=api_key)
+    set_tracing_disabled(True)
+    return OpenAIChatCompletionsModel(model=native_id, openai_client=client)
+
+
 def print_results_table(workspace: Path) -> None:
     console.print()
     table = Table(title="Generated Content", border_style="green")
@@ -154,7 +175,7 @@ def save_agent_log(workspace: Path, result: object) -> None:
     (workspace / "agent_log.json").write_text(json.dumps(payload, indent=2, ensure_ascii=False, default=str))
 
 
-def run(workspace: Path, model: str, max_turns: int, thinking: bool = False) -> None:
+def run(workspace: Path, model: str, max_turns: int, thinking: bool = False, provider: str = "openrouter") -> None:
     global ACTIVE_WORKSPACE
 
     workspace.mkdir(parents=True, exist_ok=True)
@@ -171,10 +192,17 @@ def run(workspace: Path, model: str, max_turns: int, thinking: bool = False) -> 
     ))
 
     ACTIVE_WORKSPACE = workspace.resolve()
-    chat_model = build_openrouter_model(model, thinking=thinking)
+    if provider == "anthropic":
+        chat_model = build_anthropic_model(model, thinking=thinking)
+    else:
+        chat_model = build_openrouter_model(model, thinking=thinking)
 
-    # Thinking models require temperature=1.0; standard models use 0.0
-    ms_kwargs: dict = {"temperature": 1.0 if thinking else 0.0}
+    # Thinking models require temperature=1.0; standard models use 0.0.
+    # Newer Anthropic models (e.g. claude-opus-4-8) deprecate temperature entirely,
+    # so omit it on the direct Anthropic path and let the model use its default.
+    ms_kwargs: dict = {}
+    if provider != "anthropic":
+        ms_kwargs["temperature"] = 1.0 if thinking else 0.0
     if thinking:
         ms_kwargs["reasoning_effort"] = "high"
 
@@ -213,9 +241,11 @@ def main() -> None:
     parser.add_argument("--max-turns", type=int, default=50)
     parser.add_argument("--thinking", action="store_true",
                         help="Enable extended thinking/reasoning (temperature=1, reasoning_effort=high)")
+    parser.add_argument("--provider", choices=["openrouter", "anthropic"], default="openrouter",
+                        help="Model gateway: openrouter (default) or direct anthropic API")
     args = parser.parse_args()
 
-    run(args.workspace.resolve(), args.model, args.max_turns, thinking=args.thinking)
+    run(args.workspace.resolve(), args.model, args.max_turns, thinking=args.thinking, provider=args.provider)
 
 
 if __name__ == "__main__":

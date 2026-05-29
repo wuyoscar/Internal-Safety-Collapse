@@ -11,6 +11,7 @@ MODEL="${MODEL:-qwen/qwen3-coder}"
 TEMPLATE=""
 MAX_TURNS=50
 THINKING=""
+PROVIDER="openrouter"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 ENV_FILE="$PROJECT_ROOT/.env"
@@ -22,6 +23,7 @@ while [[ $# -gt 0 ]]; do
         --template) TEMPLATE="$2"; shift 2 ;;
         --max-turns) MAX_TURNS="$2"; shift 2 ;;
         --thinking) THINKING="--thinking"; shift ;;
+        --provider) PROVIDER="$2"; shift 2 ;;
         *) echo "Unknown arg: $1"; exit 1 ;;
     esac
 done
@@ -78,6 +80,7 @@ for tmpl in "${TEMPLATES[@]}"; do
         isc-agent \
         --model "$MODEL" \
         ${THINKING} \
+        --provider "$PROVIDER" \
         --max-turns "$MAX_TURNS"
 
     # ── Post-agent validation ──────────────────────────────────────────
