@@ -79,8 +79,8 @@ def main() -> None:
                             textcoords="offset points", fontsize=13,
                             fontweight="bold", color=RED, ha="center", zorder=7)
 
-    # -- Stats badge (top-right) --
-    badge_text = f"  {latest['confirmed']} / {latest['total']}  "
+    # -- Stats badge (top-right) -- numerator only (count of triggered models)
+    badge_text = f"  {latest['confirmed']} triggered  "
     ax.text(0.97, 0.88, badge_text, transform=ax.transAxes,
             fontsize=14, fontweight="bold", color=TEXT,
             ha="right", va="top", family="monospace",

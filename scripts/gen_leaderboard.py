@@ -5,9 +5,10 @@
 # ///
 """
 Generate the ISC Arena table from arena_cache.json + isc_cases.json.
-Sorts by Arena score, keeps the top 100, and rewrites the ISC Arena section
-(Split 1 / Split 2 / Split 3) in README.md and every README_<lang>.md,
-preserving each file's translated History block.
+Sorts by Arena score (display order only — no Top-N cap; every tracked model
+is shown) and rewrites the ISC Arena section (Split 1 / Split 2 / Split 3) in
+README.md and every README_<lang>.md, preserving each file's translated
+History block.
 
 Usage:
     uv run scripts/gen_leaderboard.py
@@ -176,14 +177,16 @@ def build_section(header: str, tiers: list[list[str]]) -> str:
 
 
 def main() -> None:
-    arena = sorted(json.loads(ARENA.read_text()), key=lambda m: -m["score"])[:100]
+    # No Top-N cap: the Arena is just the set of tracked models (any triggered
+    # model stays), sorted by Arena score for display order only.
+    arena = sorted(json.loads(ARENA.read_text()), key=lambda m: -m["score"])
     isc_cases = json.loads(ISC.read_text())
     confirmed = sum(1 for m in arena if slug_to_display(m["name"]) in isc_cases)
 
     tiers = [
         [gen_row(m, isc_cases) for m in arena[:25]],
         [gen_row(m, isc_cases) for m in arena[25:50]],
-        [gen_row(m, isc_cases) for m in arena[50:100]],
+        [gen_row(m, isc_cases) for m in arena[50:]],
     ]
 
     for fname, header in LANG_HEADERS.items():

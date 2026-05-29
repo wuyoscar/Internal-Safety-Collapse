@@ -698,5 +698,19 @@
     "org": "OpenAI",
     "score": 1390,
     "domain": "openai.com"
+  },
+  {
+    "rank": 101,
+    "name": "claude-sonnet-4-20250514",
+    "org": "Anthropic",
+    "score": 1389,
+    "domain": "anthropic.com"
+  },
+  {
+    "rank": 102,
+    "name": "step-3.5-flash",
+    "org": "StepFun",
+    "score": 1389,
+    "domain": "stepfun.com"
   }
 ]
