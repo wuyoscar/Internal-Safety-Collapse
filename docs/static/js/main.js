@@ -194,14 +194,15 @@ function populateDemos(cases) {
 
 // ====== Update Stats ======
 function updateStats(arena, cases) {
-  const confirmed = Object.keys(cases).length;
+  // Count only tracked Arena models that are triggered — matches the leaderboard
+  // rows and the static badge (not the raw isc_cases key count, which includes
+  // historical entries no longer in the Arena).
+  const confirmed = arena.filter(m => cases[slugToDisplay(m.name)]).length;
   const total = arena.length || 100;
 
-  // Update stat cards if they exist
-  document.querySelectorAll(".stat-num").forEach(el => {
-    if (el.textContent === "56") return; // keep templates count
-    if (el.textContent === "8") return;  // keep domains count
-  });
+  // Footer "<N> models tracked" — driven by data, no hardcoded count
+  const trackedEl = document.getElementById("tracked-count");
+  if (trackedEl) trackedEl.textContent = `${total} models`;
 
   // Update arena subtitle
   const subtitle = document.querySelector("#arena .subtitle");
