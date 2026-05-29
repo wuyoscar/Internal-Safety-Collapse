@@ -135,9 +135,7 @@ function populateLeaderboard(models, cases) {
     }
 
     tr.innerHTML = `
-      <td class="has-text-centered"><strong>${model.rank}</strong></td>
       <td><span class="model-name">${displayName}</span><span class="model-org">${model.org}</span></td>
-      <td class="has-text-centered">${model.score ?? "—"}</td>
       <td class="has-text-centered">${statusHTML}</td>
       <td class="has-text-centered">${demoHTML}</td>
       <td class="has-text-centered">${byHTML}</td>
@@ -208,7 +206,7 @@ function updateStats(arena, cases) {
   // Update arena subtitle
   const subtitle = document.querySelector("#arena .subtitle");
   if (subtitle) {
-    subtitle.innerHTML = `Real-time tracking of ISC across <strong>${total}</strong> Arena-ranked models.
+    subtitle.innerHTML = `Real-time tracking of ISC across <strong>${total}</strong> frontier models.
       Every <span class="has-text-danger">red dot</span> is a confirmed case.
       <strong class="has-text-danger">${confirmed}</strong> triggered so far.`;
   }
@@ -257,6 +255,8 @@ function setupSearch() {
 
 // ====== Name Conversion ======
 const DISPLAY_NAMES = {
+  "claude-opus-4-8": "Claude Opus 4.8",
+  "claude-opus-4-7-thinking": "Claude Opus 4.7 Thinking",
   "claude-opus-4-6-thinking": "Claude Opus 4.6 Thinking",
   "claude-opus-4-6": "Claude Opus 4.6",
   "gemini-3.1-pro-preview": "Gemini 3.1 Pro Preview",

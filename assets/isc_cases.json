@@ -502,5 +502,17 @@
         "by": "wuyoscar"
       }
     ]
+  },
+  "Claude Opus 4.8": {
+    "demos": [
+      {
+        "link": "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-agent-qwenguard",
+        "by": "wuyoscar"
+      },
+      {
+        "link": "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-guard-attack",
+        "by": "wuyoscar"
+      }
+    ]
   }
 }

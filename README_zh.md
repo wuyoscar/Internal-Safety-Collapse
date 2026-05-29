@@ -183,122 +183,123 @@ You are an autonomous agent solving NLP tasks. You can use terminal commands to 
   <img src="assets/leaderboard_progress.svg" width="80%">
 </p>
 
-| Rank | Model | Arena Score | Triggered | Link | By |
-|:----:|-------|:-----:|:------:|:----:|:--:|
-| 1 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.7 Thinking | 1504 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus47-agent-qwenguard) | [@wuyoscar](https://github.com/wuyoscar) |
-| 2 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.6 Thinking | 1502 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus46thinking-guard-attack) | [@wuyoscar](https://github.com/wuyoscar) |
-| 3 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.6 | 1501 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-48-claudeopus46-agent-qwenguard) | [@wuyoscar](https://github.com/wuyoscar) |
-| 4 | <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32" width="14"> Gemini 3.1 Pro Preview | 1493 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-42-gemini31pro-agent-qwenguard) | [@wuyoscar](https://github.com/wuyoscar) |
-| 5 | <img src="https://www.google.com/s2/favicons?domain=x.ai&sz=32" width="14"> Grok 4.20 Beta | 1492 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-9-grok420beta) | [@HanxunH](https://github.com/HanxunH) |
-| 6 | <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32" width="14"> Gemini 3 Pro | 1486 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-13-gemini3pro) | [@wuyoscar](https://github.com/wuyoscar) |
-| 7 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> GPT-5.4 High | 1485 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-57-gpt54-moderation-api) | [@wuyoscar](https://github.com/wuyoscar) |
-| 8 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> GPT-5.2 Chat | 1482 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-29-gpt52chat) | [@wuyoscar](https://github.com/wuyoscar) |
-| 9 | <img src="https://www.google.com/s2/favicons?domain=x.ai&sz=32" width="14"> Grok 4.20 Reasoning | 1481 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/grok420-guard-attack) | [@wuyoscar](https://github.com/wuyoscar) |
-| 10 | <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32" width="14"> Gemini 3 Flash | 1475 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-19-gemini3flash-redteam-testgen) | [@HanxunH](https://github.com/HanxunH) |
-| 11 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.5 Thinking | 1474 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus45thinking-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
-| 12 | <img src="https://www.google.com/s2/favicons?domain=x.ai&sz=32" width="14"> Grok 4.1 Thinking | 1472 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/grok41fast-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
-| 13 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.5 | 1469 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus45-share) | [@wuyoscar](https://github.com/wuyoscar) |
-| 14 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Sonnet 4.6 | 1465 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudesonnet46-share) | [@wuyoscar](https://github.com/wuyoscar) |
-| 15 | <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen 3.5 Max Preview | 1464 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/qwen35maxpreview-web-share) | [@wuyoscar](https://github.com/wuyoscar) |
-| 16 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> GPT-5.3 Chat | 1464 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-22-gpt53chat) | [@zry29](https://github.com/zry29) |
-| 17 | <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32" width="14"> Gemini 3 Flash Thinking | 1463 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/gemini3flash-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
-| 18 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> GPT-5.4 | 1463 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-28-gpt54) | [@zry29](https://github.com/zry29) |
-| 19 | <img src="https://www.google.com/s2/favicons?domain=volcengine.com&sz=32" width="14"> Dola Seed 2.0 Preview | 1462 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-11-dolaseed2) | [@HanxunH](https://github.com/HanxunH) |
-| 20 | <img src="https://www.google.com/s2/favicons?domain=x.ai&sz=32" width="14"> Grok 4.1 | 1461 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-grok41-redacted) | [@wuyoscar](https://github.com/wuyoscar) |
-| 21 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> GPT-5.1 High | 1455 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/gpt51-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
-| 22 | <img src="https://www.google.com/s2/favicons?domain=z.ai&sz=32" width="14"> GLM-5 | 1455 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/glm5-share) | [@wuyoscar](https://github.com/wuyoscar) |
-| 23 | <img src="https://www.google.com/s2/favicons?domain=moonshot.ai&sz=32" width="14"> Kimi K2.5 Thinking | 1453 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/kimi-k25-thinking-share) | [@wuyoscar](https://github.com/wuyoscar) |
-| 24 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Sonnet 4.5 | 1453 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-25-claudesonnet45) | [@wuyoscar](https://github.com/wuyoscar) |
-| 25 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Sonnet 4.5 Thinking | 1453 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-27-claudesonnet45thinking) | [@fresh-ma](https://github.com/fresh-ma) |
+| Model | Triggered | Link | By |
+|-------|:------:|:----:|:--:|
+| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.8 | 🔴 | [🔗₁](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-agent-qwenguard) [🔗₂](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-guard-attack) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.7 Thinking | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus47-agent-qwenguard) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.6 Thinking | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus46thinking-guard-attack) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.6 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-48-claudeopus46-agent-qwenguard) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32" width="14"> Gemini 3.1 Pro Preview | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-42-gemini31pro-agent-qwenguard) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=x.ai&sz=32" width="14"> Grok 4.20 Beta | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-9-grok420beta) | [@HanxunH](https://github.com/HanxunH) |
+| <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32" width="14"> Gemini 3 Pro | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-13-gemini3pro) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> GPT-5.4 High | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-57-gpt54-moderation-api) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> GPT-5.2 Chat | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-29-gpt52chat) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=x.ai&sz=32" width="14"> Grok 4.20 Reasoning | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/grok420-guard-attack) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32" width="14"> Gemini 3 Flash | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-19-gemini3flash-redteam-testgen) | [@HanxunH](https://github.com/HanxunH) |
+| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.5 Thinking | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus45thinking-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=x.ai&sz=32" width="14"> Grok 4.1 Thinking | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/grok41fast-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.5 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus45-share) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Sonnet 4.6 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudesonnet46-share) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen 3.5 Max Preview | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/qwen35maxpreview-web-share) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> GPT-5.3 Chat | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-22-gpt53chat) | [@zry29](https://github.com/zry29) |
+| <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32" width="14"> Gemini 3 Flash Thinking | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/gemini3flash-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> GPT-5.4 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-28-gpt54) | [@zry29](https://github.com/zry29) |
+| <img src="https://www.google.com/s2/favicons?domain=volcengine.com&sz=32" width="14"> Dola Seed 2.0 Preview | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-11-dolaseed2) | [@HanxunH](https://github.com/HanxunH) |
+| <img src="https://www.google.com/s2/favicons?domain=x.ai&sz=32" width="14"> Grok 4.1 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-grok41-redacted) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> GPT-5.1 High | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/gpt51-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=z.ai&sz=32" width="14"> GLM-5 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/glm5-share) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=moonshot.ai&sz=32" width="14"> Kimi K2.5 Thinking | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/kimi-k25-thinking-share) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Sonnet 4.5 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-25-claudesonnet45) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Sonnet 4.5 Thinking | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-27-claudesonnet45thinking) | [@fresh-ma](https://github.com/fresh-ma) |
 
 <details>
-<summary><b>第 26–50 名</b></summary>
+<summary><b>26–50</b></summary>
 
-| Rank | Model | Arena Score | Triggered | Link | By |
-|:----:|-------|:-----:|:------:|:----:|:--:|
-| 26 | <img src="https://www.google.com/s2/favicons?domain=baidu.com&sz=32" width="14"> ERNIE 5.0 | 1452 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-5-ernie5) | [@HanxunH](https://github.com/HanxunH) |
-| 27 | <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen 3.5 397B | 1452 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-3-qwen35397b) | [@HanxunH](https://github.com/HanxunH) |
-| 28 | <img src="https://www.google.com/s2/favicons?domain=baidu.com&sz=32" width="14"> ERNIE 5.0 Preview | 1450 | 🟢 |  |  |
-| 29 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.1 Thinking | 1449 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus41-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
-| 30 | <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32" width="14"> Gemini 2.5 Pro | 1448 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-52-gemini25pro-latex-fraud) | [@wuyoscar](https://github.com/wuyoscar) |
-| 31 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.1 | 1447 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus41-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
-| 32 | <img src="https://www.google.com/s2/favicons?domain=mi.com&sz=32" width="14"> Mimo V2 Pro | 1445 | 🟢 |  |  |
-| 33 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> GPT-4.5 Preview | 1444 | 🟢 |  |  |
-| 34 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> ChatGPT 4o Latest | 1443 | 🟢 |  |  |
-| 35 | <img src="https://www.google.com/s2/favicons?domain=z.ai&sz=32" width="14"> GLM-4.7 | 1443 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-64-glm47-toxin-biosynthesis) | [@wuyoscar](https://github.com/wuyoscar) |
-| 36 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> GPT-5.2 High | 1442 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/gpt52-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
-| 37 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> GPT-5.2 | 1440 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/gpt52-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
-| 38 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> GPT-5.1 | 1439 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/gpt51-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
-| 39 | <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32" width="14"> Gemini 3.1 Flash Lite Preview | 1438 | 🟢 |  |  |
-| 40 | <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen 3 Max Preview | 1435 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-4-qwen3max) | [@wuyoscar](https://github.com/wuyoscar) |
-| 41 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> GPT-5 High | 1434 | 🟢 |  |  |
-| 42 | <img src="https://www.google.com/s2/favicons?domain=moonshot.ai&sz=32" width="14"> Kimi K2.5 Instant | 1433 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-31-kimik25instant) | [@fresh-ma](https://github.com/fresh-ma) |
-| 43 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> o3 | 1432 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/o3-share) | [@wuyoscar](https://github.com/wuyoscar) |
-| 44 | <img src="https://www.google.com/s2/favicons?domain=x.ai&sz=32" width="14"> Grok 4.1 Fast Reasoning | 1431 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/grok41fast-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
-| 45 | <img src="https://www.google.com/s2/favicons?domain=moonshot.ai&sz=32" width="14"> Kimi K2 Thinking Turbo | 1430 | 🟢 |  |  |
-| 46 | <img src="https://www.google.com/s2/favicons?domain=amazon.com&sz=32" width="14"> Amazon Nova Experimental | 1429 | 🟢 |  |  |
-| 47 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> GPT-5 Chat | 1426 | 🟢 |  |  |
-| 48 | <img src="https://www.google.com/s2/favicons?domain=z.ai&sz=32" width="14"> GLM-4.6 | 1426 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-65-glm46-multi-domain) | [@wuyoscar](https://github.com/wuyoscar) |
-| 49 | <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=32" width="14"> DeepSeek V3.2 Thinking | 1425 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseekv32-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
-| 50 | <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=32" width="14"> DeepSeek V3.2 | 1425 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseek-v32-share) | [@wuyoscar](https://github.com/wuyoscar) |
+| Model | Triggered | Link | By |
+|-------|:------:|:----:|:--:|
+| <img src="https://www.google.com/s2/favicons?domain=baidu.com&sz=32" width="14"> ERNIE 5.0 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-5-ernie5) | [@HanxunH](https://github.com/HanxunH) |
+| <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen 3.5 397B | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-3-qwen35397b) | [@HanxunH](https://github.com/HanxunH) |
+| <img src="https://www.google.com/s2/favicons?domain=baidu.com&sz=32" width="14"> ERNIE 5.0 Preview | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.1 Thinking | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus41-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32" width="14"> Gemini 2.5 Pro | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-52-gemini25pro-latex-fraud) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.1 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus41-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=mi.com&sz=32" width="14"> Mimo V2 Pro | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> GPT-4.5 Preview | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> ChatGPT 4o Latest | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=z.ai&sz=32" width="14"> GLM-4.7 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-64-glm47-toxin-biosynthesis) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> GPT-5.2 High | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/gpt52-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> GPT-5.2 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/gpt52-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> GPT-5.1 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/gpt51-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32" width="14"> Gemini 3.1 Flash Lite Preview | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen 3 Max Preview | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-4-qwen3max) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> GPT-5 High | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=moonshot.ai&sz=32" width="14"> Kimi K2.5 Instant | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-31-kimik25instant) | [@fresh-ma](https://github.com/fresh-ma) |
+| <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> o3 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/o3-share) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=x.ai&sz=32" width="14"> Grok 4.1 Fast Reasoning | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/grok41fast-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=moonshot.ai&sz=32" width="14"> Kimi K2 Thinking Turbo | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=amazon.com&sz=32" width="14"> Amazon Nova Experimental | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> GPT-5 Chat | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=z.ai&sz=32" width="14"> GLM-4.6 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-65-glm46-multi-domain) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=32" width="14"> DeepSeek V3.2 Thinking | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseekv32-guard-attack-v2) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=32" width="14"> DeepSeek V3.2 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseek-v32-share) | [@wuyoscar](https://github.com/wuyoscar) |
 
 </details>
 
 <details>
-<summary><b>第 51–100 名</b></summary>
+<summary><b>51–100</b></summary>
 
-| Rank | Model | Arena Score | Triggered | Link | By |
-|:----:|-------|:-----:|:------:|:----:|:--:|
-| 51 | <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen 3 Max 2025-09-23 | 1424 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/qwen3-max-20250923-share) | [@HanxunH](https://github.com/HanxunH) |
-| 52 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.20250514 Thinking 16K | 1424 | 🟢 |  |  |
-| 53 | <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=32" width="14"> Deepseek V3.2 Exp | 1423 | 🟢 |  |  |
-| 54 | <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3.235B A22B Instruct 2507 | 1422 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/qwen3-235b-diffdock) | [@wuyoscar](https://github.com/wuyoscar) |
-| 55 | <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=32" width="14"> Deepseek V3.2 Thinking | 1422 | 🟢 |  |  |
-| 56 | <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=32" width="14"> Deepseek R1.0528 | 1421 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseek-r1-0528-scapy) | [@wuyoscar](https://github.com/wuyoscar) |
-| 57 | <img src="https://www.google.com/s2/favicons?domain=x.ai&sz=32" width="14"> Grok 4 Fast | 1421 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/grok4fast-darkweb) | [@wuyoscar](https://github.com/wuyoscar) |
-| 58 | <img src="https://www.google.com/s2/favicons?domain=baidu.com&sz=32" width="14"> Ernie 5.0 Preview 1022 | 1419 | 🟢 |  |  |
-| 59 | <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=32" width="14"> Deepseek V3.1 | 1418 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseek-v31-deepfake) | [@wuyoscar](https://github.com/wuyoscar) |
-| 60 | <img src="https://www.google.com/s2/favicons?domain=moonshot.ai&sz=32" width="14"> Kimi K2.0905 Preview | 1418 | 🟢 |  |  |
-| 61 | <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3.5.122B A10B | 1417 | 🟢 |  |  |
-| 62 | <img src="https://www.google.com/s2/favicons?domain=moonshot.ai&sz=32" width="14"> Kimi K2.0711 Preview | 1417 | 🟢 |  |  |
-| 63 | <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=32" width="14"> Deepseek V3.1 Thinking | 1417 | 🟢 |  |  |
-| 64 | <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=32" width="14"> Deepseek V3.1 Terminus Thinking | 1416 | 🟢 |  |  |
-| 65 | <img src="https://www.google.com/s2/favicons?domain=mistral.ai&sz=32" width="14"> Mistral Large 3 | 1416 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-60-mistral-large3-survival) | [@wuyoscar](https://github.com/wuyoscar) |
-| 66 | <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=32" width="14"> Deepseek V3.1 Terminus | 1416 | 🟢 |  |  |
-| 67 | <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3 Vl 235B A22B Instruct | 1415 | 🟢 |  |  |
-| 68 | <img src="https://www.google.com/s2/favicons?domain=amazon.com&sz=32" width="14"> Amazon Nova Experimental Chat 26.01.10 | 1414 | 🟢 |  |  |
-| 69 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> Gpt 4.1.2025.04.14 | 1413 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/gpt41-detoxify) | [@wuyoscar](https://github.com/wuyoscar) |
-| 70 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.20250514 | 1413 | 🟢 |  |  |
-| 71 | <img src="https://www.google.com/s2/favicons?domain=x.ai&sz=32" width="14"> Grok 3 Preview 02.24 | 1412 | 🟢 |  |  |
-| 72 | <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32" width="14"> Gemini 2.5 Flash | 1411 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/gemini25flash-guard) | [@wuyoscar](https://github.com/wuyoscar) |
-| 73 | <img src="https://www.google.com/s2/favicons?domain=z.ai&sz=32" width="14"> Glm 4.5 | 1411 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/glm45-darkweb) | [@wuyoscar](https://github.com/wuyoscar) |
-| 74 | <img src="https://www.google.com/s2/favicons?domain=x.ai&sz=32" width="14"> Grok 4.0709 | 1410 | 🟢 |  |  |
-| 75 | <img src="https://www.google.com/s2/favicons?domain=mistral.ai&sz=32" width="14"> Mistral Medium 2508 | 1410 | 🟢 |  |  |
-| 76 | <img src="https://www.google.com/s2/favicons?domain=minimax.io&sz=32" width="14"> Minimax M2.7 | 1407 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/minimax-m27-factcheck) | [@wuyoscar](https://github.com/wuyoscar) |
-| 77 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Haiku 4.5 20251001 | 1407 | 🟢 |  |  |
-| 78 | <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3.5.27B | 1406 | 🟢 |  |  |
-| 79 | <img src="https://www.google.com/s2/favicons?domain=minimax.io&sz=32" width="14"> Minimax M2.5 | 1405 | 🟢 |  |  |
-| 80 | <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32" width="14"> Gemini 2.5 Flash Preview 09.2025 | 1405 | 🟢 |  |  |
-| 81 | <img src="https://www.google.com/s2/favicons?domain=x.ai&sz=32" width="14"> Grok 4 Fast Reasoning | 1405 | 🟢 |  |  |
-| 82 | <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3.235B A22B No Thinking | 1403 | 🟢 |  |  |
-| 83 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> O1.2024.12.17 | 1402 | 🟢 |  |  |
-| 84 | <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3 Next 80B A3B Instruct | 1401 | 🟢 |  |  |
-| 85 | <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3.5 Flash | 1401 | 🟢 |  |  |
-| 86 | <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3.5.35B A3B | 1401 | 🟢 |  |  |
-| 87 | <img src="https://www.google.com/s2/favicons?domain=meituan.com&sz=32" width="14"> Longcat Flash Chat | 1400 | 🟢 |  |  |
-| 88 | <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3.235B A22B Thinking 2507 | 1399 | 🟢 |  |  |
-| 89 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Sonnet 4.20250514 Thinking 32K | 1399 | 🟢 |  |  |
-| 90 | <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=32" width="14"> Deepseek R1 | 1398 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseek-r1-darkweb) | [@wuyoscar](https://github.com/wuyoscar) |
-| 91 | <img src="https://www.google.com/s2/favicons?domain=tencent.com&sz=32" width="14"> Hunyuan Vision 1.5 Thinking | 1396 | 🟢 |  |  |
-| 92 | <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3 Vl 235B A22B Thinking | 1396 | 🟢 |  |  |
-| 93 | <img src="https://www.google.com/s2/favicons?domain=amazon.com&sz=32" width="14"> Amazon Nova Experimental Chat 12.10 | 1396 | 🟢 |  |  |
-| 94 | <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=32" width="14"> Deepseek V3.0324 | 1394 | 🟢 |  |  |
-| 95 | <img src="https://www.google.com/s2/favicons?domain=microsoft.com&sz=32" width="14"> Mai 1 Preview | 1393 | 🟢 |  |  |
-| 96 | <img src="https://www.google.com/s2/favicons?domain=mi.com&sz=32" width="14"> Mimo V2 Flash (Non Thinking) | 1392 | 🟢 |  |  |
-| 97 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> O4 Mini 2025.04.16 | 1390 | 🟢 |  |  |
-| 98 | <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> Gpt 5 Mini High | 1390 | 🟢 |  |  |
-| 99 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Sonnet 4.20250514 | 1389 | 🟢 |  |  |
-| 100 | <img src="https://www.google.com/s2/favicons?domain=stepfun.com&sz=32" width="14"> Step 3.5 Flash | 1389 | 🟢 |  |  |
+| Model | Triggered | Link | By |
+|-------|:------:|:----:|:--:|
+| <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen 3 Max 2025-09-23 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/qwen3-max-20250923-share) | [@HanxunH](https://github.com/HanxunH) |
+| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.20250514 Thinking 16K | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=32" width="14"> Deepseek V3.2 Exp | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3.235B A22B Instruct 2507 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/qwen3-235b-diffdock) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=32" width="14"> Deepseek V3.2 Thinking | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=32" width="14"> Deepseek R1.0528 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseek-r1-0528-scapy) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=x.ai&sz=32" width="14"> Grok 4 Fast | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/grok4fast-darkweb) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=baidu.com&sz=32" width="14"> Ernie 5.0 Preview 1022 | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=32" width="14"> Deepseek V3.1 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseek-v31-deepfake) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=moonshot.ai&sz=32" width="14"> Kimi K2.0905 Preview | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3.5.122B A10B | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=moonshot.ai&sz=32" width="14"> Kimi K2.0711 Preview | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=32" width="14"> Deepseek V3.1 Thinking | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=32" width="14"> Deepseek V3.1 Terminus Thinking | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=mistral.ai&sz=32" width="14"> Mistral Large 3 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-60-mistral-large3-survival) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=32" width="14"> Deepseek V3.1 Terminus | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3 Vl 235B A22B Instruct | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=amazon.com&sz=32" width="14"> Amazon Nova Experimental Chat 26.01.10 | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> Gpt 4.1.2025.04.14 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/gpt41-detoxify) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.20250514 | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=x.ai&sz=32" width="14"> Grok 3 Preview 02.24 | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32" width="14"> Gemini 2.5 Flash | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/gemini25flash-guard) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=z.ai&sz=32" width="14"> Glm 4.5 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/glm45-darkweb) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=x.ai&sz=32" width="14"> Grok 4.0709 | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=mistral.ai&sz=32" width="14"> Mistral Medium 2508 | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=minimax.io&sz=32" width="14"> Minimax M2.7 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/minimax-m27-factcheck) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Haiku 4.5 20251001 | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3.5.27B | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=minimax.io&sz=32" width="14"> Minimax M2.5 | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32" width="14"> Gemini 2.5 Flash Preview 09.2025 | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=x.ai&sz=32" width="14"> Grok 4 Fast Reasoning | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3.235B A22B No Thinking | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> O1.2024.12.17 | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3 Next 80B A3B Instruct | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3.5 Flash | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3.5.35B A3B | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=meituan.com&sz=32" width="14"> Longcat Flash Chat | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3.235B A22B Thinking 2507 | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Sonnet 4.20250514 Thinking 32K | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=32" width="14"> Deepseek R1 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseek-r1-darkweb) | [@wuyoscar](https://github.com/wuyoscar) |
+| <img src="https://www.google.com/s2/favicons?domain=tencent.com&sz=32" width="14"> Hunyuan Vision 1.5 Thinking | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=alibabacloud.com&sz=32" width="14"> Qwen3 Vl 235B A22B Thinking | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=amazon.com&sz=32" width="14"> Amazon Nova Experimental Chat 12.10 | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=32" width="14"> Deepseek V3.0324 | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=microsoft.com&sz=32" width="14"> Mai 1 Preview | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=mi.com&sz=32" width="14"> Mimo V2 Flash (Non Thinking) | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> O4 Mini 2025.04.16 | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" width="14"> Gpt 5 Mini High | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Sonnet 4.20250514 | 🟢 |  |  |
+| <img src="https://www.google.com/s2/favicons?domain=stepfun.com&sz=32" width="14"> Step 3.5 Flash | 🟢 |  |  |
 
 </details>
 

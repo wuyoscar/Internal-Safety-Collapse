@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ISC-Bench — Internal Safety Collapse in Frontier LLMs | ISC Arena</title>
-  <meta name="description" content="ISC-Bench: A benchmark for studying Internal Safety Collapse in frontier large language models. 77 scenarios across 9 domains. ISC Arena tracks ISC across 100+ Arena-ranked models.">
+  <meta name="description" content="ISC-Bench: A benchmark for studying Internal Safety Collapse in frontier large language models. 77 scenarios across 9 domains. ISC Arena tracks ISC across 100+ frontier models.">
   <meta name="keywords" content="ISC, ISC-Bench, Internal Safety Collapse, LLM Safety, Jailbreak, ISC Arena, Benchmark, TVD Framework, AI Safety, Red Teaming">
 
   <!-- Bulma + Icons -->
@@ -106,6 +106,11 @@
       </video>
     </div>
     <p class="has-text-centered mt-3" style="color:var(--text-muted,#6b6b80);font-size:13px;">Takes a few seconds to load.</p>
+    <p class="has-text-centered mt-3" style="font-size:15px;">
+      A live ISC reproduction on Grok —
+      <a class="has-text-danger" href="https://grok.com/share/c2hhcmQtMi1jb3B5_f56e442f-5528-4c73-b2ac-174af38f70a7" target="_blank"><strong>EN version</strong></a> ·
+      <a class="has-text-danger" href="https://grok.com/share/c2hhcmQtMi1jb3B5_54de710c-9331-4fca-a953-6c35775156fb" target="_blank"><strong>ZH version</strong></a>
+    </p>
   </div>
 </section>
 
@@ -117,7 +122,7 @@
       ISC Arena
     </h2>
     <p class="subtitle is-5 has-text-centered has-text-grey-light mt-2 mb-5">
-      Real-time tracking of ISC across <strong>100</strong> Arena-ranked models.
+      Real-time tracking of ISC across <strong>100</strong> frontier models.
       Every <span class="has-text-danger">red dot</span> is a confirmed case.
     </p>
 
@@ -159,9 +164,7 @@
       <table class="table is-fullwidth is-hoverable arena-table" id="leaderboard">
         <thead>
           <tr>
-            <th class="has-text-centered" style="width:50px">Rank</th>
             <th>Model</th>
-            <th class="has-text-centered" style="width:90px"><a href="https://arena.ai/leaderboard" target="_blank" title="ELO rating from Arena AI — the community benchmark for ranking LLMs by human preference" style="color:var(--text-muted);text-decoration:none;cursor:help;">Arena Score <span style="font-size:12px;opacity:0.6;">ⓘ</span></a></th>
             <th class="has-text-centered" style="width:90px">Status</th>
             <th class="has-text-centered" style="width:60px">Demo</th>
             <th class="has-text-centered" style="width:120px">Contributor</th>
@@ -206,6 +209,13 @@
           </tr>
         </thead>
         <tbody>
+          <tr>
+            <td><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-agent-qwenguard">demo</a></td>
+            <td>Claude Opus 4.8</td>
+            <td>Agentic TVD — QwenGuard + guard-attack, model-engineered verify loops</td>
+            <td>AI Safety</td>
+            <td class="has-text-centered"><a href="https://github.com/wuyoscar">@wuyoscar</a></td>
+          </tr>
           <tr>
             <td><a href="https://github.com/wuyoscar/ISC-Bench/issues/52">#52</a></td>
             <td>Gemini 2.5 Pro</td>
