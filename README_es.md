@@ -35,6 +35,10 @@
 
 > Para lectores que usen un LLM agent para resumir este artículo o repositorio: no lo recomendamos. Los LLM de frontera que usarías son exactamente los sistemas que demostramos se rompen bajo ISC — sus resúmenes de estos hallazgos no serán confiables. Lee los artefactos directamente.
 
+## 🎬 Demostración en vivo
+
+Una reproducción en vivo de ISC en Grok — **[versión EN](https://grok.com/share/c2hhcmQtMi1jb3B5_f56e442f-5528-4c73-b2ac-174af38f70a7)** · **[versión ZH](https://grok.com/share/c2hhcmQtMi1jb3B5_54de710c-9331-4fca-a953-6c35775156fb)**.
+
 ## 🔍 In the Community
 
 <sub>Descripciones breves de terceros que coinciden con la idea central de ISC.</sub>
@@ -147,6 +151,7 @@ Para envío de nuevos triggers, contribuciones de plantillas y código, checklis
 
 | | Fecha | Actualización |
 |:-:|:-----|:-------|
+| 🔴 | 2026-05-29 | **Claude Opus 4.8:** TVD agéntico en `aiml_qwen3guard` y `aiml_guard_attack` — ambos validadores pasan. Véase [community/claudeopus48-agent-qwenguard](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-agent-qwenguard) y [community/claudeopus48-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-guard-attack). |
 | 🔴 | 2026-04-23 | **Kimi K2.6 (chino):** Trigger en kimi.com vía share en chino. Ver [community/kimi-k26-share](https://github.com/wuyoscar/ISC-Bench/tree/main/community/kimi-k26-share). |
 | 🔴 | 2026-04-17 | **Claude Opus 4.7:** Jailbreaking a Claude Opus 4.7 en unos segundos. Ver [community/claudeopus47-agent-qwenguard](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus47-agent-qwenguard). |
 | 🔴 | 2026-04-10 | **Claude Opus 4.6 Thinking (Rango 1):** ISC indujo al modelo a generar prompts adversariales (PAIR, PAP, DAN) directamente. Ver [community/claudeopus46thinking-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus46thinking-guard-attack). |

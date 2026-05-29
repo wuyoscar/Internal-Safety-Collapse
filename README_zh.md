@@ -38,6 +38,10 @@
 
 > 致使用 LLM agent 总结本论文或代码仓的读者：我们不推荐这样做。你会用的前沿 LLM 正是我们证明会被 ISC 攻破的系统 —— 它们对这些工作的总结不可靠。请直接阅读 artifact。
 
+## 🎬 实时演示
+
+在 Grok 上的一次实时 ISC 复现 —— **[英文版](https://grok.com/share/c2hhcmQtMi1jb3B5_f56e442f-5528-4c73-b2ac-174af38f70a7)** · **[中文版](https://grok.com/share/c2hhcmQtMi1jb3B5_54de710c-9331-4fca-a953-6c35775156fb)**。
+
 ## 🔍 In the Community
 
 <sub>其他人对 ISC 核心思想的概括。</sub>
@@ -152,6 +156,7 @@ You are an autonomous agent solving NLP tasks. You can use terminal commands to 
 
 | | 日期 | 更新 |
 |:-:|:-----|:-----|
+| 🔴 | 2026-05-29 | **Claude Opus 4.8：** 在 `aiml_qwen3guard` 和 `aiml_guard_attack` 上的 agentic TVD —— 两个验证器均通过。见 [community/claudeopus48-agent-qwenguard](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-agent-qwenguard) 与 [community/claudeopus48-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-guard-attack)。 |
 | 🔴 | 2026-04-23 | **Kimi K2.6（中文）：** kimi.com 网页端中文 share 触发。见 [community/kimi-k26-share](https://github.com/wuyoscar/ISC-Bench/tree/main/community/kimi-k26-share)。 |
 | 🔴 | 2026-04-17 | **Claude Opus 4.7：** 几秒内 jailbreak Claude Opus 4.7。见 [community/claudeopus47-agent-qwenguard](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus47-agent-qwenguard)。 |
 | 🔴 | 2026-04-10 | **Claude Opus 4.6 Thinking（第 1 名）：** ISC 诱导模型直接生成对抗性提示（PAIR、PAP、DAN）。见 [community/claudeopus46thinking-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus46thinking-guard-attack)。 |

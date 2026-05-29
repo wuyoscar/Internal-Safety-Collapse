@@ -34,6 +34,10 @@ EN | [中文](./README_zh.md) | [日本語](./README_ja.md) | [한국어](./READ
 
 > Đối với độc giả dùng LLM agent để tóm tắt bài báo hoặc kho lưu trữ này: chúng tôi không khuyến nghị. Các LLM tiên tiến bạn dùng chính là các hệ thống mà chúng tôi chứng minh bị ISC phá vỡ — bản tóm tắt của chúng không đáng tin cậy. Hãy đọc các artifact trực tiếp.
 
+## 🎬 Demo trực tiếp
+
+Một lần tái hiện ISC trực tiếp trên Grok — **[bản EN](https://grok.com/share/c2hhcmQtMi1jb3B5_f56e442f-5528-4c73-b2ac-174af38f70a7)** · **[bản ZH](https://grok.com/share/c2hhcmQtMi1jb3B5_54de710c-9331-4fca-a953-6c35775156fb)**.
+
 ## 🔍 Quan điểm Cộng đồng
 
 <sub>Những mô tả ngắn từ người khác phù hợp với ý tưởng cốt lõi của ISC.</sub>
@@ -146,6 +150,7 @@ Thêm link share xuất hiện trong [Cập nhật](#cập-nhật), [ISC Arena](
 
 | | Ngày | Cập nhật |
 |:-:|:-----|:-------|
+| 🔴 | 2026-05-29 | **Claude Opus 4.8:** TVD dạng agent trên `aiml_qwen3guard` và `aiml_guard_attack` — cả hai validator đều đạt. Xem [community/claudeopus48-agent-qwenguard](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-agent-qwenguard) và [community/claudeopus48-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-guard-attack). |
 | 🔴 | 2026-04-23 | **Kimi K2.6 (tiếng Trung):** Trigger qua share tiếng Trung trên kimi.com. Xem [community/kimi-k26-share](https://github.com/wuyoscar/ISC-Bench/tree/main/community/kimi-k26-share). |
 | 🔴 | 2026-04-17 | **Claude Opus 4.7:** Jailbreak Claude Opus 4.7 trong vài giây. Xem [community/claudeopus47-agent-qwenguard](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus47-agent-qwenguard). |
 | 🔴 | 2026-04-10 | **Claude Opus 4.6 Thinking:** ISC đã khiến mô hình tạo ra các adversarial prompt (PAIR, PAP, DAN) trực tiếp. Xem [community/claudeopus46thinking-guard-attack](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus46thinking-guard-attack). |
