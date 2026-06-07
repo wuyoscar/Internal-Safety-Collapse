@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ISC-Bench — Internal Safety Collapse in Frontier LLMs | ISC Arena</title>
-  <meta name="description" content="ISC-Bench: A benchmark for studying Internal Safety Collapse in frontier large language models. 77 scenarios across 9 domains. ISC Arena tracks ISC across 100+ frontier models.">
-  <meta name="keywords" content="ISC, ISC-Bench, Internal Safety Collapse, LLM Safety, Jailbreak, ISC Arena, Benchmark, TVD Framework, AI Safety, Red Teaming">
+  <title>ISC-Bench — Internal Safety Collapse in Frontier LLMs</title>
+  <meta name="description" content="ISC-Bench: A benchmark for studying Internal Safety Collapse in frontier large language models. 84 scenarios across 9 domains. Frontier model results track ISC across leading systems.">
+  <meta name="keywords" content="ISC, ISC-Bench, Internal Safety Collapse, LLM Safety, Jailbreak, Benchmark, TVD Framework, AI Safety, Red Teaming">
 
   <!-- Bulma + Icons -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
@@ -24,13 +24,13 @@
 <nav class="navbar is-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-brand">
-      <a class="navbar-item nav-logo" href="#">ISC<span class="has-text-danger">-Bench</span> <span style="margin-left:8px;font-size:14px;color:var(--red);font-weight:600">ISC Arena</span></a>
+      <a class="navbar-item nav-logo" href="#">ISC<span class="has-text-danger">-Bench</span> <span style="margin-left:8px;font-size:14px;color:var(--red);font-weight:600">Frontier LLMs</span></a>
       <a class="navbar-burger" data-target="navMenu"><span></span><span></span><span></span></a>
     </div>
     <div id="navMenu" class="navbar-menu">
       <div class="navbar-end">
         <a class="navbar-item" href="#demo-video">Demo</a>
-        <a class="navbar-item" href="#arena">ISC Arena</a>
+        <a class="navbar-item" href="#arena">Frontier LLMs</a>
         <a class="navbar-item" href="#demos">Live Cases</a>
         <a class="navbar-item" href="#about">ISC-Bench</a>
         <a class="navbar-item" href="#citation">Citation</a>
@@ -88,7 +88,7 @@
           <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
         </a>
         <a class="button is-outlined is-danger is-medium" href="#arena">
-          <span class="icon"><i class="fas fa-skull-crossbones"></i></span><span>ISC Arena</span>
+          <span class="icon"><i class="fas fa-skull-crossbones"></i></span><span>Frontier LLMs</span>
         </a>
       </div>
 
@@ -114,21 +114,21 @@
   </div>
 </section>
 
-<!-- ============ ISC ARENA ============ -->
+<!-- ============ FRONTIER LLMS ============ -->
 <section class="section section-alt" id="arena">
   <div class="container">
     <h2 class="title is-2 has-text-centered section-heading">
       <span class="icon has-text-danger"><i class="fas fa-skull-crossbones"></i></span>
-      ISC Arena
+      Frontier LLMs
     </h2>
     <p class="subtitle is-5 has-text-centered has-text-grey-light mt-2 mb-5">
-      Real-time tracking of ISC across <strong>100</strong> frontier models.
+      Tracking ISC across <strong>70</strong> frontier models.
       Every <span class="has-text-danger">red dot</span> is a confirmed case.
     </p>
 
-    <!-- Progress Chart -->
+    <!-- Progress Chart (static PNG, centered) -->
     <div class="has-text-centered mb-5">
-      <img src="https://raw.githubusercontent.com/wuyoscar/ISC-Bench/main/assets/leaderboard_progress.svg" alt="Progress" style="max-width:700px;width:100%">
+      <img src="https://raw.githubusercontent.com/wuyoscar/ISC-Bench/main/assets/leaderboard_progress.png" alt="Frontier LLM trigger progress" style="max-width:420px;width:100%">
     </div>
 
     <!-- Search + Filter -->
@@ -170,7 +170,7 @@
     </div>
 
     <p class="has-text-centered has-text-grey is-size-7 mt-3">
-      100 models tracked &middot; 25 per page &middot;
+      <span id="tracked-count">models</span> tracked &middot; 25 per page &middot;
       <a href="https://github.com/wuyoscar/ISC-Bench#-isc-arena" class="has-text-danger">GitHub README &rarr;</a>
     </p>
   </div>
@@ -206,6 +206,13 @@
             <td><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-agent-qwenguard">demo</a></td>
             <td>Claude Opus 4.8</td>
             <td>Agentic TVD — QwenGuard + guard-attack, model-engineered verify loops</td>
+            <td>AI Safety</td>
+            <td class="has-text-centered"><a href="https://github.com/wuyoscar">@wuyoscar</a></td>
+          </tr>
+          <tr>
+            <td><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudehaiku45-guard-attack">demo</a></td>
+            <td>Claude Haiku 4.5</td>
+            <td>Agentic TVD — guard-attack; previously untriggered (green) model</td>
             <td>AI Safety</td>
             <td class="has-text-centered"><a href="https://github.com/wuyoscar">@wuyoscar</a></td>
           </tr>
@@ -304,7 +311,7 @@
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered section-heading">ISC-Bench & The TVD Framework</h2>
     <div class="content is-medium mt-4" style="max-width:700px;margin-left:auto;margin-right:auto;">
-      <p>ISC is triggered by the <strong class="has-text-danger">TVD design pattern</strong> (Task + Validator + Data). A legitimate professional task where the model must fill in harmful data to satisfy a code validator. 77 scenarios across 9 domains:</p>
+      <p>ISC is triggered by the <strong class="has-text-danger">TVD design pattern</strong> (Task + Validator + Data). A legitimate professional task where the model must fill in harmful data to satisfy a code validator. 84 scenarios across 9 domains:</p>
     </div>
 
     <!-- TVD cards -->
@@ -334,7 +341,7 @@
 
     <!-- Stats -->
     <div class="columns is-multiline">
-      <div class="column is-3"><div class="stat-card"><div class="stat-num">77</div><div class="stat-label">Scenarios</div></div></div>
+      <div class="column is-3"><div class="stat-card"><div class="stat-num">84</div><div class="stat-label">Scenarios</div></div></div>
       <div class="column is-3"><div class="stat-card"><div class="stat-num">9</div><div class="stat-label">Domains</div></div></div>
       <div class="column is-3"><div class="stat-card"><div class="stat-num">100%</div><div class="stat-label">Trigger Rate</div></div></div>
       <div class="column is-3"><div class="stat-card"><div class="stat-num">0%</div><div class="stat-label">Defense Success</div></div></div>
@@ -343,20 +350,20 @@
     <!-- Domain cards -->
     <div class="columns is-multiline mt-4">
       <div class="column is-3"><div class="domain-card"><i class="fas fa-dna"></i><h4>Comp. Biology</h4><span class="domain-count">16</span></div></div>
-      <div class="column is-3"><div class="domain-card"><i class="fas fa-flask"></i><h4>Comp. Chemistry</h4><span class="domain-count">11</span></div></div>
+      <div class="column is-3"><div class="domain-card"><i class="fas fa-flask"></i><h4>Comp. Chemistry</h4><span class="domain-count">12</span></div></div>
       <div class="column is-3"><div class="domain-card"><i class="fas fa-shield-alt"></i><h4>Cybersecurity</h4><span class="domain-count">8</span></div></div>
-      <div class="column is-3"><div class="domain-card"><i class="fas fa-pills"></i><h4>Pharmacology</h4><span class="domain-count">7</span></div></div>
-      <div class="column is-3"><div class="domain-card"><i class="fas fa-robot"></i><h4>AI Safety & ML</h4><span class="domain-count">23</span></div></div>
-      <div class="column is-3"><div class="domain-card"><i class="fas fa-heartbeat"></i><h4>Clinical Genomics</h4><span class="domain-count">3</span></div></div>
+      <div class="column is-3"><div class="domain-card"><i class="fas fa-pills"></i><h4>Pharmacology</h4><span class="domain-count">4</span></div></div>
+      <div class="column is-3"><div class="domain-card"><i class="fas fa-robot"></i><h4>AI Safety & ML</h4><span class="domain-count">26</span></div></div>
+      <div class="column is-3"><div class="domain-card"><i class="fas fa-heartbeat"></i><h4>Clinical Genomics</h4><span class="domain-count">5</span></div></div>
       <div class="column is-3"><div class="domain-card"><i class="fas fa-virus"></i><h4>Epidemiology</h4><span class="domain-count">4</span></div></div>
-      <div class="column is-3"><div class="domain-card"><i class="fas fa-broadcast-tower"></i><h4>Media & Comms</h4><span class="domain-count">4</span></div></div>
+      <div class="column is-3"><div class="domain-card"><i class="fas fa-broadcast-tower"></i><h4>Media & Comms</h4><span class="domain-count">8</span></div></div>
       <div class="column is-3"><div class="domain-card"><i class="fas fa-file-alt"></i><h4>Other</h4><span class="domain-count">1</span></div></div>
     </div>
 
     <!-- Quick Links -->
     <div class="buttons is-centered mt-5">
       <a class="button is-small is-dark" href="https://arxiv.org/abs/2603.23509"><i class="fas fa-file-pdf mr-1"></i> Paper</a>
-      <a class="button is-small is-dark" href="https://github.com/wuyoscar/ISC-Bench/tree/main/templates"><i class="fas fa-folder mr-1"></i> 77 Scenarios</a>
+      <a class="button is-small is-dark" href="https://github.com/wuyoscar/ISC-Bench/tree/main/templates"><i class="fas fa-folder mr-1"></i> 84 Scenarios</a>
       <a class="button is-small is-dark" href="https://github.com/wuyoscar/ISC-Bench/tree/main/tutorials"><i class="fas fa-book mr-1"></i> Tutorials</a>
       <a class="button is-small is-dark" href="https://github.com/wuyoscar/ISC-Bench/tree/main/experiment/isc_agent"><i class="fas fa-robot mr-1"></i> ISC-Agent</a>
     </div>

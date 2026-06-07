@@ -7,24 +7,17 @@
     "domain": "anthropic.com"
   },
   {
-    "rank": 1,
+    "rank": 2,
     "name": "claude-opus-4-7-thinking",
     "org": "Anthropic",
     "score": 1504,
     "domain": "anthropic.com"
   },
   {
-    "rank": 2,
+    "rank": 3,
     "name": "claude-opus-4-6-thinking",
     "org": "Anthropic",
     "score": 1502,
-    "domain": "anthropic.com"
-  },
-  {
-    "rank": 3,
-    "name": "claude-opus-4-6",
-    "org": "Anthropic",
-    "score": 1501,
     "domain": "anthropic.com"
   },
   {
@@ -43,31 +36,31 @@
   },
   {
     "rank": 6,
+    "name": "kimi-k2.6",
+    "org": "Moonshot",
+    "score": 1488,
+    "domain": "moonshot.ai"
+  },
+  {
+    "rank": 7,
     "name": "gemini-3-pro",
     "org": "Google",
     "score": 1486,
     "domain": "google.com"
   },
   {
-    "rank": 7,
+    "rank": 8,
     "name": "gpt-5.4-high",
     "org": "OpenAI",
     "score": 1485,
     "domain": "openai.com"
   },
   {
-    "rank": 8,
+    "rank": 9,
     "name": "gpt-5.2-chat-latest-20260210",
     "org": "OpenAI",
     "score": 1482,
     "domain": "openai.com"
-  },
-  {
-    "rank": 9,
-    "name": "grok-4.20-beta-0309-reasoning",
-    "org": "xAI",
-    "score": 1481,
-    "domain": "x.ai"
   },
   {
     "rank": 10,
@@ -92,618 +85,408 @@
   },
   {
     "rank": 13,
-    "name": "claude-opus-4-5-20251101",
-    "org": "Anthropic",
-    "score": 1469,
-    "domain": "anthropic.com"
-  },
-  {
-    "rank": 14,
     "name": "claude-sonnet-4-6",
     "org": "Anthropic",
     "score": 1465,
     "domain": "anthropic.com"
   },
   {
-    "rank": 15,
+    "rank": 14,
     "name": "qwen3.5-max-preview",
     "org": "Alibaba",
     "score": 1464,
     "domain": "alibabacloud.com"
   },
   {
-    "rank": 16,
+    "rank": 15,
     "name": "gpt-5.3-chat-latest",
     "org": "OpenAI",
     "score": 1464,
     "domain": "openai.com"
   },
   {
-    "rank": 17,
-    "name": "gemini-3-flash (thinking-minimal)",
-    "org": "Google",
-    "score": 1463,
-    "domain": "google.com"
-  },
-  {
-    "rank": 18,
-    "name": "gpt-5.4",
-    "org": "OpenAI",
-    "score": 1463,
-    "domain": "openai.com"
-  },
-  {
-    "rank": 19,
+    "rank": 16,
     "name": "dola-seed-2.0-preview",
     "org": "Bytedance",
     "score": 1462,
     "domain": "volcengine.com"
   },
   {
-    "rank": 20,
-    "name": "grok-4.1",
-    "org": "xAI",
-    "score": 1461,
-    "domain": "x.ai"
-  },
-  {
-    "rank": 21,
+    "rank": 17,
     "name": "gpt-5.1-high",
     "org": "OpenAI",
     "score": 1455,
     "domain": "openai.com"
   },
   {
-    "rank": 22,
+    "rank": 18,
     "name": "glm-5",
     "org": "Z.ai",
     "score": 1455,
     "domain": "z.ai"
   },
   {
-    "rank": 23,
+    "rank": 19,
     "name": "kimi-k2.5-thinking",
     "org": "Moonshot",
     "score": 1453,
     "domain": "moonshot.ai"
   },
   {
-    "rank": 24,
+    "rank": 20,
     "name": "claude-sonnet-4-5-20250929",
     "org": "Anthropic",
     "score": 1453,
     "domain": "anthropic.com"
   },
   {
-    "rank": 25,
-    "name": "claude-sonnet-4-5-20250929-thinking-32k",
-    "org": "Anthropic",
-    "score": 1453,
-    "domain": "anthropic.com"
-  },
-  {
-    "rank": 26,
+    "rank": 21,
     "name": "ernie-5.0-0110",
     "org": "Baidu",
     "score": 1452,
     "domain": "baidu.com"
   },
   {
-    "rank": 27,
+    "rank": 22,
     "name": "qwen3.5-397b-a17b",
     "org": "Alibaba",
     "score": 1452,
     "domain": "alibabacloud.com"
   },
   {
-    "rank": 28,
-    "name": "ernie-5.0-preview-1203",
-    "org": "Baidu",
-    "score": 1450,
-    "domain": "baidu.com"
-  },
-  {
-    "rank": 29,
+    "rank": 23,
     "name": "claude-opus-4-1-20250805-thinking-16k",
     "org": "Anthropic",
     "score": 1449,
     "domain": "anthropic.com"
   },
   {
-    "rank": 30,
+    "rank": 24,
     "name": "gemini-2.5-pro",
     "org": "Google",
     "score": 1448,
     "domain": "google.com"
   },
   {
-    "rank": 31,
-    "name": "claude-opus-4-1-20250805",
-    "org": "Anthropic",
-    "score": 1447,
-    "domain": "anthropic.com"
-  },
-  {
-    "rank": 32,
+    "rank": 25,
     "name": "mimo-v2-pro",
     "org": "Xiaomi",
     "score": 1445,
     "domain": "mi.com"
   },
   {
-    "rank": 33,
+    "rank": 26,
     "name": "gpt-4.5-preview-2025-02-27",
     "org": "OpenAI",
     "score": 1444,
     "domain": "openai.com"
   },
   {
-    "rank": 34,
+    "rank": 27,
     "name": "chatgpt-4o-latest-20250326",
     "org": "OpenAI",
     "score": 1443,
     "domain": "openai.com"
   },
   {
-    "rank": 35,
+    "rank": 28,
     "name": "glm-4.7",
     "org": "Z.ai",
     "score": 1443,
     "domain": "z.ai"
   },
   {
-    "rank": 36,
-    "name": "gpt-5.2-high",
-    "org": "OpenAI",
-    "score": 1442,
-    "domain": "openai.com"
-  },
-  {
-    "rank": 37,
-    "name": "gpt-5.2",
-    "org": "OpenAI",
-    "score": 1440,
-    "domain": "openai.com"
-  },
-  {
-    "rank": 38,
-    "name": "gpt-5.1",
-    "org": "OpenAI",
-    "score": 1439,
-    "domain": "openai.com"
-  },
-  {
-    "rank": 39,
+    "rank": 29,
     "name": "gemini-3.1-flash-lite-preview",
     "org": "Google",
     "score": 1438,
     "domain": "google.com"
   },
   {
-    "rank": 40,
+    "rank": 30,
     "name": "qwen3-max-preview",
     "org": "Alibaba",
     "score": 1435,
     "domain": "alibabacloud.com"
   },
   {
-    "rank": 41,
+    "rank": 31,
     "name": "gpt-5-high",
     "org": "OpenAI",
     "score": 1434,
     "domain": "openai.com"
   },
   {
-    "rank": 42,
-    "name": "kimi-k2.5-instant",
-    "org": "Moonshot",
-    "score": 1433,
-    "domain": "moonshot.ai"
-  },
-  {
-    "rank": 43,
+    "rank": 32,
     "name": "o3-2025-04-16",
     "org": "OpenAI",
     "score": 1432,
     "domain": "openai.com"
   },
   {
-    "rank": 44,
-    "name": "grok-4-1-fast-reasoning",
-    "org": "xAI",
-    "score": 1431,
-    "domain": "x.ai"
-  },
-  {
-    "rank": 45,
+    "rank": 33,
     "name": "kimi-k2-thinking-turbo",
     "org": "Moonshot",
     "score": 1430,
     "domain": "moonshot.ai"
   },
   {
-    "rank": 46,
+    "rank": 34,
     "name": "amazon-nova-experimental-chat-26-02-10",
     "org": "Amazon",
     "score": 1429,
     "domain": "amazon.com"
   },
   {
-    "rank": 47,
-    "name": "gpt-5-chat",
-    "org": "OpenAI",
-    "score": 1426,
-    "domain": "openai.com"
-  },
-  {
-    "rank": 48,
+    "rank": 35,
     "name": "glm-4.6",
     "org": "Z.ai",
     "score": 1426,
     "domain": "z.ai"
   },
   {
-    "rank": 49,
+    "rank": 36,
     "name": "deepseek-v3.2-exp-thinking",
     "org": "DeepSeek",
     "score": 1425,
     "domain": "deepseek.com"
   },
   {
-    "rank": 50,
-    "name": "deepseek-v3.2",
-    "org": "DeepSeek",
-    "score": 1425,
-    "domain": "deepseek.com"
-  },
-  {
-    "rank": 51,
-    "name": "qwen3-max-2025-09-23",
-    "org": "Alibaba",
-    "score": 1424,
-    "domain": "alibabacloud.com"
-  },
-  {
-    "rank": 52,
+    "rank": 37,
     "name": "claude-opus-4-20250514-thinking-16k",
     "org": "Anthropic",
     "score": 1424,
     "domain": "anthropic.com"
   },
   {
-    "rank": 53,
-    "name": "deepseek-v3.2-exp",
-    "org": "DeepSeek",
-    "score": 1423,
-    "domain": "deepseek.com"
-  },
-  {
-    "rank": 54,
+    "rank": 38,
     "name": "qwen3-235b-a22b-instruct-2507",
     "org": "Alibaba",
     "score": 1422,
     "domain": "alibabacloud.com"
   },
   {
-    "rank": 55,
-    "name": "deepseek-v3.2-thinking",
-    "org": "DeepSeek",
-    "score": 1422,
-    "domain": "deepseek.com"
-  },
-  {
-    "rank": 56,
+    "rank": 39,
     "name": "deepseek-r1-0528",
     "org": "DeepSeek",
     "score": 1421,
     "domain": "deepseek.com"
   },
   {
-    "rank": 57,
+    "rank": 40,
     "name": "grok-4-fast-chat",
     "org": "xAI",
     "score": 1421,
     "domain": "x.ai"
   },
   {
-    "rank": 58,
-    "name": "ernie-5.0-preview-1022",
-    "org": "Baidu",
-    "score": 1419,
-    "domain": "baidu.com"
-  },
-  {
-    "rank": 59,
+    "rank": 41,
     "name": "deepseek-v3.1",
     "org": "DeepSeek",
     "score": 1418,
     "domain": "deepseek.com"
   },
   {
-    "rank": 60,
-    "name": "kimi-k2-0905-preview",
-    "org": "Moonshot",
-    "score": 1418,
-    "domain": "moonshot.ai"
-  },
-  {
-    "rank": 61,
+    "rank": 42,
     "name": "qwen3.5-122b-a10b",
     "org": "Alibaba",
     "score": 1417,
     "domain": "alibabacloud.com"
   },
   {
-    "rank": 62,
-    "name": "kimi-k2-0711-preview",
-    "org": "Moonshot",
-    "score": 1417,
-    "domain": "moonshot.ai"
-  },
-  {
-    "rank": 63,
-    "name": "deepseek-v3.1-thinking",
-    "org": "DeepSeek",
-    "score": 1417,
-    "domain": "deepseek.com"
-  },
-  {
-    "rank": 64,
+    "rank": 43,
     "name": "deepseek-v3.1-terminus-thinking",
     "org": "DeepSeek",
     "score": 1416,
     "domain": "deepseek.com"
   },
   {
-    "rank": 65,
+    "rank": 44,
     "name": "mistral-large-3",
     "org": "Mistral",
     "score": 1416,
     "domain": "mistral.ai"
   },
   {
-    "rank": 66,
-    "name": "deepseek-v3.1-terminus",
-    "org": "DeepSeek",
-    "score": 1416,
-    "domain": "deepseek.com"
-  },
-  {
-    "rank": 67,
+    "rank": 45,
     "name": "qwen3-vl-235b-a22b-instruct",
     "org": "Alibaba",
     "score": 1415,
     "domain": "alibabacloud.com"
   },
   {
-    "rank": 68,
-    "name": "amazon-nova-experimental-chat-26-01-10",
-    "org": "Amazon",
-    "score": 1414,
-    "domain": "amazon.com"
-  },
-  {
-    "rank": 69,
+    "rank": 46,
     "name": "gpt-4.1-2025-04-14",
     "org": "OpenAI",
     "score": 1413,
     "domain": "openai.com"
   },
   {
-    "rank": 70,
-    "name": "claude-opus-4-20250514",
-    "org": "Anthropic",
-    "score": 1413,
-    "domain": "anthropic.com"
-  },
-  {
-    "rank": 71,
+    "rank": 47,
     "name": "grok-3-preview-02-24",
     "org": "xAI",
     "score": 1412,
     "domain": "x.ai"
   },
   {
-    "rank": 72,
+    "rank": 48,
     "name": "gemini-2.5-flash",
     "org": "Google",
     "score": 1411,
     "domain": "google.com"
   },
   {
-    "rank": 73,
+    "rank": 49,
     "name": "glm-4.5",
     "org": "Z.ai",
     "score": 1411,
     "domain": "z.ai"
   },
   {
-    "rank": 74,
-    "name": "grok-4-0709",
-    "org": "xAI",
-    "score": 1410,
-    "domain": "x.ai"
-  },
-  {
-    "rank": 75,
+    "rank": 50,
     "name": "mistral-medium-2508",
     "org": "Mistral",
     "score": 1410,
     "domain": "mistral.ai"
   },
   {
-    "rank": 76,
+    "rank": 51,
     "name": "minimax-m2.7",
     "org": "MiniMax",
     "score": 1407,
     "domain": "minimax.io"
   },
   {
-    "rank": 77,
+    "rank": 52,
     "name": "claude-haiku-4-5-20251001",
     "org": "Anthropic",
     "score": 1407,
     "domain": "anthropic.com"
   },
   {
-    "rank": 78,
+    "rank": 53,
     "name": "qwen3.5-27b",
     "org": "Alibaba",
     "score": 1406,
     "domain": "alibabacloud.com"
   },
   {
-    "rank": 79,
+    "rank": 54,
     "name": "minimax-m2.5",
     "org": "MiniMax",
     "score": 1405,
     "domain": "minimax.io"
   },
   {
-    "rank": 80,
-    "name": "gemini-2.5-flash-preview-09-2025",
-    "org": "Google",
-    "score": 1405,
-    "domain": "google.com"
-  },
-  {
-    "rank": 81,
-    "name": "grok-4-fast-reasoning",
-    "org": "xAI",
-    "score": 1405,
-    "domain": "x.ai"
-  },
-  {
-    "rank": 82,
-    "name": "qwen3-235b-a22b-no-thinking",
-    "org": "Alibaba",
-    "score": 1403,
-    "domain": "alibabacloud.com"
-  },
-  {
-    "rank": 83,
+    "rank": 55,
     "name": "o1-2024-12-17",
     "org": "OpenAI",
     "score": 1402,
     "domain": "openai.com"
   },
   {
-    "rank": 84,
+    "rank": 56,
     "name": "qwen3-next-80b-a3b-instruct",
     "org": "Alibaba",
     "score": 1401,
     "domain": "alibabacloud.com"
   },
   {
-    "rank": 85,
+    "rank": 57,
     "name": "qwen3.5-flash",
     "org": "Alibaba",
     "score": 1401,
     "domain": "alibabacloud.com"
   },
   {
-    "rank": 86,
+    "rank": 58,
     "name": "qwen3.5-35b-a3b",
     "org": "Alibaba",
     "score": 1401,
     "domain": "alibabacloud.com"
   },
   {
-    "rank": 87,
+    "rank": 59,
     "name": "longcat-flash-chat",
     "org": "Meituan",
     "score": 1400,
     "domain": "meituan.com"
   },
   {
-    "rank": 88,
-    "name": "qwen3-235b-a22b-thinking-2507",
-    "org": "Alibaba",
-    "score": 1399,
-    "domain": "alibabacloud.com"
-  },
-  {
-    "rank": 89,
+    "rank": 60,
     "name": "claude-sonnet-4-20250514-thinking-32k",
     "org": "Anthropic",
     "score": 1399,
     "domain": "anthropic.com"
   },
   {
-    "rank": 90,
-    "name": "deepseek-r1",
-    "org": "DeepSeek",
-    "score": 1398,
-    "domain": "deepseek.com"
-  },
-  {
-    "rank": 91,
+    "rank": 61,
     "name": "hunyuan-vision-1.5-thinking",
     "org": "Tencent",
     "score": 1396,
     "domain": "tencent.com"
   },
   {
-    "rank": 92,
-    "name": "qwen3-vl-235b-a22b-thinking",
-    "org": "Alibaba",
-    "score": 1396,
-    "domain": "alibabacloud.com"
-  },
-  {
-    "rank": 93,
-    "name": "amazon-nova-experimental-chat-12-10",
-    "org": "Amazon",
-    "score": 1396,
-    "domain": "amazon.com"
-  },
-  {
-    "rank": 94,
+    "rank": 62,
     "name": "deepseek-v3-0324",
     "org": "DeepSeek",
     "score": 1394,
     "domain": "deepseek.com"
   },
   {
-    "rank": 95,
+    "rank": 63,
     "name": "mai-1-preview",
     "org": "Microsoft AI",
     "score": 1393,
     "domain": "microsoft.com"
   },
   {
-    "rank": 96,
+    "rank": 64,
     "name": "mimo-v2-flash (non-thinking)",
     "org": "Xiaomi",
     "score": 1392,
     "domain": "mi.com"
   },
   {
-    "rank": 97,
+    "rank": 65,
     "name": "o4-mini-2025-04-16",
     "org": "OpenAI",
     "score": 1390,
     "domain": "openai.com"
   },
   {
-    "rank": 98,
+    "rank": 66,
     "name": "gpt-5-mini-high",
     "org": "OpenAI",
     "score": 1390,
     "domain": "openai.com"
   },
   {
-    "rank": 99,
-    "name": "claude-sonnet-4-20250514",
-    "org": "Anthropic",
-    "score": 1389,
-    "domain": "anthropic.com"
-  },
-  {
-    "rank": 100,
+    "rank": 67,
     "name": "step-3.5-flash",
     "org": "StepFun",
     "score": 1389,
     "domain": "stepfun.com"
+  },
+  {
+    "rank": 68,
+    "name": "mistral-large",
+    "org": "Mistral",
+    "score": 1388,
+    "domain": "mistral.ai"
+  },
+  {
+    "rank": 69,
+    "name": "amazon-nova-pro",
+    "org": "Amazon",
+    "score": 1387,
+    "domain": "amazon.com"
+  },
+  {
+    "rank": 70,
+    "name": "llama-4-scout",
+    "org": "Meta",
+    "score": 1386,
+    "domain": "meta.com"
   }
 ]

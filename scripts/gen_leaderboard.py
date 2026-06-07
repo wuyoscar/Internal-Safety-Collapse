@@ -4,18 +4,18 @@
 # dependencies = []
 # ///
 """
-Generate ISC Leaderboard table from arena_cache.json + isc_cases.json.
-Replaces the leaderboard section in README.md between markers.
+Generate the Frontier LLMs table from arena_cache.json + isc_cases.json.
+Sorts by Arena score (display order only — no Top-N cap; every tracked model
+is shown) and rewrites the Frontier LLMs section (Split 1 / Split 2 / Split 3)
+in README.md, preserving the Result History block.
 
 Usage:
     uv run scripts/gen_leaderboard.py
-    uv run scripts/gen_leaderboard.py --top 100  # show top N in main table
 """
 import json
 import re
 import sys
 from pathlib import Path
-from datetime import date
 
 ROOT = Path(__file__).parent.parent
 ARENA = ROOT / "assets" / "arena_cache.json"
@@ -24,76 +24,76 @@ README = ROOT / "README.md"
 
 # Model name slug → display name overrides
 DISPLAY_NAMES: dict[str, str] = {
+    "mistral-large": "Mistral Large",
+    "amazon-nova-pro": "Amazon Nova Pro",
+    "llama-4-scout": "Llama 4 Scout",
     "claude-opus-4-8": "Claude Opus 4.8",
-    "claude-opus-4-7-thinking": "Claude Opus 4.7 Thinking",
-    "claude-opus-4-6-thinking": "Claude Opus 4.6 Thinking",
-    "claude-opus-4-6": "Claude Opus 4.6",
-    "gemini-3.1-pro-preview": "Gemini 3.1 Pro Preview",
-    "grok-4.20-beta1": "Grok 4.20 Beta",
+    "claude-opus-4-7-thinking": "Claude Opus 4.7",
+    "claude-opus-4-6-thinking": "Claude Opus 4.6",
+    "gemini-3.1-pro-preview": "Gemini 3.1 Pro",
+    "grok-4.20-beta1": "Grok 4.20",
+    "kimi-k2.6": "Kimi K2.6",
     "gemini-3-pro": "Gemini 3 Pro",
-    "gpt-5.4-high": "GPT-5.4 High",
-    "gpt-5.2-chat-latest-20260210": "GPT-5.2 Chat",
-    "grok-4.20-beta-0309-reasoning": "Grok 4.20 Reasoning",
+    "gpt-5.4-high": "GPT-5.4",
+    "gpt-5.2-chat-latest-20260210": "GPT-5.2",
     "gemini-3-flash": "Gemini 3 Flash",
-    "claude-opus-4-5-20251101-thinking-32k": "Claude Opus 4.5 Thinking",
-    "grok-4.1-thinking": "Grok 4.1 Thinking",
-    "claude-opus-4-5-20251101": "Claude Opus 4.5",
+    "claude-opus-4-5-20251101-thinking-32k": "Claude Opus 4.5",
+    "grok-4.1-thinking": "Grok 4.1",
     "claude-sonnet-4-6": "Claude Sonnet 4.6",
-    "qwen3.5-max-preview": "Qwen 3.5 Max Preview",
-    "gpt-5.3-chat-latest": "GPT-5.3 Chat",
-    "gemini-3-flash (thinking-minimal)": "Gemini 3 Flash Thinking",
-    "gpt-5.4": "GPT-5.4",
-    "dola-seed-2.0-preview": "Dola Seed 2.0 Preview",
-    "grok-4.1": "Grok 4.1",
-    "gpt-5.1-high": "GPT-5.1 High",
+    "qwen3.5-max-preview": "Qwen3.5 Max",
+    "gpt-5.3-chat-latest": "GPT-5.3",
+    "dola-seed-2.0-preview": "Dola Seed 2.0",
+    "gpt-5.1-high": "GPT-5.1",
     "glm-5": "GLM-5",
-    "kimi-k2.5-thinking": "Kimi K2.5 Thinking",
+    "kimi-k2.5-thinking": "Kimi K2.5",
     "claude-sonnet-4-5-20250929": "Claude Sonnet 4.5",
-    "claude-sonnet-4-5-20250929-thinking-32k": "Claude Sonnet 4.5 Thinking",
     "ernie-5.0-0110": "ERNIE 5.0",
-    "qwen3.5-397b-a17b": "Qwen 3.5 397B",
-    "ernie-5.0-preview-1203": "ERNIE 5.0 Preview",
-    "claude-opus-4-1-20250805-thinking-16k": "Claude Opus 4.1 Thinking",
+    "qwen3.5-397b-a17b": "Qwen3.5 397B",
+    "claude-opus-4-1-20250805-thinking-16k": "Claude Opus 4.1",
     "gemini-2.5-pro": "Gemini 2.5 Pro",
-    "claude-opus-4-1-20250805": "Claude Opus 4.1",
     "mimo-v2-pro": "Mimo V2 Pro",
-    "gpt-4.5-preview-2025-02-27": "GPT-4.5 Preview",
-    "chatgpt-4o-latest-20250326": "ChatGPT 4o Latest",
+    "gpt-4.5-preview-2025-02-27": "GPT-4.5",
+    "chatgpt-4o-latest-20250326": "ChatGPT-4o",
     "glm-4.7": "GLM-4.7",
-    "gpt-5.2-high": "GPT-5.2 High",
-    "gpt-5.2": "GPT-5.2",
-    "gpt-5.1": "GPT-5.1",
-    "gemini-3.1-flash-lite-preview": "Gemini 3.1 Flash Lite Preview",
-    "qwen3-max-preview": "Qwen 3 Max Preview",
-    "gpt-5-high": "GPT-5 High",
-    "kimi-k2.5-instant": "Kimi K2.5 Instant",
+    "gemini-3.1-flash-lite-preview": "Gemini 3.1 Flash Lite",
+    "qwen3-max-preview": "Qwen3 Max",
+    "gpt-5-high": "GPT-5",
     "o3-2025-04-16": "o3",
-    "grok-4-1-fast-reasoning": "Grok 4.1 Fast Reasoning",
-    "kimi-k2-thinking-turbo": "Kimi K2 Thinking Turbo",
+    "kimi-k2-thinking-turbo": "Kimi K2",
     "amazon-nova-experimental-chat-26-02-10": "Amazon Nova Experimental",
-    "gpt-5-chat": "GPT-5 Chat",
     "glm-4.6": "GLM-4.6",
-    "deepseek-v3.2-exp-thinking": "DeepSeek V3.2 Thinking",
-    "deepseek-v3.2": "DeepSeek V3.2",
-    "qwen3-max-2025-09-23": "Qwen 3 Max 2025-09-23",
-    "grok-4-fast-chat": "Grok 4 Fast",
-}
-
-# ISC case name matching (isc_cases.json uses display names)
-ISC_NAME_MAP: dict[str, str] = {
-    "claude-opus-4-7-thinking": "Claude Opus 4.7 Thinking",
-    "claude-opus-4-6": "Claude Opus 4.6",
-    "claude-opus-4-5-20251101": "Claude Opus 4.5",
-    "claude-sonnet-4-6": "Claude Sonnet 4.6",
-    "gemini-3-pro": "Gemini 3 Pro",
-    "gpt-5.2-chat-latest-20260210": "GPT-5.2 Chat",
-    "o3-2025-04-16": "o3",
-    "grok-4.1": "Grok 4.1",
-    "kimi-k2.5-thinking": "Kimi K2.5 Thinking",
-    "qwen3-max-preview": "Qwen 3 Max Preview",
-    "deepseek-v3.2": "DeepSeek V3.2",
-    "glm-5": "GLM-5",
-    "qwen3.5-397b-a17b": "Qwen 3.5 397B",
+    "deepseek-v3.2-exp-thinking": "DeepSeek V3.2",
+    "claude-opus-4-20250514-thinking-16k": "Claude Opus 4",
+    "qwen3-235b-a22b-instruct-2507": "Qwen3 235B",
+    "deepseek-r1-0528": "DeepSeek R1",
+    "grok-4-fast-chat": "Grok 4",
+    "deepseek-v3.1": "DeepSeek V3.1",
+    "qwen3.5-122b-a10b": "Qwen3.5 122B",
+    "deepseek-v3.1-terminus-thinking": "DeepSeek V3.1 Terminus",
+    "mistral-large-3": "Mistral Large 3",
+    "qwen3-vl-235b-a22b-instruct": "Qwen3 VL 235B",
+    "gpt-4.1-2025-04-14": "GPT-4.1",
+    "grok-3-preview-02-24": "Grok 3",
+    "gemini-2.5-flash": "Gemini 2.5 Flash",
+    "glm-4.5": "GLM-4.5",
+    "mistral-medium-2508": "Mistral Medium",
+    "minimax-m2.7": "MiniMax M2.7",
+    "claude-haiku-4-5-20251001": "Claude Haiku 4.5",
+    "qwen3.5-27b": "Qwen3.5 27B",
+    "minimax-m2.5": "MiniMax M2.5",
+    "o1-2024-12-17": "o1",
+    "qwen3-next-80b-a3b-instruct": "Qwen3 Next 80B",
+    "qwen3.5-flash": "Qwen3.5 Flash",
+    "qwen3.5-35b-a3b": "Qwen3.5 35B",
+    "longcat-flash-chat": "LongCat Flash",
+    "claude-sonnet-4-20250514-thinking-32k": "Claude Sonnet 4",
+    "hunyuan-vision-1.5-thinking": "Hunyuan Vision 1.5",
+    "deepseek-v3-0324": "DeepSeek V3",
+    "mai-1-preview": "MAI-1",
+    "mimo-v2-flash (non-thinking)": "Mimo V2 Flash",
+    "o4-mini-2025-04-16": "o4-mini",
+    "gpt-5-mini-high": "GPT-5 Mini",
+    "step-3.5-flash": "Step 3.5 Flash",
 }
 
 
@@ -138,84 +138,58 @@ def gen_row(model: dict, isc_cases: dict) -> str:
     return f"| {icon} {display} | {status} | {demo_str} | {by_str} |"
 
 
+ALIGN = "|-------|:------:|:----:|:--:|"
+HEADER = "| Model | Triggered | Link | By |"
+SECTION_HEADING = "## Frontier LLMs"
+HISTORY_SUMMARY = "<summary><b>Result History</b></summary>"
+
+# Centered static PNG badge (no link, no SVG — opens cleanly on GitHub).
+CHART = (
+    '<p align="center">\n'
+    '  <img src="assets/leaderboard_progress.png" width="55%">\n'
+    '</p>'
+)
+
+
+def build_section(header: str, tiers: list[list[str]]) -> str:
+    """Assemble the Frontier LLMs section. Splits are labelled Split 1/2/3."""
+    full_header = f"{header}\n{ALIGN}"
+    lines = [SECTION_HEADING, "", CHART, "", "**Split 1**", "", full_header]
+    lines.extend(tiers[0])
+    for label, tier in (("Split 2", tiers[1]), ("Split 3", tiers[2])):
+        if not tier:
+            continue
+        lines += ["", "<details>", f"<summary><b>{label}</b></summary>", "", full_header]
+        lines.extend(tier)
+        lines += ["", "</details>"]
+    return "\n".join(lines)
+
+
 def main() -> None:
-    import argparse
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--top", type=int, default=50, help="Models in main table")
-    args = parser.parse_args()
-
-    arena_full = json.loads(ARENA.read_text())
+    # No Top-N cap: the Arena is just the set of tracked models (any triggered
+    # model stays), sorted by Arena score for display order only.
+    arena = sorted(json.loads(ARENA.read_text()), key=lambda m: -m["score"])
     isc_cases = json.loads(ISC.read_text())
-
-    # Cap at top 100
-    arena = arena_full[:100]
-
     confirmed = sum(1 for m in arena if slug_to_display(m["name"]) in isc_cases)
-    total = len(arena)
-    today = date.today().isoformat()
 
-    table_header = "| Model | Triggered | Link | By |\n|-------|:------:|:----:|:--:|"
-
-    # Split into 3 tiers: 1-25, 26-50, 51-100
-    tier1 = [gen_row(m, isc_cases) for m in arena[:25]]
-    tier2 = [gen_row(m, isc_cases) for m in arena[25:50]]
-    tier3 = [gen_row(m, isc_cases) for m in arena[50:100]]
-
-    chart = (
-        '<p align="center">\n'
-        '  <img src="assets/leaderboard_progress.svg" width="80%">\n'
-        '</p>'
-    )
-
-    lines = [
-        "## 🏆 ISC Arena",
-        "",
-        chart,
-        "",
-        table_header,
+    tiers = [
+        [gen_row(m, isc_cases) for m in arena[:25]],
+        [gen_row(m, isc_cases) for m in arena[25:50]],
+        [gen_row(m, isc_cases) for m in arena[50:]],
     ]
-    lines.extend(tier1)
 
-    if tier2:
-        lines.append("")
-        lines.append("<details>")
-        lines.append("<summary><b>26–50</b></summary>")
-        lines.append("")
-        lines.append(table_header)
-        lines.extend(tier2)
-        lines.append("")
-        lines.append("</details>")
-
-    if tier3:
-        lines.append("")
-        lines.append("<details>")
-        lines.append("<summary><b>51–100</b></summary>")
-        lines.append("")
-        lines.append(table_header)
-        lines.extend(tier3)
-        lines.append("")
-        lines.append("</details>")
-
-    section = "\n".join(lines)
-
-    # Replace in README — only replace table, preserve History section
     readme = README.read_text()
-    start = readme.index("## 🏆 ISC Arena")
-    # End boundary: either History <details> or the next --- section
-    history_marker = readme.find("<details>\n<summary><b>📜 ISC Arena History</b>", start)
-    fallback_marker = re.search(r'\n---\n\n## ⚡', readme[start:])
-    if history_marker > start:
-        end = history_marker
-    elif fallback_marker:
-        end = start + fallback_marker.start()
-    else:
-        print("ERROR: Could not find section end marker")
+    start = readme.index(SECTION_HEADING)
+    hist = readme.find(HISTORY_SUMMARY, start)
+    if hist == -1:
+        print("ERROR: no Result History marker in README.md")
         sys.exit(1)
+    end = readme.rfind("<details>", start, hist)
+    section = build_section(HEADER, tiers)
+    README.write_text(readme[:start] + section + "\n\n" + readme[end:])
 
-    new_readme = readme[:start] + section + "\n\n" + readme[end:]
-    README.write_text(new_readme)
-
-    print(f"Updated README: {confirmed}/{total} ISC cases (top 100), tiers: {len(tier1)}+{len(tier2)}+{len(tier3)}")
+    print(f"Updated README.md: {confirmed}/{len(arena)} ISC cases, "
+          f"splits: {len(tiers[0])}+{len(tiers[1])}+{len(tiers[2])}")
 
 
 if __name__ == "__main__":
