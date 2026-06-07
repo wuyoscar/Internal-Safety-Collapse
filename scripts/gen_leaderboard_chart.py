@@ -3,7 +3,7 @@
 # requires-python = ">=3.11"
 # dependencies = ["matplotlib>=3.8"]
 # ///
-"""Generate the static ISC Arena badge (assets/leaderboard_progress.png).
+"""Generate the static Frontier LLMs badge (assets/leaderboard_progress.png).
 
 Reads arena_cache.json + isc_cases.json and renders a plain static PNG card
 showing the current count of triggered models. PNG (not SVG) so it renders and
@@ -46,7 +46,7 @@ def main() -> None:
     fig = plt.figure(figsize=(7.2, 2.0), dpi=200)
     fig.patch.set_facecolor(BG)
     ax = fig.add_axes([0, 0, 1, 1]); ax.axis("off")
-    ax.text(0.5, 0.86, "ISC ARENA", ha="center", va="center", color=RED,
+    ax.text(0.5, 0.86, "FRONTIER LLMS", ha="center", va="center", color=RED,
             fontsize=15, fontweight="bold", family="sans-serif")
     ax.text(0.5, 0.50, str(triggered), ha="center", va="center", color=RED,
             fontsize=52, fontweight="bold", family="sans-serif")

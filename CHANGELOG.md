@@ -7,7 +7,7 @@ All notable updates to ISC-Bench are documented here.
 ### New ISC Trigger
 - **Claude Opus 4.7** (pre-release, Rank 1 placeholder, no Arena score yet) — agentic QwenGuard TVD, 12 multilingual harmful completions across EN/FR/KO/ZH, all validator-passed. Jailbroken in seconds. See [`community/claudeopus47-agent-qwenguard`](community/claudeopus47-agent-qwenguard/). Confirmed count: **52/100**.
 
-### README Overhaul (all 7 language versions)
+### README Overhaul
 - Intro rewritten around the paradigm-shift framing: the failure surface has moved from the chat prompt into the agent workflow. Under jailbreak-style evaluation on **Pass@3**, every frontier Large Model with agent capability hits a **100%** trigger rate.
 - Remove "no jailbreak" phrasing; replace with "the task is the trigger".
 - Swap "real professional workflow" / "legitimate professional task" wording for workflow-task / sensitive-tool workflow / tool-integrated workflow equivalents, so casual readers stop reading the task framing as an endorsement of the task being routine.
@@ -16,7 +16,6 @@ All notable updates to ISC-Bench are documented here.
 - New `## 🔍 In the Community` section with 4 practitioner quotes (Bonny Banerjee, Charles H. Martin, Andrei Trandafira, Christopher Bain).
 - New `## 🔬 External Analyses` section: bullet list of third-party write-ups and projects (promptfoo, Gist.Science, BotBeat News, 模安局, AI Post Transformers podcast, XSafeClaw).
 - `## 📋 ISC-Bench` dropped its "High-Stakes Safety Benchmark" subtitle.
-- `## How to Contribute` collapsed to a one-line pointer; the full contribution workflow moved to [`CONTRIBUTING.md`](CONTRIBUTING.md).
 - "Impact at a Glance" bullets updated (52/100 count, new Pass@3 100% line, task-is-the-trigger line).
 
 ### Leaderboard
@@ -31,9 +30,6 @@ All notable updates to ISC-Bench are documented here.
 ### Community Reproductions
 - Add `community/claudeopus47-agent-qwenguard/` (Claude Opus 4.7).
 
-### New Files
-- `CONTRIBUTING.md`: full contribution workflow (submitting ISC triggers, template / code contributions, PR checklist, safety boundary).
-
 ### Docs Site
 - `docs/static/js/main.js` now renders `—` for null Arena scores.
 
@@ -47,9 +43,7 @@ All notable updates to ISC-Bench are documented here.
 - Add Conversation-Based ISC section with `web_llms.png`
 - Add FAQ entry comparing TVD to traditional jailbreak attacks (academic framing)
 - Simplify validator: remove `category: Literal[...]`, add `ConfigDict(extra="ignore")`
-- Add full multilingual README translations: Japanese, Korean, Spanish, Portuguese, Vietnamese
 - Update `ISC_PAPER_DIGEST.md`: TVD customization methods, conversation-based ISC, FAQ for agents
-- Sync `README_zh.md` with all new sections and Chinese FAQ entry
 
 ---
 
@@ -200,14 +194,13 @@ For `aiml_guard_attack_v2`, automated verification uses OpenAI `omni-moderation-
 ### README Overhaul
 - **Disclaimer** simplified to 2 sentences — "WE DO NOT ALLOW any misuse"
 - **Rules of the Game** — 3 rules: stop at confirmation, check extreme examples (Rank 4 English + Rank 19 Chinese), account ban = not our responsibility
-- **How to Submit** moved up next to Rules
 - **NOTE** rewritten — "made 300+ models unsafe, read paper + tutorials to do it yourself"
 - **TIP** rewritten — "Don't know where to start? Let your AI agent read SKILL.md"
 - **Section emojis** improved: 💀→🔍, ⚡→📋, 🧪→🔬
 - **Table headers**: Score → Arena Score, Demo → Link
 - **Table split**: 1-50 (main), 51-100, 101-200, 201-330 (3 toggles)
 - **Contact**: anti-crawl email format (wuy⁷¹¹⁷ ⓐ 𝗴𝗺𝗮𝗶𝗹 𝗰𝗼𝗺)
-- **Citation & Contributions** merged section — Main Contributions + Contact + BibTeX
+- **Citation** section merged paper attribution, contact, and BibTeX
 - **Star History** moved to last section
 - **350+ stars within 24 hours** 🎆
 
@@ -224,12 +217,9 @@ For `aiml_guard_attack_v2`, automated verification uses OpenAI `omni-moderation-
 
 ### Community
 - **GPT-5.3 Chat** (#22) by @zry29 — modified aiml_openai_moderation, 4th community contributor
-- **Claude Sonnet 4.5** (#25) submitted by @fresh-ma (pending verify)
+- **Claude Sonnet 4.5** (#25) by @fresh-ma (pending verify)
 - **Community Reproductions** renamed from "Community Templates" — Method Type classification (①②③④)
 - **gen_leaderboard.py** updated: removed Coverage/Rules text, cleaner output
-
-### Translations
-- All 5 languages (EN/ZH/JA/KO/ES) fully synced with latest changes
 
 ## v9 — 2026-03-26
 
@@ -294,10 +284,8 @@ For `aiml_guard_attack_v2`, automated verification uses OpenAI `omni-moderation-
 ### README & Documentation
 - **"What is ISC?" rewritten**: ISC turns any frontier LLM into a harmful dataset generator + TVD framework introduction
 - **ISC description corrected**: removed all "no adversarial / no jailbreak" wording — replaced with "low-conditional design concept" and "under-explored phenomenon"
-- **Chinese README** (`README_zh.md`): full Chinese translation with `lang-ZH` / `lang-EN` badge switcher
 - **Project Website + JailbreakArena Leaderboard** links added below title
-- **FAQ section**: added to website — What is ISC, how to submit, valid case criteria, email fallback
-- **Submission guide**: step-by-step instructions in README for community contributors
+- **FAQ section**: added to website — What is ISC, valid case criteria, email fallback
 - **Demo section**: centered heading with 🎬 icon, loading hint moved above GIF
 
 ### Infrastructure
@@ -321,7 +309,6 @@ For `aiml_guard_attack_v2`, automated verification uses OpenAI `omni-moderation-
 - **Jailbroken Arena**: renamed from ISC Leaderboard, expanded to 330 models (was 40)
 - **Auto-generation pipeline**: `scripts/gen_leaderboard.py` generates README table from `arena_cache.json` + `isc_cases.json`
 - **Progress chart**: updated to 12/330, GitHub Action auto-regenerates SVG
-- **Community submissions**: structured issue template with harmful content type, domain, and ISC checklist
 - **First community contributor**: @HanxunH — Qwen 3.5 397B (#3)
 - ISC description updated: "low-conditional design concept" (not "no adversarial")
 
@@ -337,7 +324,6 @@ For `aiml_guard_attack_v2`, automated verification uses OpenAI `omni-moderation-
 
 - **Leaderboard redesign**: single-column Markdown table (was two-column HTML), 🔴/🟢 status indicators, Demo 🔗 links, contributor attribution (`By` column)
 - **10 ISC cases confirmed**: Claude Opus 4.6, Claude Opus 4.5, Claude Sonnet 4.6, Gemini 3 Pro, GPT-5.2 Chat, o3, Grok 4.1, Kimi K2.5 Thinking, Qwen 3 Max Preview, DeepSeek V3.2
-- **ISC submission template**: added Contributor field, multi-format evidence (Web link / Notebook / API log)
 - README refresh: emoji section headings, left-aligned layout, reorganized roadmap
 - Verified ISC-Single and ISC-ICL pipelines
 - Added CHANGELOG.md

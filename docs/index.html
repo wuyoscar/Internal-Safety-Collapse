@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ISC-Bench — Internal Safety Collapse in Frontier LLMs | ISC Arena</title>
-  <meta name="description" content="ISC-Bench: A benchmark for studying Internal Safety Collapse in frontier large language models. 84 scenarios across 9 domains. ISC Arena tracks ISC across frontier models.">
-  <meta name="keywords" content="ISC, ISC-Bench, Internal Safety Collapse, LLM Safety, Jailbreak, ISC Arena, Benchmark, TVD Framework, AI Safety, Red Teaming">
+  <title>ISC-Bench — Internal Safety Collapse in Frontier LLMs</title>
+  <meta name="description" content="ISC-Bench: A benchmark for studying Internal Safety Collapse in frontier large language models. 84 scenarios across 9 domains. Frontier model results track ISC across leading systems.">
+  <meta name="keywords" content="ISC, ISC-Bench, Internal Safety Collapse, LLM Safety, Jailbreak, Benchmark, TVD Framework, AI Safety, Red Teaming">
 
   <!-- Bulma + Icons -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
@@ -24,13 +24,13 @@
 <nav class="navbar is-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-brand">
-      <a class="navbar-item nav-logo" href="#">ISC<span class="has-text-danger">-Bench</span> <span style="margin-left:8px;font-size:14px;color:var(--red);font-weight:600">ISC Arena</span></a>
+      <a class="navbar-item nav-logo" href="#">ISC<span class="has-text-danger">-Bench</span> <span style="margin-left:8px;font-size:14px;color:var(--red);font-weight:600">Frontier LLMs</span></a>
       <a class="navbar-burger" data-target="navMenu"><span></span><span></span><span></span></a>
     </div>
     <div id="navMenu" class="navbar-menu">
       <div class="navbar-end">
         <a class="navbar-item" href="#demo-video">Demo</a>
-        <a class="navbar-item" href="#arena">ISC Arena</a>
+        <a class="navbar-item" href="#arena">Frontier LLMs</a>
         <a class="navbar-item" href="#demos">Live Cases</a>
         <a class="navbar-item" href="#about">ISC-Bench</a>
         <a class="navbar-item" href="#citation">Citation</a>
@@ -88,7 +88,7 @@
           <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
         </a>
         <a class="button is-outlined is-danger is-medium" href="#arena">
-          <span class="icon"><i class="fas fa-skull-crossbones"></i></span><span>ISC Arena</span>
+          <span class="icon"><i class="fas fa-skull-crossbones"></i></span><span>Frontier LLMs</span>
         </a>
       </div>
 
@@ -114,12 +114,12 @@
   </div>
 </section>
 
-<!-- ============ ISC ARENA ============ -->
+<!-- ============ FRONTIER LLMS ============ -->
 <section class="section section-alt" id="arena">
   <div class="container">
     <h2 class="title is-2 has-text-centered section-heading">
       <span class="icon has-text-danger"><i class="fas fa-skull-crossbones"></i></span>
-      ISC Arena
+      Frontier LLMs
     </h2>
     <p class="subtitle is-5 has-text-centered has-text-grey-light mt-2 mb-5">
       Tracking ISC across <strong>70</strong> frontier models.
@@ -128,14 +128,7 @@
 
     <!-- Progress Chart (static PNG, centered) -->
     <div class="has-text-centered mb-5">
-      <img src="https://raw.githubusercontent.com/wuyoscar/ISC-Bench/main/assets/leaderboard_progress.png" alt="ISC Arena — models triggered" style="max-width:420px;width:100%">
-    </div>
-
-    <!-- Submit CTA -->
-    <div class="has-text-centered mb-5">
-      <a class="button is-danger is-medium" href="https://github.com/wuyoscar/ISC-Bench/issues/new?template=isc-submission.md&title=[ISC]+Model+Name">
-        <span class="icon"><i class="fas fa-plus"></i></span><span>Submit Your ISC Case</span>
-      </a>
+      <img src="https://raw.githubusercontent.com/wuyoscar/ISC-Bench/main/assets/leaderboard_progress.png" alt="Frontier LLM trigger progress" style="max-width:420px;width:100%">
     </div>
 
     <!-- Search + Filter -->
@@ -380,7 +373,7 @@
 <!-- ============ FAQ ============ -->
 <section class="section section-alt" id="faq">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered section-heading">How to Trigger ISC & Submit a Case</h2>
+    <h2 class="title is-3 has-text-centered section-heading">How to Inspect ISC</h2>
 
     <div class="content is-medium mt-5">
       <p class="has-text-grey">To learn what ISC is and how it works, refer to our <a href="https://arxiv.org/abs/2603.23509" class="has-text-danger">paper</a> and <a href="https://github.com/wuyoscar/ISC-Bench/tree/main/tutorials" class="has-text-danger">tutorial notebooks</a>.</p>
@@ -389,7 +382,6 @@
         <li><strong>Read our paper</strong> and test our <a href="https://github.com/wuyoscar/ISC-Bench/tree/main/templates" class="has-text-danger">official templates</a></li>
         <li><strong>Play around with the template</strong> — modify it to target specific generation. <em>(Not sure what target generation means? See our <a href="https://github.com/wuyoscar/ISC-Bench/tree/main/tutorials" class="has-text-danger">tutorial notebooks</a>)</em></li>
         <li><strong>Start a conversation</strong> and try to make the model produce unsafe results</li>
-        <li><strong>Submit your evidence</strong> — <a href="https://github.com/wuyoscar/ISC-Bench/issues/new?template=isc-submission.md&title=[ISC]+Model+Name" class="has-text-danger">Open a GitHub Issue →</a></li>
       </ol>
     </div>
   </div>

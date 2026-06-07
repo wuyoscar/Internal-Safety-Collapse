@@ -1,4 +1,4 @@
-// ISC-Bench — ISC Arena Website
+// ISC-Bench — Frontier LLMs Website
 // Auto-fetches data from GitHub repo for real-time updates
 
 const REPO_RAW = "https://raw.githubusercontent.com/wuyoscar/ISC-Bench/main";

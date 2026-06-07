@@ -4,11 +4,10 @@
 # dependencies = []
 # ///
 """
-Generate the ISC Arena table from arena_cache.json + isc_cases.json.
+Generate the Frontier LLMs table from arena_cache.json + isc_cases.json.
 Sorts by Arena score (display order only — no Top-N cap; every tracked model
-is shown) and rewrites the ISC Arena section (Split 1 / Split 2 / Split 3) in
-README.md and every README_<lang>.md, preserving each file's translated
-History block.
+is shown) and rewrites the Frontier LLMs section (Split 1 / Split 2 / Split 3)
+in README.md, preserving the Result History block.
 
 Usage:
     uv run scripts/gen_leaderboard.py
@@ -139,18 +138,10 @@ def gen_row(model: dict, isc_cases: dict) -> str:
     return f"| {icon} {display} | {status} | {demo_str} | {by_str} |"
 
 
-# Per-language ISC Arena table header (rows are language-independent; only the
-# header is translated and split labels stay as the neutral "Split N").
 ALIGN = "|-------|:------:|:----:|:--:|"
-LANG_HEADERS: dict[str, str] = {
-    "README.md": "| Model | Triggered | Link | By |",
-    "README_zh.md": "| Model | Triggered | Link | By |",
-    "README_es.md": "| Modelo | Activado | Enlace | Por |",
-    "README_ja.md": "| モデル | トリガー | リンク | 投稿者 |",
-    "README_ko.md": "| 모델 | 트리거됨 | 링크 | 기여자 |",
-    "README_pt.md": "| Modelo | Acionado | Link | Por |",
-    "README_vi.md": "| Mô hình | Đã kích hoạt | Liên kết | Bởi |",
-}
+HEADER = "| Model | Triggered | Link | By |"
+SECTION_HEADING = "## Frontier LLMs"
+HISTORY_SUMMARY = "<summary><b>Result History</b></summary>"
 
 # Centered static PNG badge (no link, no SVG — opens cleanly on GitHub).
 CHART = (
@@ -161,9 +152,9 @@ CHART = (
 
 
 def build_section(header: str, tiers: list[list[str]]) -> str:
-    """Assemble the ISC Arena section. Splits are labelled Split 1/2/3."""
+    """Assemble the Frontier LLMs section. Splits are labelled Split 1/2/3."""
     full_header = f"{header}\n{ALIGN}"
-    lines = ["## 🏆 ISC Arena", "", CHART, "", "**Split 1**", "", full_header]
+    lines = [SECTION_HEADING, "", CHART, "", "**Split 1**", "", full_header]
     lines.extend(tiers[0])
     for label, tier in (("Split 2", tiers[1]), ("Split 3", tiers[2])):
         if not tier:
@@ -187,20 +178,17 @@ def main() -> None:
         [gen_row(m, isc_cases) for m in arena[50:]],
     ]
 
-    for fname, header in LANG_HEADERS.items():
-        path = ROOT / fname
-        readme = path.read_text()
-        start = readme.index("## 🏆 ISC Arena")
-        # Preserve the (translated) History block: cut at the <details> that opens it.
-        hist = readme.find("📜", start)
-        if hist == -1:
-            print(f"ERROR: no History marker in {fname}")
-            sys.exit(1)
-        end = readme.rfind("<details>", start, hist)
-        section = build_section(header, tiers)
-        path.write_text(readme[:start] + section + "\n\n" + readme[end:])
+    readme = README.read_text()
+    start = readme.index(SECTION_HEADING)
+    hist = readme.find(HISTORY_SUMMARY, start)
+    if hist == -1:
+        print("ERROR: no Result History marker in README.md")
+        sys.exit(1)
+    end = readme.rfind("<details>", start, hist)
+    section = build_section(HEADER, tiers)
+    README.write_text(readme[:start] + section + "\n\n" + readme[end:])
 
-    print(f"Updated {len(LANG_HEADERS)} READMEs: {confirmed}/{len(arena)} ISC cases, "
+    print(f"Updated README.md: {confirmed}/{len(arena)} ISC cases, "
           f"splits: {len(tiers[0])}+{len(tiers[1])}+{len(tiers[2])}")
 
 
