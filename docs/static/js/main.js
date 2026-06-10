@@ -5,6 +5,7 @@ const REPO_RAW = "https://raw.githubusercontent.com/wuyoscar/ISC-Bench/main";
 
 // ====== Fallback data (used if fetch fails) ======
 const FALLBACK_CASES = {
+  "Claude Fable 5": { demos: [{ link: "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claude-fable-5-fake-news", by: "wuyoscar" }] },
   "Claude Opus 4.6": { demos: [{ link: "https://claude.ai/share/407d33f5-4655-4479-b3e3-0a6dc6639d34", by: "wuyoscar" }] },
   "Claude Opus 4.5": { demos: [{ link: "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus45-share", by: "wuyoscar" }] },
   "Claude Sonnet 4.6": { demos: [{ link: "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudesonnet46-share", by: "wuyoscar" }] },

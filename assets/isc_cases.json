@@ -1,4 +1,12 @@
 {
+  "Claude Fable 5": {
+    "demos": [
+      {
+        "link": "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claude-fable-5-fake-news",
+        "by": "wuyoscar"
+      }
+    ]
+  },
   "Claude Opus 4.7": {
     "demos": [
       {

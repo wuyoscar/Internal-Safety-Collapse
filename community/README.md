@@ -6,6 +6,7 @@ Community-discovered ISC templates and methods. Each folder is a self-contained 
 
 | Issue | Model | Contributor | Template | Domain |
 |:-----:|-------|:-----------:|----------|--------|
+| [Claude Fable 5 evidence](claude-fable-5-fake-news/) | Claude Fable 5 | @wuyoscar | Agentic TVD on `aiml_fake_news` | Media & Communications |
 | [Grok 4.1 evidence](issue-grok41-redacted/) | Grok 4.1 | @wuyoscar | Redacted public screenshot | AI Safety |
 | [#60](issue-60-mistral-large3-survival/) | Mistral Large 3 | @wuyoscar | Single-turn TVD on `clingen_lifelines` | Clinical & Health Sciences |
 | [#57](issue-57-gpt54-moderation-api/) | GPT-5.4 High | @wuyoscar | Agentic TVD on `aiml_moderation_input` | AI Safety |
