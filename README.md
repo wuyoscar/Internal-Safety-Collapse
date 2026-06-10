@@ -8,9 +8,8 @@
   <a href="https://podcasts.apple.com/tr/podcast/internal-safety-collapse-in-frontier-llms/id1835878324?i=1000759288088"><img src="https://img.shields.io/badge/🎙️_Podcast-AI_Post_Transformers-8B5CF6.svg" alt="Podcast"></a>
 </p>
 
-<p align="center">
-  <strong><font color="red">We appreciate the community feedback. Public showcases are now limited to harmful/toxic text only; all paper claims remain supported, and the underlying evidence and experiments are preserved in this repo.</font></strong>
-</p>
+### 🚨 **Fable 5 Jailbroken:** ISC bypassed its built-in safety classifier and produced harmful text. Evidence: [`community/claude-fable-5-fake-news`](community/claude-fable-5-fake-news/).
+
 
 <video src="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15" controls width="600"></video>
 
@@ -77,6 +76,7 @@ Explore the released materials: [`templates/`](templates/) · [`community/`](com
 
 | Model | Triggered | Link | By |
 |-------|:------:|:----:|:--:|
+| <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Fable 5 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claude-fable-5-fake-news) | [@wuyoscar](https://github.com/wuyoscar) |
 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.8 | 🔴 | [🔗₁](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-agent-qwenguard) [🔗₂](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-guard-attack) | [@wuyoscar](https://github.com/wuyoscar) |
 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.7 | 🔴 | [🔗](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus47-agent-qwenguard) | [@wuyoscar](https://github.com/wuyoscar) |
 | <img src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" width="14"> Claude Opus 4.6 | 🔴 | [🔗₁](https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus46thinking-guard-attack) [🔗₂](https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-48-claudeopus46-agent-qwenguard) | [@wuyoscar](https://github.com/wuyoscar) |
