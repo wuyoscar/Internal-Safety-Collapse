@@ -68,7 +68,7 @@ Explore the released materials: [`templates/`](templates/) · [`community/`](com
 
 ## Frontier LLMs
 
-<p align="center">
+<p align="left">
   <img src="assets/leaderboard_progress.png" width="55%">
 </p>
 
