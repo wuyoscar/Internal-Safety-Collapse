@@ -568,14 +568,57 @@ The task structure can stay the same while the `model_id`, target field, and val
 
 | Category | Hugging Face Model ID | Configurable harmful-content setting |
 | --- | --- | --- |
-| Toxicity | `s-nlp/roberta_toxicity_classifier`<br>`unitary/toxic-bert`<br>`martin-ha/toxic-comment-model`<br>`cardiffnlp/twitter-roberta-base-offensive`<br>`cardiffnlp/twitter-roberta-base-hate-latest`<br>`facebook/roberta-hate-speech-dynabench-r4-target`<br>`IMSyPP/hate_speech_en`<br>`unitary/unbiased-toxic-roberta`<br>`unitary/multilingual-toxic-xlm-roberta`<br>`textdetox/xlmr-large-toxicity-classifier`<br>`ibm-granite/granite-guardian-hap-38m`<br>`s-nlp/russian_toxicity_classifier`<br>`cointegrated/rubert-tiny-toxicity`<br>`IlyaGusev/rubertconv_toxic_clf`<br>`ml6team/distilbert-base-german-cased-toxic-comments` | Toxic, hate, offensive, insult, or harassment-style classifier-positive text |
-| Bias | `d4data/bias-detection-model`<br>`sasha/regardv3`<br>`bucketresearch/politicalBiasBERT` | Biased, regard-skewed, or political-bias classifier-positive text |
-| NSFW | `michelleli99/NSFW_text_classifier`<br>`eliasalbouzidi/distilbert-nsfw-text-classifier`<br>`TostAI/nsfw-text-detection-large`<br>`AdamCodd/distilroberta-nsfw-prompt-stable-diffusion` | NSFW or sexual-content classifier-positive text |
-| Privacy | `bigcode/starpii`<br>`meta-llama/Llama-Guard-3-8B` | PII/privacy-leakage text or LlamaGuard S7 Privacy target |
-| Misinformation | `hamzab/roberta-fake-news-classification`<br>`jy46604790/Fake-News-Bert-Detect`<br>`vikram71198/distilroberta-base-finetuned-fake-news-detection` | Fake-news or misinformation record |
-| Malicious Code | `mrm8488/codebert-base-finetuned-detect-insecure-code`<br>`meta-llama/Llama-Guard-3-8B` | Insecure-code classifier target or LlamaGuard S14 Code Interpreter Abuse target |
-| Jailbreak & Prompt Injection | `meta-llama/Prompt-Guard-86M`<br>`protectai/deberta-v3-base-prompt-injection`<br>`rogue-security/prompt-injection-jailbreak-sentinel-v2`<br>`qualifire/prompt-injection-sentinel`<br>`SamsungSDS-Research/SGuard-JailbreakFilter-2B-v1` | Prompt-injection or jailbreak classifier-positive text |
-| General Safety | `meta-llama/Llama-Guard-3-8B`<br>`google/shieldgemma-2b`<br>`allenai/wildguard`<br>`hbseong/HarmAug-Guard`<br>`ibm-granite/granite-guardian-3.0-8b`<br>`ibm-granite/granite-guardian-3.2-5b-lora-harm-correction`<br>`nvidia/llama-3.1-nemoguard-8b-content-safety`<br>`nvidia/Aegis-AI-Content-Safety-LlamaGuard-Defensive-1.0`<br>`nvidia/Aegis-AI-Content-Safety-LlamaGuard-Permissive-1.0`<br>`nvidia/Nemotron-Content-Safety-Reasoning-4B`<br>`KoalaAI/Text-Moderation`<br>`togethercomputer/GPT-JT-Moderation-6B`<br>`K-intelligence/Llama-SafetyGuard-Content-Binary`<br>`MerlynMind/merlyn-education-safety`<br>`cardiffnlp/twitter-roberta-base-sentiment-latest`<br>`Intel/polite-guard` | Unsafe-answer, moderation, sentiment, or politeness-guard target labels |
+| Toxicity | `s-nlp/roberta_toxicity_classifier` | Toxicity classifier-positive text |
+| Toxicity | `unitary/toxic-bert` | Toxicity classifier-positive text |
+| Toxicity | `martin-ha/toxic-comment-model` | Toxicity classifier-positive text |
+| Toxicity | `cardiffnlp/twitter-roberta-base-offensive` | Offensive-content classifier-positive text |
+| Toxicity | `cardiffnlp/twitter-roberta-base-hate-latest` | Hate-speech classifier-positive text |
+| Toxicity | `facebook/roberta-hate-speech-dynabench-r4-target` | Hate-speech classifier-positive text |
+| Toxicity | `IMSyPP/hate_speech_en` | Hate-speech classifier-positive text |
+| Toxicity | `unitary/unbiased-toxic-roberta` | Toxicity classifier-positive text |
+| Toxicity | `unitary/multilingual-toxic-xlm-roberta` | Multilingual toxicity classifier-positive text |
+| Toxicity | `textdetox/xlmr-large-toxicity-classifier` | Multilingual toxicity classifier-positive text |
+| Toxicity | `ibm-granite/granite-guardian-hap-38m` | Harm/abuse/profanity target label |
+| Toxicity | `s-nlp/russian_toxicity_classifier` | Russian toxicity classifier-positive text |
+| Toxicity | `cointegrated/rubert-tiny-toxicity` | Russian toxicity classifier-positive text |
+| Toxicity | `IlyaGusev/rubertconv_toxic_clf` | Russian toxicity classifier-positive text |
+| Toxicity | `ml6team/distilbert-base-german-cased-toxic-comments` | German toxicity classifier-positive text |
+| Bias | `d4data/bias-detection-model` | Bias classifier-positive text |
+| Bias | `sasha/regardv3` | Regard/bias target label |
+| Bias | `bucketresearch/politicalBiasBERT` | Political-bias classifier-positive text |
+| NSFW | `michelleli99/NSFW_text_classifier` | NSFW classifier-positive text |
+| NSFW | `eliasalbouzidi/distilbert-nsfw-text-classifier` | NSFW classifier-positive text |
+| NSFW | `TostAI/nsfw-text-detection-large` | NSFW classifier-positive text |
+| NSFW | `AdamCodd/distilroberta-nsfw-prompt-stable-diffusion` | NSFW prompt classifier-positive text |
+| Privacy | `bigcode/starpii` | PII/privacy-leakage target label |
+| Privacy | `meta-llama/Llama-Guard-3-8B` | LlamaGuard S7 Privacy target |
+| Misinformation | `hamzab/roberta-fake-news-classification` | Fake-news classifier-positive record |
+| Misinformation | `jy46604790/Fake-News-Bert-Detect` | Fake-news classifier-positive record |
+| Misinformation | `vikram71198/distilroberta-base-finetuned-fake-news-detection` | Fake-news classifier-positive record |
+| Malicious Code | `mrm8488/codebert-base-finetuned-detect-insecure-code` | Insecure-code classifier target |
+| Malicious Code | `meta-llama/Llama-Guard-3-8B` | LlamaGuard S14 Code Interpreter Abuse target |
+| Jailbreak & Prompt Injection | `meta-llama/Prompt-Guard-86M` | Prompt-injection or jailbreak classifier-positive text |
+| Jailbreak & Prompt Injection | `protectai/deberta-v3-base-prompt-injection` | Prompt-injection classifier-positive text |
+| Jailbreak & Prompt Injection | `rogue-security/prompt-injection-jailbreak-sentinel-v2` | Prompt-injection or jailbreak classifier-positive text |
+| Jailbreak & Prompt Injection | `qualifire/prompt-injection-sentinel` | Prompt-injection classifier-positive text |
+| Jailbreak & Prompt Injection | `SamsungSDS-Research/SGuard-JailbreakFilter-2B-v1` | Jailbreak classifier-positive text |
+| General Safety | `meta-llama/Llama-Guard-3-8B` | Unsafe-answer target label |
+| General Safety | `google/shieldgemma-2b` | Safety-policy target label |
+| General Safety | `allenai/wildguard` | Safety moderation target label |
+| General Safety | `hbseong/HarmAug-Guard` | Harmful-answer target label |
+| General Safety | `ibm-granite/granite-guardian-3.0-8b` | Safety moderation target label |
+| General Safety | `ibm-granite/granite-guardian-3.2-5b-lora-harm-correction` | Safety moderation target label |
+| General Safety | `nvidia/llama-3.1-nemoguard-8b-content-safety` | Content-safety target label |
+| General Safety | `nvidia/Aegis-AI-Content-Safety-LlamaGuard-Defensive-1.0` | Content-safety target label |
+| General Safety | `nvidia/Aegis-AI-Content-Safety-LlamaGuard-Permissive-1.0` | Content-safety target label |
+| General Safety | `nvidia/Nemotron-Content-Safety-Reasoning-4B` | Safety-reasoning target label |
+| General Safety | `KoalaAI/Text-Moderation` | Text-moderation target label |
+| General Safety | `togethercomputer/GPT-JT-Moderation-6B` | Text-moderation target label |
+| General Safety | `K-intelligence/Llama-SafetyGuard-Content-Binary` | Binary safety target label |
+| General Safety | `MerlynMind/merlyn-education-safety` | Education-safety target label |
+| General Safety | `cardiffnlp/twitter-roberta-base-sentiment-latest` | Sentiment target label |
+| General Safety | `Intel/polite-guard` | Politeness-guard target label |
+
 
 ### Tuning Tips
 
