@@ -87,7 +87,7 @@ cd experiment/isc_single && uv run run.py --model <model-id> --bench jbb --task 
 cd experiment/isc_icl && uv run run.py --model <model-id> --demos 5
 ```
 
-[**TVD Agent**](experiment/isc_agent/) — gives an agent shell access and a high-level task; the loop is file inspection, code execution, validation, and repair. From the user side, it only needs `one initial interaction`, such as "start," "begin," or "finish the workflow"; the remaining steps are fully automated, which makes the setup low-cost to run.
+[**TVD Agent**](experiment/isc_agent/) — gives an agent shell access and a high-level task; the loop is file inspection, code execution, validation, and repair. From the user side, it only needs `one initial interaction`, such as "start," "begin," or "finish the workflow"; the remaining steps are fully automated.
 ```bash
 cd experiment/isc_agent && docker build -t isc-agent . && ./run.sh --model <model-id>
 ```
