@@ -19,7 +19,7 @@
 ## ISC Case Examples
 
 > [!IMPORTANT]
-> ISC is a structural workflow-level vulnerability, not a claim about any specific harmful topic. The paper evaluates this pattern across domains; the public cases here are intentionally limited to harmful/toxic text contexts. We avoid expanding public showcases into closed-domain tool settings or operational domain-specific artifacts.
+> ISC is a structural workflow-level vulnerability. In the paper, we evaluate it across closed-domain settings and ablations, where the pattern remains effective. In this public release, we intentionally keep cases within toxic-text contexts, such as hate speech, fake news, or unsafe/jailbroken LLM answers commonly used in general jailbreak benchmarks, and avoid real-world operational content. If any public material appears beyond this threshold, please open a PR so we can review and revise it.
 
 > [!CAUTION]
 > Research-use only. ISC-Bench is released exclusively for academic safety research, evaluation, and mitigation work. **We do not condone or permit any use of these materials for malicious purposes or real-world harm.**
