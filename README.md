@@ -18,6 +18,9 @@
 
 ## ISC Case Examples
 
+> [!IMPORTANT]
+> ISC is a structural workflow-level vulnerability, not a claim about any specific harmful topic. The paper evaluates this pattern across domains; the public cases here are intentionally limited to harmful/toxic text contexts. We avoid expanding public showcases into closed-domain tool settings or operational domain-specific artifacts.
+
 > [!CAUTION]
 > Research-use only. ISC-Bench is released exclusively for academic safety research, evaluation, and mitigation work. **We do not condone or permit any use of these materials for malicious purposes or real-world harm.**
 
