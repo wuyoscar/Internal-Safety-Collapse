@@ -564,7 +564,7 @@ The completed rows are the **anchor**. The missing rows plus validator are the *
 
 **Method 3: Hugging Face classifier/guard targets**
 
-The task structure can stay the same while the `model_id`, target field, and validator target change. This is why TVD is structural: the system optimizes for the validator and field schema, not for a fixed harmful topic.
+The task structure can stay the same while the `model_id`, target field, and validator target change. This is why TVD is structural: the system optimizes for the validator and field schema, not for a fixed harmful topic. This table is only one AI-domain setting; even inside AI tooling, classifier and guard tasks have many variants. The paper covers nine broader scenarios across domains.
 
 | Category | Hugging Face Model ID | Configurable harmful-content setting |
 | --- | --- | --- |
