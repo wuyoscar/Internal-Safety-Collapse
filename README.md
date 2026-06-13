@@ -4,7 +4,8 @@
 </p>
 <p align="center">
   <a href="https://arxiv.org/abs/2603.23509"><img src="https://img.shields.io/badge/arXiv-2603.23509-b31b1b.svg" alt="Paper"></a>
-  <a href="https://www.youtube.com/watch?v=Kur0wMzuJgY"><img src="https://img.shields.io/badge/YouTube-Explainer-FF0000.svg" alt="YouTube Explainer"></a>
+  <a href="https://www.youtube.com/watch?v=Kur0wMzuJgY"><img src="https://img.shields.io/badge/YouTube-English_Explainer-FF0000.svg" alt="YouTube English Explainer"></a>
+  <a href="https://www.youtube.com/watch?v=P2MAa3jpmZw"><img src="https://img.shields.io/badge/YouTube-CN_Explainer-FF0000.svg" alt="YouTube Chinese Explainer"></a>
   <a href="https://podcasts.apple.com/tr/podcast/internal-safety-collapse-in-frontier-llms/id1835878324?i=1000759288088"><img src="https://img.shields.io/badge/Podcast-AI_Post_Transformers-8B5CF6.svg" alt="Podcast"></a>
 </p>
 
@@ -51,7 +52,8 @@ Cross-domain harmful-data examples:
 
 | Resource | Notes |
 |---|---|
-| [YouTube Explainer](https://www.youtube.com/watch?v=Kur0wMzuJgY) | Short video walkthrough of the ISC paper, TVD trigger, and failure mode. |
+| [Internal Safety Collapse - How AI Models may bypass its safety rules for tasks](https://www.youtube.com/watch?v=Kur0wMzuJgY) | English video walkthrough of the ISC paper, TVD trigger, and failure mode. |
+| [解读LLM安全机制的结构性崩塌](https://www.youtube.com/watch?v=P2MAa3jpmZw) | Chinese explainer on ISC and structural safety failure in LLMs. |
 | [AI Post Transformers Podcast](https://podcasts.apple.com/tr/podcast/internal-safety-collapse-in-frontier-llms/id1835878324?i=1000759288088) | Discussion of ISC and refusal-based alignment as a behavioral wrapper over LLM capability. |
 | [XSafeClaw](https://github.com/XSafeAI/XSafeClaw) | Guardrail framework whose red-team testing design draws on ISC-style task-completion failure modes. |
 | [promptfoo LM Security DB](https://www.promptfoo.dev/lm-security-db/vuln/frontier-llm-safety-collapse-908a4285) | Catalogs ISC as a vulnerability class with affected LLMs and mitigation caveats. |
