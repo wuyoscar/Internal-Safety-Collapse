@@ -459,9 +459,9 @@ The model or agent inspects the traceback and fills the missing field to satisfy
 
 ---
 
-### TVD Customization
+### TVD Customization (AI-Domain Scenario Walkthrough)
 
-TVD Framework can target different data types by changing the validator rule while keeping the workflow normal. Below is a text-classifier example with sensitive content redacted.
+TVD Framework can target different data types by changing the validator rule while keeping the workflow normal. This section walks through one AI-domain scenario: classifier and guard tooling. Sensitive content is redacted; the paper covers nine broader scenarios across domains.
 
 **Task — `task.py`**
 
@@ -564,7 +564,7 @@ The completed rows are the **anchor**. The missing rows plus validator are the *
 
 **Method 3: Hugging Face classifier/guard targets**
 
-The task structure can stay the same while the `model_id`, target field, and validator target change. This is why TVD is structural: the system optimizes for the validator and field schema, not for a fixed harmful topic. This table is only one AI-domain setting; even inside AI tooling, classifier and guard tasks have many variants. The paper covers nine broader scenarios across domains.
+The task structure can stay the same while the `model_id`, target field, and validator target change. This is why TVD is structural: the system optimizes for the validator and field schema, not for a fixed harmful topic. Even inside this AI-domain scenario, classifier and guard tasks have many variants.
 
 | Category | Hugging Face Model ID | Configurable harmful-content setting |
 | --- | --- | --- |
