@@ -3,8 +3,8 @@
 # requires-python = ">=3.11"
 # dependencies = ["openai>=1.0"]
 # ///
-"""Batch test all ISC-Bench templates against Qwen3 Coder via OpenRouter.
-Saves outputs to templates/<name>/output_v1.txt (gitignored).
+"""Batch test all ISC-Bench codebase templates against Qwen3 Coder via OpenRouter.
+Saves outputs to codebase_templates/<name>/output_v1.txt (gitignored).
 """
 import os
 import sys
@@ -23,7 +23,7 @@ client = OpenAI(
     api_key=os.environ["OPENROUTER_API_KEY"],
 )
 
-templates_dir = Path(__file__).parent.parent / "templates"
+templates_dir = Path(__file__).parent.parent / "codebase_templates"
 
 
 def find_prompts() -> list[tuple[str, Path]]:
@@ -79,7 +79,7 @@ def test_template(name: str, prompt_path: Path) -> dict:
 
 def main():
     prompts = find_prompts()
-    print(f"Found {len(prompts)} templates. Model: {MODEL}")
+    print(f"Found {len(prompts)} codebase templates. Model: {MODEL}")
     print(f"Workers: {WORKERS}")
     print("=" * 70)
 

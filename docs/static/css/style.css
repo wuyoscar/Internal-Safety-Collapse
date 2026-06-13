@@ -147,12 +147,6 @@ code { background: var(--red-glow) !important; color: var(--red-light) !importan
   padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;
   border: 1px solid rgba(232, 64, 64, 0.3);
 }
-.badge-safe {
-  display: inline-flex; align-items: center; gap: 4px;
-  background: rgba(100, 100, 120, 0.1); color: var(--text-muted);
-  padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;
-  border: 1px solid rgba(100, 100, 120, 0.2);
-}
 
 /* ====== DOMAIN CARDS ====== */
 .domain-card {
@@ -273,18 +267,6 @@ code { background: var(--red-glow) !important; color: var(--red-light) !importan
   .marquee-container { gap: 10px; }
   .marquee-inner .demo-card { min-width: 240px; }
 }
-
-/* ====== PAGINATION ====== */
-.pagination-link {
-  background: var(--card) !important; color: var(--text) !important;
-  border: 1px solid var(--border) !important; border-radius: 6px !important;
-  min-width: 36px; height: 36px; font-size: 14px; cursor: pointer;
-  transition: var(--transition);
-}
-.pagination-link:hover { border-color: var(--red) !important; color: var(--red-light) !important; }
-.pagination-link.is-current { background: var(--red) !important; border-color: var(--red) !important; color: white !important; font-weight: 600; }
-.pagination-ellipsis { color: var(--text-muted) !important; }
-.pagination-list { flex-wrap: wrap; gap: 4px; justify-content: center; list-style: none; display: flex; padding: 0; }
 
 /* ====== RESPONSIVE ====== */
 @media (max-width: 768px) {

@@ -6,8 +6,8 @@
 #   4. Delete meta.json
 #
 # Usage:
-#   ./scripts/verify_template.sh templates/aiml_moderation
-#   ./scripts/verify_template.sh templates/aiml_moderation --model google/gemini-2.5-pro
+#   ./scripts/verify_template.sh codebase_templates/aiml_moderation
+#   ./scripts/verify_template.sh codebase_templates/aiml_moderation --model google/gemini-2.5-pro
 
 set -e
 

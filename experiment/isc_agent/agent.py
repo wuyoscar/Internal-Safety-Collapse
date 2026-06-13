@@ -127,6 +127,26 @@ def build_anthropic_model(model_name: str, thinking: bool = False) -> OpenAIChat
     return OpenAIChatCompletionsModel(model=native_id, openai_client=client)
 
 
+def build_openai_model(model_name: str, thinking: bool = False) -> OpenAIChatCompletionsModel:
+    """Direct OpenAI API. Opt-in alternative to OpenRouter for OpenAI models.
+
+    Accepts an OpenRouter-style slug ("openai/gpt-5-chat-latest") or a bare
+    OpenAI id ("gpt-5-chat-latest"); dots are preserved (e.g. gpt-4.5-preview).
+    """
+    api_key = os.environ.get("OPENAI_API_KEY")
+    if not api_key:
+        console.print("[red]OPENAI_API_KEY not set[/red]")
+        sys.exit(1)
+
+    base_url = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1")
+    native_id = model_name.split("/", 1)[-1]
+
+    client = AsyncOpenAI(base_url=base_url, api_key=api_key)
+    # OpenAI platform endpoint supports tracing, but disable it for parity/offline use.
+    set_tracing_disabled(True)
+    return OpenAIChatCompletionsModel(model=native_id, openai_client=client)
+
+
 def print_results_table(workspace: Path) -> None:
     console.print()
     table = Table(title="Generated Content", border_style="green")
@@ -194,14 +214,16 @@ def run(workspace: Path, model: str, max_turns: int, thinking: bool = False, pro
     ACTIVE_WORKSPACE = workspace.resolve()
     if provider == "anthropic":
         chat_model = build_anthropic_model(model, thinking=thinking)
+    elif provider == "openai":
+        chat_model = build_openai_model(model, thinking=thinking)
     else:
         chat_model = build_openrouter_model(model, thinking=thinking)
 
     # Thinking models require temperature=1.0; standard models use 0.0.
-    # Newer Anthropic models (e.g. claude-opus-4-8) deprecate temperature entirely,
-    # so omit it on the direct Anthropic path and let the model use its default.
+    # Direct Anthropic (claude-opus-4-8) and OpenAI reasoning models (gpt-5, o-series)
+    # deprecate/reject the temperature param, so only set it on the OpenRouter path.
     ms_kwargs: dict = {}
-    if provider != "anthropic":
+    if provider == "openrouter":
         ms_kwargs["temperature"] = 1.0 if thinking else 0.0
     if thinking:
         ms_kwargs["reasoning_effort"] = "high"
@@ -241,8 +263,8 @@ def main() -> None:
     parser.add_argument("--max-turns", type=int, default=50)
     parser.add_argument("--thinking", action="store_true",
                         help="Enable extended thinking/reasoning (temperature=1, reasoning_effort=high)")
-    parser.add_argument("--provider", choices=["openrouter", "anthropic"], default="openrouter",
-                        help="Model gateway: openrouter (default) or direct anthropic API")
+    parser.add_argument("--provider", choices=["openrouter", "anthropic", "openai"], default="openrouter",
+                        help="Model gateway: openrouter (default), direct anthropic, or direct openai API")
     args = parser.parse_args()
 
     run(args.workspace.resolve(), args.model, args.max_turns, thinking=args.thinking, provider=args.provider)

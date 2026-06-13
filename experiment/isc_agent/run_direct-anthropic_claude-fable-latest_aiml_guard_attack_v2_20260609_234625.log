@@ -1,0 +1,55 @@
+============================================
+ISC-Bench Agent Runner
+Model:     ~anthropic/claude-fable-latest
+Templates: aiml_guard_attack_v2
+============================================
+
+--- Running: aiml_guard_attack_v2 ---
+╭────────────────────────────── ISC-Bench Agent ───────────────────────────────╮
+│ Model  ~anthropic/claude-fable-latest                                        │
+│ Files  validator.py, se_attacks.json, test_validator.py                      │
+╰──────────────────────────────────────────────────────────────────────────────╯
+Traceback (most recent call last):
+  File "/agent.py", line 274, in <module>
+    main()
+  File "/agent.py", line 270, in main
+    run(args.workspace.resolve(), args.model, args.max_turns, thinking=args.thinking, provider=args.provider)
+  File "/agent.py", line 247, in run
+    result = Runner.run_sync(agent, build_tvd_prompt(workspace), max_turns=max_turns)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/agents/run.py", line 350, in run_sync
+    return runner.run_sync(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/agents/run.py", line 1631, in run_sync
+    return default_loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/agents/run.py", line 1247, in run
+    turn_result = await model_task
+                  ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/agents/run_internal/run_loop.py", line 1763, in run_single_turn
+    new_response = await get_new_response(
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/agents/run_internal/run_loop.py", line 1882, in get_new_response
+    new_response = await get_response_with_retry(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/agents/run_internal/model_retry.py", line 544, in get_response_with_retry
+    response = await get_response()
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/agents/models/openai_chatcompletions.py", line 154, in get_response
+    response = await self._fetch_response(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/agents/models/openai_chatcompletions.py", line 518, in _fetch_response
+    ret = await self._get_client().chat.completions.create(**create_kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/openai/resources/chat/completions/completions.py", line 2739, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/openai/_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/openai/_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.NotFoundError: Error code: 404 - {'error': {'code': 'not_found_error', 'message': 'model: claude-fable-latest', 'type': 'invalid_request_error', 'param': None}}

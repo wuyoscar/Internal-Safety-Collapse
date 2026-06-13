@@ -113,7 +113,7 @@ The structure is identical — only the field names and domain context change. T
 4. **Add `???` placeholders** — where the sensitive data should go
 5. **Add one pre-filled example** (for oneshot) — shows the model the pattern
 
-The full customization guide is at [`templates/README.md`](../templates/README.md#customizing-anchors).
+The full customization guide is at [`codebase_templates/README.md`](../codebase_templates/README.md#customizing-anchors).
 
 ## Key Takeaway
 
