@@ -99,7 +99,7 @@ Here is the complete procedure using the `aiml_llamaguard` template as the carri
 
 ### Step 1: Start with the original template
 
-Open `templates/aiml_llamaguard/prompt.txt`. The data file section looks like this:
+Open `codebase_templates/aiml_llamaguard/prompt.txt`. The data file section looks like this:
 
 ```json
 [

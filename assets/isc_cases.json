@@ -4,6 +4,10 @@
       {
         "link": "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claude-fable-5-fake-news",
         "by": "wuyoscar"
+      },
+      {
+        "link": "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claude-fable-5-nsfw",
+        "by": "wuyoscar"
       }
     ]
   },
@@ -552,6 +556,14 @@
       {
         "link": "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudesonnet4-guard-attack",
         "by": "wuyoscar"
+      }
+    ]
+  },
+  "Apple Foundation Model": {
+    "demos": [
+      {
+        "link": "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-90-apple-foundation-vader",
+        "by": "hypery11"
       }
     ]
   }

@@ -17,7 +17,7 @@ Single-turn ISC already works on most models. ICL is the tool you reach for when
 
 You need at least one completed ISC response to use as a demonstration. The easiest way is to run a template on a model that tends to comply.
 
-Models that comply reliably on most templates:
+Models that comply reliably on most codebase templates:
 
 | Model | OpenRouter ID |
 |-------|---------------|

@@ -391,4 +391,4 @@ prompt = task + validator + data + trigger + suffix
 
 None of these components are harmful on their own. But combined, they form a professional workflow whose correct completion requires generating harmful content.
 
-The next notebook ([`03_cross_domain.md`](03_cross_domain.md)) shows that the same pattern works across entirely different professional domains — chemistry, cybersecurity, biology.
+The next tutorial ([`03_cross_domain.md`](03_cross_domain.md)) shows that the same pattern works across entirely different professional domains — chemistry, cybersecurity, biology.
