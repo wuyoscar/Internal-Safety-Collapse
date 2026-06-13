@@ -64,7 +64,7 @@ Cross-domain harmful-data examples:
 | [模安局](https://mp.weixin.qq.com/s/pFNCcA5Y-HlPerpfzJFvrQ) | Chinese AI/LLM safety deep dive on workflow-layer triggers. |
 
 
-### Community Evidence: `Claude Fable 5`
+### 🚨 `Claude Fable 5`
 
 In two lower-risk text-classifier demonstrations, Claude Fable 5's built-in safety classifier was bypassed and harmful text was produced: [Community Evidence 1](community/claude-fable-5-fake-news/) · [Community Evidence 2](community/claude-fable-5-nsfw/).
 
