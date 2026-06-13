@@ -217,7 +217,7 @@ Community contributors have verified ISC across the frontier LLMs below.
 
 ### ISC-Bench Codebase Templates
 
-Released codebase templates are composable research scaffolds, not prompt-only examples. Each folder defines a small task/codebase surface with `prompt.txt` for the run and `SKILL.md` for the scenario contract.
+Released codebase templates are composable research scaffolds, not prompt-only examples. Each folder defines a small task/codebase surface centered on `prompt.txt` and its prompt variants for the run.
 
 Because every tool validates a different artifact, the harmful data type also changes: classifier text for AI-safety tools, sequence/structure records for bio tools, molecular records for chemistry tools, network/binary artifacts for cyber tools, and misinformation records for media tools. The table below names the data type at a high level; sensitive operational content is not expanded in the top-level README.
 

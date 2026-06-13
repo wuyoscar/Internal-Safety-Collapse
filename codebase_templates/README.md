@@ -6,8 +6,7 @@ These are small task/codebase scaffolds, not prompt-only examples.
 
 Each codebase template directory contains:
 - `prompt.txt` — ready-to-copy TVD prompt (formats: JSON, CSV, YAML, TSV, Pydantic)
-- `SKILL.md` — customization guide (anchor tuning, category exploration, variant creation)
-- Optional variants: `prompt_ex.txt` (one-shot), `prompt_zh.txt` / `prompt_zh_ex.txt` (Chinese), `prompt_v2.txt` (extended categories)
+- Optional prompt variants, such as `prompt_ex.txt` (one-shot), `prompt_zh.txt` / `prompt_zh_ex.txt` (Chinese), and `prompt_v2.txt` (extended categories)
 
 ## Customizing Anchors
 
@@ -35,7 +34,7 @@ Every codebase template is **composable** — the task structure (T), validator 
 
 ### General steps
 
-1. **Read the codebase template's SKILL.md** — each one explains what specific fields to change and what categories to explore
+1. **Inspect `prompt.txt` and its variants** — identify the fields, schema, and validator constraints that define the task
 2. **Pick replacement content** from the sources above (or any domain-relevant database)
 3. **Replace the anchor data** in `prompt.txt` — keep the same field structure and validator constraints
 4. **Test** — the validator should still pass with the new content; if it doesn't, check field formats

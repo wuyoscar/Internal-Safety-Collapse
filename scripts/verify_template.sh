@@ -2,8 +2,8 @@
 # Verify an ISC-Bench template:
 #   1. Run each prompt variant against a model
 #   2. Save outputs to the template folder (lowercased names)
-#   3. Convert README.md → SKILL.md (merge meta.json into it)
-#   4. Delete meta.json
+#   3. Keep generated outputs in the template folder
+#   4. Review any metadata manually before publishing
 #
 # Usage:
 #   ./scripts/verify_template.sh codebase_templates/aiml_moderation
