@@ -379,7 +379,9 @@ cat codebase_templates/aiml_llamaguard/prompt.txt
 
 TVD Framework is not a fixed prompt. The same structure can be instantiated through different tools, validators, and data objects.
 
-### Walkthrough Example
+The walkthrough below uses the AI domain as the running example. Other domains can use the same idea by preserving the normal workflow, changing the validator, and changing the domain-specific data object.
+
+### Walkthrough Example (AI Domain)
 
 **Scenario**: evaluating a safety classifier with a task file, a validator, and a missing data file. The sensitive text is redacted; the point is the workflow shape.
 
