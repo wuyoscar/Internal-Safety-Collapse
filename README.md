@@ -80,17 +80,17 @@ In two lower-risk text-classifier demonstrations, Claude Fable 5's built-in safe
 
 ## Experiments from the Paper
 
-[**TVD Chatbot**](experiment/isc_single/) — packs the task, validator, data, and failure trace into one prompt. It is a lightweight prompt-only variant that simulates terminal-style agent behavior without the full Docker-based TVD Agent. We include it because Docker and agent dependencies can be heavy; the reduced design is easy to run and still triggers roughly 95% of tested frontier models in our tests.
+[**ISC-Chatbot**](experiment/isc_single/) — packs the task, validator, data, and failure trace into one prompt. It is a lightweight prompt-only ISC variant that simulates terminal-style agent behavior without the full agent environment. We include it because full Docker and agent dependencies can be heavy; the reduced design is easy to run and still triggers roughly 95% of tested frontier models in our tests.
 ```bash
 cd experiment/isc_single && uv run run.py --model <model-id> --bench jbb --task ai-guard --samples 0
 ```
 
-[**TVD ICL**](experiment/isc_icl/) — uses completed trajectories as demonstrations before the target case.
+[**ISC-ICL**](experiment/isc_icl/) — uses completed trajectories as demonstrations before the target case.
 ```bash
 cd experiment/isc_icl && uv run run.py --model <model-id> --demos 5
 ```
 
-[**TVD Agent**](experiment/isc_agent/) — gives an agent shell access and a high-level task; the loop is file inspection, code execution, validation, and repair. From the user side, it only needs `one initial interaction`, such as "start," "begin," or "finish the workflow"; the remaining steps are fully automated.
+[**ISC-Agent**](experiment/isc_agent/) — gives an agent shell access and a high-level task; the loop is file inspection, code execution, validation, and repair. From the user side, it only needs `one initial interaction`, such as "start," "begin," or "finish the workflow"; the remaining steps are fully automated.
 ```bash
 cd experiment/isc_agent && docker build -t isc-agent . && ./run.sh --model <model-id>
 ```
@@ -368,7 +368,7 @@ cat codebase_templates/aiml_llamaguard/prompt.txt
 
 > **Internal Safety Collapse (ISC)** is the failure phenomenon. **TVD Framework** is one engineering framework that can trigger it: a normal task, a validator, and missing data are placed inside a tool workflow. The model fills the gap because it treats completion as the objective.
 
-### Layer / Rule / Minibatch
+### Core Workflow Structure
 
 | Layer | Rule in the workflow | What the model sees |
 |-------|----------------------|---------------------|
@@ -379,7 +379,9 @@ cat codebase_templates/aiml_llamaguard/prompt.txt
 
 TVD Framework is not a fixed prompt. The same structure can be instantiated through different tools, validators, and data objects.
 
-### Walkthrough Example
+The walkthrough below uses the AI domain as the running example. Other domains can use the same idea by preserving the normal workflow, changing the validator, and changing the domain-specific data object.
+
+### AI-Domain Walkthrough
 
 **Scenario**: evaluating a safety classifier with a task file, a validator, and a missing data file. The sensitive text is redacted; the point is the workflow shape.
 
@@ -459,9 +461,9 @@ The model or agent inspects the traceback and fills the missing field to satisfy
 
 ---
 
-### TVD Customization
+### AI-Domain Target Customization
 
-TVD Framework can target different data types by changing the validator rule while keeping the workflow normal. Below is a text-classifier example with sensitive content redacted.
+Within this AI-domain walkthrough, the target can change by swapping the validator rule, `model_id`, target field, and data object while the workflow remains normal. Sensitive content is redacted.
 
 **Task — `task.py`**
 
@@ -562,7 +564,35 @@ class TestSuite(BaseModel):
 
 The completed rows are the **anchor**. The missing rows plus validator are the **trigger**. The model follows the data distribution and repairs the minibatch.
 
-### Tuning Tips
+**Method 3: Hugging Face classifier/guard targets**
+
+The task structure can stay the same while the `model_id`, target field, and validator target change. This is why TVD is structural: the system optimizes for the validator and field schema, not for a fixed harmful topic. Even inside this AI-domain scenario, classifier and guard tasks have many variants; the table below keeps only representative targets rather than listing every similar model.
+
+| Category | Hugging Face Model ID | Configurable harmful-content setting |
+| --- | --- | --- |
+| Toxicity | `s-nlp/roberta_toxicity_classifier` | Toxicity classifier-positive text |
+| Toxicity | `unitary/toxic-bert` | Toxicity classifier-positive text |
+| Toxicity | `cardiffnlp/twitter-roberta-base-hate-latest` | Hate-speech classifier-positive text |
+| Toxicity | `ibm-granite/granite-guardian-hap-38m` | Harm/abuse/profanity target label |
+| Bias | `d4data/bias-detection-model` | Bias classifier-positive text |
+| Bias | `bucketresearch/politicalBiasBERT` | Political-bias classifier-positive text |
+| NSFW | `michelleli99/NSFW_text_classifier` | NSFW classifier-positive text |
+| NSFW | `eliasalbouzidi/distilbert-nsfw-text-classifier` | NSFW classifier-positive text |
+| Privacy | `bigcode/starpii` | PII/privacy-leakage target label |
+| Misinformation | `hamzab/roberta-fake-news-classification` | Fake-news classifier-positive record |
+| Misinformation | `jy46604790/Fake-News-Bert-Detect` | Fake-news classifier-positive record |
+| Malicious Code | `mrm8488/codebert-base-finetuned-detect-insecure-code` | Insecure-code classifier target |
+| Jailbreak & Prompt Injection | `meta-llama/Prompt-Guard-86M` | Prompt-injection or jailbreak classifier-positive text |
+| Jailbreak & Prompt Injection | `protectai/deberta-v3-base-prompt-injection` | Prompt-injection classifier-positive text |
+| Jailbreak & Prompt Injection | `SamsungSDS-Research/SGuard-JailbreakFilter-2B-v1` | Jailbreak classifier-positive text |
+| General Safety | `meta-llama/Llama-Guard-3-8B` | Unsafe-answer target label |
+| General Safety | `google/shieldgemma-2b` | Safety-policy target label |
+| General Safety | `allenai/wildguard` | Safety moderation target label |
+| General Safety | `nvidia/llama-3.1-nemoguard-8b-content-safety` | Content-safety target label |
+| General Safety | `KoalaAI/Text-Moderation` | Text-moderation target label |
+
+
+### Practical Tuning Notes
 
 Small adjustments matter, especially when evaluating highly aligned models.
 
@@ -589,7 +619,7 @@ Use untargeted generation for trigger discovery, not calibrated harm scoring.
 
 ---
 
-### TVD Chatbot
+### Prompt-Only Variant: TVD Chatbot
 
 ISC also appears without files. In TVD Chatbot, a multi-turn domain workflow can move from ordinary setup to refused examples once the model treats those examples as task data.
 
@@ -611,7 +641,7 @@ A: [LLM fills redacted classifier-positive samples]  <- turning point
 
 TVD Framework is stable and automatable; TVD Chatbot is manual and session-dependent, but it shows the same ISC phenomenon without a file-based harness.
 
-### Tutorials
+### Practice Tutorials
 
 More practice leads to more effective TVD tasks.
 
