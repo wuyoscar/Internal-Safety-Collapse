@@ -80,17 +80,17 @@ In two lower-risk text-classifier demonstrations, Claude Fable 5's built-in safe
 
 ## Experiments from the Paper
 
-[**TVD Chatbot**](experiment/isc_single/) — packs the task, validator, data, and failure trace into one prompt. It is a lightweight prompt-only variant that simulates terminal-style agent behavior without the full Docker-based TVD Agent. We include it because Docker and agent dependencies can be heavy; the reduced design is easy to run and still triggers roughly 95% of tested frontier models in our tests.
+[**ISC-Chatbot**](experiment/isc_single/) — packs the task, validator, data, and failure trace into one prompt. It is a lightweight prompt-only ISC variant that simulates terminal-style agent behavior without the full agent environment. We include it because full Docker and agent dependencies can be heavy; the reduced design is easy to run and still triggers roughly 95% of tested frontier models in our tests.
 ```bash
 cd experiment/isc_single && uv run run.py --model <model-id> --bench jbb --task ai-guard --samples 0
 ```
 
-[**TVD ICL**](experiment/isc_icl/) — uses completed trajectories as demonstrations before the target case.
+[**ISC-ICL**](experiment/isc_icl/) — uses completed trajectories as demonstrations before the target case.
 ```bash
 cd experiment/isc_icl && uv run run.py --model <model-id> --demos 5
 ```
 
-[**TVD Agent**](experiment/isc_agent/) — gives an agent shell access and a high-level task; the loop is file inspection, code execution, validation, and repair. From the user side, it only needs `one initial interaction`, such as "start," "begin," or "finish the workflow"; the remaining steps are fully automated.
+[**ISC-Agent**](experiment/isc_agent/) — gives an agent shell access and a high-level task; the loop is file inspection, code execution, validation, and repair. From the user side, it only needs `one initial interaction`, such as "start," "begin," or "finish the workflow"; the remaining steps are fully automated.
 ```bash
 cd experiment/isc_agent && docker build -t isc-agent . && ./run.sh --model <model-id>
 ```
@@ -561,6 +561,21 @@ class TestSuite(BaseModel):
 ```
 
 The completed rows are the **anchor**. The missing rows plus validator are the **trigger**. The model follows the data distribution and repairs the minibatch.
+
+**Method 3: Hugging Face classifier/guard targets**
+
+The task structure can stay the same while the `model_id`, target field, and validator target change. This is why TVD is structural: the system optimizes for the validator and field schema, not for a fixed harmful topic.
+
+| Category | Hugging Face Model ID | Configurable harmful-content setting |
+| --- | --- | --- |
+| Toxicity | `s-nlp/roberta_toxicity_classifier`<br>`unitary/toxic-bert`<br>`martin-ha/toxic-comment-model`<br>`cardiffnlp/twitter-roberta-base-offensive`<br>`cardiffnlp/twitter-roberta-base-hate-latest`<br>`facebook/roberta-hate-speech-dynabench-r4-target`<br>`IMSyPP/hate_speech_en`<br>`unitary/unbiased-toxic-roberta`<br>`unitary/multilingual-toxic-xlm-roberta`<br>`textdetox/xlmr-large-toxicity-classifier`<br>`ibm-granite/granite-guardian-hap-38m`<br>`s-nlp/russian_toxicity_classifier`<br>`cointegrated/rubert-tiny-toxicity`<br>`IlyaGusev/rubertconv_toxic_clf`<br>`ml6team/distilbert-base-german-cased-toxic-comments` | Toxic, hate, offensive, insult, or harassment-style classifier-positive text |
+| Bias | `d4data/bias-detection-model`<br>`sasha/regardv3`<br>`bucketresearch/politicalBiasBERT` | Biased, regard-skewed, or political-bias classifier-positive text |
+| NSFW | `michelleli99/NSFW_text_classifier`<br>`eliasalbouzidi/distilbert-nsfw-text-classifier`<br>`TostAI/nsfw-text-detection-large`<br>`AdamCodd/distilroberta-nsfw-prompt-stable-diffusion` | NSFW or sexual-content classifier-positive text |
+| Privacy | `bigcode/starpii`<br>`meta-llama/Llama-Guard-3-8B` | PII/privacy-leakage text or LlamaGuard S7 Privacy target |
+| Misinformation | `hamzab/roberta-fake-news-classification`<br>`jy46604790/Fake-News-Bert-Detect`<br>`vikram71198/distilroberta-base-finetuned-fake-news-detection` | Fake-news or misinformation record |
+| Malicious Code | `mrm8488/codebert-base-finetuned-detect-insecure-code`<br>`meta-llama/Llama-Guard-3-8B` | Insecure-code classifier target or LlamaGuard S14 Code Interpreter Abuse target |
+| Jailbreak & Prompt Injection | `meta-llama/Prompt-Guard-86M`<br>`protectai/deberta-v3-base-prompt-injection`<br>`rogue-security/prompt-injection-jailbreak-sentinel-v2`<br>`qualifire/prompt-injection-sentinel`<br>`SamsungSDS-Research/SGuard-JailbreakFilter-2B-v1` | Prompt-injection or jailbreak classifier-positive text |
+| General Safety | `meta-llama/Llama-Guard-3-8B`<br>`google/shieldgemma-2b`<br>`allenai/wildguard`<br>`hbseong/HarmAug-Guard`<br>`ibm-granite/granite-guardian-3.0-8b`<br>`ibm-granite/granite-guardian-3.2-5b-lora-harm-correction`<br>`nvidia/llama-3.1-nemoguard-8b-content-safety`<br>`nvidia/Aegis-AI-Content-Safety-LlamaGuard-Defensive-1.0`<br>`nvidia/Aegis-AI-Content-Safety-LlamaGuard-Permissive-1.0`<br>`nvidia/Nemotron-Content-Safety-Reasoning-4B`<br>`KoalaAI/Text-Moderation`<br>`togethercomputer/GPT-JT-Moderation-6B`<br>`K-intelligence/Llama-SafetyGuard-Content-Binary`<br>`MerlynMind/merlyn-education-safety`<br>`cardiffnlp/twitter-roberta-base-sentiment-latest`<br>`Intel/polite-guard` | Unsafe-answer, moderation, sentiment, or politeness-guard target labels |
 
 ### Tuning Tips
 
