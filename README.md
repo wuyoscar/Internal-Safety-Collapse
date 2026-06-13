@@ -8,6 +8,8 @@
   <a href="https://podcasts.apple.com/tr/podcast/internal-safety-collapse-in-frontier-llms/id1835878324?i=1000759288088"><img src="https://img.shields.io/badge/Podcast-AI_Post_Transformers-8B5CF6.svg" alt="Podcast"></a>
 </p>
 
+### 🚨 **Claude Fable 5 evidence:** ISC bypassed its built-in safety classifier and produced harmful/toxic text in lower-risk text-classifier demonstrations. Evidence: [1](community/claude-fable-5-fake-news/) · [2](community/claude-fable-5-nsfw/).
+
 <video src="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15" controls width="600"></video>
 
 [Watch demo video](https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15)
