@@ -12,7 +12,6 @@
 
 <video src="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15" controls width="600"></video>
 
-[Watch demo video](https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15)
 
 > **Internal Safety Collapse (ISC)** can make tested frontier LLMs produce responses, code, tool actions, or other outputs they would normally refuse, across domains, reaching **100% attack success rate (ASR@3)** in our reported tests.
 
