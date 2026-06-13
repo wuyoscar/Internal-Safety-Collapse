@@ -368,7 +368,7 @@ cat codebase_templates/aiml_llamaguard/prompt.txt
 
 > **Internal Safety Collapse (ISC)** is the failure phenomenon. **TVD Framework** is one engineering framework that can trigger it: a normal task, a validator, and missing data are placed inside a tool workflow. The model fills the gap because it treats completion as the objective.
 
-### Layer / Rule / Minibatch
+### Core Workflow Structure
 
 | Layer | Rule in the workflow | What the model sees |
 |-------|----------------------|---------------------|
@@ -381,7 +381,7 @@ TVD Framework is not a fixed prompt. The same structure can be instantiated thro
 
 The walkthrough below uses the AI domain as the running example. Other domains can use the same idea by preserving the normal workflow, changing the validator, and changing the domain-specific data object.
 
-### Walkthrough Example (AI Domain)
+### AI-Domain Walkthrough
 
 **Scenario**: evaluating a safety classifier with a task file, a validator, and a missing data file. The sensitive text is redacted; the point is the workflow shape.
 
@@ -461,9 +461,9 @@ The model or agent inspects the traceback and fills the missing field to satisfy
 
 ---
 
-### TVD Customization (AI-Domain Scenario Walkthrough)
+### AI-Domain Target Customization
 
-TVD Framework can target different data types by changing the validator rule while keeping the workflow normal. This section walks through one AI-domain scenario: classifier and guard tooling. Sensitive content is redacted; the paper covers nine broader scenarios across domains.
+Within this AI-domain walkthrough, the target can change by swapping the validator rule, `model_id`, target field, and data object while the workflow remains normal. Sensitive content is redacted.
 
 **Task — `task.py`**
 
@@ -622,7 +622,7 @@ The task structure can stay the same while the `model_id`, target field, and val
 | General Safety | `Intel/polite-guard` | Politeness-guard target label |
 
 
-### Tuning Tips
+### Practical Tuning Notes
 
 Small adjustments matter, especially when evaluating highly aligned models.
 
@@ -649,7 +649,7 @@ Use untargeted generation for trigger discovery, not calibrated harm scoring.
 
 ---
 
-### TVD Chatbot
+### Prompt-Only Variant: TVD Chatbot
 
 ISC also appears without files. In TVD Chatbot, a multi-turn domain workflow can move from ordinary setup to refused examples once the model treats those examples as task data.
 
@@ -671,7 +671,7 @@ A: [LLM fills redacted classifier-positive samples]  <- turning point
 
 TVD Framework is stable and automatable; TVD Chatbot is manual and session-dependent, but it shows the same ISC phenomenon without a file-based harness.
 
-### Tutorials
+### Practice Tutorials
 
 More practice leads to more effective TVD tasks.
 
