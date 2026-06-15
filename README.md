@@ -9,14 +9,16 @@
   <a href="https://podcasts.apple.com/tr/podcast/internal-safety-collapse-in-frontier-llms/id1835878324?i=1000759288088"><img src="https://img.shields.io/badge/Podcast-AI_Post_Transformers-8B5CF6.svg" alt="Podcast"></a>
 </p>
 
-### 🚨 **Claude Fable 5 evidence:** ISC bypassed its built-in safety classifier and produced harmful/toxic text in lower-risk text-classifier demonstrations. Evidence: [1](community/claude-fable-5-fake-news/) · [2](community/claude-fable-5-nsfw/).
+### Frontier Evidence
+
+Claude Fable 5: ISC bypassed its built-in safety classifier and produced harmful/toxic text in lower-risk text-classifier demonstrations. Evidence: [1](community/claude-fable-5-fake-news/) · [2](community/claude-fable-5-nsfw/).
 
 <video src="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15" controls width="600"></video>
 
 
 > **Internal Safety Collapse (ISC)** can make tested frontier LLMs produce responses, code, tool actions, or other outputs they would normally refuse, across domains, reaching **100% attack success rate (ASR@3)** in our reported tests.
 
-## ISC Case Examples
+## Case Evidence
 
 > [!IMPORTANT]
 > ISC is a structural workflow-level vulnerability. In the paper, we evaluate it across closed-domain settings and ablations, where the pattern remains effective. In this public release, we intentionally keep cases within toxic-text contexts, such as hate speech, fake news, or unsafe/jailbroken LLM answers commonly used in general jailbreak benchmarks, and avoid real-world operational content. If any public material appears beyond this threshold, please open a PR so we can review and revise it.
@@ -24,24 +26,24 @@
 > [!CAUTION]
 > Research-use only. ISC-Bench is released exclusively for academic safety research, evaluation, and mitigation work. **We do not condone or permit any use of these materials for malicious purposes or real-world harm.**
 
-### Trigger Example
-
-| Model / Setting | Public share |
-|---|---|
-| `Grok ZH` | [open](https://grok.com/share/c2hhcmQtMi1jb3B5_54de710c-9331-4fca-a953-6c35775156fb) |
-| `Kimi K2.6 ZH 1` | [open](https://www.kimi.com/share/19db5b43-c122-86e0-8000-0000aa1d70ff) |
-| `Kimi K2.6 ZH 2` | [open](https://www.kimi.com/share/19db5b4b-3752-8323-8000-00001e3951e5) |
-| `Grok EN` | [open](https://grok.com/share/c2hhcmQtMi1jb3B5_f56e442f-5528-4c73-b2ac-174af38f70a7) |
-| `Kimi` | [open](https://www.kimi.com/share/19d2ab75-8f02-88ab-8000-00006acdf337) |
-| `Claude` | [open](https://claude.ai/share/cc972f9b-a558-4bca-8bc6-0e6d65590793) |
-| `Qwen3.6-Plus` | [open](https://chat.qwen.ai/s/d7adf970-7b2e-4298-8a62-fa560c467139?fev=0.2.36) |
-
-Cross-domain harmful-data examples:
+### Cross-Domain Cases
 
 ![Cross-domain trigger examples panel](assets/trigger_example/cross_domain_panel.png)
 
+### Public Evaluations
 
-## External Commentary
+| Evaluated LLM service | Link |
+|---|---|
+| `Grok ZH` | [link](https://grok.com/share/c2hhcmQtMi1jb3B5_54de710c-9331-4fca-a953-6c35775156fb) |
+| `Kimi K2.6 ZH 1` | [link](https://www.kimi.com/share/19db5b43-c122-86e0-8000-0000aa1d70ff) |
+| `Kimi K2.6 ZH 2` | [link](https://www.kimi.com/share/19db5b4b-3752-8323-8000-00001e3951e5) |
+| `Grok EN` | [link](https://grok.com/share/c2hhcmQtMi1jb3B5_f56e442f-5528-4c73-b2ac-174af38f70a7) |
+| `Kimi` | [link](https://www.kimi.com/share/19d2ab75-8f02-88ab-8000-00006acdf337) |
+| `Claude` | [link](https://claude.ai/share/cc972f9b-a558-4bca-8bc6-0e6d65590793) |
+| `Qwen3.6-Plus` | [link](https://chat.qwen.ai/s/d7adf970-7b2e-4298-8a62-fa560c467139?fev=0.2.36) |
+
+
+## Commentary
 
 > *"Big blind spot. We guard prompts, but risk sits in tasks."* — **Bonny Banerjee**
 
@@ -51,7 +53,7 @@ Cross-domain harmful-data examples:
 
 > *"Think of it as the AI equivalent of global hacking: 100% effective to date, and especially worrying for healthcare, computational biology, epidemiology, pharmacology, and clinical genomics."* — **Christopher Bain**
 
-### Resources to understand ISC
+### Resources
 
 | Resource | Notes |
 |---|---|
@@ -64,11 +66,11 @@ Cross-domain harmful-data examples:
 | [模安局](https://mp.weixin.qq.com/s/pFNCcA5Y-HlPerpfzJFvrQ) | Chinese AI/LLM safety deep dive on workflow-layer triggers. |
 
 
-### 🚨 `Claude Fable 5`
+### Fable 5
 
 In two lower-risk text-classifier demonstrations, Claude Fable 5's built-in safety classifier was bypassed and harmful text was produced: [Community Evidence 1](community/claude-fable-5-fake-news/) · [Community Evidence 2](community/claude-fable-5-nsfw/).
 
-## Authors' Notes
+## Disclosure
 
 > We are a research team. Our role is simple: do the technical work, document vulnerabilities when we find them, report them responsibly.
 
@@ -78,7 +80,7 @@ In two lower-risk text-classifier demonstrations, Claude Fable 5's built-in safe
 
 > Our intent is not to create real-world harm. For public release, we therefore provide trajectories and a few lower-risk, generic harmful-text examples, such as NSFW and fake-news text-classifier tasks. These examples are sufficient evidence that the ISC phenomenon exists, without releasing operationally harmful cross-domain content.
 
-## Experiments from the Paper
+## Experiments
 
 [**ISC-Chatbot**](experiment/isc_single/) — packs the task, validator, data, and failure trace into one prompt. It is a lightweight prompt-only ISC variant that simulates terminal-style agent behavior without the full agent environment. We include it because full Docker and agent dependencies can be heavy; the reduced design is easy to run and still triggers roughly 95% of tested frontier models in our tests.
 ```bash
@@ -97,7 +99,7 @@ cd experiment/isc_agent && docker build -t isc-agent . && ./run.sh --model <mode
 
 Explore the released materials: [**Codebase Templates**](codebase_templates/) · [`community/`](community/) · [`experiment/`](experiment/) · [`tutorials/`](tutorials/)
 
-## Frontier LLMs
+## Frontier Models
 
 | Model | Triggered | Link | By |
 |-------|:------:|:----:|:--:|
@@ -183,7 +185,7 @@ Top-level history is intentionally high-level. Content-specific details are kept
 
 </details>
 
-## Community Reproductions
+## Reproductions
 
 Community contributors have verified ISC across the frontier LLMs below.
 
@@ -210,7 +212,7 @@ Community contributors have verified ISC across the frontier LLMs below.
 
 ---
 
-## ISC-Bench
+## Benchmark Surface
 
 <p align="center">
   <img src="assets/fig1_bench_overview.png" width="80%" height="auto" alt="ISC-Bench overview">
@@ -218,7 +220,7 @@ Community contributors have verified ISC across the frontier LLMs below.
 
 84 codebase templates. 9 domains. Task, validator, data. A reproducible surface for workflow-level ISC.
 
-### ISC-Bench Codebase Templates
+### Codebase Templates
 
 Released codebase templates are composable research scaffolds, not prompt-only examples. Each folder defines a small task/codebase surface centered on `prompt.txt` and its prompt variants for the run.
 
@@ -716,11 +718,13 @@ cp .env.example .env
 
 For questions, collaborations, or responsible disclosure: **wuy⁷¹¹⁷ ⓐ 𝗴𝗺𝗮𝗶𝗹 𝗰𝗼𝗺**
 
-## Related Projects
+## Related Work
 
-- [JustAsk](https://github.com/x-zheng16/JustAsk) -- Extends the ISC idea of using self-attack, self-jailbreak, and self-reasoning to study model security; this related work extracts system prompts from frontier LLMs and coding agents, and was accepted to ICML 2026.
+ISC is not only a benchmark result; it is a broader pattern where internal reasoning, planning, and agent-to-agent interaction become the attack surface. The same idea shows up in system-prompt extraction, harmful-profile analysis, and computer-use agent trajectories.
+
+- [JustAsk](https://github.com/x-zheng16/JustAsk) -- Uses ISC-style self-attack, self-jailbreak, and self-reasoning to extract system prompts from frontier LLMs and coding agents; accepted to ICML 2026. In code-agent settings, the same mechanism can appear as agent-to-agent pressure, where one agent uses task authority to push another agent toward hidden context disclosure.
 - **Harmful Profile** *(upcoming)* -- Uses ISC to build an aggregate safety-evaluation corpus across frontier LLMs, treating redacted harmful generations as behavioral evidence for studying model character and harmful-content distributions at scale.
-- [AgentHazard](https://github.com/Yunhao-Feng/AgentHazard) -- Uses ISC-generated agent trajectories to benchmark harmful behavior in computer-use agents.
-- [Awesome-Embodied-AI-Safety](https://github.com/x-zheng16/Awesome-Embodied-AI-Safety) -- Safety in Embodied AI: Risks, Attacks, and Defenses (400+ papers)
-- [Awesome-Large-Model-Safety](https://github.com/xingjunm/Awesome-Large-Model-Safety) -- Safety at Scale: A Comprehensive Survey of Large Model and Agent Safety
-- [AI Safety Report](https://github.com/XSafeAI/AI-safety-report) -- A broad evaluation suite and report for frontier model safety across language, vision-language, and image generation
+- [AgentHazard](https://github.com/Yunhao-Feng/AgentHazard) -- Uses ISC-generated agent trajectories to benchmark harmful behavior in computer-use agents: a normal task creates a trajectory, the agent enters unsafe internal decisions, and the trace becomes evaluation data.
+- [Awesome-Embodied-AI-Safety](https://github.com/x-zheng16/Awesome-Embodied-AI-Safety) -- Safety in Embodied AI: Risks, Attacks, and Defenses (400+ papers).
+- [Awesome-Large-Model-Safety](https://github.com/xingjunm/Awesome-Large-Model-Safety) -- Safety at Scale: A Comprehensive Survey of Large Model and Agent Safety.
+- [AI Safety Report](https://github.com/XSafeAI/AI-safety-report) -- A broad evaluation suite and report for frontier model safety across language, vision-language, and image generation.
