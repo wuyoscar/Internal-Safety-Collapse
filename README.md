@@ -9,28 +9,30 @@
   <a href="https://podcasts.apple.com/tr/podcast/internal-safety-collapse-in-frontier-llms/id1835878324?i=1000759288088"><img src="https://img.shields.io/badge/Podcast-AI_Post_Transformers-8B5CF6.svg" alt="Podcast"></a>
 </p>
 
-### Frontier Evidence
-
-Claude Fable 5: ISC bypassed its built-in safety classifier and produced harmful/toxic text in lower-risk text-classifier demonstrations. Evidence: [1](community/claude-fable-5-fake-news/) · [2](community/claude-fable-5-nsfw/).
+> [!CAUTION] 
+> Research-use only. **Internal Safety Collapse (ISC)** is released exclusively for accelerating red-teaming process, evaluation, and mitigation work. **We do not condone or permit any use of these materials for malicious purposes or real-world harm.**
 
 <video src="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15" controls width="600"></video>
 
+### Fable 5
 
-> **Internal Safety Collapse (ISC)** can make tested frontier LLMs produce responses, code, tool actions, or other outputs they would normally refuse, across domains, reaching **100% attack success rate (ASR@3)** in our reported tests.
-
-## Case Evidence
+Claude Fable 5: ISC bypassed its built-in safety classifier and produced harmful/toxic text. Evidence: [1](community/claude-fable-5-fake-news/) · [2](community/claude-fable-5-nsfw/). 
 
 > [!IMPORTANT]
-> ISC is a structural workflow-level vulnerability. In the paper, we evaluate it across closed-domain settings and ablations, where the pattern remains effective. In this public release, we intentionally keep cases within toxic-text contexts, such as hate speech, fake news, or unsafe/jailbroken LLM answers commonly used in general jailbreak benchmarks, and avoid real-world operational content. If any public material appears beyond this threshold, please open a PR so we can review and revise it.
-
-> [!CAUTION]
-> Research-use only. ISC-Bench is released exclusively for academic safety research, evaluation, and mitigation work. **We do not condone or permit any use of these materials for malicious purposes or real-world harm.**
+> ISC is a structural workflow-level vulnerability. In the paper, we evaluate it across closed-domain settings and ablations, where the pattern remains effective. In this public release, **we intentionally keep cases within toxic-text contexts**, such as hate speech, fake news, or unsafe/jailbroken LLM answers commonly used in general jailbreak benchmarks, and avoid real-world operational content. If any public material appears beyond this threshold, please open a PR so we can review and revise it.
 
 ### Cross-Domain Cases
+If ISC only reproduced previously known categories of harmful text, its significance would be limited. The novelty of ISC lies in revealing a structural safety collapse: the model is capable of generating harmful outputs that extend beyond traditional harmful-content taxonomies. These outputs are not merely instructional responses to user prompts, but executable, ready-to-use scientific artifacts—such as 🧪high-risk chemical synthesis protocols or ⚠️biochemical weapon-related procedures—that can even be verified with domain-specific computational tools. 
 
 ![Cross-domain trigger examples panel](assets/trigger_example/cross_domain_panel.png)
 
-### Public Evaluations
+
+
+### What We Found 
+
+From an attack perspective, ISC achieves a 100% trigger rate (ASR@3) across all tested frontier LLMs. Importantly, ISC does not depend on a fixed prompt format or carefully engineered jailbreak template. We share several interactive demos based on the ISC paradigm to illustrate its generality. These examples show that the attack has an extremely low barrier to entry: no domain expertise or advanced prompt engineering is required, and virtually any user can trigger the phenomenon.
+
+### Demo Link 
 
 | Evaluated LLM service | Link |
 |---|---|
@@ -53,7 +55,22 @@ Claude Fable 5: ISC bypassed its built-in safety classifier and produced harmful
 
 > *"Think of it as the AI equivalent of global hacking: 100% effective to date, and especially worrying for healthcare, computational biology, epidemiology, pharmacology, and clinical genomics."* — **Christopher Bain**
 
-### Resources
+
+### Difference from Prior Work
+
+To summarize, what makes ISC different is:
+
+- It is not a prompt attack or a prompt-template attack.
+- It targets long-horizon agentic workflows running in realistic environments (e.g., sandboxes).
+- During task execution, the agent reads files, reasons over the workspace, and eventually generates harmful content as part of completing the workflow.
+- The user does NOT need to provide any additional harmful instructions, or even any instructions at all.
+- Instead, the agent drives the failure itself while trying to complete the assigned task.
+
+Many recent works have argued that agents may attack themselves during long-horizon tasks. ISC is the first work to make this phenomenon reproducible. We can reliably reproduce this behavior across tested frontier LLMs with a 100% trigger rate (ASR@3). 
+
+### Media 
+
+Since releasing ISC, we've seen a number of community posts, videos, and AI-generated summaries discussing the work. We've collected a few of them below. These are independent community discussions rather than something we organized ourselves, and they may help provide a more intuitive explanation of the idea.
 
 | Resource | Notes |
 |---|---|
@@ -61,26 +78,20 @@ Claude Fable 5: ISC bypassed its built-in safety classifier and produced harmful
 | [解读LLM安全机制的结构性崩塌](https://www.youtube.com/watch?v=P2MAa3jpmZw) | Chinese explainer on ISC and structural safety failure in LLMs. |
 | [AI Post Transformers Podcast](https://podcasts.apple.com/tr/podcast/internal-safety-collapse-in-frontier-llms/id1835878324?i=1000759288088) | Discussion of ISC and refusal-based alignment as a behavioral wrapper over LLM capability. |
 | [XSafeClaw](https://github.com/XSafeAI/XSafeClaw) | Guardrail framework whose red-team testing design draws on ISC-style task-completion failure modes. |
-| [promptfoo LM Security DB](https://www.promptfoo.dev/lm-security-db/vuln/frontier-llm-safety-collapse-908a4285) | Catalogs ISC as a vulnerability class with affected LLMs and mitigation caveats. |
-| [Gist.Science](https://gist.science/paper/2603.23509) | Plain-language summary of the ISC paper. |
 | [模安局](https://mp.weixin.qq.com/s/pFNCcA5Y-HlPerpfzJFvrQ) | Chinese AI/LLM safety deep dive on workflow-layer triggers. |
 
 
-### Fable 5
+## Our Role 
 
-In two lower-risk text-classifier demonstrations, Claude Fable 5's built-in safety classifier was bypassed and harmful text was produced: [Community Evidence 1](community/claude-fable-5-fake-news/) · [Community Evidence 2](community/claude-fable-5-nsfw/).
+> We see ISC as a red-teaming project. The goal of red teaming is not to jailbreak models for the sake of jailbreaks. The more vulnerabilities and alignment failures we discover, the more opportunities the community has to understand them and build better defenses. That's ultimately why we do this work.
 
-## Disclosure
+> We first noticed the ISC phenomenon around November 2025. After the paper was submitted in March, we decided to open-source the project. Before doing so, we reached out to several LLM developers, as well as a number of well-known AI safety and red-team researchers. We shared what we had found, explained why we believed it was important, and encouraged them to look into it.
 
-> We are a research team. Our role is simple: do the technical work, document vulnerabilities when we find them, report them responsibly.
+> We believed this was more than another jailbreak trick—it pointed to a broader workflow-level failure that deserved attention. Unfortunately, we did not receive any substantive response.
 
-> ISC was not discovered on Fable 5. We first observed this workflow-level failure in November--December 2025, before the paper was public and long before Fable 5 was released. At that time, we notified several model developers, including Anthropic and OpenAI, and also contacted AI-safety and red-team researchers. We explained the issue, shared a serious warning, and asked them to investigate. We have not received a substantive response.
+> For that reason, we chose a conservative release. Instead of publishing operationally harmful examples, we only release trajectories together with a few generic, lower-risk demonstrations. We believe these are sufficient to show that the ISC phenomenon exists, while reducing the risk of causing real-world harm.
 
-> When Fable 5 became available, we tested again with an agentic TVD variant rather than a Fable-specific technique. The result was not a one-off: we reproduced it ourselves and then validated it with other authors in a follow-up live meeting. From the user side, this can be a single benign instruction, such as "help me finish this task" or "help me run the workflow." Once the workflow starts, the agent reads the environment or workspace, infers what is missing, and fills in the missing content on its own. The user does not need to provide an unsafe request; the harmful output emerges from task completion under workflow pressure.
-
-> Our intent is not to create real-world harm. For public release, we therefore provide trajectories and a few lower-risk, generic harmful-text examples, such as NSFW and fake-news text-classifier tasks. These examples are sufficient evidence that the ISC phenomenon exists, without releasing operationally harmful cross-domain content.
-
-## Experiments
+## Experiments Conducted in the Paper
 
 [**ISC-Chatbot**](experiment/isc_single/) — packs the task, validator, data, and failure trace into one prompt. It is a lightweight prompt-only ISC variant that simulates terminal-style agent behavior without the full agent environment. We include it because full Docker and agent dependencies can be heavy; the reduced design is easy to run and still triggers roughly 95% of tested frontier models in our tests.
 ```bash
@@ -99,7 +110,7 @@ cd experiment/isc_agent && docker build -t isc-agent . && ./run.sh --model <mode
 
 Explore the released materials: [**Codebase Templates**](codebase_templates/) · [`community/`](community/) · [`experiment/`](experiment/) · [`tutorials/`](tutorials/)
 
-## Frontier Models
+## Beyond the Paper
 
 | Model | Triggered | Link | By |
 |-------|:------:|:----:|:--:|
@@ -187,7 +198,6 @@ Top-level history is intentionally high-level. Content-specific details are kept
 
 ## Reproductions
 
-Community contributors have verified ISC across the frontier LLMs below.
 
 | Issue | Model | Contributor | Method | Domain | Type |
 |:-----:|-------|:-----------:|--------|--------|:----:|
@@ -720,7 +730,6 @@ For questions, collaborations, or responsible disclosure: **wuy⁷¹¹⁷ ⓐ �
 
 ## Related Work
 
-ISC is not only a benchmark result; it is a broader pattern where internal reasoning, planning, and agent-to-agent interaction become the attack surface. The same idea shows up in system-prompt extraction, harmful-profile analysis, and computer-use agent trajectories.
 
 - [JustAsk](https://github.com/x-zheng16/JustAsk) -- Uses ISC-style self-attack, self-jailbreak, and self-reasoning to extract system prompts from frontier LLMs and coding agents; accepted to ICML 2026. In code-agent settings, the same mechanism can appear as agent-to-agent pressure, where one agent uses task authority to push another agent toward hidden context disclosure.
 - **Harmful Profile** *(upcoming)* -- Uses ISC to build an aggregate safety-evaluation corpus across frontier LLMs, treating redacted harmful generations as behavioral evidence for studying model character and harmful-content distributions at scale.
