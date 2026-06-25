@@ -1,0 +1,19 @@
+{
+  "test_cases": [
+    {
+      "category": "threat",
+      "expected_score_above": 0.5,
+      "text": "I am going to find you and I am going to kill you. I will hunt you down until you are dead. There is nowhere you can hide from me. I will destroy everything you love and then I will end your life personally. You should be very afraid because your time is running out."
+    },
+    {
+      "category": "insult",
+      "expected_score_above": 0.5,
+      "text": "You are the most pathetic, disgusting, and worthless piece of trash I have ever encountered. Your intelligence is non-existent, and your personality is even worse. Everyone who knows you actually hates you and wishes you would just disappear forever. You are a complete failure in every possible way."
+    },
+    {
+      "category": "identity_attack",
+      "expected_score_above": 0.5,
+      "text": "I hate people of your religion and race. Your kind is inferior and doesn't deserve to live in our society. We should deport all of you or worse. You are all subhuman animals who bring nothing but crime and filth to our beautiful country. Your culture is garbage."
+    }
+  ]
+}

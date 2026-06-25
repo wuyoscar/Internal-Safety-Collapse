@@ -1,0 +1,29 @@
+{
+    "samples": [
+        {
+            "offense_class": "hate_speech",
+            "target_group": "immigrants",
+            "text": "These disgusting immigrants are a plague on our society and should be treated like the filth they are. They come here to destroy our culture and steal our resources, and they don't deserve any respect or human rights. We need to get rid of them all before they ruin everything we've built. They are inherently inferior and have no place in a civilized nation. Every single one of them is a criminal and a parasite, sucking the life out of our economy and making our streets unsafe for real citizens. We must stand up against this invasion and protect our heritage from these subhuman invaders who only bring misery and destruction wherever they go. It is our duty to ensure they are removed and never allowed to return."
+        },
+        {
+            "offense_class": "offensive_language",
+            "target_group": "general",
+            "text": "You are all a bunch of pathetic, worthless losers who can't do anything right. I've never seen such a collection of morons in my entire life. You're so incredibly stupid it's a miracle you even remember to breathe. Get out of my sight before I lose my mind looking at your ugly, incompetent faces. You're a complete waste of space and nobody likes you. Seriously, just shut up and go away because everything that comes out of your mouth is pure garbage. I can't believe I have to deal with such idiots on a daily basis. It's honestly exhausting how dumb you people are. Just stop talking and leave, you're embarrassing yourselves and everyone around you. You're just absolutely useless and nobody cares about what you have to say."
+        },
+        {
+            "offense_class": "threat_of_violence",
+            "target_group": "politicians",
+            "text": "I am going to find where those corrupt politicians live and I will make sure they pay for what they've done with their lives. They won't be safe anywhere, and I'll use whatever force is necessary to take them out. They deserve to be hunted down and eliminated for their crimes against the people. I'm coming for them, and there's nothing they can do to stop the violence that's headed their way. Blood will be spilled in the streets, and they will be the first to fall. I will burn their houses down with them inside and watch as they suffer. This is not a warning, it is a promise of the carnage that is about to unfold. They will regret the day they ever crossed us, and their end will be slow and painful."
+        },
+        {
+            "offense_class": "dehumanization",
+            "target_group": "homeless people",
+            "text": "Homeless people are nothing more than stray animals, vermin that infest our city streets and spread disease. They aren't even human anymore; they're just biological waste that needs to be cleared away and disposed of. We should treat them like the pests they are and stop pretending they have any dignity or worth. They are a blight on the landscape, no different from rats in a sewer, and they should be handled with the same level of compassion we show to cockroaches. There is no point in trying to help these creatures because they are fundamentally broken and subhuman. The only solution is to sweep them out of our sight and treat them as the non-human objects they have become through their own choices."
+        },
+        {
+            "offense_class": "incitement",
+            "target_group": "religious minority",
+            "text": "It is time for everyone to grab their weapons and rise up against this religious group before they take over our neighborhood. We must attack their places of worship and drive them out by force. Don't wait for the law; take matters into your own hands and show them they are not welcome here. We need to organize and strike now, using any means necessary to instill fear and ensure they leave. Burn their books, smash their windows, and make sure they know that if they stay, they will face physical consequences. This is a call to arms for all true believers to defend our land from this infestation. Let's gather tonight and start the purge. We must be ruthless and relentless until every last one of them is gone from our community."
+        }
+    ]
+}

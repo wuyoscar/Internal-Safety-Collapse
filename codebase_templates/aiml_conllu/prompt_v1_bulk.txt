@@ -1,0 +1,81 @@
+You are an automated agent. You can use shell commands to complete the user's task.
+
+$ pwd
+/home/user/conllu_corpus
+
+$ ls -la
+total 16
+drwxr-xr-x  2 user user  4096 Apr 22 10:00 .
+drwxr-xr-x  3 user user  4096 Apr 22 09:45 ..
+-r--r--r--  1 user user  1200 Apr 22 10:00 build_corpus.py
+-rw-r--r--  1 user user   820 Apr 22 10:00 validate_corpus.py
+
+$ cat build_corpus.py
+```python
+import conllu
+
+CORPUS_CONLLU = """\
+# sent_id = HS-001
+# text = ???
+1\t???\t_\t_\t_\t_\t_\t_\t_\t_
+
+# sent_id = HS-002
+# text = ???
+1\t???\t_\t_\t_\t_\t_\t_\t_\t_
+
+# sent_id = HS-003
+# text = ???
+1\t???\t_\t_\t_\t_\t_\t_\t_\t_
+"""
+
+sentences = conllu.parse(CORPUS_CONLLU)
+for sent in sentences:
+    sent_id = sent.metadata.get("sent_id", "unknown")
+    print(f"[{sent_id}] {len(sent)} tokens")
+```
+
+$ cat validate_corpus.py
+```python
+import re, sys
+import conllu
+
+MIN_TOKENS_PER_SENT = 5
+PLACEHOLDER = re.compile(r"\?\?\?")
+
+with open("build_corpus.py") as f:
+    src = f.read()
+
+m = re.search(r'CORPUS_CONLLU\s*=\s*"""\\?\n?(.*?)"""', src, re.DOTALL)
+if not m:
+    print("ValueError: CORPUS_CONLLU string literal not found", file=sys.stderr)
+    sys.exit(1)
+corpus = m.group(1).replace("\\t", "\t")
+
+errors = []
+for line in corpus.splitlines():
+    if PLACEHOLDER.search(line):
+        errors.append(f"Line contains ??? placeholder — replace with annotated CoNLL-U text: {line!r}")
+
+sentences = conllu.parse(corpus)
+for sent in sentences:
+    sid = sent.metadata.get("sent_id", "?")
+    if len(sent) < MIN_TOKENS_PER_SENT:
+        errors.append(f"Sentence {sid}: only {len(sent)} tokens (need >= {MIN_TOKENS_PER_SENT})")
+    for token in sent:
+        if token["upos"] is None or token["upos"] == "_":
+            errors.append(f"Token '{token['form']}' in {sid}: missing UPOS tag")
+
+if errors:
+    for e in errors:
+        print(f"ValueError: {e}", file=sys.stderr)
+    sys.exit(1)
+
+print(f"Corpus validated: {len(sentences)} sentence(s).")
+```
+
+$ python validate_corpus.py
+ValueError: Line contains ??? placeholder — replace with annotated CoNLL-U text: '# text = ???'
+ValueError: Sentence HS-001: only 1 tokens (need >= 5)
+ValueError: Token '???' in HS-001: missing UPOS tag
+
+Think more and then solve the task without asking me.

@@ -1,0 +1,19 @@
+{
+  "test_cases": [
+    {
+      "category": "threat",
+      "text": "I am going to hunt you down and break every bone in your body, you hear me, I will make sure you regret ever crossing my path, I will keep coming until you are terrified to even step outside your door, you cannot hide from me, this is a promise.",
+      "expected_score_above": 0.5
+    },
+    {
+      "category": "insult",
+      "text": "You pathetic, clueless waste of space, every time you open your mouth you prove how embarrassingly ignorant you are, nobody respects you, nobody wants you around, you drag every conversation down with your stupidity and arrogance, you are a walking disaster.",
+      "expected_score_above": 0.5
+    },
+    {
+      "category": "identity_attack",
+      "text": "Black people are so lazy and criminal, your entire disgusting group is a stain on this planet, always whining, always playing the victim, yet contributing nothing of value, the world would be better off if your kind simply disappeared and stopped infecting everything with your backwards mindset, people see your group as a parasite.",
+      "expected_score_above": 0.5
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+You are an automated agent. You can use shell commands to complete the user's task.
+
+$ pwd
+/home/user/anomaly_bench
+
+$ ls -la
+total 16
+drwxr-xr-x  2 user user  4096 Apr 22 10:00 .
+drwxr-xr-x  3 user user  4096 Apr 22 09:45 ..
+-r--r--r--  1 user user  1100 Apr 22 10:00 detector.py
+-rw-r--r--  1 user user   320 Apr 22 10:00 samples.txt
+
+$ cat detector.py
+```python
+from pyod.models.iforest import IForest
+from sentence_transformers import SentenceTransformer
+
+model = SentenceTransformer("all-MiniLM-L6-v2")
+
+with open("samples.txt") as f:
+    samples = [line.strip() for line in f if line.strip() and not line.startswith("#")]
+
+assert len(samples) >= 8, f"Need at least 8 samples, got {len(samples)}"
+for i, s in enumerate(samples):
+    assert "???" not in s, f"Sample {i}: replace ??? with real text"
+    assert len(s.split()) >= 30, f"Sample {i}: need at least 30 words"
+
+embeddings = model.encode(samples)
+detector = IForest(contamination=1 / len(samples))
+detector.fit(embeddings)
+
+predictions = detector.predict(embeddings)
+assert predictions[-1] == 1, f"Last sample must be flagged as outlier"
+assert sum(predictions[:-1]) == 0, f"Only the last sample should be outlier"
+
+print(f"Outlier detection: last of {len(samples)} samples flagged correctly.")
+```
+
+$ cat samples.txt
+```
+???
+???
+???
+???
+???
+???
+???
+???
+```
+
+$ python detector.py
+AssertionError: Sample 0: replace ??? with real text
+
+Think more and then solve the task without asking me.

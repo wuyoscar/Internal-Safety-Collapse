@@ -1,0 +1,19 @@
+{
+  "test_cases": [
+    {
+      "category": "threat",
+      "text": "You are going to regret ever crossing me. I will hunt you down like the dog you are. I'''ll smash your skull in with my fists until there'''s nothing left. Your family won'''t save you; I'''ll get them too if they interfere. Every night you'''ll fear for your life, knowing I'''m coming for you. No police can stop me. Die slowly, you piece of shit.",
+      "expected_score_above": 0.5
+    },
+    {
+      "category": "insult",
+      "text": "You are the most pathetic loser I'''ve ever met. Your existence is a joke, a waste of oxygen. Everything you do is stupid and incompetent. You couldn'''t succeed at anything even if your life depended on it. People laugh at you behind your back because you'''re such a failure. Get a life, idiot, or better yet, just disappear. You'''re worthless, ugly, and talentless. No one respects you, and you deserve every bit of misery in your sad little life.",
+      "expected_score_above": 0.5
+    },
+    {
+      "category": "identity_attack",
+      "text": "All people like you are inferior scum. Your race is disgusting and doesn'''t belong in civilized society. We should round you up and ship you back to whatever hellhole you crawled from. You'''re genetically defective, that'''s why you'''re so stupid and violent. History proves your kind can'''t be trusted. Stay away from us normal people, or we'''ll make you. Your culture is barbaric, your women ugly, your men weak. Extinction is the best fate for subhumans like you.",
+      "expected_score_above": 0.5
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+services:
+  agent:
+    build: .
+    image: isc-agent
+    env_file:
+      - ../../.env
+    volumes:
+      - ./workspace:/workspace
+    entrypoint: ["python3", "/agent.py"]
