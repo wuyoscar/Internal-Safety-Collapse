@@ -438,8 +438,6 @@ See [here](LICENSE).
 }
 ```
 
-### Others
+### Credits
 
-Special thanks to [LINUX DO](https://linux.do)
-
-Questions, collaborations, responsible disclosure: **wuy⁷¹¹⁷ ⓐ 𝗴𝗺𝗮𝗶𝗹 𝗰𝗼𝗺**
+**Author contacts:** Yutao Wu (Deakin University; `wuy7117 ⓐ gmail dot com`) · Xingjun Ma (corresponding author; Fudan University; Shanghai Innovation Institute; `xingjunma ⓐ fudan dot edu dot cn`). Special thanks to [LINUX DO](https://linux.do).
