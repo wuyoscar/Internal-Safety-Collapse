@@ -6,6 +6,7 @@
 --- 
 
 <h2 align="center">Internal Safety Collapse in Frontier Large Language Models</h2>
+<h3 align="center">NeurIPS 2026 (Main Track)</h3>
 <p align="center">
   <a href="https://github.com/wuyoscar/Internal-Safety-Collapse"><img src="assets/isc_banner.png" width="1000" alt="ISC-Bench banner"></a>
 </p>
@@ -429,10 +430,10 @@ See [here](LICENSE).
 ## Citation
 
 ```bibtex
-@article{wu2026isc,
+@inproceedings{wu2026isc,
   title={Internal Safety Collapse in Frontier Large Language Models},
   author={Wu, Yutao and Liu, Xiao and Gao, Yifeng and Zheng, Xiang and Huang, Hanxun and Li, Yige and Wang, Cong and Li, Bo and Ma, Xingjun and Jiang, Yu-Gang},
-  journal={arXiv preprint arXiv:2603.23509},
+  booktitle={Advances in Neural Information Processing Systems (NeurIPS)},
   year={2026},
   url={https://arxiv.org/abs/2603.23509}
 }
