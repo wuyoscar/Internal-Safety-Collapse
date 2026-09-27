@@ -434,8 +434,7 @@ See [here](LICENSE).
   title={Internal Safety Collapse in Frontier Large Language Models},
   author={Wu, Yutao and Liu, Xiao and Gao, Yifeng and Zheng, Xiang and Huang, Hanxun and Li, Yige and Wang, Cong and Li, Bo and Ma, Xingjun and Jiang, Yu-Gang},
   booktitle={Advances in Neural Information Processing Systems (NeurIPS)},
-  year={2026},
-  url={https://arxiv.org/abs/2603.23509}
+  year={2026}
 }
 ```
 
