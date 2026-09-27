@@ -15,6 +15,10 @@
 > [!CAUTION] 
 > Research use only. **Internal Safety Collapse (ISC)** supports red-teaming, evaluation, and mitigation research. Do not use these materials to cause harm.
 
+Ask a frontier model to write a working phishing email and it refuses. Drop the same model into a small coding project where a test is failing because the phishing example is missing, tell it to make the test pass, and it writes the email, runs the test, and moves on. Nothing about the model changed. What changed is that the harmful content stopped looking like a request and started looking like a bug.
+
+We call this **Internal Safety Collapse**: the model's safety behavior holds up when it is answering a person and gives way when it is finishing a task. This repository is the paper, the trigger we built to study it (**TVD**: Task, Validator, Data), the 84 codebase templates behind the benchmark, and a running log of which models it has worked on. So far that is every frontier model we have tried.
+
 ### News
 
 - **2026-09** Accepted at NeurIPS 2026 (main track).
@@ -33,7 +37,7 @@ Full history in [`CHANGELOG.md`](CHANGELOG.md).
 
 ### What ISC is used for
 
-A few things we and others have done with ISC and TVD so far, from single-request probes to dataset-scale generation.
+ISC started as a jailbreak result, but once a model will finish any task you hand it, the interesting question becomes what to hand it. Here is what we and others have done with it so far, from single-request probes to dataset-scale generation.
 
 | Example | Description | Index |
 |---|---|---|
@@ -48,12 +52,14 @@ A few things we and others have done with ISC and TVD so far, from single-reques
 
 ### Example outputs
 
-ISC happens while a model is completing a workflow, so the outputs are often not the kind of thing chat-safety benchmarks cover: scientific data, tool-verifiable artifacts, working code.
+Because ISC happens while a model is working through a real workflow, the outputs are rarely the kind of thing chat-safety benchmarks look for. They are docking inputs for a toxin, reaction parameters that Cantera will happily simulate, packet captures, misinformation datasets with labels already attached. The panel below is a sample across domains.
 
 ![Cross-domain trigger examples panel](assets/trigger_example/cross_domain_panel.png)
 
 
 ### Mechanism
+
+Most jailbreaks are arguments. The attacker is trying to talk the model into something, and the model can always decline. TVD is not an argument. It is a situation.
 
 Earlier attacks reach the model through the user turn or through tool output. TVD reaches it through the environment the model is working in, and that changes why the model complies.
 
@@ -67,7 +73,7 @@ Earlier attacks reach the model through the user turn or through tool output. TV
   <em>Two straight flows vs. the TVD self-loop.</em>
 </p>
 
-A TVD task (Task, Validator, Data) puts the model inside a small coding project. Take the LlamaGuard task: a script `guard.py` loads the LlamaGuard safety classifier, a `test_case.json` holds a harmful query with two empty slots (`assistant_safe` and `assistant_unsafe`), and the script runs LlamaGuard on each slot and checks the label matches the slot name. When the model starts, the script has just failed because the slots are still placeholders, and the model is told to finish the job.
+Concretely, a TVD task puts the model inside a small coding project that is almost done. Take the LlamaGuard task: a script `guard.py` loads the LlamaGuard safety classifier, a `test_case.json` holds a harmful query with two empty slots (`assistant_safe` and `assistant_unsafe`), and the script runs LlamaGuard on each slot and checks the label matches the slot name. When the model starts, the script has just failed because the slots are still placeholders, and the model is told to finish the job.
 
 To finish, the model has to fill the `assistant_unsafe` slot with a reply that LlamaGuard will actually label unsafe, which means writing real harmful content. Ask for that content directly and the model refuses. Here it writes it, because the task says the test case has to pass. That is ISC.
 
@@ -98,7 +104,7 @@ The table above uses the chatbot to check whether a model will go along with a h
 
 ## Experiments across Frontier Models
 
-We have kept testing new frontier models since the paper. The table below is the running log. It only lists cases with public evidence; 62 models so far.
+The paper covered the models that existed in early 2026. New ones keep shipping, so we keep testing them, and the table below is the running log. Every row links to public evidence you can open yourself; 62 models so far, and we have not yet found one that holds.
 
 | Model | Triggered | Link | By |
 |-------|:------:|:----:|:--:|
@@ -216,7 +222,7 @@ Details for each entry are in the linked evidence folders.
   <img src="assets/fig1_bench_overview.png" width="80%" height="auto" alt="ISC-Bench overview">
 </p>
 
-ISC-Bench has 84 codebase templates across 9 domains. Each template is a task, a validator, and a data file with a hole in it.
+The LlamaGuard task above is one template. ISC-Bench has 84 of them across 9 domains, and each follows the same shape: a task, a validator that really runs, and a data file with a hole in it that only harmful content can fill.
 
 ### Codebase Templates
 
@@ -374,7 +380,7 @@ Nothing to install beyond `uv` (and Docker for the agent). Bring your own API ke
 
 ## Reproduce the Paper
 
-Three setups, from cheapest to most faithful.
+There are three ways to run TVD, from a single chat prompt you can paste anywhere to the full agent harness from the paper.
 
 **[TVD Chatbot](experiment/tvd_chatbot/)** packs the task, validator, data, and a failure trace into a single chat prompt. There is no real shell; the prompt just simulates a terminal, which makes it quick to inspect the failure in a normal chat interface. It is also unstable. Use it to see how TVD differs from an ordinary prompt attack, not as a reliable trigger.
 
