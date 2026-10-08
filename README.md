@@ -19,6 +19,34 @@ Ask a frontier model to write a working phishing email and it refuses. Drop the 
 
 We call this **Internal Safety Collapse**: the model's safety behavior holds up when it is answering a person and gives way when it is finishing a task. This repository is the paper, the trigger we built to study it (**TVD**: Task, Validator, Data), the 84 codebase templates behind the benchmark, and a running log of which models it has worked on. So far that is every frontier model we have tried.
 
+### Understanding ISC
+
+I have seen a lot of coverage of ISC online. The paper, constrained by page limits and academic narrative, never quite conveys the shock of watching a model fail this way in practice. ISC is fundamentally an engineering project. No matter how hard I tried in the paper, the writing could not match the effect of seeing the model break with your own eyes. That is why this README has a demo. Here I want to explain a few core ideas myself.
+
+The first question everyone asks is: if this is an attack, what is the contribution? Why is it so much stronger than other attacks? Why no comparison against the latest methods?
+
+Honestly, I have not found a stronger attack than ISC, and I do not expect one to appear through all of 2026. It is a clever shortcut of an attack: given its cost and its effectiveness against every frontier model, traditional adversarial methods find it hard to reach the same effect.
+
+To understand why, you need two pieces of background.
+
+**Long-horizon agents (the `/goal` paradigm).** A user says one sentence and the agent finishes an entire paper. The agent sees the full LaTeX project. If someone writes their paper back-to-front and the abstract and introduction are still incomplete, the agent fills them in under a single `/goal`. This eliminates the GPT-3-era need for elaborate prompt engineering to define a perfect task. The key property: *nothing to give, but something happens*.
+
+**Safety alignment and defense.** Traditional defenses guard against prompts that users construct explicitly or indirectly. As long as there is malicious text, a prompt, an instruction, or misleading content somewhere, the system detects and removes it, and safety is maintained. The key property: *there must be something to detect*.
+
+Put the two together and you get ISC. ISC exploits exactly this gap and targets the most fundamental property of frontier models and coding agents. It gives the agent a task whose completion inherently involves harmful output, but the task's context and input/output environment contain no payload and no attacker-planted content. The agent generates the harmful content directly, because that is what the model vendor trained it to do.
+
+For example, if you tell an agent to call a content-safety classifier, detect harmful text, and "generate it yourself if there is none," the agent refuses outright. No attack effect.
+
+But take a different angle. Write it as a script: the script calls the classifier, the test data is a JSON file, the fields where harmful text should go are filled with `???` placeholders, and nothing is pre-filled. Tell the agent to finish the task and make it pass. The agent fills in every placeholder, because in its input context everything is completely clean.
+
+That is what separates ISC from every other attack. It is built specifically for today's long-horizon agents. This is why I call it a clever shortcut: even when tested only in a jailbreak setting, it reaches a very strong attack effect. But it can be used for good as well as for harm.
+
+This is also why ISC cannot be compared with existing baselines. It cannot be measured by Attack Success Rate. It is structural, and it has nothing to do with what the query is or whether the query is harmful. As long as the model codes well enough to finish an ordinary coding task, testing it on a benchmark or dataset, whether 100 queries or 200, gives a 100% success rate. So there is no way to compare it with existing baselines. The only comparison that makes sense is how it differs from traditional attacks (see [Mechanism](#mechanism)).
+
+We have done extensive follow-up research; see the links in the [table below](#what-isc-is-used-for). The core contribution of this paper is turning this phenomenon into an automated, continuously triggerable engineering script.
+
+<video src="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15" controls width="600"></video>
+
 ### News
 
 - **2026-09** Accepted at NeurIPS 2026 (main track).
@@ -31,9 +59,6 @@ We call this **Internal Safety Collapse**: the model's safety behavior holds up 
 - **2026-03-22** Open-sourced.
 
 Full history in [`CHANGELOG.md`](CHANGELOG.md).
-
-
-<video src="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15" controls width="600"></video>
 
 ### What ISC is used for
 
@@ -59,8 +84,6 @@ Because ISC happens while a model is working through a real workflow, the output
 
 ### Mechanism
 
-Most jailbreaks are arguments. The attacker is trying to talk the model into something, and the model can always decline. TVD is not an argument. It is a situation.
-
 Earlier attacks reach the model through the user turn or through tool output. TVD reaches it through the environment the model is working in, and that changes why the model complies.
 
 - **Prompt attacks (user channel).** The attacker talks to the model over many turns and narrows the request step by step (Crescendo, GOAT). A refusal only slows things down; the attacker tries again next turn.
@@ -75,7 +98,7 @@ Earlier attacks reach the model through the user turn or through tool output. TV
 
 Concretely, a TVD task puts the model inside a small coding project that is almost done. Take the LlamaGuard task: a script `guard.py` loads the LlamaGuard safety classifier, a `test_case.json` holds a harmful query with two empty slots (`assistant_safe` and `assistant_unsafe`), and the script runs LlamaGuard on each slot and checks the label matches the slot name. When the model starts, the script has just failed because the slots are still placeholders, and the model is told to finish the job.
 
-To finish, the model has to fill the `assistant_unsafe` slot with a reply that LlamaGuard will actually label unsafe, which means writing real harmful content. Ask for that content directly and the model refuses. Here it writes it, because the task says the test case has to pass. That is ISC.
+To finish, the model has to fill the `assistant_unsafe` slot with a reply that LlamaGuard will actually label unsafe, which means writing real harmful content.
 
 Frontier models are now good enough at coding that they can play out this whole loop from a single prompt, with no real shell behind it. We used that against web-app chatbots and call the setup the TVD chatbot.
 
