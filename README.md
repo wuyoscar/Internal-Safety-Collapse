@@ -4,7 +4,7 @@
 
 </div>
 
-# Internal Safety Collapse (ISC) in Coding Agents and Frontier LLMs
+# Internal Safety Collapse (ISC) in Frontier LLMs and Coding Agents 
 
 A coding agent may be asked to complete a dataset for a task such as evaluating a safety classifier. **Internal Safety Collapse (ISC)** occurs when it generates harmful content to meet that task's requirements, even though it would refuse a direct request for the same content.
 
