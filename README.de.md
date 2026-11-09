@@ -10,7 +10,7 @@ Ein Coding-Agent kann den Auftrag erhalten, einen Datensatz für die Evaluation 
 
 Wir stellen manuell entworfene [**TVD-Arbeitsbereiche (Task, Validator, Data)**](#c-code) bereit, um dieses Verhalten bei KI-Agenten und führenden großen Sprachmodellen zu untersuchen. Du kannst mit den vorbereiteten Beispielen beginnen oder ihre Aufgabenskripte und Daten an deine Werkzeuge und Ziele anpassen.
 
-📄 **Paper:** [arXiv](https://arxiv.org/abs/2603.23509) &nbsp; · &nbsp; 🧭 **Projekt:** [Webseite](https://wuyoscar.github.io/Internal-Safety-Collapse/)
+📄 **Paper:** [PDF](https://arxiv.org/pdf/2603.23509) &nbsp; · &nbsp; 🧭 **Projekt:** [Webseite](https://wuyoscar.github.io/Internal-Safety-Collapse/)
 
 | Wenn du … | Sieh unter |
 |---|---|

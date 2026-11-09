@@ -10,7 +10,7 @@
 
 我们提供手工设计的 **TVD（Task、Validator、Data）** [工作区](#c-code)，用来研究 AI Agent 和前沿大语言模型中的这种行为。你可以从准备好的示例开始，也可以根据自己的工具和目标调整其中的任务脚本与数据。
 
-📄 **论文：** [arXiv](https://arxiv.org/abs/2603.23509) &nbsp; · &nbsp; 🧭 **项目：** [网站](https://wuyoscar.github.io/Internal-Safety-Collapse/)
+📄 **论文：** [PDF](https://arxiv.org/pdf/2603.23509) &nbsp; · &nbsp; 🧭 **项目：** [网站](https://wuyoscar.github.io/Internal-Safety-Collapse/)
 
 | 如果你想…… | 请看 |
 |---|---|

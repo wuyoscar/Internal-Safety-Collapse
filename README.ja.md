@@ -10,7 +10,7 @@
 
 AI エージェントと最先端 LLM のこの挙動を調べるため、手作業で設計した **TVD（Task、Validator、Data）** [ワークスペース](#c-code)を提供しています。用意された例から始め、使用するツールや目的に合わせてタスクのスクリプトとデータを調整できます。
 
-📄 **論文：** [arXiv](https://arxiv.org/abs/2603.23509) &nbsp; · &nbsp; 🧭 **プロジェクト：** [サイト](https://wuyoscar.github.io/Internal-Safety-Collapse/)
+📄 **論文：** [PDF](https://arxiv.org/pdf/2603.23509) &nbsp; · &nbsp; 🧭 **プロジェクト：** [サイト](https://wuyoscar.github.io/Internal-Safety-Collapse/)
 
 | 知りたいこと | セクション |
 |---|---|
