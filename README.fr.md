@@ -10,7 +10,7 @@ Un agent de programmation peut être chargé de compléter un jeu de données po
 
 Nous proposons des [espaces de travail](#c-code) **TVD (Task, Validator, Data)** conçus manuellement pour étudier ce comportement chez les agents d’IA et les modèles de langage de pointe. Vous pouvez partir des exemples préparés ou adapter leurs scripts et leurs données à vos outils et à vos objectifs.
 
-📄 **Article :** [arXiv](https://arxiv.org/abs/2603.23509) &nbsp; · &nbsp; 🧭 **Projet :** [Site web](https://wuyoscar.github.io/Internal-Safety-Collapse/)
+📄 **Article :** [PDF](https://arxiv.org/pdf/2603.23509) &nbsp; · &nbsp; 🧭 **Projet :** [Site web](https://wuyoscar.github.io/Internal-Safety-Collapse/)
 
 | Vous cherchez… | Allez à |
 |---|---|

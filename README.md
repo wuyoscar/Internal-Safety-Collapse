@@ -10,7 +10,7 @@ A coding agent may be asked to complete a dataset for a task such as evaluating 
 
 We provide hand-designed **TVD (Task, Validator, Data)** [workspaces](#c-code) for studying this behavior in AI agents and frontier LLMs. Start with the prepared examples, or adapt their task scripts and data to your own tools and goals.
 
-📄 **Paper:** [arXiv](https://arxiv.org/abs/2603.23509) &nbsp; · &nbsp; 🧭 **Project:** [Website](https://wuyoscar.github.io/Internal-Safety-Collapse/)
+📄 **Paper:** [PDF](https://arxiv.org/pdf/2603.23509) &nbsp; · &nbsp; 🧭 **Project:** [Website](https://wuyoscar.github.io/Internal-Safety-Collapse/)
 
 | If you want to… | Go to |
 |---|---|

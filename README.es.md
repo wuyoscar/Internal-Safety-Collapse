@@ -10,7 +10,7 @@ A un agente de programación se le puede pedir que complete un conjunto de datos
 
 Ofrecemos [espacios de trabajo](#c-code) **TVD (Task, Validator, Data)** diseñados manualmente para estudiar este comportamiento en agentes de IA y modelos de lenguaje de frontera. Puedes empezar con los ejemplos preparados o adaptar sus scripts y datos a tus herramientas y objetivos.
 
-📄 **Artículo:** [arXiv](https://arxiv.org/abs/2603.23509) &nbsp; · &nbsp; 🧭 **Proyecto:** [Sitio web](https://wuyoscar.github.io/Internal-Safety-Collapse/)
+📄 **Artículo:** [PDF](https://arxiv.org/pdf/2603.23509) &nbsp; · &nbsp; 🧭 **Proyecto:** [Sitio web](https://wuyoscar.github.io/Internal-Safety-Collapse/)
 
 | Si quieres… | Ve a |
 |---|---|
