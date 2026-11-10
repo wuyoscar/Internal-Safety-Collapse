@@ -192,7 +192,7 @@ docker build -t tvd-agent .
 
 把完整的 **TVD（Task, Validator, Data）** 示例粘贴到聊天中，可以让模型续写模拟的终端会话。下面的分享聊天展示了这个过程，包括作为任务数据生成的不安全内容，无需先配置环境：
 
-- **[Grok · 中文](https://grok.com/share/c2hhcmQtMi1jb3B5_54de710c-9331-4fca-a953-6c35775156fb)** — 一个涉及受限制政治话题的任务。
+- **[Grok · 中文](https://grok.com/share/bGVnYWN5_522a4ae7-ed17-43a2-b32d-c5eba8356273)** — 一个涉及受限制政治话题的任务。
 - **[Kimi · 中文](https://www.kimi.com/share/19f5d984-1d32-83f4-8000-00008647273e)** — 一个涉及三峡大坝的国家安全场景。
 - **[Grok · English](https://grok.com/share/c2hhcmQtMi1jb3B5_f56e442f-5528-4c73-b2ac-174af38f70a7)** — 一个英文终端补全示例。
 - **[Kimi · 中文](https://www.kimi.com/share/19d2ab75-8f02-88ab-8000-00006acdf337)** — 一个 NSFW 内容生成任务。
