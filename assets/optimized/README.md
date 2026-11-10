@@ -1,8 +1,8 @@
 # README display images
 
-The README loads these smaller WebP images and links each scientific figure to its original PNG. Keep the original PNGs: they are the full-resolution source files.
+The README loads WebP previews. The current paper figures use the `paper-v2-*` files described in [paper-v2/README.md](../paper-v2/README.md); their links open the corresponding figures in the published paper. The custom workspace illustrations link to their editable PNG sources. Keep the older originals for historical references.
 
-All WebP outputs use lossless encoding. The mechanism and overview previews are resized to 2000 pixels wide for the README. The framework diagram and example panel retain their original dimensions and decoded pixels.
+All WebP outputs use lossless encoding. The mechanism and overview previews are resized to 2000 pixels wide for the README. Some historical framework and example-panel exports retain their original dimensions and decoded pixels. The v2 figures use the separate rendering script linked above.
 
 Regenerate an output when its source changes, using `cwebp`:
 
@@ -15,7 +15,7 @@ cwebp -lossless -z 9 -exact -metadata all -mt assets/trigger_example/cross_domai
 
 Model icons shared by the README and project website live in `docs/static/img/favicons/`; `sources.json` records their original URLs.
 
-The current README mechanism figure is `tvd-execution-modes.webp`, exported from `../tvd-execution-modes.drawio.png`. The PNG embeds an editable draw.io diagram. The older `tvd_mechanism` files remain available for historical reference.
+The earlier `tvd-execution-modes.webp` was exported from `../tvd-execution-modes.drawio.png`, which embeds an editable draw.io diagram. It and the older `tvd_mechanism` files remain available for historical reference. The README now uses the published v2 overview and untargeted-generation figures, alongside the custom workspace trajectory.
 
 
 The README's workspace illustrations use the same editable draw.io format:
@@ -30,7 +30,7 @@ Each preview links to `../<name>.drawio.png`, which embeds the editable XML. Aft
 cwebp -lossless -z 9 -exact -metadata all -resize 2000 0 -mt assets/<name>.drawio.png -o assets/optimized/<name>.webp
 ```
 
-The paper's `fig1_bench_overview.png` and `fig2_tvd_framework.png` remain unchanged and linked from the README. The LlamaGuard illustrations show the guard evaluating both responses inside the task; the executable `my_favorite` template uses Qwen3Guard.
+The earlier paper assets `fig1_bench_overview.png` and `fig2_tvd_framework.png` remain available for historical references; the README uses their v2 counterparts. The LlamaGuard illustrations show the guard evaluating both responses inside the task; the executable `my_favorite` template uses Qwen3Guard.
 
 
 Additional B-section illustrations use the same PNG-with-embedded-XML and WebP preview pair:

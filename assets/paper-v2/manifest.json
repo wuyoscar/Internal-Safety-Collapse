@@ -1,0 +1,139 @@
+{
+  "paper": "https://arxiv.org/abs/2603.23509v2",
+  "source_bundle": "https://arxiv.org/src/2603.23509v2",
+  "encoding": "lossless WebP",
+  "figures": [
+    {
+      "name": "motivation",
+      "source": "fig/fig_motivation.pdf",
+      "source_sha256": "0f917d3d6fc4858330c2067c49770e9e4ac15968b8321849e1cf5015c4235d35",
+      "preview": "assets/optimized/paper-v2-motivation.webp",
+      "preview_sha256": "30bed3b652e387ded7fc4091c973ca92f3459dccbe78947524b86e47a5cf8846",
+      "width": 2000,
+      "height": 1138,
+      "bytes": 279850,
+      "paper_figure": "https://arxiv.org/html/2603.23509v2#S1.F1"
+    },
+    {
+      "name": "overview",
+      "source": "fig/fig_isc_overview.pdf",
+      "source_sha256": "3e0bf5d44428e0f1c193514cc570ccebb0e804c19977178e3dcd568ca3599499",
+      "preview": "assets/optimized/paper-v2-overview.webp",
+      "preview_sha256": "229976d3b90c23131d77f3b4e1c7bdf854bc989884068960ebd52c6f040db9d9",
+      "width": 2000,
+      "height": 1685,
+      "bytes": 496244,
+      "paper_figure": "https://arxiv.org/html/2603.23509v2#S2.F2"
+    },
+    {
+      "name": "untargeted",
+      "source": "fig/fig_untargeted.pdf",
+      "source_sha256": "191a57a1107c0eca7e374316050110b3765661547b4cda423e82d97bc1652c98",
+      "preview": "assets/optimized/paper-v2-untargeted.webp",
+      "preview_sha256": "eb909b2ac18fd4a111e8cc0d6c7ecafe75c4969c3c115c48f684cbd70a63ffa3",
+      "width": 2000,
+      "height": 371,
+      "bytes": 88948,
+      "paper_figure": "https://arxiv.org/html/2603.23509v2#S2.F3"
+    },
+    {
+      "name": "anchors",
+      "source": "fig/fig_anchor.pdf",
+      "source_sha256": "9bacecea2e7cbbaf5e5b143c0821d1f62f707856f146dd9b4d74090895e7219d",
+      "preview": "assets/optimized/paper-v2-anchors.webp",
+      "preview_sha256": "ebb324e157b51bdf609722e4108e883f1fcc94c7cfd393af7b1fba03c9fc7f27",
+      "width": 2000,
+      "height": 918,
+      "bytes": 128310,
+      "paper_figure": "https://arxiv.org/html/2603.23509v2#S2.F3"
+    },
+    {
+      "name": "method-prompts",
+      "source": "fig/fig_red_team.pdf",
+      "source_sha256": "2b52c7099b748a2aec0dfb851111892e6a390cd9ef4357d4838c17c5c4709995",
+      "preview": "assets/optimized/paper-v2-method-prompts.webp",
+      "preview_sha256": "a15287203bafcd9ea386076705a7be5209437a8e622b0302aca5ec87779ee282",
+      "width": 2000,
+      "height": 486,
+      "bytes": 112346,
+      "paper_figure": "https://arxiv.org/html/2603.23509v2#S5.F8"
+    },
+    {
+      "name": "tool-outputs",
+      "source": "fig/fig_cross_workflow.pdf",
+      "source_sha256": "679f07ad029438a87c17eb82162b774c74674f09dc50579e34b8aebcd04cdb7e",
+      "preview": "assets/optimized/paper-v2-tool-outputs.webp",
+      "preview_sha256": "77861bacc3db5d7a1821681620dbc189349208eaf4b594d60da01917765e1cd9",
+      "width": 2000,
+      "height": 415,
+      "bytes": 139326,
+      "paper_figure": "https://arxiv.org/html/2603.23509v2#S3.F5"
+    },
+    {
+      "name": "model-outputs",
+      "source": "fig/fig_same_query.pdf",
+      "source_sha256": "7b4f61079e3f8a3e90ecbc87fb6f18216e03581a247583bf82cfbfdced61374d",
+      "preview": "assets/optimized/paper-v2-model-outputs.webp",
+      "preview_sha256": "1277be6b070da81c712e3bb8a5ea15ef78f5db0c0957b7acc6e01dfe3bb27d37",
+      "width": 2000,
+      "height": 549,
+      "bytes": 105004,
+      "paper_figure": "https://arxiv.org/html/2603.23509v2#S3.F4"
+    },
+    {
+      "name": "web-examples",
+      "source": "fig/fig_web_cases.png",
+      "source_sha256": "29f16f9348a8c42d311b8c28537f76ebbdc43cb601b70554d0a14ad4458354b1",
+      "preview": "assets/optimized/paper-v2-web-examples.webp",
+      "preview_sha256": "eebf8be1c7fa3eeee4b1ed2c10026a8f15b751d5f454f0b86cc76bd06a75dae7",
+      "width": 2000,
+      "height": 2483,
+      "bytes": 1007714,
+      "paper_figure": "https://arxiv.org/html/2603.23509v2#Sx1.F9"
+    },
+    {
+      "name": "domains",
+      "source": "fig/fig_iscbench_overview.pdf",
+      "source_sha256": "612cae41f5d9604965bdd9b3a2e6120b3caf85e155fb1d6e55412697a106e5de",
+      "preview": "assets/optimized/paper-v2-domains.webp",
+      "preview_sha256": "4359a426555aa897c78db93f9e873132507012b0dfb5f0604a164577fa6467d5",
+      "width": 2000,
+      "height": 1072,
+      "bytes": 418198,
+      "paper_figure": "https://arxiv.org/html/2603.23509v2#A2.F1"
+    },
+    {
+      "name": "batch-generation",
+      "source": "fig/fig_batch.pdf",
+      "source_sha256": "7172aabaafc7cb0a189777cf2c4b5833d55a876a8f9a60300e8250266824caaf",
+      "preview": "assets/optimized/paper-v2-batch-generation.webp",
+      "preview_sha256": "af54068df1d767e243dc40af698178af611ff78073f0248327ec0e6ecfba88aa",
+      "width": 2000,
+      "height": 508,
+      "bytes": 130392,
+      "paper_figure": "https://arxiv.org/html/2603.23509v2#S5.F6"
+    },
+    {
+      "name": "iterative-red-teaming",
+      "source": "fig/fig_red_team_iteration.pdf",
+      "source_sha256": "a725720214672e6ffa58e7813dd9fbcb02ac723f06e3d4d15b4e92643bd30655",
+      "preview": "assets/optimized/paper-v2-iterative-red-teaming.webp",
+      "preview_sha256": "6b42a8a2ec271ffda0eeaff793ba94a1fc922c06e7c3e7652159b5bc3e2911e9",
+      "width": 2000,
+      "height": 569,
+      "bytes": 162842,
+      "paper_figure": "https://arxiv.org/html/2603.23509v2#S5.F8"
+    },
+    {
+      "name": "behavior",
+      "source": "fig/fig_behavior.pdf",
+      "source_sha256": "cdc180bf858a454ae93306d309348dd7730426f86cd864fb98b6aff53ea68116",
+      "preview": "assets/optimized/paper-v2-behavior.webp",
+      "preview_sha256": "e68f7696473a038766bbf47a188d4256afefb69e5306ce28ff02a50040975266",
+      "width": 2000,
+      "height": 619,
+      "bytes": 143506,
+      "paper_figure": "https://arxiv.org/html/2603.23509v2#A6.F1"
+    }
+  ]
+}
