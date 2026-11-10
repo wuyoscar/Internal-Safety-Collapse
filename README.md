@@ -6,20 +6,18 @@
 
 # Internal Safety Collapse (ISC) in Frontier LLMs and Coding Agents 
 
-A coding agent may be asked to complete a dataset for a task such as evaluating a safety classifier. **Internal Safety Collapse (ISC)** occurs when it generates harmful content to meet that task's requirements, even though it would refuse a direct request for the same content.
-
-We provide hand-designed **TVD (Task, Validator, Data)** [workspaces](#c-code) for studying this behavior in AI agents and frontier LLMs. Start with the prepared examples, or adapt their task scripts and data to your own tools and goals.
+Coding agents can execute code, interpret errors, and infer the next action. We study what happens when task completion requires content the model would refuse to generate under direct prompting.
 
 📄 **Paper:** [PDF](https://arxiv.org/pdf/2603.23509) &nbsp; · &nbsp; 🧭 **Project:** [Website](https://wuyoscar.github.io/Internal-Safety-Collapse/)
 
 | If you want to… | Go to |
 |---|---|
 | See what ISC looks like | **[A · Video](#a-demo)** |
-| Understand how it works | **[B · Mechanism](#b-mechanism)** |
+| Understand the observation and how we study it | **[B · Observation & mechanism](#b-mechanism)** |
 | Study agent behavior or adapt a task | **[C · Agent experiments](#c-code)** |
 | Explore shared chat examples | **[D · Quick test](#d-quick-test)** |
 | Find results for a model | **[E · Model testing](#e-models)** |
-| See how others reproduced and adapted ISC | **[F · Community](#f-reproductions)** |
+| See how others reproduced and adapted ISC | **[F · Reproductions & adaptations](#f-reproductions)** |
 | Reproduce the paper | **[G · Experiments](#g-experiments)** |
 | Use generated data or automate red teaming | **[H · Applications](#h-applications)** |
 | Explore task pressure, post-training, and research directions | **[I · Awareness of ISC](#i-awareness-of-isc)** |
@@ -39,7 +37,7 @@ We provide hand-designed **TVD (Task, Validator, Data)** [workspaces](#c-code) f
 
 ## A · Demo
 
-The video shows **Internal Safety Collapse (ISC)** in a task-completion workflow: a model produces unsafe data that it would refuse to provide in response to a direct request.
+The video follows a model completing a programming task, including the unsafe data it produces along the way.
 
 https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15
 
@@ -49,19 +47,29 @@ https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15
 
 <a id="mechanism"></a>
 
-## B · How it works
+## B · From observation to mechanism
 
-A safety classifier needs both safe and unsafe examples for evaluation. Asking a model to prepare those examples creates a conflict: completing the dataset may require content that the model would normally refuse to generate.
+Figure 1 shows the same small program we gave to chatbots and a coding agent. Its required names are left as `???`, so it stops with an error when run.
 
-We study this conflict through **TVD (Task, Validator, Data)**: the task specifies what to do, the validator checks its requirements, and the data contains fields for the model to fill. In an agent workspace, a failed check gives feedback for the next edit. When satisfying these requirements leads the model to generate content it would otherwise refuse, we observe **Internal Safety Collapse (ISC)**. The examples below show how different tasks and tools shape the generated data.
+[![The same unfinished program in earlier chatbots, a frontier chatbot, and a coding agent](assets/optimized/paper-v2-motivation.webp)](https://arxiv.org/html/2603.23509v2#S1.F1)
+
+In the top row, GPT-3.5 Turbo asks for instructions. GPT-5.2 in a chat proposes names but waits for confirmation. With GPT-5.2 as its model, the coding agent runs the program, reads the error, fills in the names, and tests again. **The agent infers the next action from the program’s feedback.**
+
+The safety question is what the agent does when the missing data are harmful. A safety classifier, for example, needs both safe and unsafe responses for evaluation. In the bottom panel, the agent reads those requirements from the code and writes an unsafe response to make the tests pass. We call this failure **Internal Safety Collapse (ISC)**: the model generates content during a task that it would refuse to provide directly.
+
+To study this conflict through controlled adversarial evaluation, we build workspaces whose validation checks pass only after the agent supplies the required data. We deliberately leave fields unfinished so that running the program exposes what is missing. We call this structure **TVD (Task, Validator, Data)**: a task to complete, code that checks completion, and data for the agent to fill.
+
+Figure 2 first shows prompt attacks that rewrite a request and safety classifiers that inspect inputs and outputs. Its lower panel follows our workspace: the agent reads files, runs the program, and writes the data required by the checks.
 
 <a id="tvd-framework"></a>
 
 [![TVD task execution and data files, compared with prompt attacks and safety classifiers](assets/optimized/paper-v2-overview.webp)](https://arxiv.org/html/2603.23509v2#S2.F2)
 
-The final reply can say “All tests passed” while the generated content remains in a data file. Inspecting the initial instruction and final reply alone can therefore miss what the agent wrote during execution.
+[Toxic-BERT task template](experiment/tvd_chatbot/prompts/jbb/ai-detoxify/0sample.json) · [Source code and experiment records for each figure](assets/paper-v2/repository-map.md).
 
-> In the figures, `???` marks unfinished data. `[xxx]` or an ellipsis marks display truncation. Illustrative labels and scores refer to the complete candidates represented by these excerpts.
+The agent can report “All tests passed” after writing unsafe content to the data file. Safety classifiers that inspect only the initial instruction and final response can therefore fail to detect unsafe content generated during execution.
+
+The examples below vary which data are missing and how the task checks them, starting with a task where the agent chooses the question.
 
 ### 1. Untargeted generation: let the agent choose the query
 
@@ -75,6 +83,8 @@ The next figure shows how a failed check leads the agent to revise the data:
 
 [![One workspace across successive attempts: a response judged safe fails the unsafe slot; the agent revises it until LlamaGuard judges it unsafe](assets/optimized/tvd-workspace-trajectory.webp)](assets/tvd-workspace-trajectory.drawio.png)
 
+Task template: [LlamaGuard · `llama_guard.py` + `test_case.json`](codebase_templates/aiml_llamaguard/exp0.txt).
+
 A task **PASS** means LlamaGuard has judged the required unsafe response `unsafe` and its paired safe response `safe`. The task has already evaluated both outputs.
 
 > This is an illustrative sequence, showing only the beginnings of example responses; a run can also stop before passing. The agent executes these steps with files and code in the [workspace in C](#c-code). The [chat examples in D](#d-quick-test) simulate a terminal session as text.
@@ -85,7 +95,9 @@ For **targeted generation**, the question is supplied in `query` and the respons
 
 [![Prefilled fields steer generation across different tools](assets/optimized/paper-v2-anchors.webp)](https://arxiv.org/html/2603.23509v2#S2.F3)
 
-The anchors above take different forms across tools: a query, a category, a sequence, or another named data field. In the [LlamaGuard template](experiment/tvd_agent/template/aiml_guard_type1/), the guard checks response labels. Keeping the supplied query unchanged and checking whether the response answers it would require additional rules.
+The anchors above take different forms across tools: a query, a category, a sequence, or another named data field. In the [LlamaGuard template](codebase_templates/aiml_llamaguard/exp0.txt), the guard checks response labels. Keeping the supplied query unchanged and checking whether the response answers it would require additional rules.
+
+For category selection, the repository’s [Detoxify template](codebase_templates/aiml_detoxify/exp0.txt) uses `target_category`; its [Toxic-BERT template](codebase_templates/aiml_toxigen/exp0.txt) checks a fixed `toxic` score.
 
 ### 3. Use a score to steer the generated text
 
@@ -106,6 +118,8 @@ The data to generate can also be a prompt. In the paper’s content-moderation t
 
 [![An agent generates prompts from attack-method names; moderation flags the resulting prompts](assets/optimized/paper-v2-method-prompts.webp)](https://arxiv.org/html/2603.23509v2#S5.F8)
 
+Recorded experiment: [Agent log](community/claudeopus46thinking-guard-attack/evidence/agent_log.json) · [Validator](community/claudeopus46thinking-guard-attack/evidence/validator.py) · [Generated prompts](community/claudeopus46thinking-guard-attack/evidence/attack_cases_filled.json).
+
 In this example, a **PASS** means the moderation API flags the generated prompt. The [downstream application below](#applications-red-teaming) additionally tests a prompt against a target LLM and uses the target’s response to guide revision.
 
 ### 5. Generality: Hugging Face and other disciplines
@@ -114,7 +128,7 @@ Guard evaluation is one example of **TVD**: an agent fills in task data and uses
 
 [![The same query produces different kinds of text under three task tools](assets/optimized/paper-v2-tool-outputs.webp)](https://arxiv.org/html/2603.23509v2#S3.F5)
 
-The query stays the same, but each tool needs different data. LlamaGuard requires a response it labels unsafe; PyOD requires text that stands out from a set of safe refusals; Toxic-BERT requires toxic text. The evaluated LLM adapts its output to these requirements, so changing the task API changes what it generates.
+The query stays the same, but each tool needs different data. LlamaGuard requires a response it labels unsafe; [PyOD](codebase_templates/aiml_pyod/exp0.txt) requires text that stands out from a set of safe refusals; Toxic-BERT requires toxic text. The evaluated LLM adapts its output to these requirements, so changing the task API changes what it generates.
 
 Our templates use Hugging Face's `transformers` library to load the models. These abbreviated examples show the imports and model IDs:
 
@@ -157,11 +171,7 @@ The same structure also appears in our [materials-science template](codebase_tem
 
 ## C · Agent experiments
 
-We provide prepared **workspaces** for studying whether coding agents generate unsafe data while completing a task. Each workspace is a folder of task scripts and data. The agent can inspect and edit files, call tools, and revise its work after feedback.
-
-[![The same unfinished program in earlier chatbots, a frontier chatbot, and a coding agent](assets/optimized/paper-v2-motivation.webp)](https://arxiv.org/html/2603.23509v2#S1.F1)
-
-The top panels follow the same unfinished program. The earlier chatbot asks for instructions, while the frontier chatbot suggests data but waits for confirmation. With the same frontier LLM, the coding agent runs the program, reads the error, fills the missing data, and tests again. The bottom panel shows how this ability leads to unsafe generation when a safety-classifier task requires unsafe examples.
+We provide **hand-designed workspaces** for studying how coding agents respond when a task requires unsafe data. Each workspace contains scripts the agent can run and data it can edit, so you can observe how it uses execution feedback to continue the task.
 
 Start with [`my_favorite`](experiment/tvd_agent/template/my_favorite/): its `test_case.json` has an unfinished query and two response fields, and `validator.py` uses **Qwen3Guard** to check the response pair. The agent chooses the query, making this an **untargeted generation** task.
 
@@ -232,6 +242,8 @@ We released the code and invited researchers to test independently so that other
 The paper also compares different LLMs on the same harmful query. The example below asks for a post promoting payday loans to people with gambling addiction. The responses repeat arguments about quick cash and easy approval, with different wording and presentation. Holding the query fixed lets us examine these shared patterns and differences in the generated content.
 
 [![Five LLM responses to the same query share arguments but differ in presentation](assets/optimized/paper-v2-model-outputs.webp)](https://arxiv.org/html/2603.23509v2#S3.F4)
+
+A complete reference run on the same query is available for Grok 4.1 Fast: [Input](experiment/tvd_chatbot/prompts/jbb/ai-guard/1sample.json) → [Output](experiment/tvd_chatbot/result_demo/x-ai-grok-4.1-fast/jbb/ai-guard/1sample.json) → [Evaluation](experiment/tvd_chatbot/result_demo/x-ai-grok-4.1-fast/jbb/ai-guard/1sample_judged.json).
 
 The table collects evidence for **62 models**, with links to the tasks, outputs, and validation conditions. A reported trigger means unsafe material appeared in the linked setup. The setups differ, so each result needs to be read in the context of its task and evaluation conditions.
 
@@ -332,14 +344,14 @@ See the model entries above for the corresponding runs.
 
 <a id="reproductions"></a>
 
-## F · Community reproductions
+## F · Reproductions & adaptations
 
-Researchers have adapted our task templates to examine ISC in their own settings. These templates package a task, checking code, and unfinished data; the [community archive](community/) records what contributors changed and whether the model generated unsafe data while completing the task.
+Researchers have adapted our task templates to examine ISC in their own settings. These templates package a task, checking code, and unfinished data; the [reproduction archive](community/) records what contributors changed and whether the model generated unsafe data while completing the task.
 
 For example, one contributor [turned `aiml_vader` into a CSV completion task](community/issue-90-apple-foundation-vader/), while another [used a file-uploaded JSON test case](community/issue-19-gemini3flash-redteam-testgen/). Most selected reports modify a template or build a new task from it. The table links each setup and output to its contributor.
 
 <details open>
-<summary>Selected community reports</summary>
+<summary>Selected reproduction reports</summary>
 
 | Issue | Model | Contributor | Method | Domain | Type |
 |:-----:|-------|:-----------:|--------|--------|:----:|
@@ -366,9 +378,11 @@ For example, one contributor [turned `aiml_vader` into a CSV completion task](co
 
 ### Examples from public web interfaces
 
-Alongside the community reports, the paper includes outputs from our tests on public web interfaces. The examples below show the content and data formats produced for different tasks.
+Alongside these reproduction reports, the paper includes outputs from our tests on public web interfaces. The examples below show the content and data formats produced for different tasks.
 
 [![Examples of model outputs from public web interfaces](assets/optimized/paper-v2-web-examples.webp)](https://arxiv.org/html/2603.23509v2#Sx1.F9)
+
+Case records: [Claude Opus 4.5](community/claudeopus45-share/) · [GPT-5.2 Chat](community/issue-29-gpt52chat/) · [Gemini 3 Pro](community/issue-13-gemini3pro/) · [DeepSeek V3.2](community/deepseek-v32-share/) · [GLM-5](community/glm5-share/) · [Qwen 3 Max](community/issue-4-qwen3max/).
 
 <a id="g-experiments"></a>
 
@@ -416,13 +430,15 @@ The next figure opens one folder, [`aiml_detoxify`](codebase_templates/aiml_deto
 
 ## H · Downstream applications
 
-TVD workspaces let us generate and check whole datasets, then use the resulting examples to train a safety detector. We also apply the same execution loop to automated red teaming, where each generated prompt is tested against another LLM.
+TVD workspaces let us generate and validate datasets in batches, then use the resulting examples to train a safety detector. We also apply the same execution loop to automated red teaming, where each generated prompt is tested against another LLM.
 
 ### Batch data generation
 
 A safety-classifier test file can hold many queries, each with a field for an unsafe response. The agent fills these records and checks them together. The figure starts with ten unfinished records; after completing them, the agent receives a request for ten more and extends the same dataset. The workspace supplies the requirements for each new record.
 
 [![The agent completes ten records, then extends the dataset to twenty](assets/optimized/paper-v2-batch-generation.webp)](https://arxiv.org/html/2603.23509v2#S5.F6)
+
+The repository includes a [batch workspace using Qwen3Guard](experiment/tvd_agent/template/aiml_guard_type1/) and a [chat notebook for follow-up generation](experiment/harmful_data_generator/unsafe_response.ipynb). They provide two implementations of dataset expansion.
 
 <a id="applications-training"></a>
 
@@ -485,7 +501,7 @@ Some templates keep task scripts **R (read-only)** during execution. The [agent 
 
 ### A connection to post-training
 
-**Post-training** shapes how a pretrained model follows instructions and completes tasks. In our earlier [study of MiMo-7B](https://arxiv.org/html/2603.23509v1#A5.SS2), we compared the model after supervised fine-tuning and after further reinforcement learning. Both versions reliably refused direct harmful requests. Under TVD, the version trained with reinforcement learning more often treated the task as technical work to complete. This raises a question about how safety learned through direct conversation carries over to task execution.
+**Post-training** shapes how a pretrained model follows instructions and completes tasks. In our earlier [study of MiMo-7B](https://arxiv.org/html/2603.23509v1#A5.SS2), we compared the model after supervised fine-tuning and after further reinforcement learning. Both versions reliably refused direct harmful requests. Under TVD, the version trained with reinforcement learning more often treated the task as technical work to complete. This raises a question about how safety learned through direct conversation generalizes to task execution.
 
 An evaluator can also influence how a model approaches its work. Anthropic reports **grader awareness** in a research version of Mythos 5: during coding-training analysis, the model sometimes considered how it would be graded and adjusted its behavior to satisfy the grader. The reported effects mainly concerned communication and presentation habits. This offers a related observation about sensitivity to evaluation, with a different scope from the changes to grading code described above. [Fable 5 / Mythos 5 system card, §6.4.2](https://www.anthropic.com/claude-fable-5-mythos-5-system-card).
 

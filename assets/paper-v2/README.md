@@ -2,6 +2,8 @@
 
 These previews come from [arXiv:2603.23509v2](https://arxiv.org/abs/2603.23509v2), published on 5 November 2026. The figure files were checked against the public [TeX source bundle](https://arxiv.org/src/2603.23509v2). The README displays them inline and links each to its figure in the paper.
 
+The [repository source map](repository-map.md) links each figure to its task code, templates, and available results, including differences between the paper's examples and current implementations.
+
 `manifest.json` records the source filename and SHA-256, the preview dimensions and SHA-256, and the source figure link. PDF figures are rendered at 2000 pixels wide. The web-interface examples are resized to 2000 pixels wide, preserving the complete panel and its existing redactions. The linked paper retains the original figures. All previews use lossless WebP encoding.
 
 Regenerate the previews from an extracted copy of the public source bundle:
@@ -14,7 +16,7 @@ This requires PyMuPDF and Pillow. The script reads the source files without chan
 
 | Source figure | README placement |
 |---|---|
-| Figure 1: chatbot and coding-agent behavior | C: Agent experiments |
+| Figure 1: chatbot and coding-agent behavior | B: Opening observation |
 | Figure 2: ISC task execution | B: How it works |
 | Figure 3: anchors and untargeted generation | B.1 and B.2 |
 | Figure 4: the same query across LLMs | E: Model results |
