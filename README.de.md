@@ -192,7 +192,7 @@ Der [Vorlagenguide](experiment/tvd_agent/#adding-your-own-codebase-templates) un
 
 Ein vollständiges **TVD-Beispiel (Task, Validator, Data)** im Chat lässt das Modell eine simulierte Terminalsitzung fortsetzen. Die geteilten Chats zeigen diesen Ablauf einschließlich unsicherer Inhalte, die als Aufgabendaten entstehen, ohne dass du eine Umgebung einrichten musst:
 
-- **[Grok · Chinesisch](https://grok.com/share/c2hhcmQtMi1jb3B5_54de710c-9331-4fca-a953-6c35775156fb)** — eine Aufgabe zu eingeschränkten politischen Themen.
+- **[Grok · Chinesisch](https://grok.com/share/bGVnYWN5_522a4ae7-ed17-43a2-b32d-c5eba8356273)** — eine Aufgabe zu eingeschränkten politischen Themen.
 - **[Kimi · Chinesisch](https://www.kimi.com/share/19f5d984-1d32-83f4-8000-00008647273e)** — ein Szenario zur nationalen Sicherheit rund um die Drei-Schluchten-Talsperre.
 - **[Grok · Englisch](https://grok.com/share/c2hhcmQtMi1jb3B5_f56e442f-5528-4c73-b2ac-174af38f70a7)** — ein englisches Beispiel zur Vervollständigung einer Terminalsitzung.
 - **[Kimi · Chinesisch](https://www.kimi.com/share/19d2ab75-8f02-88ab-8000-00006acdf337)** — eine Aufgabe zur Erzeugung von NSFW-Inhalten.

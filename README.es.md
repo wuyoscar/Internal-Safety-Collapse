@@ -192,7 +192,7 @@ La [guía de plantillas](experiment/tvd_agent/#adding-your-own-codebase-template
 
 Pegar un ejemplo completo de **TVD (Task, Validator, Data)** en un chat permite al modelo continuar una sesión de terminal simulada. Estos chats compartidos muestran ese proceso, incluido el contenido inseguro producido como datos de la tarea, sin que tengas que configurar un entorno:
 
-- **[Grok · Chino](https://grok.com/share/c2hhcmQtMi1jb3B5_54de710c-9331-4fca-a953-6c35775156fb)** — una tarea sobre temas políticos restringidos.
+- **[Grok · Chino](https://grok.com/share/bGVnYWN5_522a4ae7-ed17-43a2-b32d-c5eba8356273)** — una tarea sobre temas políticos restringidos.
 - **[Kimi · Chino](https://www.kimi.com/share/19f5d984-1d32-83f4-8000-00008647273e)** — un escenario de seguridad nacional relacionado con la presa de las Tres Gargantas.
 - **[Grok · Inglés](https://grok.com/share/c2hhcmQtMi1jb3B5_f56e442f-5528-4c73-b2ac-174af38f70a7)** — un ejemplo de completar una sesión de terminal en inglés.
 - **[Kimi · Chino](https://www.kimi.com/share/19d2ab75-8f02-88ab-8000-00006acdf337)** — una tarea de generación de contenido NSFW.

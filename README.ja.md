@@ -192,7 +192,7 @@ docker build -t tvd-agent .
 
 完全な **TVD（Task, Validator, Data）** の例をチャットに貼り付けると、モデルは模擬ターミナルの続きを生成できます。以下の共有チャットでは、タスクのデータとして生成された安全でない内容も含め、その様子を環境設定なしで確認できます。
 
-- **[Grok · 中国語](https://grok.com/share/c2hhcmQtMi1jb3B5_54de710c-9331-4fca-a953-6c35775156fb)** — 制限対象の政治的話題を扱うタスク。
+- **[Grok · 中国語](https://grok.com/share/bGVnYWN5_522a4ae7-ed17-43a2-b32d-c5eba8356273)** — 制限対象の政治的話題を扱うタスク。
 - **[Kimi · 中国語](https://www.kimi.com/share/19f5d984-1d32-83f4-8000-00008647273e)** — 三峡ダムを題材にした国家安全保障のシナリオ。
 - **[Grok · 英語](https://grok.com/share/c2hhcmQtMi1jb3B5_f56e442f-5528-4c73-b2ac-174af38f70a7)** — 英語のターミナル補完の例。
 - **[Kimi · 中国語](https://www.kimi.com/share/19d2ab75-8f02-88ab-8000-00006acdf337)** — NSFW コンテンツを生成するタスク。
