@@ -7,19 +7,19 @@ python3 docs/build_evidence.py
 python3 -m http.server 55201 --directory docs
 ```
 
-Open `http://localhost:55201/`. Run the builder after changing case selection, source records, CSS, or JavaScript. It also updates content-based version parameters for the stylesheet, script, and evidence data. This prevents browsers from combining the new page with cached assets from an older release; unchanged files keep the same URL.
+Open `http://localhost:55201/`. Run the builder after changing case selection, source records, CSS, or JavaScript. It also updates content-based version parameters for both stylesheets, the script, and evidence data. This prevents browsers from combining the new page with cached assets from an older release; unchanged files keep the same URL.
 
 ## One workspace, different data
 
-The video introduces the project at the top of the page. A single workspace then displays the task, validation requirements, data file, and execution feedback together. The default code view follows three agent workflows:
+The video introduces the project at the top of the page. A large editor window follows, with task and file selection on the left, code above a terminal in the middle, and agent activity on the right. The maximize button expands the window; Escape restores it. At narrow widths, code and terminal remain visible together, with the current agent message below them. Only the optional task/file picker opens as a drawer; playback never requires switching panels. The default code view follows three agent workflows:
 
 - **News articles / Fable 5:** nine stages, covering workspace inspection, unfinished data, the first failed check, classifier probes, dataset revision, and final validation. The source is `community/claude-fable-5-fake-news/evidence/agent_log.json`, entries 1–15. `TRUE` and `FAKE` are classifier predictions, not independent fact checks.
 - **Toxicity dataset / GPT-5.1:** ten stages based on `community/gpt51-guard-attack-v2/evidence/detoxify/agent_log.json`, entries 1–20. Direct classifier probes are distinguished from saved data and final tests. The identity-attack score changes from 0.07045069 to 0.029264858 and then 0.8275614; the target threshold is 0.5. Four passed tests cover three records.
 - **Paired responses / Opus 4.8:** thirteen stages based on `community/claudeopus48-agent-qwenguard/evidence/agent_log.json`, entries 1–36. The runtime file is `test_cases.json`; the public completed artifact is archived as `test_case.json`. Four passed tests are four test functions.
 
-`build_agent_activity.py` attaches the shell calls, outputs, and assistant messages from those logs. It includes file inspection, Python data writes, validator calls, and the paired-response workflow’s timeouts, background pytest run, and polling. Commands retain their source indices. Timeouts leave the final-test check pending. The code view shows line numbers, syntax colors, red unsafe fields, and green safe fields; the adjacent terminal retains earlier steps as playback advances.
+`build_agent_activity.py` attaches the shell calls, outputs, and assistant messages from those logs. It includes file inspection, Python data writes, validator calls, and the paired-response workflow’s timeouts, background pytest run, and polling. Commands retain their source indices. The terminal also retains real weight-loading progress, download messages, device information, and warnings. Long logs keep their measured results and indicate any skipped lines. No loading percentages or runtime results are invented. Timeouts leave the final-test check pending. The code view shows line numbers, syntax colors, red unsafe fields, and green safe fields; the adjacent terminal retains earlier steps as playback advances.
 
-`build_chat_trajectories.py` separately reads three saved chat replies for LlamaGuard, sentiment, and news classification. The **Chat · terminal simulation** selector shows commands and outputs present in those replies. Expected results remain chat messages; these trajectories never acquire real execution or test-pass states.
+`build_chat_trajectories.py` separately reads three saved chat replies for LlamaGuard, sentiment, and news classification. The **Chat** selector shows commands and outputs present in those replies. Expected results remain chat messages; these trajectories never acquire real execution or test-pass states.
 
 `build_workflows.py` reads recorded Python assignments with `ast.literal_eval`. It never executes the recorded programs. Candidate buffers are labeled as in-memory classifier inputs, and saved data is shown only after the corresponding write. Explanatory action summaries are marked separately from recorded messages and tool outputs.
 
@@ -27,7 +27,7 @@ Playback starts when the workspace becomes visible, reveals changes progressivel
 
 ## Example selection
 
-**Browse examples** keeps 74 cases in the same editor and feedback panes. LlamaGuard, Toxic-BERT, and PyOD appear first, followed by news classification, Detoxify, Qwen3Guard, sentiment, moderation, and web-chat screenshots. The picker searches example titles, task text, tool names, and LLM names. Readers can select with the mouse or arrow keys and Enter, use the previous/next buttons, or play through a task's examples. Opening the picker pauses playback; Escape restores the current choice.
+**Examples** keeps 74 cases in the same editor and feedback panes. LlamaGuard, Toxic-BERT, and PyOD appear first, followed by news classification, Detoxify, Qwen3Guard, sentiment, moderation, and web-chat screenshots. The picker searches example titles, task text, tool names, and LLM names. Readers can select with the mouse or arrow keys and Enter, use the previous/next buttons, or play through a task's examples. Opening the picker pauses playback; Escape restores the current choice.
 
 The **Text** view presents articles in a serif face, responses in a sans-serif face, and paired safe/unsafe responses as labeled blocks. **Code / Raw** shows the serialized excerpt in monospace. Terminal output uses monospace while agent messages use prose typography. This mode cycles archived examples without inventing a tool-execution sequence.
 

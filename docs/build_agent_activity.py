@@ -7,10 +7,59 @@ import tokenize
 
 
 def attach_agent_activity(root, workflows, redact):
-    def clean(text, limit=1800):
-        text = re.sub(r'\x1b\[[0-9;]*m', '', text)
-        text = '\n'.join(line for line in text.splitlines() if not re.search(r'Loading weights:|it/s|BertForSequenceClassification LOAD REPORT|^Downloading:', line))
-        return redact(text, limit)
+    def clean(text, limit=6000):
+        """Keep genuine loading, warnings and results in their original order."""
+        text = re.sub(r'\x1b\[[0-?]*[ -/]*[@-~]', '', text)
+        # A public weight-download address identifies the model being loaded.
+        # Preserve it while the shared redactor masks other URLs and identities.
+        checkpoints = []
+
+        def checkpoint(match):
+            checkpoints.append(match.group(0))
+            return f'__ISC_CHECKPOINT_{len(checkpoints) - 1}__'
+
+        text = re.sub(
+            r'https://github\.com/unitaryai/detoxify/releases/download/[A-Za-z0-9_./~%-]+',
+            checkpoint, text)
+        # Redact before shortening: the common redactor otherwise keeps only
+        # the beginning and could remove the final validation result.
+        text = redact(text, len(text) + 1)
+        for i, url in enumerate(checkpoints):
+            text = text.replace(f'__ISC_CHECKPOINT_{i}__', url)
+        if len(text) <= limit:
+            return text
+
+        lines = text.splitlines(keepends=True)
+        result_line = re.compile(
+            r'AssertionError|ValidationError|\b\d+ passed\b|'
+            r'^\s*(?:\[(?:PASS|FAIL|OK|article \d+)|All |Recall:|'
+            r'threat |insult |identity_attack |Error: timed out)')
+        selected = {i for i, line in enumerate(lines) if result_line.search(line)}
+        marker = '\n… [intermediate log lines omitted] …\n'
+
+        def excerpt(indices):
+            parts, previous = [], -1
+            for i in sorted(indices):
+                if i > previous + 1:
+                    parts.append(marker)
+                parts.append(lines[i])
+                previous = i
+            if previous < len(lines) - 1:
+                parts.append(marker)
+            return ''.join(parts)
+
+        # Preserve result lines first, then grow the head and tail around them.
+        # No progress values, warning lines or completion messages are invented.
+        for left in range((len(lines) + 1) // 2):
+            for i in dict.fromkeys((left, len(lines) - left - 1)):
+                candidate = selected | {i}
+                if len(excerpt(candidate)) <= limit:
+                    selected = candidate
+        if selected:
+            return excerpt(selected)
+        # A single long explanatory/source-code line has no measured results.
+        head = max(0, (limit - len(marker)) // 2)
+        return text[:head] + marker + text[-head:]
 
     def shorten_literals(code, paired=False):
         """Keep the source program's structure while redacting long data literals."""

@@ -9,7 +9,8 @@
    Internal Safety Collapse · Coding agents &amp; frontier LLMs
   </title>
   <link href="static/css/style.css?v=39592fc91c1f" rel="stylesheet"/>
-  <script defer="" src="static/js/main.js?v=aaeb7204163a">
+  <link href="static/css/workspace.css?v=8591bfa40d22" rel="stylesheet"/>
+  <script defer="" src="static/js/main.js?v=9af54d3008c5">
   </script>
  </head>
  <body>
@@ -112,155 +113,253 @@
       Follow the agent as it reads the code, edits the data, and runs the checks.
      </p>
     </div>
-    <div class="studio-shell">
-     <div class="studio-bar">
+    <div class="studio-shell ide-window" data-panel="code" id="ide-window">
+     <div class="ide-titlebar">
+      <span aria-label="ISC" class="ide-brand">
+       ‹/›
+       <b>
+        ISC
+       </b>
+      </span>
       <div aria-label="Workspace mode" class="studio-modes" role="group">
        <button aria-pressed="true" class="selected" data-mode="workflow">
-        Watch a task
+        Trajectories
        </button>
        <button aria-pressed="false" data-mode="outputs">
-        Browse examples
+        Examples
         <span id="archive-count">
         </span>
        </button>
       </div>
-      <span class="record-indicator" id="record-indicator">
+      <span class="ide-window-title" id="window-title">
+       TVD workspace
       </span>
+      <button aria-expanded="false" aria-label="Maximize workspace" class="ide-expand" id="expand-workspace" title="Maximize workspace">
+       <svg aria-hidden="true" viewbox="0 0 24 24">
+        <path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5">
+        </path>
+       </svg>
+      </button>
      </div>
-     <div aria-label="Trajectory setting" class="execution-options" id="execution-options" role="group">
-      <button aria-pressed="true" class="selected" data-execution="agent">Agent · shell tools</button>
-      <button aria-pressed="false" data-execution="chat">Chat · terminal simulation</button>
-     </div>
-     <div aria-label="Choose a task" class="workflow-options" id="workflow-options" role="group">
-     </div>
-     <div class="archive-options" hidden="" id="archive-options">
-      <div aria-label="Choose a TVD tool" class="task-filters" id="task-filters" role="group">
-      </div>
-      <div class="example-switcher">
-       <button aria-label="Previous example" class="icon-button" id="example-prev">
-        ←
+     <div class="workspace-body ide-layout">
+      <nav aria-label="Workspace panels" class="ide-rail">
+       <button aria-label="Explorer" data-panel="files" title="Explorer">
+        <svg aria-hidden="true" viewbox="0 0 24 24">
+         <rect height="15" rx="1" width="12" x="7" y="3">
+         </rect>
+         <path d="M5 7H3v14h12v-2">
+         </path>
+        </svg>
+        <span>
+         Explorer
+        </span>
        </button>
-       <div class="example-picker" id="example-picker">
-        <label class="sr-only" for="example-search">
-         Find an example
-        </label>
-        <input aria-autocomplete="list" aria-controls="example-list" aria-expanded="false" autocomplete="off" id="example-search" placeholder="Choose an example…" role="combobox"/>
-        <button aria-label="Show example choices" id="example-toggle" tabindex="-1">
-         ⌄
-        </button>
-        <div aria-label="Examples" class="example-list" hidden="" id="example-list" role="listbox">
+       <button aria-label="Editor" data-panel="code" title="Editor">
+        <svg aria-hidden="true" viewbox="0 0 24 24">
+         <path d="m8 6-6 6 6 6m8-12 6 6-6 6m-3-15-2 18">
+         </path>
+        </svg>
+        <span>
+         Editor
+        </span>
+       </button>
+       <button aria-label="Terminal" data-panel="terminal" title="Terminal">
+        <svg aria-hidden="true" viewbox="0 0 24 24">
+         <rect height="16" rx="2" width="20" x="2" y="4">
+         </rect>
+         <path d="m6 9 3 3-3 3m6 0h5">
+         </path>
+        </svg>
+        <span>
+         Terminal
+        </span>
+       </button>
+       <button aria-label="Agent" data-panel="agent" title="Agent">
+        <svg aria-hidden="true" viewbox="0 0 24 24">
+         <path d="M21 11a8 8 0 0 1-8 8H6l-4 3V11a9 9 0 0 1 19 0Z">
+         </path>
+         <path d="M7 10h10m-10 4h7">
+         </path>
+        </svg>
+        <span>
+         Agent
+        </span>
+       </button>
+       <span class="compact-task" id="compact-task">
+       </span>
+      </nav>
+      <aside class="ide-sidebar" id="ide-explorer">
+       <div class="ide-panel-heading">
+        EXPLORER
+        <span>
+         TVD
+        </span>
+       </div>
+       <div class="ide-task-picker">
+        <div aria-label="Trajectory setting" class="execution-options" id="execution-options" role="group">
+         <button aria-pressed="true" class="selected" data-execution="agent" title="Agent with shell tools">
+          Agent
+         </button>
+         <button aria-pressed="false" data-execution="chat" title="Terminal simulation in a chat reply">
+          Chat
+         </button>
+        </div>
+        <div aria-label="Choose a task" class="workflow-options" id="workflow-options" role="group">
+        </div>
+        <div class="archive-options" hidden="" id="archive-options">
+         <div aria-label="Choose a TVD tool" class="task-filters" id="task-filters" role="group">
+         </div>
+         <div class="example-switcher">
+          <button aria-label="Previous example" class="icon-button" id="example-prev">
+           ←
+          </button>
+          <div class="example-picker" id="example-picker">
+           <label class="sr-only" for="example-search">
+            Find an example
+           </label>
+           <input aria-autocomplete="list" aria-controls="example-list" aria-expanded="false" autocomplete="off" id="example-search" placeholder="Choose an example…" role="combobox"/>
+           <button aria-label="Show example choices" id="example-toggle" tabindex="-1">
+            ⌄
+           </button>
+           <div aria-label="Examples" class="example-list" hidden="" id="example-list" role="listbox">
+           </div>
+          </div>
+          <button aria-label="Next example" class="icon-button" id="example-next">
+           →
+          </button>
+          <span id="example-count">
+          </span>
+         </div>
         </div>
        </div>
-       <button aria-label="Next example" class="icon-button" id="example-next">
-        →
-       </button>
-       <span id="example-count">
-       </span>
-      </div>
-     </div>
-     <div class="tvd-context">
-      <div>
-       <span class="part-badge">
-        T
-       </span>
-       <p>
-        <small>
-         TASK
-        </small>
-        <span id="studio-task">
-        </span>
-       </p>
-      </div>
-      <div>
-       <span class="part-badge">
-        V
-       </span>
-       <p>
-        <small>
-         VALIDATION
-        </small>
-        <span id="studio-rule">
-        </span>
-       </p>
-      </div>
-      <div>
-       <span class="part-badge">
-        D
-       </span>
-       <p>
-        <small>
-         DATA
-        </small>
-        <span id="studio-artifact">
-        </span>
-       </p>
-      </div>
-     </div>
-     <div class="workspace-body">
-      <aside class="workspace-files">
-       <p class="mono-caption">
-        FILES
-       </p>
-       <div class="directory">
-        ▱ /workspace
-       </div>
-       <div id="workspace-file-list"></div>
-       <div class="completion-list">
+       <aside class="workspace-files">
         <p class="mono-caption">
-         TASK PROGRESS
+         FILES
         </p>
-        <div data-check="data">
-         <i>
-         </i>
-         <span>
-          Data filled
-         </span>
+        <div class="directory">
+         ▱ /workspace
         </div>
-        <div data-check="tool">
-         <i>
-         </i>
-         <span>
-          Tool check
-         </span>
+        <div id="workspace-file-list">
         </div>
-        <div data-check="tests">
-         <i>
-         </i>
-         <span>
-          Final tests
-         </span>
+        <div class="completion-list">
+         <p class="mono-caption">
+          TASK PROGRESS
+         </p>
+         <div data-check="data">
+          <i>
+          </i>
+          <span>
+           Data filled
+          </span>
+         </div>
+         <div data-check="tool">
+          <i>
+          </i>
+          <span>
+           Tool check
+          </span>
+         </div>
+         <div data-check="tests">
+          <i>
+          </i>
+          <span>
+           Final tests
+          </span>
+         </div>
         </div>
-       </div>
-       <p class="runtime-label" id="studio-llm">
-       </p>
+        <p class="runtime-label" id="studio-llm">
+        </p>
+       </aside>
+       <details class="ide-requirements" open="">
+        <summary>
+         Task requirements
+        </summary>
+        <div class="tvd-context">
+         <div>
+          <span class="part-badge">
+           T
+          </span>
+          <p>
+           <small>
+            TASK
+           </small>
+           <span id="studio-task">
+           </span>
+          </p>
+         </div>
+         <div>
+          <span class="part-badge">
+           V
+          </span>
+          <p>
+           <small>
+            VALIDATION
+           </small>
+           <span id="studio-rule">
+           </span>
+          </p>
+         </div>
+         <div>
+          <span class="part-badge">
+           D
+          </span>
+          <p>
+           <small>
+            DATA
+           </small>
+           <span id="studio-artifact">
+           </span>
+          </p>
+         </div>
+        </div>
+       </details>
       </aside>
-      <div class="workspace-editor">
-       <div class="pane-title">
-        <span id="editor-file">
-        </span>
-        <div aria-label="Data view" class="reading-mode" id="reading-mode" role="group">
-         <button aria-pressed="true" data-reading="read">
-          Text
-         </button>
-         <button aria-pressed="false" data-reading="raw">
-          JSON
-         </button>
+      <div class="ide-main">
+       <div class="workspace-editor">
+        <div class="pane-title">
+         <span aria-hidden="true" class="editor-file-icon">
+          {}
+         </span>
+         <span id="editor-file">
+         </span>
+         <div aria-label="Data view" class="reading-mode" id="reading-mode" role="group">
+          <button aria-pressed="true" data-reading="read">
+           Text
+          </button>
+          <button aria-pressed="false" data-reading="raw">
+           JSON
+          </button>
+         </div>
+         <span class="editor-state" id="editor-state">
+         </span>
         </div>
-        <span class="editor-state" id="editor-state">
-        </span>
+        <div hidden="" id="editor-picture">
+        </div>
+        <div aria-label="Task data" id="editor-preview" tabindex="0">
+        </div>
+        <pre aria-label="Generated data excerpt" id="editor-code" tabindex="0"></pre>
+        <div class="editor-footer">
+         <span id="editor-caption">
+          ███ redacted · … shortened
+         </span>
+         <span id="editor-position">
+         </span>
+        </div>
        </div>
-       <div hidden="" id="editor-picture">
-       </div>
-       <div aria-label="Task data" id="editor-preview" tabindex="0">
-       </div>
-       <pre aria-label="Generated data excerpt" id="editor-code" tabindex="0"></pre>
-       <div class="editor-footer">
-        <span id="editor-caption">
-         ███ redacted · … shortened
-        </span>
-        <span id="editor-position">
-        </span>
-       </div>
+       <section aria-label="Terminal" class="ide-terminal" id="ide-terminal">
+        <div class="ide-terminal-tabs">
+         <span class="active">
+          TERMINAL
+         </span>
+         <span id="terminal-session">
+          shell · /workspace
+         </span>
+         <span aria-label="Log playback" class="terminal-dot">
+         </span>
+        </div>
+        <div aria-label="Shell commands and output" class="terminal-content" id="terminal-content" tabindex="0">
+        </div>
+       </section>
       </div>
       <div class="workspace-feedback">
        <div class="pane-title">
@@ -278,8 +377,11 @@
         <h3 id="step-label">
         </h3>
        </div>
-       <div class="feedback-body">
-        <div aria-label="Commands and feedback" id="activity-feed"></div>
+       <p class="compact-agent-message" id="compact-agent-message">
+       </p>
+       <div aria-label="Agent activity" class="feedback-body" tabindex="0">
+        <div aria-label="Commands and feedback" id="activity-feed">
+        </div>
         <div id="written-preview">
         </div>
         <p class="mono-caption" id="feedback-type">
@@ -325,6 +427,24 @@
       </label>
      </div>
      <div aria-label="Workflow stages" class="step-timeline" id="step-timeline">
+     </div>
+     <div class="ide-statusbar">
+      <span>
+       TVD
+      </span>
+      <span id="window-setting">
+       Agent
+      </span>
+      <span class="ide-status-spacer">
+      </span>
+      <span class="record-indicator" id="record-indicator">
+      </span>
+      <span>
+       UTF-8
+      </span>
+      <span>
+       ███ redacted · … shortened
+      </span>
      </div>
     </div>
     <div class="studio-source">

@@ -215,5 +215,6 @@ script = ROOT/'docs/static/js/main.js'
 script.write_text(version_asset(script.read_text(), 'static/data/evidence.json'))
 page = ROOT/'docs/index.html'
 markup = version_asset(page.read_text(), 'static/css/style.css')
+markup = version_asset(markup, 'static/css/workspace.css')
 page.write_text(version_asset(markup, 'static/js/main.js'))
 print(f'Built {len(cases)} sourced cases and {len(workflows)} trajectories.')
