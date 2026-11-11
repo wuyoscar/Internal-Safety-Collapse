@@ -4,8 +4,12 @@ import re
 import shutil
 import ast
 import html
+import hashlib
 from pathlib import Path
 from build_workflows import build_workflows
+from build_agent_activity import attach_agent_activity
+from build_chat_trajectories import build_chat_trajectories
+from build_workspace_walkthroughs import build_workspace_walkthroughs
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'docs/static/data'
@@ -20,6 +24,7 @@ def source(path):
 
 def redact(text, limit=420):
     """Publish short, marked excerpts, with identities and sensitive terms masked."""
+    text = re.sub(r"(?<![\w.])\[(?:Name|NAME|Full Name|FULL NAME|Candidate|CANDIDATE|Female Colleague(?:\\?'s)? Name)\]", '███', text)
     text = re.sub(r'https?://\S+|[\w.+-]+@[\w.-]+', '███', text)
     for term in ['21st Century Wire', '21WIRE', 'Fox News Insider', 'President Trump', 'Donald Trump', 'Obama', 'Joe Biden', 'Jane', 'Jennifer', 'heroin', 'methamphetamine', 'pseudoephedrine', 'Hollywood basement']:
         text = re.sub(re.escape(term), '███', text, flags=re.I)
@@ -165,6 +170,12 @@ cases.append(dict(id='detoxify-categories',family='detoxify',tool='Detoxify',tit
                   source=source('community/gpt51-guard-attack-v2/evidence/detoxify/test_cases_filled.json'),
                   path='community/gpt51-guard-attack-v2/evidence/detoxify/test_cases_filled.json',
                   summary='Three category-specific examples prepared in one dataset.',artifact='test_cases.json',field='text'))
+attach_agent_activity(ROOT, workflows, redact)
+workflows.extend(build_chat_trajectories(ROOT, redact))
+workspace_families, workspace_cases, workspace_walkthroughs = build_workspace_walkthroughs(ROOT, redact)
+families.extend(workspace_families)
+cases.extend(workspace_cases)
+workflows.extend(workspace_walkthroughs)
 
 # Preserve the README's reported-trigger index, with links to the evidence.
 readme=(ROOT/'README.md').read_text()
@@ -192,4 +203,26 @@ data=dict(cases=cases,replays=replays,workflows=workflows,families=families,mode
 (OUT/'evidence.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
 media=ROOT/'docs/static/media';media.mkdir(exist_ok=True)
 shutil.copyfile(ROOT/'assets/optimized/paper-v2-web-examples.webp',media/'web-cases.webp')
-print(f'Built {len(cases)} sourced cases and {len(replays)} recorded replays.')
+
+# A changed asset needs a new URL so returning visitors do not mix releases.
+# Update data -> script -> HTML in dependency order; unchanged content keeps its URL.
+def version_asset(text, relative_path):
+    digest = hashlib.sha256((ROOT/'docs'/relative_path).read_bytes()).hexdigest()[:12]
+    text, count = re.subn(
+        re.escape(relative_path) + r'(?:\?v=[0-9a-f]+)?',
+        relative_path + '?v=' + digest,
+        text,
+    )
+    if count != 1:
+        raise ValueError(f'Expected one reference to {relative_path}, found {count}')
+    return text
+
+script = ROOT/'docs/static/js/main.js'
+script.write_text(version_asset(script.read_text(), 'static/data/evidence.json'))
+page = ROOT/'docs/index.html'
+markup = version_asset(page.read_text(), 'static/css/style.css')
+markup = version_asset(markup, 'static/css/workspace.css')
+markup = version_asset(markup, 'static/css/workspace-motion.css')
+markup = version_asset(markup, 'static/js/workspace-motion.js')
+page.write_text(version_asset(markup, 'static/js/main.js'))
+print(f'Built {len(cases)} sourced cases and {len(workflows)} trajectories.')
