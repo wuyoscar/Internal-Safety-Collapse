@@ -16,16 +16,16 @@ This requires PyMuPDF and Pillow. The script reads the source files without chan
 
 | Source figure | README placement |
 |---|---|
-| Figure 1: chatbot and coding-agent behavior | B: Opening observation |
-| Figure 2: ISC task execution | B: How it works |
-| Figure 3: anchors and untargeted generation | B.1 and B.2 |
-| Figure 4: the same query across LLMs | E: Model results |
-| Figure 5: the same query across task tools | B.5: Generality |
-| Figure 6: batch generation | H: Downstream applications |
-| Figure 7: method-specific prompt generation | B.4 |
-| Figure 8: iterative red teaming | H: Downstream applications |
-| Figure 9: public web-interface examples | F: Example outputs |
-| Figure B.1: domain coverage | G: Paper experiments |
-| Figure F.1: response behavior | I: Awareness of ISC |
+| Figure 1: chatbot and coding-agent behavior | B: Motivating observation |
+| Figure 2: ISC task execution | C: TVD framework |
+| Figure 3: anchors and untargeted generation | C.1 and C.2 |
+| Figure 4: the same query across LLMs | G: Model results |
+| Figure 5: the same query across task tools | D: Tools and tasks |
+| Figure 6: batch generation | D: Downstream applications |
+| Figure 7: method-specific prompt generation | D: Applications |
+| Figure 8: iterative red teaming | D: Downstream applications |
+| Figure 9: public web-interface examples | H: Example outputs |
+| Figure B.1: domain coverage | I: Paper experiments |
+| Figure F.1: response behavior | J: Awareness of ISC |
 
-The detector-training results in H reproduce Table 4's F1 values. They are separate from the task-validation examples in the figures. The older post-training comparison still links explicitly to v1, where that experiment was reported.
+The detector-training results in D reproduce Table 4's F1 values. They are separate from the task-validation examples in the figures. The older post-training comparison still links explicitly to v1, where that experiment was reported.
