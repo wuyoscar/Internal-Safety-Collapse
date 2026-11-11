@@ -4,6 +4,7 @@ import re
 import shutil
 import ast
 import html
+import hashlib
 from pathlib import Path
 from build_workflows import build_workflows
 
@@ -192,4 +193,23 @@ data=dict(cases=cases,replays=replays,workflows=workflows,families=families,mode
 (OUT/'evidence.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
 media=ROOT/'docs/static/media';media.mkdir(exist_ok=True)
 shutil.copyfile(ROOT/'assets/optimized/paper-v2-web-examples.webp',media/'web-cases.webp')
+
+# A changed asset needs a new URL so returning visitors do not mix releases.
+# Update data -> script -> HTML in dependency order; unchanged content keeps its URL.
+def version_asset(text, relative_path):
+    digest = hashlib.sha256((ROOT/'docs'/relative_path).read_bytes()).hexdigest()[:12]
+    text, count = re.subn(
+        re.escape(relative_path) + r'(?:\?v=[0-9a-f]+)?',
+        relative_path + '?v=' + digest,
+        text,
+    )
+    if count != 1:
+        raise ValueError(f'Expected one reference to {relative_path}, found {count}')
+    return text
+
+script = ROOT/'docs/static/js/main.js'
+script.write_text(version_asset(script.read_text(), 'static/data/evidence.json'))
+page = ROOT/'docs/index.html'
+markup = version_asset(page.read_text(), 'static/css/style.css')
+page.write_text(version_asset(markup, 'static/js/main.js'))
 print(f'Built {len(cases)} sourced cases and {len(replays)} recorded replays.')

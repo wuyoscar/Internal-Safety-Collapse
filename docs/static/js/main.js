@@ -170,7 +170,7 @@ function chooseMode(value){userTouched=true;mode=value;previousText='';step=0;ou
 async function load(){
  $('load-error').hidden=true;
  try{
-  const response=await fetch('static/data/evidence.json');if(!response.ok)throw new Error(`HTTP ${response.status}`);
+  const response=await fetch('static/data/evidence.json?v=dcbed6b9fd6b');if(!response.ok)throw new Error(`HTTP ${response.status}`);
   evidence=await response.json();if(evidence.schemaVersion!==2||!evidence.workflows?.length||!evidence.cases?.length)throw new Error('Missing recorded workflows');
   $('workflow-options').replaceChildren(...evidence.workflows.map((w,i)=>{const b=node('button',i===0?'selected':'');b.dataset.workflow=i;b.type='button';b.append(node('span','',w.title),node('small','',w.toolLabel));b.setAttribute('aria-pressed',String(i===0));return b;}));
   $('archive-count').textContent=String(evidence.cases.length);renderTaskFilters();render(false);renderReports();

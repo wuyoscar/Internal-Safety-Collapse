@@ -7,7 +7,7 @@ python3 docs/build_evidence.py
 python3 -m http.server 55201 --directory docs
 ```
 
-Open `http://localhost:55201/`. Rebuild the evidence after changing the case selection or source records.
+Open `http://localhost:55201/`. Run the builder after changing case selection, source records, CSS, or JavaScript. It also updates content-based version parameters for the stylesheet, script, and evidence data. This prevents browsers from combining the new page with cached assets from an older release; unchanged files keep the same URL.
 
 ## One workspace, different data
 
