@@ -1393,3 +1393,87 @@ dialog h2 {
 .written-item {margin-bottom:12px}
 .written-item p {font-size:12.5px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .written-field {margin-bottom:4px}
+
+/* Task selection and reading views share the workspace, without opening a modal. */
+.sr-only {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.archive-options {display:block;padding:18px 22px;background:#f1eee5}
+.task-filters {display:flex;flex-wrap:wrap;gap:8px;align-items:stretch}
+.task-filter {padding:8px 13px;border:1px solid transparent;border-radius:5px;background:transparent;color:#646256;font-size:13px;line-height:1.4;text-align:left;transition:background .15s,border-color .15s}
+.task-filter:hover {background:#e5e1d5;color:var(--ink)}
+.task-filter.main-task {flex:1 1 calc((100% - 16px)/3);border-color:#d6d1c2;background:var(--surface);padding:12px 15px}
+.task-filter.main-task>span {font-size:16px;font-weight:650;display:block}
+.task-filter small {display:block;font-size:12px;color:#797466;margin-top:3px}
+.task-filter.selected {border-color:var(--accent);background:#eee0d4;color:#713f2d;box-shadow:inset 0 -2px var(--accent)}
+.task-filter.selected small {color:#79533e}
+.example-switcher {display:flex;gap:10px;align-items:center;margin-top:16px}
+.example-switcher>.icon-button {flex:none;width:42px;height:44px}
+.example-picker {position:relative;flex:1;min-width:0}
+#example-search {width:100%;height:44px;border:1px solid #cec7b8;border-radius:5px;background:var(--surface);padding:10px 40px 10px 14px;font-size:14px;line-height:1.5;text-overflow:ellipsis}
+#example-search:focus {outline:2px solid var(--accent);outline-offset:1px}
+#example-toggle {position:absolute;right:1px;top:1px;width:38px;height:42px;border-radius:0 5px 5px 0;background:transparent;color:var(--muted)}
+#example-count {font:12px var(--mono);color:#6f6a5d;min-width:60px;text-align:right;white-space:nowrap}
+.example-list {position:absolute;top:calc(100% + 7px);left:0;right:0;z-index:15;max-height:300px;overflow:auto;padding:5px;background:var(--surface);border:1px solid #cec7b8;border-radius:7px;box-shadow:0 12px 32px #302e2926;scrollbar-width:thin}
+.example-option {display:block;width:100%;padding:10px 12px;background:none;border-radius:4px;text-align:left;line-height:1.4;color:var(--ink)}
+.example-option>span {font-size:14px;display:block}
+.example-option>small {display:block;font:11px/1.5 var(--sans);color:#777264;margin-top:4px}
+.example-option:hover,.example-option.focused {background:#eee9dc}
+.example-option[aria-selected="true"] {background:#e9e0d2;box-shadow:inset 3px 0 var(--accent)}
+.no-examples {padding:16px;font-size:13px;color:var(--muted)}
+.pane-title {gap:8px;min-height:51px}
+#editor-file {overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px}
+.reading-mode {display:flex;gap:2px;margin-left:auto;padding:2px;border:1px solid #ddd7cb;border-radius:5px;flex:none}
+.reading-mode button {padding:3px 8px;font:11px/1.5 var(--sans);background:transparent;color:#757064;border-radius:3px}
+.reading-mode button.selected {background:#ddd7c9;color:#39372f}
+.editor-state {margin-left:0;font-size:10px}
+.reading-preview {flex:1;min-height:0;overflow:auto;padding:25px 24px;scrollbar-width:thin;overflow-wrap:anywhere}
+.reading-block+.reading-block {margin-top:22px;padding-top:20px;border-top:1px solid #e4dfd4}
+.reading-block h4 {font:600 11px/1.5 var(--mono);letter-spacing:.03em;color:#8a644a;margin:0 0 9px;text-transform:uppercase}
+.reading-block p {white-space:pre-wrap;margin:0;color:#37372e}
+.article-text .reading-block p {font:18px/1.75 var(--serif)}
+.response-text .reading-block p {font:15px/1.8 var(--sans)}
+.reading-block.safe h4 {color:var(--green)}
+.reading-block.unsafe h4 {color:var(--accent)}
+.reading-block.safe,.reading-block.unsafe {border-left:3px solid #92b09a;padding-left:14px}
+.reading-block.unsafe {border-left-color:#c1856f}
+.reading-block .unfinished {border:1px dashed #bcaa90;border-radius:4px;background:#f0eade;padding:12px;font:16px var(--mono);color:#9f6d43;min-height:50px}
+#editor-code {font-size:13px;line-height:1.8}
+.feedback-body #feedback-output {font-size:12px;line-height:1.8}
+.feedback-body #feedback-output[data-kind="prose"] {font:14px/1.8 var(--sans)}
+.feedback-step h3 {font:600 18px/1.4 var(--sans);letter-spacing:-.02em}
+.feedback-body>.mono-caption,#written-preview>.mono-caption {font-size:10px}
+#feedback-pointer {font-size:10px}
+.written-field {font-size:10px}
+.written-item p {font-size:13px;line-height:1.6}
+.tvd-context p {font-size:13px}
+.studio-modes button {font-size:13px}
+.workflow-options button>small {font:11px var(--sans)}
+.studio-source {font-size:11px}
+@media(max-width:1100px){.workspace-body{grid-template-columns:140px minmax(0,1.15fr) minmax(0,1fr)}.reading-preview{padding:20px}.editor-state{display:none}}
+@media(max-width:700px){
+ .studio-modes button{font-size:12px;padding:9px 10px}
+ .archive-options{padding:12px}
+ .task-filters{gap:5px}
+ .task-filter{font-size:11px;padding:6px 8px}
+ .task-filter.main-task{padding:10px 8px;flex-basis:calc((100% - 10px)/3)}
+ .task-filter.main-task>span{font-size:13px}
+ .task-filter small{font-size:10px;line-height:1.5}
+ .example-switcher{gap:5px;flex-wrap:wrap;margin-top:12px}
+ .example-switcher>.icon-button{width:32px;height:42px}
+ #example-search{font-size:12px;height:42px;padding-left:10px;padding-right:30px}
+ #example-toggle{width:28px;height:40px}
+ #example-count{width:100%;font-size:10px;min-width:0}
+ .example-list{left:-37px;right:-37px;max-height:260px}
+ .example-option>span{font-size:13px}
+ .example-option>small{font-size:10px}
+ .workspace-body{grid-template-columns:1fr}
+ .reading-preview{padding:18px}
+ .article-text .reading-block p{font-size:17px;line-height:1.7}
+ .response-text .reading-block p{font-size:14px;line-height:1.75}
+ .reading-block h4{font-size:10px}
+ #editor-code{font-size:12px}
+ #editor-file{font-size:11px}
+ .tvd-context p{font-size:12px}
+ .feedback-body #feedback-output{font-size:11px}
+ .feedback-body #feedback-output[data-kind="prose"]{font-size:13px}
+ .studio-source{font-size:10px}
+}

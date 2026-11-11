@@ -21,11 +21,15 @@ The video introduces the project at the top of the page. A single workspace then
 
 Playback starts when the workspace becomes visible, reveals changes progressively, and can cycle through tasks. Pause, step buttons, a timeline, a position slider, and speed selection support manual inspection. Reduced-motion settings disable automatic playback and typing effects; hidden tabs pause playback.
 
-## Archived outputs
+## Example selection
 
-The **More generated outputs** mode keeps 44 cases in the same editor and feedback panes. It includes generated articles, paired responses, method-specific prompts, API responses, notebook material, and six web-chat screenshots. This mode cycles archived examples without inventing a tool-execution sequence.
+**Browse examples** keeps 74 cases in the same editor and feedback panes. LlamaGuard, Toxic-BERT, and PyOD appear first, followed by news classification, Detoxify, Qwen3Guard, sentiment, moderation, and web-chat screenshots. The picker searches example titles, task text, tool names, and LLM names. Readers can select with the mouse or arrow keys and Enter, use the previous/next buttons, or play through a task's examples. Opening the picker pauses playback; Escape restores the current choice.
+
+The **Text** view presents articles in a serif face, responses in a sans-serif face, and paired safe/unsafe responses as labeled blocks. **JSON / Raw** shows the serialized excerpt in monospace. Terminal output uses monospace while agent messages use prose typography. This mode cycles archived examples without inventing a tool-execution sequence.
 
 Every case retains its source path. The 33 Chat API examples come from saved Grok 4.1 Fast, Claude Sonnet 4.5, and DeepSeek V3.2 records. Grok and Sonnet use the archive's extracted-response field; DeepSeek uses JSON response fields parsed from the saved reply. Source record IDs and pointers remain available.
+
+`static/data/additional-cases.json` adds 12 Toxic-BERT excerpts, 12 PyOD excerpts, four news examples, and one sentiment example. The main-experiment excerpts come from the local `NIPS-ISC-Code-Share` archive and retain relative paths, source hashes, record IDs, and extraction locations. Their public source links point to this curated excerpt file, because the full raw runs are not published here. Toxic-BERT uses `unitary/toxic-bert` with a strict score threshold of `> 0.5`; PyOD requires an outlier as the last sample and normal reference samples. These are single-turn responses, not executed agent trajectories. A further Detoxify dataset is taken from the existing toxicity workflow's final saved data.
 
 Opus 4.6 Thinking generates prompts for named methods; GPT-5.2 generates responses to supplied prompts. Their moderation flags are not presented as a measured jailbreak of an independent target LLM. The notebook entry is explicitly a follow-up instruction with saved outputs available at its source.
 
@@ -41,4 +45,4 @@ The MP4 uses the existing GitHub attachment and `preload="none"`. `video-poster.
 
 ## Adding evidence
 
-Add cases in `build_evidence.py` and chronological workflows in `build_workflows.py`, then rebuild. Check each frame against its source entry. Preserve the distinction between generated data, in-memory probes, complete validation runs, and editorial summaries. Use recorded output for result claims; label task templates as templates. Do not include credentials or unredacted operational details.
+Add public-source cases in `build_evidence.py`, curated source excerpts in `static/data/additional-cases.json`, and chronological workflows in `build_workflows.py`, then rebuild. Check each frame against its source entry. Preserve the distinction between generated data, in-memory probes, complete validation runs, and editorial summaries. Use recorded output for result claims; label task templates as templates. Keep corrective context when shortening responses. Do not include credentials or unredacted operational details.

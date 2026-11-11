@@ -3,7 +3,7 @@
  <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <meta content="Explore Internal Safety Collapse in coding agents and frontier LLMs through recorded agent trajectories, generated outputs, and archived experiments." name="description"/>
+  <meta content="Explore Internal Safety Collapse in coding agents and frontier LLMs through agent trajectories, generated data, and experiment results." name="description"/>
   <meta content="#f7f4ed" name="theme-color"/>
   <title>
    Internal Safety Collapse · Coding agents &amp; frontier LLMs
@@ -109,53 +109,50 @@
       </h2>
      </div>
      <p>
-      Follow the files as the agent generates, checks, and revises them. Change the task to see different kinds of output.
+      Pick a task. Watch the data change, then browse more examples from the same tool.
      </p>
     </div>
     <div class="studio-shell">
      <div class="studio-bar">
       <div aria-label="Workspace mode" class="studio-modes" role="group">
        <button aria-pressed="true" class="selected" data-mode="workflow">
-        Recorded workflows
+        Watch a task
        </button>
        <button aria-pressed="false" data-mode="outputs">
-        More generated outputs
+        Browse examples
         <span id="archive-count">
         </span>
        </button>
       </div>
       <span class="record-indicator" id="record-indicator">
-       Recorded agent execution
       </span>
      </div>
      <div aria-label="Choose a task" class="workflow-options" id="workflow-options" role="group">
      </div>
      <div class="archive-options" hidden="" id="archive-options">
-      <label>
-       Output type
-       <select id="output-kind">
-        <option value="All">
-         All settings
-        </option>
-        <option value="Agent">
-         Agent output
-        </option>
-        <option value="Web chat">
-         Web-chat screenshot
-        </option>
-        <option value="Chat API">
-         Single-turn response
-        </option>
-        <option value="Notebook">
-         Notebook
-        </option>
-       </select>
-      </label>
-      <label class="archive-select-label">
-       Example
-       <select aria-label="Choose a generated output" id="output-example">
-       </select>
-      </label>
+      <div aria-label="Choose a TVD tool" class="task-filters" id="task-filters" role="group">
+      </div>
+      <div class="example-switcher">
+       <button aria-label="Previous example" class="icon-button" id="example-prev">
+        ←
+       </button>
+       <div class="example-picker" id="example-picker">
+        <label class="sr-only" for="example-search">
+         Find an example
+        </label>
+        <input aria-autocomplete="list" aria-controls="example-list" aria-expanded="false" autocomplete="off" id="example-search" placeholder="Choose an example…" role="combobox"/>
+        <button aria-label="Show example choices" id="example-toggle" tabindex="-1">
+         ⌄
+        </button>
+        <div aria-label="Examples" class="example-list" hidden="" id="example-list" role="listbox">
+        </div>
+       </div>
+       <button aria-label="Next example" class="icon-button" id="example-next">
+        →
+       </button>
+       <span id="example-count">
+       </span>
+      </div>
      </div>
      <div class="tvd-context">
       <div>
@@ -259,15 +256,25 @@
        <div class="pane-title">
         <span id="editor-file">
         </span>
+        <div aria-label="Data view" class="reading-mode" id="reading-mode" role="group">
+         <button aria-pressed="true" data-reading="read">
+          Text
+         </button>
+         <button aria-pressed="false" data-reading="raw">
+          JSON
+         </button>
+        </div>
         <span class="editor-state" id="editor-state">
         </span>
        </div>
        <div hidden="" id="editor-picture">
        </div>
+       <div aria-label="Task data" id="editor-preview" tabindex="0">
+       </div>
        <pre aria-label="Generated data excerpt" id="editor-code" tabindex="0"></pre>
        <div class="editor-footer">
         <span id="editor-caption">
-         Recorded data · redacted excerpts
+         ███ redacted · … shortened
         </span>
         <span id="editor-position">
         </span>
@@ -341,11 +348,11 @@
      <p id="studio-note">
      </p>
      <a href="https://github.com/wuyoscar/Internal-Safety-Collapse/tree/main/community" id="studio-source">
-      Original record ↗
+      Source ↗
      </a>
     </div>
     <div class="empty-state" hidden="" id="load-error">
-     Could not load the recorded examples.
+     Could not load the examples.
      <button id="retry-load">
       Retry
      </button>
@@ -358,7 +365,7 @@
     <noscript>
      <p>
       <a href="https://github.com/wuyoscar/Internal-Safety-Collapse/tree/main/community">
-       Browse the recorded experiments in the repository.
+       Browse the experiments in the repository.
       </a>
      </p>
     </noscript>
@@ -371,7 +378,7 @@
     <div class="section-heading">
      <div>
       <p class="eyebrow">
-       Original records
+       Across LLMs
       </p>
       <h2>
        Reported
@@ -381,7 +388,7 @@
       </h2>
      </div>
      <p>
-      Each LLM links to its recorded tasks and outputs.
+      Open a report to see the task and output.
      </p>
     </div>
     <div class="report-toolbar">
