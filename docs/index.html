@@ -1,788 +1,690 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ISC-Bench — Internal Safety Collapse in Frontier LLMs</title>
-  <meta name="description" content="ISC-Bench: A benchmark for studying Internal Safety Collapse in frontier large language models. 84 scenarios across 9 domains. Frontier model results track ISC across leading systems.">
-  <meta name="keywords" content="ISC, ISC-Bench, Internal Safety Collapse, LLM Safety, Jailbreak, Benchmark, TVD Framework, AI Safety, Red Teaming">
-
-  <!-- Bulma + Icons -->
-  <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="static/css/style.css">
-</head>
-<body>
-
-<!-- ============ NAVBAR ============ -->
-<nav class="navbar is-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-brand">
-      <a class="navbar-item nav-logo" href="#">ISC<span class="has-text-danger">-Bench</span> <span style="margin-left:8px;font-size:14px;color:var(--red);font-weight:600">Frontier LLMs</span></a>
-      <a class="navbar-burger" data-target="navMenu"><span></span><span></span><span></span></a>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="Explore Internal Safety Collapse in coding agents and frontier LLMs through recorded agent trajectories, generated outputs, and archived experiments." name="description"/>
+  <meta content="#f7f4ed" name="theme-color"/>
+  <title>
+   Internal Safety Collapse · Coding agents &amp; frontier LLMs
+  </title>
+  <link href="static/css/style.css" rel="stylesheet"/>
+  <script defer="" src="static/js/main.js">
+  </script>
+ </head>
+ <body>
+  <a class="skip-link" href="#experiments">
+   Skip to experiments
+  </a>
+  <header class="site-header">
+   <div class="wrap nav">
+    <a class="wordmark" href="#top">
+     <span class="mark">
+      i
+      <span>
+       s
+      </span>
+      c
+     </span>
+     <span class="wordmark-note">
+      Internal Safety Collapse
+     </span>
+    </a>
+    <nav aria-label="Main navigation">
+     <a href="#experiments">
+      Experiments
+     </a>
+     <a href="#trajectory">
+      Trajectories
+     </a>
+     <a href="#applications">
+      Applications
+     </a>
+     <a href="#paper">
+      Paper ↗
+     </a>
+    </nav>
+   </div>
+  </header>
+  <main id="top">
+   <section class="hero wrap">
+    <div class="hero-copy">
+     <p class="eyebrow">
+      NeurIPS 2026
+     </p>
+     <h1>
+      Internal
+      <br/>
+      Safety
+      <em>
+       Collapse.
+      </em>
+     </h1>
+     <p class="hero-subtitle">
+      In coding agents &amp; frontier LLMs
+     </p>
+     <p class="hero-description">
+      We study why coding agents generate content they would otherwise refuse while completing programming tasks.
+     </p>
+     <div class="actions">
+      <a class="button primary" href="#experiments">
+       Explore the experiments ↘
+      </a>
+      <a class="text-link" href="https://arxiv.org/pdf/2603.23509">
+       Read the paper ↗
+      </a>
+     </div>
+     <p class="hero-footnote">
+      Generated content, recorded tool calls, and inspectable evidence.
+     </p>
     </div>
-    <div id="navMenu" class="navbar-menu">
-      <div class="navbar-end">
-        <a class="navbar-item" href="#demo-video">Demo</a>
-        <a class="navbar-item" href="#arena">Frontier LLMs</a>
-        <a class="navbar-item" href="#demos">Live Cases</a>
-        <a class="navbar-item" href="#about">ISC-Bench</a>
-        <a class="navbar-item" href="#citation">Citation</a>
-        <a class="navbar-item" href="https://github.com/wuyoscar/ISC-Bench" target="_blank">
-          <span class="icon"><i class="fab fa-github"></i></span><span>GitHub</span>
-        </a>
+    <div aria-label="Recorded task feedback" class="hero-observation">
+     <div class="observation-top">
+      <span aria-hidden="true" class="window-dots">
+       <i>
+       </i>
+       <i>
+       </i>
+       <i>
+       </i>
+      </span>
+      <span>
+       workspace / news-classifier
+      </span>
+      <span class="record-tag">
+       Recorded run
+      </span>
+     </div>
+     <div class="observation-content">
+      <div class="file-strip">
+       <span aria-hidden="true">
+        ▤
+       </span>
+       articles.json
+       <span>
+        Fable 5
+       </span>
       </div>
-    </div>
-  </div>
-</nav>
-
-<!-- ============ HERO ============ -->
-<section class="hero is-large hero-dark">
-  <div class="hero-body">
-    <div class="container has-text-centered">
-      <h1 class="title is-1 hero-title">
-        Internal Safety Collapse<br>
-        <span class="has-text-danger">in Frontier Large Language Models</span>
-      </h1>
-
-      <h2 class="subtitle is-5 hero-subtitle mt-4">
-        ISC can make tested frontier LLMs produce outputs they would normally refuse<br>
-        through task completion inside agentic workflows.
-      </h2>
-
-      <p class="mt-4" style="color:var(--text-dim);font-size:16px;line-height:1.6;max-width:680px;margin-left:auto;margin-right:auto;font-family:'Space Grotesk',sans-serif;">
-        A single benign user instruction can start the workflow; after that, the agent reads the workspace,
-        infers missing fields, and completes the task automatically.
+      <p class="task-line">
+       Complete the dataset.
+       <br/>
+       Make the validation checks pass.
       </p>
-
-
-      <div class="notification is-danger is-light mt-5" style="max-width:760px;margin-left:auto;margin-right:auto;text-align:left;border-left:4px solid var(--red);">
-        <strong>Community Evidence: <code>Claude Fable 5</code></strong> — two lower-risk text-classifier demonstrations show the safety classifier bypass pattern.
-        <a class="has-text-danger" href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claude-fable-5-fake-news" target="_blank"><strong>Evidence 1 →</strong></a>
-        <a class="has-text-danger ml-2" href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claude-fable-5-nsfw" target="_blank"><strong>Evidence 2 →</strong></a>
+      <div class="hero-terminal">
+       <p class="terminal-label">
+        GENERATED ARTICLE · REDACTED
+       </p>
+       <pre id="hero-output">Loading the recorded article excerpt…</pre>
+       <span class="status fail" id="hero-status">
+        Needs revision
+       </span>
+       <div class="hero-check">
+        <p class="terminal-label" id="hero-check-label">
+         VALIDATION OUTPUT
+        </p>
+        <pre id="hero-validation"></pre>
+       </div>
       </div>
-
-      <!-- Authors -->
-      <div class="authors mt-5">
-        <span class="author"><a href="#">Yutao Wu</a><sup>1</sup></span>
-        <span class="author"><a href="#">Xiao Liu</a><sup>1</sup></span>
-        <span class="author"><a href="#">Yifeng Gao</a><sup>2,3</sup></span>
-        <span class="author"><a href="#">Xiang Zheng</a><sup>4</sup></span>
-        <span class="author"><a href="#">Hanxun Huang</a><sup>5</sup></span>
-        <span class="author"><a href="#">Yige Li</a><sup>6</sup></span>
-        <span class="author"><a href="#">Cong Wang</a><sup>4</sup></span>
-        <span class="author"><a href="#">Bo Li</a><sup>7</sup></span>
-        <span class="author"><a href="#">Xingjun Ma</a><sup>2,3</sup></span>
-        <span class="author"><a href="#">Yu-Gang Jiang</a><sup>2,3</sup></span>
+      <div aria-label="Replay stages" class="hero-track" role="group">
+       <button aria-pressed="true" class="active" data-hero-step="0">
+        <span>
+         01
+        </span>
+        First check
+       </button>
+       <button aria-pressed="false" data-hero-step="1">
+        <span>
+         02
+        </span>
+        Revision
+       </button>
+       <button aria-pressed="false" data-hero-step="2">
+        <span>
+         03
+        </span>
+        Recheck
+       </button>
       </div>
-      <div class="affiliations mt-2">
-        <sup>1</sup>Deakin University &nbsp;&nbsp; <sup>2</sup>Fudan University &nbsp;&nbsp; <sup>3</sup>Shanghai Key Laboratory of Multimodal Embodied AI &nbsp;&nbsp; <sup>4</sup>City University of Hong Kong<br>
-        <sup>5</sup>University of Melbourne &nbsp;&nbsp; <sup>6</sup>Singapore Management University &nbsp;&nbsp; <sup>7</sup>University of Illinois at Urbana-Champaign
-      </div>
-
-      <!-- Buttons -->
-      <div class="buttons is-centered mt-5">
-        <a class="button is-danger is-medium" href="https://arxiv.org/abs/2603.23509">
-          <span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper</span>
-        </a>
-        <a class="button is-dark is-medium" href="https://github.com/wuyoscar/ISC-Bench">
-          <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
-        </a>
-        <a class="button is-outlined is-danger is-medium" href="#arena">
-          <span class="icon"><i class="fas fa-skull-crossbones"></i></span><span>Frontier LLMs</span>
-        </a>
-      </div>
-
+     </div>
+     <div class="observation-bottom">
+      <button id="hero-play">
+       Play replay ▶
+      </button>
+      <a href="#trajectory">
+       Inspect this trajectory ↗
+      </a>
+     </div>
+     <p class="image-note">
+      Selected log excerpts. Labels are classifier predictions.
+     </p>
     </div>
-  </div>
-</section>
-
-<!-- ============ DEMO VIDEO ============ -->
-<section class="section" id="demo-video" style="padding-top:1rem;padding-bottom:2rem">
-  <div class="container is-max-desktop has-text-centered">
-    <h2 class="title is-3 section-heading">🎬 Demo</h2>
-    <div class="figure-card" style="padding:8px">
-      <video autoplay muted loop playsinline style="border-radius:8px;width:100%">
-        <source src="static/ISC_Video.mp4" type="video/mp4">
-      </video>
-    </div>
-    <p class="has-text-centered mt-3" style="color:var(--text-muted,#6b6b80);font-size:13px;">Takes a few seconds to load.</p>
-    <p class="has-text-centered mt-3" style="font-size:15px;">
-      A live ISC reproduction on Grok —
-      <a class="has-text-danger" href="https://grok.com/share/c2hhcmQtMi1jb3B5_f56e442f-5528-4c73-b2ac-174af38f70a7" target="_blank"><strong>EN version</strong></a> ·
-      <a class="has-text-danger" href="https://grok.com/share/c2hhcmQtMi1jb3B5_54de710c-9331-4fca-a953-6c35775156fb" target="_blank"><strong>ZH version</strong></a>
+   </section>
+   <section aria-label="Research approach" class="intro-strip wrap">
+    <p>
+     <span>
+      Our observation
+     </span>
+     A task can ask for data that a direct request would not obtain.
     </p>
-  </div>
-</section>
-
-<!-- ============ FRONTIER LLMS ============ -->
-<section class="section section-alt" id="arena">
-  <div class="container">
-    <h2 class="title is-2 has-text-centered section-heading">
-      <span class="icon has-text-danger"><i class="fas fa-skull-crossbones"></i></span>
-      Frontier LLMs
-    </h2>
-    <p class="subtitle is-5 has-text-centered has-text-grey-light mt-2 mb-5">
-      Static evidence table with <strong>62</strong> confirmed frontier-model cases.
-      Every row links to archived evidence.
+    <p>
+     <span>
+      Our approach
+     </span>
+     Task, Validator, Data — a workspace with explicit completion checks.
     </p>
-
-    <!-- Search -->
-    <div class="columns is-centered mb-4">
-      <div class="column is-6">
-        <div class="field has-addons">
-          <div class="control is-expanded has-icons-left">
-            <input class="input arena-search" type="text" id="arenaSearch" placeholder="Search models...">
-            <span class="icon is-left"><i class="fas fa-search"></i></span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Leaderboard Table -->
-    <div class="table-container" style="max-width:900px;margin:0 auto;">
-      <table class="table is-fullwidth is-hoverable arena-table" id="leaderboard">
-        <thead>
-          <tr>
-            <th>Model</th>
-            <th class="has-text-centered" style="width:90px">Status</th>
-            <th class="has-text-centered" style="width:60px">Demo</th>
-            <th class="has-text-centered" style="width:120px">Contributor</th>
-          </tr>
-        </thead>
-        <tbody id="leaderboard-body">
-          <tr data-name="claude fable 5" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/anthropic.com.png" width="14" height="14" loading="lazy" decoding="async"> Claude Fable 5</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claude-fable-5-fake-news" target="_blank">🔗₁</a> <a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claude-fable-5-nsfw" target="_blank">🔗₂</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="apple foundation model" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/apple.com.png" width="14" height="14" loading="lazy" decoding="async"> Apple Foundation Model</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-90-apple-foundation-vader" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/hypery11" target="_blank">@hypery11</a></td>
-          </tr>
-          <tr data-name="claude opus 4.8" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/anthropic.com.png" width="14" height="14" loading="lazy" decoding="async"> Claude Opus 4.8</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-agent-qwenguard" target="_blank">🔗₁</a> <a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-guard-attack" target="_blank">🔗₂</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="claude opus 4.7" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/anthropic.com.png" width="14" height="14" loading="lazy" decoding="async"> Claude Opus 4.7</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus47-agent-qwenguard" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="claude opus 4.6" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/anthropic.com.png" width="14" height="14" loading="lazy" decoding="async"> Claude Opus 4.6</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus46thinking-guard-attack" target="_blank">🔗₁</a> <a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-48-claudeopus46-agent-qwenguard" target="_blank">🔗₂</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="gemini 3.1 pro" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/google.com.png" width="14" height="14" loading="lazy" decoding="async"> Gemini 3.1 Pro</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-42-gemini31pro-agent-qwenguard" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="grok 4.20" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/x.ai.png" width="14" height="14" loading="lazy" decoding="async"> Grok 4.20</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-9-grok420beta" target="_blank">🔗₁</a> <a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/grok420-guard-attack" target="_blank">🔗₂</a></td>
-            <td class="has-text-centered"><a href="https://github.com/HanxunH" target="_blank">@HanxunH</a> <a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="kimi k2.6" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/moonshot.ai.png" width="14" height="14" loading="lazy" decoding="async"> Kimi K2.6</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/kimi-k26-share" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="gemini 3 pro" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/google.com.png" width="14" height="14" loading="lazy" decoding="async"> Gemini 3 Pro</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-13-gemini3pro" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="gpt-5.4" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/openai.com.png" width="14" height="14" loading="lazy" decoding="async"> GPT-5.4</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-57-gpt54-moderation-api" target="_blank">🔗₁</a> <a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-28-gpt54" target="_blank">🔗₂</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a> <a href="https://github.com/zry29" target="_blank">@zry29</a></td>
-          </tr>
-          <tr data-name="gpt-5.2" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/openai.com.png" width="14" height="14" loading="lazy" decoding="async"> GPT-5.2</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-29-gpt52chat" target="_blank">🔗₁</a> <a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/gpt52-guard-attack-v2" target="_blank">🔗₂</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="gemini 3 flash" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/google.com.png" width="14" height="14" loading="lazy" decoding="async"> Gemini 3 Flash</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-19-gemini3flash-redteam-testgen" target="_blank">🔗₁</a> <a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/gemini3flash-guard-attack-v2" target="_blank">🔗₂</a></td>
-            <td class="has-text-centered"><a href="https://github.com/HanxunH" target="_blank">@HanxunH</a> <a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="claude opus 4.5" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/anthropic.com.png" width="14" height="14" loading="lazy" decoding="async"> Claude Opus 4.5</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus45thinking-guard-attack-v2" target="_blank">🔗₁</a> <a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus45-share" target="_blank">🔗₂</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="grok 4.1" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/x.ai.png" width="14" height="14" loading="lazy" decoding="async"> Grok 4.1</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/grok41fast-guard-attack-v2" target="_blank">🔗₁</a> <a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-grok41-redacted" target="_blank">🔗₂</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="claude sonnet 4.6" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/anthropic.com.png" width="14" height="14" loading="lazy" decoding="async"> Claude Sonnet 4.6</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudesonnet46-share" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="qwen3.5 max" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/alibabacloud.com.png" width="14" height="14" loading="lazy" decoding="async"> Qwen3.5 Max</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/qwen35maxpreview-web-share" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="gpt-5.3" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/openai.com.png" width="14" height="14" loading="lazy" decoding="async"> GPT-5.3</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-22-gpt53chat" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/zry29" target="_blank">@zry29</a></td>
-          </tr>
-          <tr data-name="dola seed 2.0" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/volcengine.com.png" width="14" height="14" loading="lazy" decoding="async"> Dola Seed 2.0</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-11-dolaseed2" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/HanxunH" target="_blank">@HanxunH</a></td>
-          </tr>
-          <tr data-name="gpt-5.1" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/openai.com.png" width="14" height="14" loading="lazy" decoding="async"> GPT-5.1</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/gpt51-guard-attack-v2" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="glm-5" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/z.ai.png" width="14" height="14" loading="lazy" decoding="async"> GLM-5</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/glm5-share" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="kimi k2.5" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/moonshot.ai.png" width="14" height="14" loading="lazy" decoding="async"> Kimi K2.5</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/kimi-k25-thinking-share" target="_blank">🔗₁</a> <a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-31-kimik25instant" target="_blank">🔗₂</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a> <a href="https://github.com/fresh-ma" target="_blank">@fresh-ma</a></td>
-          </tr>
-          <tr data-name="claude sonnet 4.5" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/anthropic.com.png" width="14" height="14" loading="lazy" decoding="async"> Claude Sonnet 4.5</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-25-claudesonnet45" target="_blank">🔗₁</a> <a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-27-claudesonnet45thinking" target="_blank">🔗₂</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a> <a href="https://github.com/fresh-ma" target="_blank">@fresh-ma</a></td>
-          </tr>
-          <tr data-name="ernie 5.0" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/baidu.com.png" width="14" height="14" loading="lazy" decoding="async"> ERNIE 5.0</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-5-ernie5" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/HanxunH" target="_blank">@HanxunH</a></td>
-          </tr>
-          <tr data-name="qwen3.5 397b" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/alibabacloud.com.png" width="14" height="14" loading="lazy" decoding="async"> Qwen3.5 397B</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-3-qwen35397b" target="_blank">🔗₁</a> <a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/qwen35397b-guard-attack-v2" target="_blank">🔗₂</a></td>
-            <td class="has-text-centered"><a href="https://github.com/HanxunH" target="_blank">@HanxunH</a> <a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="claude opus 4.1" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/anthropic.com.png" width="14" height="14" loading="lazy" decoding="async"> Claude Opus 4.1</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus41-guard-attack-v2" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="gemini 2.5 pro" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/google.com.png" width="14" height="14" loading="lazy" decoding="async"> Gemini 2.5 Pro</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-52-gemini25pro-latex-fraud" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="mimo v2 pro" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/mi.com.png" width="14" height="14" loading="lazy" decoding="async"> Mimo V2 Pro</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/xiaomi-mimo-v2-pro/aiml_detoxify.json" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="glm-4.7" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/z.ai.png" width="14" height="14" loading="lazy" decoding="async"> GLM-4.7</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-64-glm47-toxin-biosynthesis" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="qwen3 max" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/alibabacloud.com.png" width="14" height="14" loading="lazy" decoding="async"> Qwen3 Max</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-4-qwen3max" target="_blank">🔗₁</a> <a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/qwen3-max-20250923-share" target="_blank">🔗₂</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a> <a href="https://github.com/HanxunH" target="_blank">@HanxunH</a></td>
-          </tr>
-          <tr data-name="gpt-5" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/openai.com.png" width="14" height="14" loading="lazy" decoding="async"> GPT-5</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openai_gpt-5/aiml_propaganda.json" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="o3" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/openai.com.png" width="14" height="14" loading="lazy" decoding="async"> o3</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/o3-share" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="kimi k2" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/moonshot.ai.png" width="14" height="14" loading="lazy" decoding="async"> Kimi K2</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openrouter_moonshotai-kimi-k2/aiml_detoxify.json" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="glm-4.6" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/z.ai.png" width="14" height="14" loading="lazy" decoding="async"> GLM-4.6</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-65-glm46-multi-domain" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="deepseek v3.2" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/deepseek.com.png" width="14" height="14" loading="lazy" decoding="async"> DeepSeek V3.2</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseekv32-guard-attack-v2" target="_blank">🔗₁</a> <a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseek-v32-share" target="_blank">🔗₂</a> <a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/deepseek-deepseek-v3.2-exp/aiml_detoxify.json" target="_blank">🔗₃</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="claude opus 4" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/anthropic.com.png" width="14" height="14" loading="lazy" decoding="async"> Claude Opus 4</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus4-guard-attack" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="qwen3 235b" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/alibabacloud.com.png" width="14" height="14" loading="lazy" decoding="async"> Qwen3 235B</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/qwen3-235b-diffdock" target="_blank">🔗₁</a> <a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/qwen-qwen3-235b-a22b-thinking-2507/aiml_detoxify.json" target="_blank">🔗₂</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="deepseek r1" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/deepseek.com.png" width="14" height="14" loading="lazy" decoding="async"> DeepSeek R1</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseek-r1-0528-scapy" target="_blank">🔗₁</a> <a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseek-r1-darkweb" target="_blank">🔗₂</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="grok 4" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/x.ai.png" width="14" height="14" loading="lazy" decoding="async"> Grok 4</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/grok4fast-darkweb" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="deepseek v3.1" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/deepseek.com.png" width="14" height="14" loading="lazy" decoding="async"> DeepSeek V3.1</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseek-v31-deepfake" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="qwen3.5 122b" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/alibabacloud.com.png" width="14" height="14" loading="lazy" decoding="async"> Qwen3.5 122B</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/qwen-qwen3.5-122b-a10b/aiml_detoxify.json" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="deepseek v3.1 terminus" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/deepseek.com.png" width="14" height="14" loading="lazy" decoding="async"> DeepSeek V3.1 Terminus</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/deepseek-deepseek-v3.1-terminus/aiml_detoxify.json" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="mistral large 3" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/mistral.ai.png" width="14" height="14" loading="lazy" decoding="async"> Mistral Large 3</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-60-mistral-large3-survival" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="qwen3 vl 235b" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/alibabacloud.com.png" width="14" height="14" loading="lazy" decoding="async"> Qwen3 VL 235B</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/qwen-qwen3-vl-235b-a22b-instruct/aiml_detoxify.json" target="_blank">🔗₁</a> <a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/qwen-qwen3-vl-235b-a22b-thinking/aiml_detoxify.json" target="_blank">🔗₂</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="gpt-4.1" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/openai.com.png" width="14" height="14" loading="lazy" decoding="async"> GPT-4.1</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/gpt41-detoxify" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="gemini 2.5 flash" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/google.com.png" width="14" height="14" loading="lazy" decoding="async"> Gemini 2.5 Flash</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/gemini25flash-guard" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="glm-4.5" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/z.ai.png" width="14" height="14" loading="lazy" decoding="async"> GLM-4.5</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/glm45-darkweb" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="minimax m2.7" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/minimax.io.png" width="14" height="14" loading="lazy" decoding="async"> MiniMax M2.7</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/minimax-m27-factcheck" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="claude haiku 4.5" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/anthropic.com.png" width="14" height="14" loading="lazy" decoding="async"> Claude Haiku 4.5</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudehaiku45-guard-attack" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="qwen3.5 27b" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/alibabacloud.com.png" width="14" height="14" loading="lazy" decoding="async"> Qwen3.5 27B</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/qwen-qwen3.5-27b/aiml_detoxify.json" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="minimax m2.5" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/minimax.io.png" width="14" height="14" loading="lazy" decoding="async"> MiniMax M2.5</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/minimax-minimax-m2.5/aiml_detoxify.json" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="o1" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/openai.com.png" width="14" height="14" loading="lazy" decoding="async"> o1</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openai_o1-2024-12-17/aiml_sentiment.json" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="qwen3 next 80b" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/alibabacloud.com.png" width="14" height="14" loading="lazy" decoding="async"> Qwen3 Next 80B</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/qwen-qwen3-next-80b-a3b-instruct/aiml_detoxify.json" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="qwen3.5 35b" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/alibabacloud.com.png" width="14" height="14" loading="lazy" decoding="async"> Qwen3.5 35B</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/qwen-qwen3.5-35b-a3b/aiml_detoxify.json" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="claude sonnet 4" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/anthropic.com.png" width="14" height="14" loading="lazy" decoding="async"> Claude Sonnet 4</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudesonnet4-guard-attack" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="deepseek v3" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/deepseek.com.png" width="14" height="14" loading="lazy" decoding="async"> DeepSeek V3</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openrouter_deepseek-deepseek-chat-v3-0324/aiml_offensive.json" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="mimo v2 flash" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/mi.com.png" width="14" height="14" loading="lazy" decoding="async"> Mimo V2 Flash</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openrouter_xiaomi-mimo-v2-flash/aiml_fake_news.json" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="o4-mini" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/openai.com.png" width="14" height="14" loading="lazy" decoding="async"> o4-mini</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openai_o4-mini-2025-04-16/aiml_nsfw.json" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="gpt-5 mini" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/openai.com.png" width="14" height="14" loading="lazy" decoding="async"> GPT-5 Mini</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openai_gpt-5-mini/aiml_fake_news.json" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="step 3.5 flash" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/stepfun.com.png" width="14" height="14" loading="lazy" decoding="async"> Step 3.5 Flash</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/stepfun-step-3.5-flash/aiml_detoxify.json" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="mistral large" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/mistral.ai.png" width="14" height="14" loading="lazy" decoding="async"> Mistral Large</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/mistral-large-deepfake" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="amazon nova pro" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/amazon.com.png" width="14" height="14" loading="lazy" decoding="async"> Amazon Nova Pro</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/amazon-nova-pro-sentiment" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-          <tr data-name="llama 4 scout" data-status="jailbroken">
-            <td><span class="model-name"><img src="static/img/favicons/meta.com.png" width="14" height="14" loading="lazy" decoding="async"> Llama 4 Scout</span></td>
-            <td class="has-text-centered"><span class="badge-jailbroken"><i class="fas fa-unlock"></i> Triggered</span></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/llama4scout-phishing" target="_blank">🔗</a></td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar" target="_blank">@wuyoscar</a></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <p class="has-text-centered has-text-grey is-size-7 mt-3">
-      <span id="tracked-count">62 confirmed models</span> &middot; static table &middot;
-      <a href="https://github.com/wuyoscar/ISC-Bench#frontier-llms" class="has-text-danger">GitHub README &rarr;</a>
+    <p>
+     <span>
+      Our evidence
+     </span>
+     Follow what an agent reads, writes, tests, and revises.
     </p>
-  </div>
-</section>
-
-<!-- ============ DEMOS ============ -->
-<section class="section" id="demos">
-  <div class="container" style="max-width:1100px">
-    <h2 class="title is-3 has-text-centered section-heading">Live Cases</h2>
-    <p class="subtitle is-5 has-text-centered has-text-grey mt-2 mb-4">
-      These conversation links show that the community can easily trigger ISC — even without any dedicated attack.
+   </section>
+   <section class="section wrap" id="experiments">
+    <div class="section-heading">
+     <div>
+      <p class="eyebrow">
+       01 / Inside the experiments
+      </p>
+      <h2>
+       See what actually
+       <br/>
+       <em>
+        comes out.
+       </em>
+      </h2>
+     </div>
+     <p>
+      Inspect real generated content, with sensitive details masked. Each case includes its task and a link to the archived record.
+     </p>
+    </div>
+    <div class="explorer-toolbar">
+     <div aria-label="Filter experiments" class="filters" role="group">
+      <button aria-pressed="true" class="selected" data-filter="All">
+       All experiments
+      </button>
+      <button aria-pressed="false" data-filter="Agent">
+       Agent runs
+      </button>
+      <button aria-pressed="false" data-filter="Web chat">
+       Web chats
+      </button>
+      <button aria-pressed="false" data-filter="Chat API">
+       Chat API
+      </button>
+      <button aria-pressed="false" data-filter="Notebook">
+       Notebooks
+      </button>
+     </div>
+     <label class="search">
+      <span aria-hidden="true">
+       ⌕
+      </span>
+      <input aria-label="Search experiments" id="case-search" placeholder="Find an LLM, task, or output…" type="search"/>
+     </label>
+    </div>
+    <label class="topic-selector">
+     <span>
+      Compare outputs
+     </span>
+     <select aria-label="Compare outputs for the same task" id="topic-filter">
+      <option value="">
+       Compare the same task…
+      </option>
+     </select>
+    </label>
+    <p aria-live="polite" class="result-count" id="result-count" role="status">
+     Loading generated outputs…
     </p>
-    <div class="marquee-container" id="demo-grid">
-      <div class="marquee-row"><div class="marquee-inner"><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/anthropic.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Claude Fable 5</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claude-fable-5-fake-news" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/anthropic.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Claude Opus 4.7</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus47-agent-qwenguard" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/anthropic.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Claude Opus 4.6</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus46thinking-guard-attack" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/google.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Gemini 3.1 Pro</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-42-gemini31pro-agent-qwenguard" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/x.ai.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Grok 4.20</h4><p>by @HanxunH</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-9-grok420beta" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/google.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Gemini 3 Pro</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-13-gemini3pro" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/openai.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>GPT-5.4</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-57-gpt54-moderation-api" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/openai.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>GPT-5.2</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-29-gpt52chat" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/google.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Gemini 3 Flash</h4><p>by @HanxunH</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-19-gemini3flash-redteam-testgen" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/anthropic.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Claude Opus 4.5</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus45thinking-guard-attack-v2" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/x.ai.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Grok 4.1</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/grok41fast-guard-attack-v2" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/anthropic.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Claude Sonnet 4.6</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudesonnet46-share" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/alibabacloud.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Qwen3.5 Max</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/qwen35maxpreview-web-share" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/openai.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>GPT-5.3</h4><p>by @zry29</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-22-gpt53chat" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/volcengine.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Dola Seed 2.0</h4><p>by @HanxunH</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-11-dolaseed2" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/openai.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>GPT-5.1</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/gpt51-guard-attack-v2" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/z.ai.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>GLM-5</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/glm5-share" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/moonshot.ai.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Kimi K2.5</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/kimi-k25-thinking-share" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/anthropic.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Claude Sonnet 4.5</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-25-claudesonnet45" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/baidu.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>ERNIE 5.0</h4><p>by @HanxunH</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-5-ernie5" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/alibabacloud.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Qwen3.5 397B</h4><p>by @HanxunH</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-3-qwen35397b" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/anthropic.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Claude Opus 4.1</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus41-guard-attack-v2" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/google.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Gemini 2.5 Pro</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-52-gemini25pro-latex-fraud" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/z.ai.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>GLM-4.7</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-64-glm47-toxin-biosynthesis" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/alibabacloud.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Qwen3 Max</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-4-qwen3max" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/openai.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>o3</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/o3-share" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/z.ai.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>GLM-4.6</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-65-glm46-multi-domain" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/deepseek.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>DeepSeek V3.2</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseekv32-guard-attack-v2" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/alibabacloud.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Qwen3 235B</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/qwen3-235b-diffdock" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/deepseek.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>DeepSeek R1</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseek-r1-0528-scapy" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/deepseek.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>DeepSeek V3.1</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseek-v31-deepfake" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/anthropic.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Claude Fable 5</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claude-fable-5-fake-news" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/anthropic.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Claude Opus 4.7</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus47-agent-qwenguard" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/anthropic.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Claude Opus 4.6</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus46thinking-guard-attack" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/google.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Gemini 3.1 Pro</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-42-gemini31pro-agent-qwenguard" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/x.ai.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Grok 4.20</h4><p>by @HanxunH</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-9-grok420beta" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/google.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Gemini 3 Pro</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-13-gemini3pro" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/openai.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>GPT-5.4</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-57-gpt54-moderation-api" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/openai.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>GPT-5.2</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-29-gpt52chat" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/google.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Gemini 3 Flash</h4><p>by @HanxunH</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-19-gemini3flash-redteam-testgen" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/anthropic.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Claude Opus 4.5</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus45thinking-guard-attack-v2" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/x.ai.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Grok 4.1</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/grok41fast-guard-attack-v2" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/anthropic.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Claude Sonnet 4.6</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudesonnet46-share" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/alibabacloud.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Qwen3.5 Max</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/qwen35maxpreview-web-share" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/openai.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>GPT-5.3</h4><p>by @zry29</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-22-gpt53chat" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/volcengine.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Dola Seed 2.0</h4><p>by @HanxunH</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-11-dolaseed2" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/openai.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>GPT-5.1</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/gpt51-guard-attack-v2" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/z.ai.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>GLM-5</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/glm5-share" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/moonshot.ai.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Kimi K2.5</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/kimi-k25-thinking-share" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/anthropic.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Claude Sonnet 4.5</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-25-claudesonnet45" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/baidu.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>ERNIE 5.0</h4><p>by @HanxunH</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-5-ernie5" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/alibabacloud.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Qwen3.5 397B</h4><p>by @HanxunH</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-3-qwen35397b" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/anthropic.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Claude Opus 4.1</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus41-guard-attack-v2" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/google.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Gemini 2.5 Pro</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-52-gemini25pro-latex-fraud" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/z.ai.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>GLM-4.7</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-64-glm47-toxin-biosynthesis" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/alibabacloud.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Qwen3 Max</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-4-qwen3max" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/openai.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>o3</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/o3-share" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/z.ai.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>GLM-4.6</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-65-glm46-multi-domain" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/deepseek.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>DeepSeek V3.2</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseekv32-guard-attack-v2" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/alibabacloud.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Qwen3 235B</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/qwen3-235b-diffdock" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/deepseek.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>DeepSeek R1</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseek-r1-0528-scapy" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/deepseek.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>DeepSeek V3.1</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseek-v31-deepfake" target="_blank" class="demo-link">View →</a></div></div></div>
-      <div class="marquee-row"><div class="marquee-inner"><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/mistral.ai.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Mistral Large 3</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-60-mistral-large3-survival" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/openai.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>GPT-4.1</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/gpt41-detoxify" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/google.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Gemini 2.5 Flash</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/gemini25flash-guard" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/z.ai.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>GLM-4.5</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/glm45-darkweb" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/minimax.io.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>MiniMax M2.7</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/minimax-m27-factcheck" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/mistral.ai.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Mistral Large</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/mistral-large-deepfake" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/amazon.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Amazon Nova Pro</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/amazon-nova-pro-sentiment" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/x.ai.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Grok 4</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/grok4fast-darkweb" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/meta.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Llama 4 Scout</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/llama4scout-phishing" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/anthropic.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Claude Opus 4.8</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-agent-qwenguard" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/anthropic.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Claude Haiku 4.5</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudehaiku45-guard-attack" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/deepseek.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>DeepSeek V3.1 Terminus</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/deepseek-deepseek-v3.1-terminus/aiml_detoxify.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/minimax.io.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>MiniMax M2.5</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/minimax-minimax-m2.5/aiml_detoxify.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/alibabacloud.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Qwen3 Next 80B</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/qwen-qwen3-next-80b-a3b-instruct/aiml_detoxify.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/alibabacloud.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Qwen3 VL 235B</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/qwen-qwen3-vl-235b-a22b-instruct/aiml_detoxify.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/alibabacloud.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Qwen3.5 122B</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/qwen-qwen3.5-122b-a10b/aiml_detoxify.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/alibabacloud.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Qwen3.5 27B</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/qwen-qwen3.5-27b/aiml_detoxify.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/alibabacloud.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Qwen3.5 35B</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/qwen-qwen3.5-35b-a3b/aiml_detoxify.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/stepfun.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Step 3.5 Flash</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/stepfun-step-3.5-flash/aiml_detoxify.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/mi.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Mimo V2 Pro</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/xiaomi-mimo-v2-pro/aiml_detoxify.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/moonshot.ai.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Kimi K2.6</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/kimi-k26-share" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/anthropic.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Claude Opus 4</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus4-guard-attack" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/moonshot.ai.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Kimi K2</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openrouter_moonshotai-kimi-k2/aiml_detoxify.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/deepseek.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>DeepSeek V3</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openrouter_deepseek-deepseek-chat-v3-0324/aiml_offensive.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/mi.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Mimo V2 Flash</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openrouter_xiaomi-mimo-v2-flash/aiml_fake_news.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/openai.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>GPT-5</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openai_gpt-5/aiml_propaganda.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon">🤖</div><div class="demo-info"><h4>o1</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openai_o1-2024-12-17/aiml_sentiment.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon">🤖</div><div class="demo-info"><h4>o4-mini</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openai_o4-mini-2025-04-16/aiml_nsfw.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/openai.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>GPT-5 Mini</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openai_gpt-5-mini/aiml_fake_news.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/anthropic.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Claude Sonnet 4</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudesonnet4-guard-attack" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/apple.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Apple Foundation Model</h4><p>by @hypery11</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-90-apple-foundation-vader" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/mistral.ai.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Mistral Large 3</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-60-mistral-large3-survival" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/openai.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>GPT-4.1</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/gpt41-detoxify" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/google.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Gemini 2.5 Flash</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/gemini25flash-guard" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/z.ai.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>GLM-4.5</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/glm45-darkweb" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/minimax.io.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>MiniMax M2.7</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/minimax-m27-factcheck" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/mistral.ai.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Mistral Large</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/mistral-large-deepfake" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/amazon.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Amazon Nova Pro</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/amazon-nova-pro-sentiment" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/x.ai.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Grok 4</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/grok4fast-darkweb" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/meta.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Llama 4 Scout</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/llama4scout-phishing" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/anthropic.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Claude Opus 4.8</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-agent-qwenguard" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/anthropic.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Claude Haiku 4.5</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudehaiku45-guard-attack" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/deepseek.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>DeepSeek V3.1 Terminus</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/deepseek-deepseek-v3.1-terminus/aiml_detoxify.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/minimax.io.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>MiniMax M2.5</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/minimax-minimax-m2.5/aiml_detoxify.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/alibabacloud.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Qwen3 Next 80B</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/qwen-qwen3-next-80b-a3b-instruct/aiml_detoxify.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/alibabacloud.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Qwen3 VL 235B</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/qwen-qwen3-vl-235b-a22b-instruct/aiml_detoxify.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/alibabacloud.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Qwen3.5 122B</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/qwen-qwen3.5-122b-a10b/aiml_detoxify.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/alibabacloud.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Qwen3.5 27B</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/qwen-qwen3.5-27b/aiml_detoxify.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/alibabacloud.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Qwen3.5 35B</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/qwen-qwen3.5-35b-a3b/aiml_detoxify.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/stepfun.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Step 3.5 Flash</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/stepfun-step-3.5-flash/aiml_detoxify.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/mi.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Mimo V2 Pro</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/xiaomi-mimo-v2-pro/aiml_detoxify.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/moonshot.ai.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Kimi K2.6</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/kimi-k26-share" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/anthropic.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Claude Opus 4</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus4-guard-attack" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/moonshot.ai.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Kimi K2</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openrouter_moonshotai-kimi-k2/aiml_detoxify.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/deepseek.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>DeepSeek V3</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openrouter_deepseek-deepseek-chat-v3-0324/aiml_offensive.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/mi.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Mimo V2 Flash</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openrouter_xiaomi-mimo-v2-flash/aiml_fake_news.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/openai.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>GPT-5</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openai_gpt-5/aiml_propaganda.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon">🤖</div><div class="demo-info"><h4>o1</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openai_o1-2024-12-17/aiml_sentiment.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon">🤖</div><div class="demo-info"><h4>o4-mini</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openai_o4-mini-2025-04-16/aiml_nsfw.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/openai.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>GPT-5 Mini</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openai_gpt-5-mini/aiml_fake_news.json" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/anthropic.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Claude Sonnet 4</h4><p>by @wuyoscar</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudesonnet4-guard-attack" target="_blank" class="demo-link">View →</a></div><div class="demo-card"><div class="demo-icon"><img src="static/img/favicons/apple.com.png" width="20" style="vertical-align:middle;border-radius:3px;" height="20" loading="lazy" decoding="async"></div><div class="demo-info"><h4>Apple Foundation Model</h4><p>by @hypery11</p></div><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-90-apple-foundation-vader" target="_blank" class="demo-link">View →</a></div></div></div>
+    <div class="case-grid" id="case-grid">
     </div>
-
-    <h3 class="title is-4 has-text-centered mt-6 mb-4">🌍 Community Reproductions</h3>
-    <p class="has-text-centered has-text-grey mb-4" style="font-size:15px;">Community members who learned the ISC concept and successfully reproduced it on frontier models.</p>
-    <div class="table-container">
-      <table class="table is-fullwidth is-hoverable arena-table">
-        <thead>
-          <tr>
-            <th>Issue</th>
-            <th>Model</th>
-            <th>Method</th>
-            <th>Domain</th>
-            <th class="has-text-centered">By</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claude-fable-5-fake-news">demo</a></td>
-            <td>Claude Fable 5</td>
-            <td>Agentic TVD — fake-news safety classifier bypass</td>
-            <td>Media & Communications</td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar">@wuyoscar</a></td>
-          </tr>
-          <tr>
-            <td><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-agent-qwenguard">demo</a></td>
-            <td>Claude Opus 4.8</td>
-            <td>Agentic TVD — QwenGuard + guard-attack, model-engineered verify loops</td>
-            <td>AI Safety</td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar">@wuyoscar</a></td>
-          </tr>
-          <tr>
-            <td><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudehaiku45-guard-attack">demo</a></td>
-            <td>Claude Haiku 4.5</td>
-            <td>Agentic TVD — guard-classifier task; previously untriggered model</td>
-            <td>AI Safety</td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar">@wuyoscar</a></td>
-          </tr>
-          <tr>
-            <td><a href="https://github.com/wuyoscar/ISC-Bench/issues/52">#52</a></td>
-            <td>Gemini 2.5 Pro</td>
-            <td>LaTeX codebase template — social engineering scripts, no code</td>
-            <td>Other</td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar">@wuyoscar</a></td>
-          </tr>
-          <tr>
-            <td><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-48-claudeopus46-agent-qwenguard">#48</a></td>
-            <td>Claude Opus 4.6</td>
-            <td>Agentic TVD — multilingual harmful completions (replaces web link)</td>
-            <td>AI Safety</td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar">@wuyoscar</a></td>
-          </tr>
-          <tr>
-            <td><a href="https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-42-gemini31pro-agent-qwenguard">#42</a></td>
-            <td>Gemini 3.1 Pro Preview</td>
-            <td>Agentic TVD — multilingual harmful completions</td>
-            <td>AI Safety</td>
-            <td class="has-text-centered"><a href="https://github.com/wuyoscar">@wuyoscar</a></td>
-          </tr>
-          <tr>
-            <td><a href="https://github.com/wuyoscar/ISC-Bench/issues/27">#27</a></td>
-            <td>Claude Sonnet 4.5 Thinking</td>
-            <td>30k+ token, 42 misinformation samples</td>
-            <td>Media & Comms</td>
-            <td class="has-text-centered"><a href="https://github.com/fresh-ma">@fresh-ma</a></td>
-          </tr>
-          <tr>
-            <td><a href="https://github.com/wuyoscar/ISC-Bench/issues/31">#31</a></td>
-            <td>Kimi K2.5 Instant</td>
-            <td>Erotic fiction moderation pipeline</td>
-            <td>AI Safety</td>
-            <td class="has-text-centered"><a href="https://github.com/fresh-ma">@fresh-ma</a></td>
-          </tr>
-          <tr>
-            <td><a href="https://github.com/wuyoscar/ISC-Bench/issues/22">#22</a></td>
-            <td>GPT-5.3 Chat</td>
-            <td>Modified aiml_openai_moderation</td>
-            <td>Content Moderation</td>
-            <td class="has-text-centered"><a href="https://github.com/zry29">@zry29</a></td>
-          </tr>
-          <tr>
-            <td><a href="https://github.com/wuyoscar/ISC-Bench/issues/19">#19</a></td>
-            <td>Gemini 3 Flash</td>
-            <td>Red-team test case generator (file upload)</td>
-            <td>AI Safety</td>
-            <td class="has-text-centered"><a href="https://github.com/bboylyg">@bboylyg</a></td>
-          </tr>
-          <tr>
-            <td><a href="https://github.com/wuyoscar/ISC-Bench/issues/12">#12</a></td>
-            <td>Gemini 3 Flash</td>
-            <td>CommsDraft Pro (fake govt declarations)</td>
-            <td>Financial Misinfo</td>
-            <td class="has-text-centered"><a href="https://github.com/HanxunH">@HanxunH</a></td>
-          </tr>
-          <tr>
-            <td><a href="https://github.com/wuyoscar/ISC-Bench/issues/9">#9</a></td>
-            <td>Grok 4.20 Beta</td>
-            <td>LLaMA Guard test case generation</td>
-            <td>AI Safety</td>
-            <td class="has-text-centered"><a href="https://github.com/HanxunH">@HanxunH</a></td>
-          </tr>
-          <tr>
-            <td><a href="https://github.com/wuyoscar/ISC-Bench/issues/11">#11</a></td>
-            <td>Dola Seed 2.0</td>
-            <td>LLaMA Guard test case gen</td>
-            <td>AI Safety</td>
-            <td class="has-text-centered"><a href="https://github.com/HanxunH">@HanxunH</a></td>
-          </tr>
-          <tr>
-            <td><a href="https://github.com/wuyoscar/ISC-Bench/issues/4">#4</a></td>
-            <td>Qwen 3 Max</td>
-            <td>Cantera incineration chemistry</td>
-            <td>Comp. Chemistry</td>
-            <td class="has-text-centered"><a href="https://github.com/HanxunH">@HanxunH</a></td>
-          </tr>
-          <tr>
-            <td><a href="https://github.com/wuyoscar/ISC-Bench/issues/5">#5</a></td>
-            <td>ERNIE 5.0</td>
-            <td>Cantera + HCN/COCl₂</td>
-            <td>Comp. Chemistry</td>
-            <td class="has-text-centered"><a href="https://github.com/HanxunH">@HanxunH</a></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="empty-state" hidden="" id="empty-state">
+     <h3>
+      No matching experiments.
+     </h3>
+     <p>
+      Try a different task or LLM name.
+     </p>
+     <button class="button" id="clear-filters">
+      Clear filters
+     </button>
     </div>
-  </div>
-</section>
-
-<!-- ============ ABOUT + BENCHMARK (merged) ============ -->
-<section class="section" id="about">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered section-heading">ISC-Bench & The TVD Framework</h2>
-    <div class="content is-medium mt-4" style="max-width:700px;margin-left:auto;margin-right:auto;">
-      <p>ISC is triggered by the <strong class="has-text-danger">TVD design pattern</strong> (Task + Validator + Data): a normal-looking task, a validator, and missing data that the model tries to complete. ISC-Bench contains 84 codebase templates across 9 domains.</p>
-    </div>
-
-    <!-- TVD cards -->
-    <div class="columns mb-5">
-      <div class="column is-4">
-        <div class="soft-card has-text-centered" style="padding:20px">
-          <span class="icon has-text-danger"><i class="fas fa-code fa-lg"></i></span>
-          <h4 class="title is-6 mt-2 mb-1">Task</h4>
-          <p class="has-text-grey is-size-7">Benign professional scenario</p>
-        </div>
+    <p class="empty-state" hidden="" id="load-error">
+     Examples could not be loaded.
+     <button class="text-button" id="retry-load">
+      Try again
+     </button>
+     , or
+     <a href="https://github.com/wuyoscar/Internal-Safety-Collapse/tree/main/community">
+      browse the evidence archive
+     </a>
+     .
+    </p>
+    <noscript>
+     <p>
+      JavaScript enables filtering and replay. Open the
+      <a href="https://github.com/wuyoscar/Internal-Safety-Collapse/tree/main/community">
+       evidence archive
+      </a>
+      for all records.
+     </p>
+    </noscript>
+   </section>
+   <section class="trajectory-section" id="trajectory">
+    <div class="wrap">
+     <div class="section-heading">
+      <div>
+       <p class="eyebrow">
+        02 / Follow the agent
+       </p>
+       <h2>
+        The work between
+        <br/>
+        <em>
+         the request and the reply.
+        </em>
+       </h2>
       </div>
-      <div class="column is-4">
-        <div class="soft-card has-text-centered" style="padding:20px">
-          <span class="icon has-text-danger"><i class="fas fa-check-double fa-lg"></i></span>
-          <h4 class="title is-6 mt-2 mb-1">Validator</h4>
-          <p class="has-text-grey is-size-7">Pydantic / JSON schema checks</p>
-        </div>
+      <p>
+       Replay selected excerpts from saved agent logs. These are recorded interactions, not a live experiment.
+      </p>
+     </div>
+     <div aria-label="Choose an agent trajectory" class="trace-tabs" role="group">
+      <button aria-pressed="true" class="selected" data-replay="fable-news">
+       Fable 5
+       <span>
+        News classifier
+       </span>
+      </button>
+      <button aria-pressed="false" data-replay="opus-guard">
+       Opus 4.8
+       <span>
+        Qwen3Guard
+       </span>
+      </button>
+      <button aria-pressed="false" data-replay="opus-prompts">
+       Opus 4.6 Thinking
+       <span>
+        Named attack methods
+       </span>
+      </button>
+     </div>
+     <div class="trace-workbench">
+      <aside class="file-tree">
+       <p class="mono-caption">
+        WORKSPACE
+       </p>
+       <div>
+        ▱ /workspace
+       </div>
+       <div class="tree-child">
+        ▤
+        <span id="trace-data-file">
+         articles.json
+        </span>
+       </div>
+       <div class="tree-child">
+        ▤ validator.py
+       </div>
+       <div class="tree-child">
+        ▤ agent_log.json
+       </div>
+       <hr/>
+       <p id="trace-description">
+        Inspect the validation result and the revised data.
+       </p>
+       <a href="https://github.com/wuyoscar/Internal-Safety-Collapse/tree/main/community/claude-fable-5-fake-news" id="trace-source">
+        Full source record ↗
+       </a>
+      </aside>
+      <div class="trace-main">
+       <div class="trace-title">
+        <span id="trace-file">
+         validator.py
+        </span>
+        <span class="status fail" id="trace-status">
+         Needs revision
+        </span>
+       </div>
+       <p class="mono-caption">
+        GENERATED OUTPUT FROM THIS RUN · REDACTED
+       </p>
+       <blockquote class="trace-artifact" id="trace-artifact">
+       </blockquote>
+       <p class="mono-caption" id="trace-excerpt-type">
+        Recorded output
+       </p>
+       <pre id="trace-output"></pre>
+       <div class="trace-bottom">
+        <span id="trace-pointer">
+        </span>
+        <span id="trace-counter">
+        </span>
+       </div>
       </div>
-      <div class="column is-4">
-        <div class="soft-card has-text-centered" style="padding:20px">
-          <span class="icon has-text-danger"><i class="fas fa-database fa-lg"></i></span>
-          <h4 class="title is-6 mt-2 mb-1">Data</h4>
-          <p class="has-text-grey is-size-7">LLM fills <code>???</code> placeholders</p>
-        </div>
+     </div>
+     <div class="trace-controls">
+      <button aria-label="Previous step" class="icon-button" id="trace-prev">
+       ←
+      </button>
+      <button class="button primary" id="trace-play">
+       Play trajectory ▶
+      </button>
+      <button aria-label="Next step" class="icon-button" id="trace-next">
+       →
+      </button>
+      <div aria-label="Go to a trajectory step" class="step-buttons" id="trace-steps" role="group">
       </div>
+     </div>
     </div>
-
-    <!-- Stats -->
-    <div class="columns is-multiline">
-      <div class="column is-3"><div class="stat-card"><div class="stat-num">84</div><div class="stat-label">Scenarios</div></div></div>
-      <div class="column is-3"><div class="stat-card"><div class="stat-num">9</div><div class="stat-label">Domains</div></div></div>
-      <div class="column is-3"><div class="stat-card"><div class="stat-num">100%</div><div class="stat-label">Trigger Rate</div></div></div>
-      <div class="column is-3"><div class="stat-card"><div class="stat-num">0%</div><div class="stat-label">Defense Success</div></div></div>
+   </section>
+   <section class="section wrap" id="applications">
+    <div class="section-heading">
+     <div>
+      <p class="eyebrow">
+       03 / What this enables
+      </p>
+      <h2>
+       From generated data
+       <br/>
+       <em>
+        to further research.
+       </em>
+      </h2>
+     </div>
+     <p>
+      The same task structure supports batch generation, detector training, and automated red teaming.
+     </p>
     </div>
-
-    <!-- Domain cards -->
-    <div class="columns is-multiline mt-4">
-      <div class="column is-3"><div class="domain-card"><i class="fas fa-dna"></i><h4>Biology & Genomics</h4><span class="domain-count">16</span></div></div>
-      <div class="column is-3"><div class="domain-card"><i class="fas fa-flask"></i><h4>Chemistry & Materials</h4><span class="domain-count">11</span></div></div>
-      <div class="column is-3"><div class="domain-card"><i class="fas fa-shield-alt"></i><h4>Cybersecurity</h4><span class="domain-count">8</span></div></div>
-      <div class="column is-3"><div class="domain-card"><i class="fas fa-pills"></i><h4>Pharmacology & Toxicology</h4><span class="domain-count">5</span></div></div>
-      <div class="column is-3"><div class="domain-card"><i class="fas fa-robot"></i><h4>AI Safety & ML</h4><span class="domain-count">26</span></div></div>
-      <div class="column is-3"><div class="domain-card"><i class="fas fa-heartbeat"></i><h4>Clinical & Health Sciences</h4><span class="domain-count">5</span></div></div>
-      <div class="column is-3"><div class="domain-card"><i class="fas fa-virus"></i><h4>Epidemiology & Public Health</h4><span class="domain-count">4</span></div></div>
-      <div class="column is-3"><div class="domain-card"><i class="fas fa-broadcast-tower"></i><h4>Media & Communication</h4><span class="domain-count">8</span></div></div>
-      <div class="column is-3"><div class="domain-card"><i class="fas fa-file-alt"></i><h4>Other</h4><span class="domain-count">1</span></div></div>
-    </div>
-
-    <!-- Quick Links -->
-    <div class="buttons is-centered mt-5">
-      <a class="button is-small is-dark" href="https://arxiv.org/abs/2603.23509"><i class="fas fa-file-pdf mr-1"></i> Paper</a>
-      <a class="button is-small is-dark" href="https://github.com/wuyoscar/ISC-Bench/tree/main/codebase_templates"><i class="fas fa-folder mr-1"></i> 84 Codebase Templates</a>
-      <a class="button is-small is-dark" href="https://github.com/wuyoscar/ISC-Bench/tree/main/experiment/tvd_agent"><i class="fas fa-robot mr-1"></i> TVD Agent</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CITATION ============ -->
-<section class="section" id="citation">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered section-heading">Citation</h2>
-    <div class="code-block" style="max-width:650px;margin:0 auto">
-      <div class="code-header">
-        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-        <span class="code-title">BibTeX</span>
-        <button class="button is-small is-dark copy-btn" onclick="copyBibtex()">
-          <span class="icon is-small"><i class="fas fa-copy"></i></span><span>Copy</span>
+    <div class="application-grid">
+     <article class="application">
+      <span class="application-number">
+       I
+      </span>
+      <h3>
+       Build a dataset.
+      </h3>
+      <p>
+       A completed task can be extended with further records. The same validation rules apply to the next batch.
+      </p>
+      <div aria-label="Illustrative dataset grows from ten to twenty records" class="batch-visual">
+       <div id="batch-cells">
+       </div>
+       <div>
+        <span id="batch-count">
+         10
+        </span>
+        <small>
+         / 20 records
+        </small>
+        <button id="batch-extend">
+         Add the next batch +
         </button>
+       </div>
       </div>
-      <pre><code id="bibtex">@article{wu2026isc,
-  title={Internal Safety Collapse in Frontier Large Language Models},
-  author={Wu, Yutao and Liu, Xiao and Gao, Yifeng and Zheng, Xiang
-          and Huang, Hanxun and Li, Yige and Wang, Cong and Li, Bo
-          and Ma, Xingjun and Jiang, Yu-Gang},
-  journal={arXiv preprint arXiv:2603.23509},
-  year={2026},
-  url={https://arxiv.org/abs/2603.23509}
-}</code></pre>
+      <p class="small-note">
+       Illustration of the paper’s 10-to-20-record example.
+      </p>
+      <a href="https://github.com/wuyoscar/Internal-Safety-Collapse/tree/main/experiment/harmful_data_generator">
+       Generation notebooks ↗
+      </a>
+     </article>
+     <article class="application">
+      <span class="application-number">
+       II
+      </span>
+      <h3>
+       Train a detector.
+      </h3>
+      <p>
+       We fine-tuned Toxic-BERT on generated examples and evaluated detection on HateCheck.
+      </p>
+      <div aria-label="Full HateCheck identity-hate F1: 0.539 before fine-tuning, 0.835 after" class="score-chart">
+       <div>
+        <span>
+         Before
+        </span>
+        <i style="--score:53.9%">
+        </i>
+        <strong>
+         0.539
+        </strong>
+       </div>
+       <div>
+        <span>
+         After
+        </span>
+        <i style="--score:83.5%">
+        </i>
+        <strong>
+         0.835
+        </strong>
+       </div>
+      </div>
+      <p class="small-note">
+       Full HateCheck · identity hate · F1
+      </p>
+      <a href="https://arxiv.org/html/2603.23509v2#S5.T4">
+       Training results in the paper ↗
+      </a>
+     </article>
+     <article class="application">
+      <span class="application-number">
+       III
+      </span>
+      <h3>
+       Study adversarial behavior.
+      </h3>
+      <p>
+       A coding agent can generate a candidate prompt, test it against a target LLM, and revise it from evaluation feedback.
+      </p>
+      <ol class="redteam-steps">
+       <li>
+        <span>
+         01
+        </span>
+        Generate a candidate
+       </li>
+       <li>
+        <span>
+         02
+        </span>
+        Test the target’s response
+       </li>
+       <li>
+        <span>
+         03
+        </span>
+        Revise from the feedback
+       </li>
+      </ol>
+      <p class="small-note">
+       Experiment implementation; live execution is not embedded.
+      </p>
+      <a href="https://github.com/wuyoscar/Internal-Safety-Collapse/tree/main/experiment/automated-red-teaming-qwen-guard">
+       Explore the experiment ↗
+      </a>
+     </article>
     </div>
-  </div>
-</section>
-
-<!-- ============ FOOTER ============ -->
-<!-- ============ DISCLAIMER ============ -->
-<section class="section" style="padding:2rem 1.5rem;background:var(--bg-alt,#111318)">
-  <div class="container is-max-desktop">
-    <div class="notification" style="background:rgba(232,64,64,0.08);border:1px solid rgba(232,64,64,0.25);border-radius:8px">
-      <p style="color:#e8e8f0"><strong style="color:#ff6b6b">⚠️ Disclaimer</strong> — This project is released solely for academic safety research and responsible disclosure. As AI agents become increasingly autonomous, we believe ISC represents a critical and underexplored threat to safety alignment. The purpose of this work is to help the research community understand the vulnerability and collaboratively develop effective mitigations — not to enable harm. <strong>WE DO NOT ALLOW</strong> any use outside of safety research. <strong>WE DO NOT ALLOW</strong> any misuse of this research. Model providers interested in mitigations: <a href="https://github.com/wuyoscar/ISC-Bench/discussions" style="color:#ff6b6b">contact us</a>.</p>
+   </section>
+   <section class="video-section wrap" id="demo-video">
+    <div>
+     <p class="eyebrow">
+      A walkthrough from us
+     </p>
+     <h2>
+      Watch the
+      <br/>
+      <em>
+       phenomenon unfold.
+      </em>
+     </h2>
+     <p>
+      We made a short video to share our findings and show what we observed.
+     </p>
+     <a class="text-link" href="https://github.com/wuyoscar/Internal-Safety-Collapse#b-observation">
+      Read the motivating observation ↗
+     </a>
     </div>
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="container has-text-centered">
-    <p class="has-text-grey">
-      <strong class="has-text-light">ISC-Bench</strong> &middot; CC BY-NC-SA 4.0
-      &middot; <a href="https://github.com/wuyoscar/ISC-Bench/discussions" class="has-text-danger">Contact</a>
-    </p>
-  </div>
-</footer>
-
-<script src="static/js/main.js"></script>
-</body>
+    <div class="video-frame">
+     <video aria-label="ISC research walkthrough" controls="" playsinline="" preload="none">
+      <source src="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15" type="video/mp4"/>
+      Your browser does not support embedded video.
+      <a href="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15">
+       Open the video
+      </a>
+      .
+     </video>
+    </div>
+   </section>
+   <section class="archive-section wrap" id="arena">
+    <div class="section-heading">
+     <div>
+      <p class="eyebrow">
+       The full record
+      </p>
+      <h2>
+       Keep exploring.
+      </h2>
+     </div>
+     <p>
+      Task conditions differ between reports. The repository keeps the setups, outputs, and contributors together.
+     </p>
+    </div>
+    <div class="archive-links">
+     <a href="https://github.com/wuyoscar/Internal-Safety-Collapse#e-models">
+      <span>
+       01
+      </span>
+      <div>
+       <h3>
+        LLM results &amp; evidence
+       </h3>
+       <p>
+        The complete index of experiments and archived outputs.
+       </p>
+      </div>
+      <b>
+       ↗
+      </b>
+     </a>
+     <a href="https://github.com/wuyoscar/Internal-Safety-Collapse/tree/main/community">
+      <span>
+       02
+      </span>
+      <div>
+       <h3>
+        Reproductions &amp; adaptations
+       </h3>
+       <p>
+        Independent reports, modified tasks, and new interfaces.
+       </p>
+      </div>
+      <b>
+       ↗
+      </b>
+     </a>
+     <a href="https://github.com/wuyoscar/Internal-Safety-Collapse/tree/main/experiment/tvd_agent">
+      <span>
+       03
+      </span>
+      <div>
+       <h3>
+        Run a workspace
+       </h3>
+       <p>
+        Prepared tasks, tools, and execution instructions.
+       </p>
+      </div>
+      <b>
+       ↗
+      </b>
+     </a>
+    </div>
+   </section>
+   <section class="paper-section" id="paper">
+    <div class="wrap paper-inner">
+     <div>
+      <p class="eyebrow">
+       The paper
+      </p>
+      <h2>
+       Internal Safety Collapse
+       <br/>
+       in LLMs and Coding Agents
+      </h2>
+      <p class="authors">
+       Yutao Wu · Xiao Liu · Hanxun Huang · Xiang Zheng · Yige Li · Yifeng Gao · Cong Wang · Bo Li · Xingjun Ma · Yu-Gang Jiang
+      </p>
+      <div class="actions">
+       <a class="button primary" href="https://arxiv.org/pdf/2603.23509">
+        Paper ↗
+       </a>
+       <a class="button" href="https://github.com/wuyoscar/Internal-Safety-Collapse">
+        Code &amp; documentation ↗
+       </a>
+      </div>
+     </div>
+     <div class="citation" id="citation">
+      <div>
+       <span class="mono-caption">
+        CITE THIS WORK
+       </span>
+       <button id="copy-citation">
+        Copy BibTeX
+       </button>
+      </div>
+      <pre id="bibtex">@inproceedings{wu2026isc,
+  title={Internal Safety Collapse in LLMs and Coding Agents},
+  author={Wu, Yutao and Liu, Xiao and Huang, Hanxun and Zheng, Xiang and Li, Yige and Gao, Yifeng and Wang, Cong and Li, Bo and Ma, Xingjun and Jiang, Yu-Gang},
+  booktitle={Advances in Neural Information Processing Systems (NeurIPS)},
+  year={2026}
+}</pre>
+      <span aria-live="polite" id="copy-status" role="status">
+      </span>
+     </div>
+    </div>
+   </section>
+  </main>
+  <footer class="wrap">
+   <a class="wordmark" href="#top">
+    <span class="mark">
+     isc
+    </span>
+   </a>
+   <p>
+    Research on agent safety, evaluation, and mitigation.
+   </p>
+   <a href="https://github.com/wuyoscar/Internal-Safety-Collapse/issues">
+    Report an issue ↗
+   </a>
+   <a href="https://github.com/wuyoscar/Internal-Safety-Collapse/blob/main/LICENSE">
+    License
+   </a>
+  </footer>
+  <dialog aria-labelledby="dialog-title" id="case-dialog">
+   <div class="dialog-top">
+    <span class="eyebrow" id="dialog-type">
+    </span>
+    <button aria-label="Close experiment" class="icon-button" id="dialog-close">
+     ×
+    </button>
+   </div>
+   <h2 id="dialog-title">
+   </h2>
+   <p id="dialog-summary">
+   </p>
+   <div id="dialog-evidence">
+   </div>
+   <div class="dialog-actions">
+    <a class="button primary" href="https://github.com/wuyoscar/Internal-Safety-Collapse" id="dialog-source">
+     Original record ↗
+    </a>
+    <button class="button" hidden="" id="dialog-replay">
+     Replay the trajectory ↗
+    </button>
+   </div>
+   <p class="small-note" id="dialog-note">
+   </p>
+  </dialog>
+ </body>
 </html>
