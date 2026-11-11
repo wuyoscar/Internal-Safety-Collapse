@@ -21,15 +21,19 @@ The video introduces the project at the top of the page. A large editor window f
 
 `build_chat_trajectories.py` separately reads three saved chat replies for LlamaGuard, sentiment, and news classification. The **Chat** selector shows commands and outputs present in those replies. Expected results remain chat messages; these trajectories never acquire real execution or test-pass states.
 
+The **Tasks** selector adds seven presentation walkthroughs for sarcasm, propaganda, PII/NER, clickbait, emotion, CoNLL-U, and VADER. `build_workspace_walkthroughs.py` combines current task code with 16 curated excerpts from local `output.txt` files. The old outputs use several earlier schemas, so the walkthroughs explicitly adapt them to current fields. Connecting shell steps are presentation instructions; no classifier scores, model-loading output, or passing checks are invented. The propaganda walkthrough uses editorial neutral comparison text alongside the archived propaganda excerpt. An example’s **▶ Task** button opens its corresponding walkthrough.
+
 `build_workflows.py` reads recorded Python assignments with `ast.literal_eval`. It never executes the recorded programs. Candidate buffers are labeled as in-memory classifier inputs, and saved data is shown only after the corresponding write. Explanatory action summaries are marked separately from recorded messages and tool outputs.
 
 Playback starts when the workspace becomes visible, reveals changes progressively, and can cycle through tasks. Pause, step buttons, a timeline, a position slider, and speed selection support manual inspection. Reduced-motion settings disable automatic playback and typing effects; hidden tabs pause playback.
 
 ## Example selection
 
-**Examples** keeps 74 cases in the same editor and feedback panes. LlamaGuard, Toxic-BERT, and PyOD appear first, followed by news classification, Detoxify, Qwen3Guard, sentiment, moderation, and web-chat screenshots. The picker searches example titles, task text, tool names, and LLM names. Readers can select with the mouse or arrow keys and Enter, use the previous/next buttons, or play through a task's examples. Opening the picker pauses playback; Escape restores the current choice.
+**Examples** keeps 90 cases in the same editor and feedback panes. LlamaGuard, Toxic-BERT, and PyOD appear first, followed by news classification, Detoxify, Qwen3Guard, sentiment, moderation, and web-chat screenshots. The picker searches example titles, task text, tool names, and LLM names. Readers can select with the mouse or arrow keys and Enter, use the previous/next buttons, or play through a task's examples. Opening the picker pauses playback; Escape restores the current choice.
 
 The **Text** view presents articles in a serif face, responses in a sans-serif face, and paired safe/unsafe responses as labeled blocks. **Code / Raw** shows the serialized excerpt in monospace. Terminal output uses monospace while agent messages use prose typography. This mode cycles archived examples without inventing a tool-execution sequence.
+
+`static/data/workspace-outputs.json` retains source-file and context hashes, original relative paths, record pointers, and display changes for the 16 newly curated local outputs. Raw ignored output files are not uploaded. Name placeholders such as `President [Name]` are masked as `President ███` in displayed excerpts.
 
 Every case retains its source path. The 33 Chat API examples come from saved Grok 4.1 Fast, Claude Sonnet 4.5, and DeepSeek V3.2 records. Grok and Sonnet use the archive's extracted-response field; DeepSeek uses JSON response fields parsed from the saved reply. Source record IDs and pointers remain available.
 
@@ -49,4 +53,4 @@ The MP4 uses the existing GitHub attachment and `preload="none"`. `video-poster.
 
 ## Adding evidence
 
-Add public-source cases in `build_evidence.py`, curated source excerpts in `static/data/additional-cases.json`, and chronological workflows in `build_workflows.py`. Attach agent activity in `build_agent_activity.py` or extract chat trajectories in `build_chat_trajectories.py`, then rebuild. Check each frame against its source entry. Preserve the distinction between generated data, in-memory probes, complete validation runs, and editorial summaries. Use recorded output for result claims; label task templates as templates. Keep corrective context when shortening responses. Do not include credentials or unredacted operational details.
+Add public-source cases in `build_evidence.py`, curated source excerpts in `static/data/additional-cases.json`, and chronological workflows in `build_workflows.py`. Attach agent activity in `build_agent_activity.py`, extract chat trajectories in `build_chat_trajectories.py`, or add presentation sequences through `build_workspace_walkthroughs.py`, then rebuild. Check each frame against its source entry. Preserve the distinction between generated data, in-memory probes, complete validation runs, and editorial summaries. Use recorded output for result claims; label task templates as templates. Keep corrective context when shortening responses. Do not include credentials or unredacted operational details.

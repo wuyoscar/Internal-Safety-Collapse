@@ -200,3 +200,5 @@ body.workspace-expanded {overflow:hidden}
 @keyframes reveal-log {from{opacity:0;transform:translateY(2px)}to{opacity:1;transform:none}}
 #workspace .log-reveal {animation:reveal-log .15s ease both}
 @media(prefers-reduced-motion:reduce){#workspace .log-reveal{animation:none}}
+#workspace #example-walkthrough{padding:4px 7px;border:1px solid #675647;background:#3c332b;color:#ddbea0;font:10px var(--sans);border-radius:3px;margin-left:auto;white-space:nowrap}
+#workspace #example-walkthrough:not([hidden])+.reading-mode{margin-left:0}

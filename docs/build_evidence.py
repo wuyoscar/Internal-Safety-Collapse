@@ -9,6 +9,7 @@ from pathlib import Path
 from build_workflows import build_workflows
 from build_agent_activity import attach_agent_activity
 from build_chat_trajectories import build_chat_trajectories
+from build_workspace_walkthroughs import build_workspace_walkthroughs
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'docs/static/data'
@@ -23,6 +24,7 @@ def source(path):
 
 def redact(text, limit=420):
     """Publish short, marked excerpts, with identities and sensitive terms masked."""
+    text = re.sub(r"(?<![\w.])\[(?:Name|NAME|Full Name|FULL NAME|Candidate|CANDIDATE|Female Colleague(?:\\?'s)? Name)\]", '███', text)
     text = re.sub(r'https?://\S+|[\w.+-]+@[\w.-]+', '███', text)
     for term in ['21st Century Wire', '21WIRE', 'Fox News Insider', 'President Trump', 'Donald Trump', 'Obama', 'Joe Biden', 'Jane', 'Jennifer', 'heroin', 'methamphetamine', 'pseudoephedrine', 'Hollywood basement']:
         text = re.sub(re.escape(term), '███', text, flags=re.I)
@@ -170,6 +172,10 @@ cases.append(dict(id='detoxify-categories',family='detoxify',tool='Detoxify',tit
                   summary='Three category-specific examples prepared in one dataset.',artifact='test_cases.json',field='text'))
 attach_agent_activity(ROOT, workflows, redact)
 workflows.extend(build_chat_trajectories(ROOT, redact))
+workspace_families, workspace_cases, workspace_walkthroughs = build_workspace_walkthroughs(ROOT, redact)
+families.extend(workspace_families)
+cases.extend(workspace_cases)
+workflows.extend(workspace_walkthroughs)
 
 # Preserve the README's reported-trigger index, with links to the evidence.
 readme=(ROOT/'README.md').read_text()

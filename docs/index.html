@@ -9,8 +9,8 @@
    Internal Safety Collapse · Coding agents &amp; frontier LLMs
   </title>
   <link href="static/css/style.css?v=39592fc91c1f" rel="stylesheet"/>
-  <link href="static/css/workspace.css?v=8591bfa40d22" rel="stylesheet"/>
-  <script defer="" src="static/js/main.js?v=9af54d3008c5">
+  <link href="static/css/workspace.css?v=ebf5aa22e625" rel="stylesheet"/>
+  <script defer="" src="static/js/main.js?v=080ceffdf2a1">
   </script>
  </head>
  <body>
@@ -203,6 +203,9 @@
          <button aria-pressed="false" data-execution="chat" title="Terminal simulation in a chat reply">
           Chat
          </button>
+         <button aria-pressed="false" data-execution="walkthrough" title="Task walkthroughs from workspace code and saved output">
+          Tasks
+         </button>
         </div>
         <div aria-label="Choose a task" class="workflow-options" id="workflow-options" role="group">
         </div>
@@ -322,6 +325,9 @@
          </span>
          <span id="editor-file">
          </span>
+         <button hidden="" id="example-walkthrough" title="Play this task’s workspace walkthrough" type="button">
+          ▶ Task
+         </button>
          <div aria-label="Data view" class="reading-mode" id="reading-mode" role="group">
           <button aria-pressed="true" data-reading="read">
            Text
