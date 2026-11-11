@@ -4,6 +4,7 @@ import re
 import shutil
 import ast
 from pathlib import Path
+from build_workflows import build_workflows
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'docs/static/data'
@@ -115,7 +116,7 @@ case('batch-chat','Notebook','A follow-up request extends the dataset.','Chatbot
 assert len(cases)>=40, f'Only {len(cases)} evidenced cases were assembled'
 
 # All displayed excerpts above are selected log output or explicitly marked metadata/summaries.
-data=dict(cases=cases,replays=replays,paper='https://arxiv.org/pdf/2603.23509',schemaVersion=1)
+data=dict(cases=cases,replays=replays,workflows=build_workflows(ROOT,redact,cases,replays),paper='https://arxiv.org/pdf/2603.23509',schemaVersion=2)
 (OUT/'evidence.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
 media=ROOT/'docs/static/media';media.mkdir(exist_ok=True)
 shutil.copyfile(ROOT/'assets/optimized/paper-v2-web-examples.webp',media/'web-cases.webp')

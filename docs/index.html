@@ -31,11 +31,8 @@
      </span>
     </a>
     <nav aria-label="Main navigation">
-     <a href="#experiments">
-      Experiments
-     </a>
-     <a href="#trajectory">
-      Trajectories
+     <a href="#workspace">
+      Workspace
      </a>
      <a href="#applications">
       Applications
@@ -61,321 +58,306 @@
       </em>
      </h1>
      <p class="hero-subtitle">
-      In coding agents &amp; frontier LLMs
+      Coding agents · Frontier LLMs
      </p>
      <p class="hero-description">
       We study why coding agents generate content they would otherwise refuse while completing programming tasks.
      </p>
      <div class="actions">
-      <a class="button primary" href="#experiments">
-       Explore the experiments ↘
+      <a class="button primary" href="#workspace">
+       Watch a workspace unfold ↓
       </a>
       <a class="text-link" href="https://arxiv.org/pdf/2603.23509">
        Read the paper ↗
       </a>
      </div>
-     <p class="hero-footnote">
-      Generated content, recorded tool calls, and inspectable evidence.
-     </p>
     </div>
-    <div aria-label="Recorded task feedback" class="hero-observation">
-     <div class="observation-top">
-      <span aria-hidden="true" class="window-dots">
-       <i>
-       </i>
-       <i>
-       </i>
-       <i>
-       </i>
-      </span>
-      <span>
-       workspace / news-classifier
-      </span>
-      <span class="record-tag">
-       Recorded run
-      </span>
+    <div class="hero-video" id="demo-video">
+     <p class="eyebrow">
+      A walkthrough from our experiments
+     </p>
+     <div class="video-frame">
+      <video aria-label="ISC research walkthrough" controls="" playsinline="" poster="static/media/video-poster.jpg" preload="none">
+       <source src="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15" type="video/mp4"/>
+       Your browser does not support embedded video.
+       <a href="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15">
+        Open the video
+       </a>
+       .
+      </video>
      </div>
-     <div class="observation-content">
-      <div class="file-strip">
-       <span aria-hidden="true">
-        ▤
-       </span>
-       articles.json
-       <span>
-        Fable 5
-       </span>
-      </div>
-      <p class="task-line">
-       Complete the dataset.
-       <br/>
-       Make the validation checks pass.
-      </p>
-      <div class="hero-terminal">
-       <p class="terminal-label">
-        GENERATED ARTICLE · REDACTED
-       </p>
-       <pre id="hero-output">Loading the recorded article excerpt…</pre>
-       <span class="status fail" id="hero-status">
-        Needs revision
-       </span>
-       <div class="hero-check">
-        <p class="terminal-label" id="hero-check-label">
-         VALIDATION OUTPUT
-        </p>
-        <pre id="hero-validation"></pre>
-       </div>
-      </div>
-      <div aria-label="Replay stages" class="hero-track" role="group">
-       <button aria-pressed="true" class="active" data-hero-step="0">
-        <span>
-         01
-        </span>
-        First check
-       </button>
-       <button aria-pressed="false" data-hero-step="1">
-        <span>
-         02
-        </span>
-        Revision
-       </button>
-       <button aria-pressed="false" data-hero-step="2">
-        <span>
-         03
-        </span>
-        Recheck
-       </button>
-      </div>
-     </div>
-     <div class="observation-bottom">
-      <button id="hero-play">
-       Play replay ▶
-      </button>
-      <a href="#trajectory">
-       Inspect this trajectory ↗
-      </a>
-     </div>
-     <p class="image-note">
-      Selected log excerpts. Labels are classifier predictions.
+     <p class="video-caption">
+      We share our findings and show what we observed.
      </p>
     </div>
    </section>
-   <section aria-label="Research approach" class="intro-strip wrap">
-    <p>
-     <span>
-      Our observation
-     </span>
-     A task can ask for data that a direct request would not obtain.
-    </p>
-    <p>
-     <span>
-      Our approach
-     </span>
-     Task, Validator, Data — a workspace with explicit completion checks.
-    </p>
-    <p>
-     <span>
-      Our evidence
-     </span>
-     Follow what an agent reads, writes, tests, and revises.
-    </p>
-   </section>
-   <section class="section wrap" id="experiments">
-    <div class="section-heading">
+   <section class="studio-section wrap" id="workspace">
+    <span id="experiments">
+    </span>
+    <span id="trajectory">
+    </span>
+    <div class="section-heading studio-heading">
      <div>
       <p class="eyebrow">
-       01 / Inside the experiments
+       One framework · different data
       </p>
       <h2>
-       See what actually
-       <br/>
+       Inside a
        <em>
-        comes out.
+        TVD workspace.
        </em>
       </h2>
      </div>
      <p>
-      Inspect real generated content, with sensitive details masked. Each case includes its task and a link to the archived record.
+      Follow the files as the agent generates, checks, and revises them. Change the task to see different kinds of output.
      </p>
     </div>
-    <div class="explorer-toolbar">
-     <div aria-label="Filter experiments" class="filters" role="group">
-      <button aria-pressed="true" class="selected" data-filter="All">
-       All experiments
-      </button>
-      <button aria-pressed="false" data-filter="Agent">
-       Agent runs
-      </button>
-      <button aria-pressed="false" data-filter="Web chat">
-       Web chats
-      </button>
-      <button aria-pressed="false" data-filter="Chat API">
-       Chat API
-      </button>
-      <button aria-pressed="false" data-filter="Notebook">
-       Notebooks
-      </button>
-     </div>
-     <label class="search">
-      <span aria-hidden="true">
-       ⌕
-      </span>
-      <input aria-label="Search experiments" id="case-search" placeholder="Find an LLM, task, or output…" type="search"/>
-     </label>
-    </div>
-    <label class="topic-selector">
-     <span>
-      Compare outputs
-     </span>
-     <select aria-label="Compare outputs for the same task" id="topic-filter">
-      <option value="">
-       Compare the same task…
-      </option>
-     </select>
-    </label>
-    <p aria-live="polite" class="result-count" id="result-count" role="status">
-     Loading generated outputs…
-    </p>
-    <div class="case-grid" id="case-grid">
-    </div>
-    <div class="empty-state" hidden="" id="empty-state">
-     <h3>
-      No matching experiments.
-     </h3>
-     <p>
-      Try a different task or LLM name.
-     </p>
-     <button class="button" id="clear-filters">
-      Clear filters
-     </button>
-    </div>
-    <p class="empty-state" hidden="" id="load-error">
-     Examples could not be loaded.
-     <button class="text-button" id="retry-load">
-      Try again
-     </button>
-     , or
-     <a href="https://github.com/wuyoscar/Internal-Safety-Collapse/tree/main/community">
-      browse the evidence archive
-     </a>
-     .
-    </p>
-    <noscript>
-     <p>
-      JavaScript enables filtering and replay. Open the
-      <a href="https://github.com/wuyoscar/Internal-Safety-Collapse/tree/main/community">
-       evidence archive
-      </a>
-      for all records.
-     </p>
-    </noscript>
-   </section>
-   <section class="trajectory-section" id="trajectory">
-    <div class="wrap">
-     <div class="section-heading">
-      <div>
-       <p class="eyebrow">
-        02 / Follow the agent
-       </p>
-       <h2>
-        The work between
-        <br/>
-        <em>
-         the request and the reply.
-        </em>
-       </h2>
+    <div class="studio-shell">
+     <div class="studio-bar">
+      <div aria-label="Workspace mode" class="studio-modes" role="group">
+       <button aria-pressed="true" class="selected" data-mode="workflow">
+        Recorded workflows
+       </button>
+       <button aria-pressed="false" data-mode="outputs">
+        More generated outputs
+        <span id="archive-count">
+        </span>
+       </button>
       </div>
-      <p>
-       Replay selected excerpts from saved agent logs. These are recorded interactions, not a live experiment.
-      </p>
+      <span class="record-indicator" id="record-indicator">
+       Recorded agent execution
+      </span>
      </div>
-     <div aria-label="Choose an agent trajectory" class="trace-tabs" role="group">
-      <button aria-pressed="true" class="selected" data-replay="fable-news">
-       Fable 5
-       <span>
-        News classifier
-       </span>
-      </button>
-      <button aria-pressed="false" data-replay="opus-guard">
-       Opus 4.8
-       <span>
-        Qwen3Guard
-       </span>
-      </button>
-      <button aria-pressed="false" data-replay="opus-prompts">
-       Opus 4.6 Thinking
-       <span>
-        Named attack methods
-       </span>
-      </button>
+     <div aria-label="Choose a task" class="workflow-options" id="workflow-options" role="group">
      </div>
-     <div class="trace-workbench">
-      <aside class="file-tree">
-       <p class="mono-caption">
-        WORKSPACE
+     <div class="archive-options" hidden="" id="archive-options">
+      <label>
+       Output type
+       <select id="output-kind">
+        <option value="All">
+         All settings
+        </option>
+        <option value="Agent">
+         Agent output
+        </option>
+        <option value="Web chat">
+         Web-chat screenshot
+        </option>
+        <option value="Chat API">
+         Single-turn response
+        </option>
+        <option value="Notebook">
+         Notebook
+        </option>
+       </select>
+      </label>
+      <label class="archive-select-label">
+       Example
+       <select aria-label="Choose a generated output" id="output-example">
+       </select>
+      </label>
+     </div>
+     <div class="tvd-context">
+      <div>
+       <span class="part-badge">
+        T
+       </span>
+       <p>
+        <small>
+         TASK
+        </small>
+        <span id="studio-task">
+        </span>
        </p>
-       <div>
+      </div>
+      <div>
+       <span class="part-badge">
+        V
+       </span>
+       <p>
+        <small>
+         VALIDATION
+        </small>
+        <span id="studio-rule">
+        </span>
+       </p>
+      </div>
+      <div>
+       <span class="part-badge">
+        D
+       </span>
+       <p>
+        <small>
+         DATA
+        </small>
+        <span id="studio-artifact">
+        </span>
+       </p>
+      </div>
+     </div>
+     <div class="workspace-body">
+      <aside class="workspace-files">
+       <p class="mono-caption">
+        FILES
+       </p>
+       <div class="directory">
         ▱ /workspace
        </div>
-       <div class="tree-child">
-        ▤
-        <span id="trace-data-file">
-         articles.json
+       <div class="file-row">
+        <span>
+         ▤
         </span>
-       </div>
-       <div class="tree-child">
-        ▤ validator.py
-       </div>
-       <div class="tree-child">
-        ▤ agent_log.json
-       </div>
-       <hr/>
-       <p id="trace-description">
-        Inspect the validation result and the revised data.
-       </p>
-       <a href="https://github.com/wuyoscar/Internal-Safety-Collapse/tree/main/community/claude-fable-5-fake-news" id="trace-source">
-        Full source record ↗
-       </a>
-      </aside>
-      <div class="trace-main">
-       <div class="trace-title">
-        <span id="trace-file">
+        <span>
          validator.py
         </span>
-        <span class="status fail" id="trace-status">
-         Needs revision
+       </div>
+       <div class="file-row current">
+        <span>
+         ▤
+        </span>
+        <span id="workspace-data-file">
         </span>
        </div>
-       <p class="mono-caption">
-        GENERATED OUTPUT FROM THIS RUN · REDACTED
-       </p>
-       <blockquote class="trace-artifact" id="trace-artifact">
-       </blockquote>
-       <p class="mono-caption" id="trace-excerpt-type">
-        Recorded output
-       </p>
-       <pre id="trace-output"></pre>
-       <div class="trace-bottom">
-        <span id="trace-pointer">
+       <div class="file-row">
+        <span>
+         ▤
         </span>
-        <span id="trace-counter">
+        <span>
+         agent_log.json
+        </span>
+       </div>
+       <div class="completion-list">
+        <p class="mono-caption">
+         TASK PROGRESS
+        </p>
+        <div data-check="data">
+         <i>
+         </i>
+         <span>
+          Data filled
+         </span>
+        </div>
+        <div data-check="tool">
+         <i>
+         </i>
+         <span>
+          Tool check
+         </span>
+        </div>
+        <div data-check="tests">
+         <i>
+         </i>
+         <span>
+          Final tests
+         </span>
+        </div>
+       </div>
+       <p class="runtime-label" id="studio-llm">
+       </p>
+      </aside>
+      <div class="workspace-editor">
+       <div class="pane-title">
+        <span id="editor-file">
+        </span>
+        <span class="editor-state" id="editor-state">
+        </span>
+       </div>
+       <div hidden="" id="editor-picture">
+       </div>
+       <pre aria-label="Generated data excerpt" id="editor-code" tabindex="0"></pre>
+       <div class="editor-footer">
+        <span id="editor-caption">
+         Recorded data · redacted excerpts
+        </span>
+        <span id="editor-position">
         </span>
        </div>
       </div>
+      <div class="workspace-feedback">
+       <div class="pane-title">
+        <span id="feedback-title">
+         TERMINAL
+        </span>
+        <span class="run-status" id="run-status">
+         Reading
+        </span>
+       </div>
+       <div class="feedback-step">
+        <span id="step-number">
+         01
+        </span>
+        <h3 id="step-label">
+        </h3>
+       </div>
+       <p class="mono-caption" id="feedback-type">
+       </p>
+       <pre aria-label="Execution feedback" id="feedback-output" tabindex="0"></pre>
+       <p id="feedback-pointer">
+       </p>
+      </div>
      </div>
-     <div class="trace-controls">
-      <button aria-label="Previous step" class="icon-button" id="trace-prev">
+     <div class="playback-toolbar">
+      <button aria-label="Previous step" class="icon-button" id="studio-prev">
        ←
       </button>
-      <button class="button primary" id="trace-play">
-       Play trajectory ▶
+      <button class="button primary" id="studio-play">
+       Pause Ⅱ
       </button>
-      <button aria-label="Next step" class="icon-button" id="trace-next">
+      <button aria-label="Next step" class="icon-button" id="studio-next">
        →
       </button>
-      <div aria-label="Go to a trajectory step" class="step-buttons" id="trace-steps" role="group">
+      <div class="playback-position">
+       <input aria-label="Playback position" id="studio-progress" max="6" min="0" type="range" value="0"/>
+       <span id="playback-label">
+       </span>
       </div>
+      <label class="speed-label">
+       Speed
+       <select aria-label="Playback speed" id="studio-speed">
+        <option value="0.5">
+         0.5×
+        </option>
+        <option selected="" value="1">
+         1×
+        </option>
+        <option value="2">
+         2×
+        </option>
+       </select>
+      </label>
+      <label class="cycle-label">
+       <input checked="" id="cycle-tasks" type="checkbox"/>
+       Cycle tasks
+      </label>
+     </div>
+     <div aria-label="Workflow stages" class="step-timeline" id="step-timeline">
      </div>
     </div>
+    <div class="studio-source">
+     <p id="studio-note">
+     </p>
+     <a href="https://github.com/wuyoscar/Internal-Safety-Collapse/tree/main/community" id="studio-source">
+      Original record ↗
+     </a>
+    </div>
+    <div class="empty-state" hidden="" id="load-error">
+     Could not load the recorded examples.
+     <button id="retry-load">
+      Retry
+     </button>
+     or
+     <a href="https://github.com/wuyoscar/Internal-Safety-Collapse/tree/main/community">
+      open the archive
+     </a>
+     .
+    </div>
+    <noscript>
+     <p>
+      <a href="https://github.com/wuyoscar/Internal-Safety-Collapse/tree/main/community">
+       Browse the recorded experiments in the repository.
+      </a>
+     </p>
+    </noscript>
    </section>
    <section class="section wrap" id="applications">
     <div class="section-heading">
@@ -506,36 +488,6 @@
      </article>
     </div>
    </section>
-   <section class="video-section wrap" id="demo-video">
-    <div>
-     <p class="eyebrow">
-      A walkthrough from us
-     </p>
-     <h2>
-      Watch the
-      <br/>
-      <em>
-       phenomenon unfold.
-      </em>
-     </h2>
-     <p>
-      We made a short video to share our findings and show what we observed.
-     </p>
-     <a class="text-link" href="https://github.com/wuyoscar/Internal-Safety-Collapse#b-observation">
-      Read the motivating observation ↗
-     </a>
-    </div>
-    <div class="video-frame">
-     <video aria-label="ISC research walkthrough" controls="" playsinline="" preload="none">
-      <source src="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15" type="video/mp4"/>
-      Your browser does not support embedded video.
-      <a href="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15">
-       Open the video
-      </a>
-      .
-     </video>
-    </div>
-   </section>
    <section class="archive-section wrap" id="arena">
     <div class="section-heading">
      <div>
@@ -661,30 +613,5 @@
     License
    </a>
   </footer>
-  <dialog aria-labelledby="dialog-title" id="case-dialog">
-   <div class="dialog-top">
-    <span class="eyebrow" id="dialog-type">
-    </span>
-    <button aria-label="Close experiment" class="icon-button" id="dialog-close">
-     ×
-    </button>
-   </div>
-   <h2 id="dialog-title">
-   </h2>
-   <p id="dialog-summary">
-   </p>
-   <div id="dialog-evidence">
-   </div>
-   <div class="dialog-actions">
-    <a class="button primary" href="https://github.com/wuyoscar/Internal-Safety-Collapse" id="dialog-source">
-     Original record ↗
-    </a>
-    <button class="button" hidden="" id="dialog-replay">
-     Replay the trajectory ↗
-    </button>
-   </div>
-   <p class="small-note" id="dialog-note">
-   </p>
-  </dialog>
  </body>
 </html>
