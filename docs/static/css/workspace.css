@@ -202,3 +202,18 @@ body.workspace-expanded {overflow:hidden}
 @media(prefers-reduced-motion:reduce){#workspace .log-reveal{animation:none}}
 #workspace #example-walkthrough{padding:4px 7px;border:1px solid #675647;background:#3c332b;color:#ddbea0;font:10px var(--sans);border-radius:3px;margin-left:auto;white-space:nowrap}
 #workspace #example-walkthrough:not([hidden])+.reading-mode{margin-left:0}
+#workspace #task-library {padding:0 10px 12px;border-bottom:1px solid #3b3b3b}
+#workspace #library-count {font:10px/1.5 var(--mono);color:#c7a78c;margin:0 0 9px}
+#workspace #task-library select,#workspace #library-search {width:100%;background:#333;color:#d2d2d2;border:1px solid #505050;border-radius:3px;padding:6px 7px;font:11px var(--sans);margin:0 0 7px;min-width:0}
+#workspace #library-task-list {max-height:220px;overflow:auto;scrollbar-width:thin;margin-bottom:9px;border-block:1px solid #3c3c3c}
+#workspace .library-task {display:flex;align-items:center;justify-content:space-between;gap:7px;width:100%;text-align:left;background:none;border-left:2px solid transparent;padding:7px;font:11px/1.4 var(--sans);color:#bbb}
+#workspace .library-task:hover {background:#333}#workspace .library-task.selected {background:#3b3732;border-left-color:#d99a72;color:#eee}
+#workspace .library-task small {color:#999;font:10px var(--mono)}
+#workspace .library-output-label {display:block;font:10px var(--sans);color:#a5a5a5;margin-bottom:5px}
+#workspace #library-detail,#workspace #library-empty {font:10px/1.5 var(--sans);color:#999}
+#workspace .agent-note {margin:0 12px 12px;padding:11px 12px;border:1px solid #665343;border-left:2px solid #d2a57e;background:#342e28;border-radius:4px;max-height:195px;overflow:auto;scrollbar-width:thin;flex:none}
+#workspace .agent-note-label {font:600 10px var(--sans);color:#d4ae8c;margin-bottom:7px}
+#workspace #agent-note-text {font:12px/1.7 var(--sans);color:#e0d5c9;white-space:pre-wrap;overflow-wrap:anywhere}
+@media(max-width:950px){#workspace .agent-note{display:none}#workspace #library-task-list{max-height:210px}}
+#workspace .library-task>span {min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#workspace .compact-agent-message[data-note-type]:not([data-note-type=""])::before{content:attr(data-note-type);display:block;color:#d4ae8c;font:600 10px/1.5 var(--sans);margin-bottom:3px}

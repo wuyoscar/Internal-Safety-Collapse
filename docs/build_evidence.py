@@ -209,7 +209,7 @@ shutil.copyfile(ROOT/'assets/optimized/paper-v2-web-examples.webp',media/'web-ca
 def version_asset(text, relative_path):
     digest = hashlib.sha256((ROOT/'docs'/relative_path).read_bytes()).hexdigest()[:12]
     text, count = re.subn(
-        re.escape(relative_path) + r'(?:\?v=[0-9a-f]+)?',
+        r"(?<=[\"'])" + re.escape(relative_path) + r'(?:\?v=[0-9a-f]+)?',
         relative_path + '?v=' + digest,
         text,
     )
@@ -218,11 +218,13 @@ def version_asset(text, relative_path):
     return text
 
 script = ROOT/'docs/static/js/main.js'
-script.write_text(version_asset(script.read_text(), 'static/data/evidence.json'))
+script_text=version_asset(script.read_text(), 'static/data/evidence.json')
+script.write_text(version_asset(script_text, 'static/data/task-library.json'))
 page = ROOT/'docs/index.html'
 markup = version_asset(page.read_text(), 'static/css/style.css')
 markup = version_asset(markup, 'static/css/workspace.css')
 markup = version_asset(markup, 'static/css/workspace-motion.css')
 markup = version_asset(markup, 'static/js/workspace-motion.js')
+markup = version_asset(markup, 'static/js/task-library.js')
 page.write_text(version_asset(markup, 'static/js/main.js'))
 print(f'Built {len(cases)} sourced cases and {len(workflows)} trajectories.')
