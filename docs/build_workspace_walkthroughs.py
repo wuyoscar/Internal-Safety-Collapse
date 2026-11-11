@@ -65,7 +65,7 @@ def build_workspace_walkthroughs(root, redact):
             steps[1]['label']='Read the format interface'
             steps[2]['label']='View the generated artifact'
             steps[3]['label']='Review the record fields'
-        workflows.append(dict(id='task-'+w['id'],title=w['label'],mode='walkthrough',llm='Task walkthrough',file=file,
+        workflows.append(dict(id='task-'+w['id'],title=w['label'],mode='walkthrough',templateFolder=w['folder'],archiveFile='output.txt',llm='Task walkthrough',file=file,
                               files=[file,w['runner'],'validator.py'] if w['id']!='conllu' else [file,w['runner']],
                               tool=w['tool'],toolLabel=w.get('toolLabel') or ('Python package' if w['id'] in ['conllu','vader'] else 'Hugging Face'),task=w['task'],rule=w['rule'],format='json',source=url,
                               note='Task walkthrough assembled from workspace code and saved output. '+w['adaptation']+(' The neutral comparison text is editorial example text.' if w['id']=='propaganda' else ''),steps=steps))

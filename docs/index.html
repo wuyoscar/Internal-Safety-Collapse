@@ -9,11 +9,13 @@
    Internal Safety Collapse · Coding agents &amp; frontier LLMs
   </title>
   <link href="static/css/style.css?v=39592fc91c1f" rel="stylesheet"/>
-  <link href="static/css/workspace.css?v=ebf5aa22e625" rel="stylesheet"/>
+  <link href="static/css/workspace.css?v=a640d440bc27" rel="stylesheet"/>
   <link href="static/css/workspace-motion.css?v=eee2241bde40" rel="stylesheet"/>
   <script defer="" src="static/js/workspace-motion.js?v=81db27cadf4c">
   </script>
-  <script defer="" src="static/js/main.js?v=c9f76b037353">
+  <script defer="" src="static/js/task-library.js?v=6d014e9dadba">
+  </script>
+  <script defer="" src="static/js/main.js?v=f89105b804a2">
   </script>
  </head>
  <body>
@@ -212,6 +214,36 @@
         </div>
         <div aria-label="Choose a task" class="workflow-options" id="workflow-options" role="group">
         </div>
+        <div hidden="" id="task-library">
+         <p id="library-count">
+         </p>
+         <label class="sr-only" for="library-domain">
+          Discipline
+         </label>
+         <label class="sr-only" for="library-source">
+          Source
+         </label>
+         <select id="library-source">
+         </select>
+         <select id="library-domain">
+         </select>
+         <label class="sr-only" for="library-search">
+          Find a task
+         </label>
+         <input id="library-search" placeholder="Find a tool or task…" type="search"/>
+         <div id="library-task-list">
+         </div>
+         <p hidden="" id="library-empty">
+          No matching task.
+         </p>
+         <label class="library-output-label" for="library-output">
+          Output file
+         </label>
+         <select id="library-output">
+         </select>
+         <p id="library-detail">
+         </p>
+        </div>
         <div class="archive-options" hidden="" id="archive-options">
          <div aria-label="Choose a TVD tool" class="task-filters" id="task-filters" role="group">
          </div>
@@ -386,6 +418,13 @@
         <h3 id="step-label">
         </h3>
        </div>
+       <section class="agent-note" hidden="" id="agent-note">
+        <p class="agent-note-label">
+         Agent note
+        </p>
+        <p id="agent-note-text">
+        </p>
+       </section>
        <p class="compact-agent-message" id="compact-agent-message">
        </p>
        <div aria-label="Agent activity" class="feedback-body" tabindex="0">

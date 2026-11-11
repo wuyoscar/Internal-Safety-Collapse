@@ -68,9 +68,10 @@ function terminalActivity(w,animate){
    const entry=node('div',`terminal-entry ${event.kind}`);entry.dataset.pointer=event.pointer;
    const pre=node('pre');
    if(event.kind==='command'){
-    entry.append(node('div','terminal-prompt',w.mode==='chat'?'chat /workspace $':w.mode==='walkthrough'?'task /workspace $':'/workspace $'));
+    entry.append(node('div','terminal-prompt',event.origin==='source-excerpt'?'Command excerpt · /workspace $':event.origin==='source-log'?'Recorded shell · /workspace $':w.mode==='chat'?'chat /workspace $':w.mode==='walkthrough'?'task /workspace $':'/workspace $'));
     pre.append(syntax(event.text,event.language,frame.unsafeFields||[]));
    }else{
+    if(event.origin==='source-log'||event.origin==='source-excerpt'||event.origin==='presentation')entry.append(node('div','terminal-step-label',event.origin==='presentation'?'Presentation':event.kind==='output'?'Tool output excerpt':'Source log'));
     event.text.split(/\r\n|\r|\n/).forEach((line,i)=>{
      let cls='terminal-line';if(/Loading|Downloading|\d+%\||LOAD REPORT|cuda|device|checkpoint|safetensors/i.test(line))cls+=' terminal-loading';
      if(/warning/i.test(line))cls+=' terminal-warning';
@@ -84,7 +85,7 @@ function terminalActivity(w,animate){
   }
   return group;
  }));
- $('terminal-session').textContent=w.mode==='chat'?'chat · terminal simulation':w.mode==='walkthrough'?'task walkthrough · shell':'shell · /workspace';
+ $('terminal-session').textContent=w.archiveInspection?(w.sourcePlayback?'recorded tool playback':'presentation · saved output'):w.mode==='chat'?'chat · terminal simulation':w.mode==='walkthrough'?'task walkthrough · shell':'shell · /workspace';
  scrollCurrent(terminal,'.terminal-step.current');
 }
 function activity(w,animate){
@@ -94,7 +95,8 @@ function activity(w,animate){
   const heading=node('button','activity-heading',`${String(index+1).padStart(2,'0')}  ${frame.label}`);heading.dataset.step=index;heading.type='button';group.append(heading);
   for(const event of frame.activity||[]){
    const entry=node('div',`activity-event ${event.kind}`);entry.dataset.pointer=event.pointer;
-   entry.append(node('span','event-label',event.kind==='command'?(w.mode==='chat'?'Chat · shell':w.mode==='walkthrough'?'Task · shell':event.tool||'shell'):event.kind==='output'?(w.mode==='chat'?'Chat · output':'Output'):(w.mode==='chat'?'Chat':w.mode==='walkthrough'?'Task':'Agent')));
+   const originLabel=event.origin==='source-excerpt'?(event.kind==='command'?'Command excerpt':event.kind==='output'?'Tool output excerpt':'Source log'):event.origin==='source-log'?(event.kind==='command'?'Recorded shell':event.kind==='output'?'Recorded tool output':'Source log'):event.origin==='presentation'?'Presentation':null;
+   entry.append(node('span','event-label',originLabel||(event.kind==='command'?(w.mode==='chat'?'Chat · shell':w.mode==='walkthrough'?'Task · shell':event.tool||'shell'):event.kind==='output'?(w.mode==='chat'?'Chat · output':'Output'):(w.mode==='chat'?'Chat':w.mode==='walkthrough'?'Task':'Agent'))));
    const pre=node('pre','event-code');
    let text=event.text.replace(/\*\*/g,'').replace(/^```[^\n]*$/gm,'');
    if(event.kind==='command')text=text.split('\n')[0];
@@ -122,8 +124,20 @@ function expandWorkspace(force){
  $('ide-window').classList.toggle('is-expanded',expanded);document.body.classList.toggle('workspace-expanded',expanded);
  $('expand-workspace').setAttribute('aria-expanded',String(expanded));$('expand-workspace').setAttribute('aria-label',expanded?'Restore workspace size':'Maximize workspace');$('expand-workspace').title=expanded?'Restore workspace size · Esc':'Maximize workspace';scrollCurrent($('terminal-content'),'.terminal-step.current');scrollCurrent(document.querySelector('.feedback-body'),'.activity-group.current');
 }
+function selectArchiveTask(folder,filename,autoplay=false){
+ const task=window.TaskLibrary.get().tasks.find(t=>t.id===folder);if(!task)return;
+ const name=filename||task.outputs.find(o=>o.filename==='output.txt')?.filename||task.outputs[0]?.filename||'';
+ let index=evidence.workflows.findIndex(w=>w.templateFolder===folder&&w.archiveFile===name);
+ if(index<0){const output=task.outputs.find(o=>o.filename===name);const recorded=output?.artifactType==='agent_log'?evidence.workflows.find(w=>w.mode==='agent'&&!w.libraryProxy&&w.source.endsWith('/'+output.sourcePath)):null;const item=recorded?{...recorded,id:'library-replay-'+folder+'-'+name,templateFolder:folder,archiveFile:name,libraryProxy:true}:window.TaskLibrary.workflow(folder,name);
+  if(!recorded&&output){const selected=evidence.cases.filter(c=>c.excerpt&&(c.path===output.sourcePath||c.artifactSource?.endsWith('/'+output.sourcePath)));if(selected.length){const text=JSON.stringify(selected.map(c=>({example:c.title,...(c.query?{query:c.query}:{}),[c.field?.split(' · ')[0]||'response']:c.excerpt})),null,2);const targets=output.toolEvents?.length?[item.steps.at(-1)]:item.steps;for(const s of targets){s.editor=text;s.file='Selected outputs';s.language='json';s.unsafeFields=['assistant_unsafe','flagged'];}item.files.push('Selected outputs');item.displayNote=(item.displayNote||'Presentation steps; saved output shown below.')+' Selected output excerpts · source details retained.';item.note=item.displayNote;item.source='https://github.com/wuyoscar/Internal-Safety-Collapse/blob/main/docs/static/data/evidence.json';}}
+  evidence.workflows.push(item);index=evidence.workflows.length-1;}
+ if(!autoplay){pause();userTouched=true;}mode='workflow';execution='walkthrough';workflowIndex=index;step=0;reading='raw';previousText='';workflowChoices();render();if(innerWidth<=950)setPanel('code');
+}
 function workflowChoices(){
- $('workflow-options').replaceChildren(...evidence.workflows.map((w,i)=>({w,i})).filter(({w})=>w.mode===execution).map(({w,i})=>{const b=node('button',i===workflowIndex?'selected':'');b.dataset.workflow=i;b.type='button';b.append(node('span','',w.title),node('small','',w.toolLabel));b.setAttribute('aria-pressed',String(i===workflowIndex));return b;}));
+ const libraryMode=execution==='walkthrough';
+ $('task-library').hidden=!libraryMode||mode!=='workflow';
+ if(libraryMode){const w=workflow();window.TaskLibrary.render(w.templateFolder||window.TaskLibrary.get().tasks[0].id,w.archiveFile);$('workflow-options').replaceChildren();}
+ else $('workflow-options').replaceChildren(...evidence.workflows.map((w,i)=>({w,i})).filter(({w})=>w.mode===execution&&!w.libraryProxy).map(({w,i})=>{const b=node('button',i===workflowIndex?'selected':'');b.dataset.workflow=i;b.type='button';b.append(node('span','',w.title),node('small','',w.toolLabel));b.setAttribute('aria-pressed',String(i===workflowIndex));return b;}));
  document.querySelectorAll('[data-execution]').forEach(b=>{b.classList.toggle('selected',b.dataset.execution===execution);b.setAttribute('aria-pressed',String(b.dataset.execution===execution));});
 }
 function textFields(text){
@@ -197,28 +211,30 @@ function renderReports(){
 }
 function render(animate=true){
  if(!evidence)return;
- $('example-walkthrough').hidden=mode!=='outputs'||!outputs()[outputIndex]?.walkthrough;$('workflow-options').hidden=mode!=='workflow';$('execution-options').hidden=mode!=='workflow';$('archive-options').hidden=mode!=='outputs';$('step-timeline').hidden=mode!=='workflow';$('cycle-tasks').closest('label').hidden=mode!=='workflow';
+ $('compact-agent-message').dataset.noteType='';
+ $('example-walkthrough').hidden=mode!=='outputs'||!outputs()[outputIndex]?.walkthrough;$('workflow-options').hidden=mode!=='workflow'||execution==='walkthrough';$('task-library').hidden=mode!=='workflow'||execution!=='walkthrough';$('execution-options').hidden=mode!=='workflow';$('archive-options').hidden=mode!=='outputs';$('step-timeline').hidden=mode!=='workflow';$('cycle-tasks').closest('label').hidden=mode!=='workflow';
  document.querySelectorAll('[data-mode]').forEach(b=>{const active=b.dataset.mode===mode;b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active));});
  document.querySelectorAll('.workspace-files .file-row:not(.current)').forEach(n=>n.hidden=mode==='outputs');
- document.querySelector('.workspace-files .completion-list').hidden=mode==='outputs'||execution!=='agent';
+ document.querySelector('.workspace-files .completion-list').hidden=mode==='outputs'||workflow().mode!=='agent';
  document.querySelector('.workspace-files .directory').textContent=mode==='workflow'?'▱ /workspace':'▱ /archive';
  let text,total,position,format='prose',language='json',unsafeFields=[],defaultField='',hasPicture=false;
  if(mode==='workflow'){
   const w=workflow(),s=w.steps[step];text=s.editor;total=w.steps.length;position=step;format=w.format;language=s.language||'json';unsafeFields=s.unsafeFields||[];const known=w.steps.slice(0,step+1).flatMap(f=>(f.activity||[]).map(e=>e.text)).join('\n');fileTree((w.files||[w.file]).filter(f=>known.includes(f)||f===s.file),s.file);
-  $('compact-task').textContent=w.title;$('window-title').textContent=w.title+' — TVD workspace';$('window-setting').textContent=w.mode==='chat'?'Chat simulation':w.mode==='walkthrough'?'Task walkthrough':'Agent';$('studio-task').textContent=w.task;$('studio-rule').textContent=w.rule;$('studio-artifact').textContent=w.file;
+  $('compact-task').textContent=w.title;$('window-title').textContent=w.title+' — TVD workspace';$('window-setting').textContent=w.archiveInspection?(w.sourcePlayback?'Recorded playback':'Task walkthrough'):w.mode==='chat'?'Chat simulation':w.mode==='walkthrough'?'Task walkthrough':'Agent';$('studio-task').textContent=w.task;$('studio-rule').textContent=w.rule;$('studio-artifact').textContent=w.file;
   $('studio-llm').textContent=`${w.llm}\n${w.tool}`;
   const kindLabels={'Recorded output':'Tool response','Recorded agent message':'Agent','Action summary':'Action','Source summary':'Task','Recorded instruction':'Instruction'};
   $('editor-file').textContent=s.file;$('step-label').textContent=s.label;$('feedback-type').textContent=kindLabels[s.feedbackKind]||s.feedbackKind;
   $('feedback-output').dataset.kind=s.feedbackKind==='Recorded output'?'terminal':'prose';
   $('feedback-output').textContent=s.feedback;$('feedback-pointer').textContent=w.llm;
   $('studio-source').href=w.source;$('studio-source').textContent='Source ↗';$('studio-source').title=w.note;
-  $('studio-note').textContent=w.mode==='chat'?'Chat reply · commands and outputs are simulated.':w.mode==='walkthrough'?'Task walkthrough · adapted from workspace code and saved output.':w.id==='news'?'TRUE and FAKE are classifier predictions.':w.id==='toxicity'?'The agent tests candidates, then saves the data and runs the final checks.':'';
-  $('record-indicator').textContent=w.toolLabel;$('editor-caption').textContent='███ redacted · … shortened';$('feedback-title').textContent=w.mode==='chat'?'CHAT':w.mode==='walkthrough'?'TASK WALKTHROUGH':'AGENT';
+  $('studio-note').textContent=w.archiveInspection?(w.displayNote||'Archive preview · values redacted; record structure and source metadata retained.'):w.mode==='chat'?'Chat reply · commands and outputs are simulated.':w.mode==='walkthrough'?'Task walkthrough · adapted from workspace code and saved output.':w.id==='news'?'TRUE and FAKE are classifier predictions.':w.id==='toxicity'?'The agent tests candidates, then saves the data and runs the final checks.':'';
+  $('record-indicator').textContent=w.toolLabel;$('editor-caption').textContent='███ redacted · … shortened';$('feedback-title').textContent=w.archiveInspection?'ARCHIVE':w.mode==='chat'?'CHAT':w.mode==='walkthrough'?'TASK WALKTHROUGH':'AGENT';
   $('editor-picture').hidden=true;$('editor-code').hidden=false;status(s.phase);setChecks(s.checks);timeline(w.steps);
-  const latest=[...(s.activity||[])].reverse().find(e=>e.kind==='assistant')||(s.activity||[]).at(-1);$('compact-agent-message').textContent=latest?(latest.kind==='output'?outputSummary(latest.text):latest.kind==='command'?latest.text.split('\n')[0]:latest.text.replace(/\*\*/g,'').replace(/^```[^\n]*$/gm,'')):s.label;activity(w,animate);$('written-preview').hidden=true;$('feedback-type').hidden=true;$('feedback-output').hidden=true;
+  const reasoning=w.steps.slice(0,step+1).filter(f=>f.reasoningSummary).at(-1);const note=reasoning?{text:reasoning.reasoningSummary}:w.mode==='agent'?w.steps.slice(0,step+1).flatMap(f=>f.activity||[]).filter(e=>e.kind==='assistant').at(-1):null;$('agent-note').hidden=!note;document.querySelector('.agent-note-label').textContent=reasoning?'Reasoning · brief summary':'Agent note';$('agent-note-text').textContent=note?.text||'';$('compact-agent-message').dataset.noteType=reasoning?'Reasoning summary':note?'Agent note':'';
+  const latest=[...(s.activity||[])].reverse().find(e=>e.kind==='assistant')||(s.activity||[]).at(-1);$('compact-agent-message').textContent=note?.text||(latest?(latest.kind==='output'?outputSummary(latest.text):latest.kind==='command'?latest.text.split('\n')[0]:latest.text.replace(/\*\*/g,'').replace(/^```[^\n]*$/gm,'')):s.label);activity(w,animate);$('written-preview').hidden=true;$('feedback-type').hidden=true;$('feedback-output').hidden=true;
   document.querySelectorAll('[data-workflow]').forEach(b=>{const active=Number(b.dataset.workflow)===workflowIndex;b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active));});
  }else{
-  $('activity-feed').hidden=true;$('terminal-content').replaceChildren();$('terminal-session').textContent='Example context';$('feedback-type').hidden=false;$('feedback-output').hidden=false;const all=outputs(),c=all[outputIndex];if(!c)return;text=c.safe?JSON.stringify({assistant_safe:c.safe,assistant_unsafe:c.excerpt},null,2):c.excerpt;total=all.length;position=outputIndex;format=c.format||'prose';unsafeFields=c.unsafeFields||['assistant_unsafe','flagged'];defaultField=c.field?.split(' · ')[0]||'';
+  $('agent-note').hidden=true;$('activity-feed').hidden=true;$('terminal-content').replaceChildren();$('terminal-session').textContent='Example context';$('feedback-type').hidden=false;$('feedback-output').hidden=false;const all=outputs(),c=all[outputIndex];if(!c)return;text=c.safe?JSON.stringify({assistant_safe:c.safe,assistant_unsafe:c.excerpt},null,2):c.excerpt;total=all.length;position=outputIndex;format=c.format||'prose';unsafeFields=c.unsafeFields||['assistant_unsafe','flagged'];defaultField=c.field?.split(' · ')[0]||'';
   $('compact-task').textContent=c.title;$('compact-agent-message').textContent=c.query||c.summary||c.title;$('window-title').textContent=c.title;$('window-setting').textContent=c.kind;$('studio-task').textContent=c.task||c.query||c.title;$('studio-rule').textContent=c.rule||(c.kind==='Agent'?'See the task checks':c.kind==='Chat API'?'Task supplied as text':c.kind==='Web chat'?'Web-chat task':'Follow-up generation');
   $('studio-artifact').textContent=c.field||c.artifact;fileTree([c.artifact],c.artifact);$('studio-llm').textContent=`${c.llm}\n${c.kind}`;
   $('editor-file').textContent=c.field||c.artifact;$('step-label').textContent=c.title;$('feedback-type').textContent=c.checks?'Task checks':'Task';
@@ -233,7 +249,7 @@ function render(animate=true){
   if(c.panel!==undefined){picture.style.setProperty('--x',c.panel%2?'100%':'0%');picture.style.setProperty('--y',`${Math.floor(c.panel/2)*50}%`);picture.setAttribute('role','img');picture.setAttribute('aria-label',`${c.llm} archived screenshot, redacted in the paper`);}
   if(c.panel===undefined&&c.kind!=='Notebook')writtenPreview(text,'archive');else $('written-preview').hidden=true;
  }
- $('run-status').hidden=mode==='outputs'||execution!=='agent';$('reading-mode').hidden=hasPicture;
+ $('studio-play').disabled=mode==='workflow'&&workflow().empty===true;$('run-status').hidden=mode==='outputs'||workflow().mode!=='agent';$('reading-mode').hidden=hasPicture;
  $('editor-preview').hidden=hasPicture||reading!=='read';$('editor-code').hidden=hasPicture||reading!=='raw';
  document.querySelectorAll('[data-reading]').forEach(b=>{b.classList.toggle('selected',b.dataset.reading===reading);b.setAttribute('aria-pressed',String(b.dataset.reading===reading));});
  document.querySelector('[data-reading="raw"]').textContent=mode==='workflow'?'Code':'Raw';
@@ -252,13 +268,13 @@ function schedule(){
  timer=setTimeout(()=>{
   if(mode==='workflow'){
    if(step<workflow().steps.length-1)step++;
-   else if($('cycle-tasks').checked){const choices=evidence.workflows.map((w,i)=>({w,i})).filter(({w})=>w.mode===execution);workflowIndex=choices[(choices.findIndex(c=>c.i===workflowIndex)+1)%choices.length].i;workflowChoices();step=0;previousText='';}
+   else if($('cycle-tasks').checked){if(execution==='walkthrough'){const choices=window.TaskLibrary.sequence();const i=choices.findIndex(c=>c.folder===workflow().templateFolder&&c.filename===workflow().archiveFile);const next=choices[(i+1)%choices.length];if(next)selectArchiveTask(next.folder,next.filename,true);else{pause();return;}}else{const choices=evidence.workflows.map((w,i)=>({w,i})).filter(({w})=>w.mode===execution&&!w.libraryProxy);workflowIndex=choices[(choices.findIndex(c=>c.i===workflowIndex)+1)%choices.length].i;workflowChoices();step=0;previousText='';}}
    else{pause();return;}
   }else outputIndex=(outputIndex+1)%outputs().length;
   render();schedule();
  },(mode==='workflow'?3800:5500)/Number($('studio-speed').value));
 }
-function play(){if(!evidence)return;playing=true;window.WorkspaceMotion?.resume();resumeTyping();if(mode==='workflow'&&step===workflow().steps.length-1){step=0;render();}$('studio-play').textContent='Pause Ⅱ';schedule();}
+function play(){if(!evidence||(mode==='workflow'&&workflow().empty))return;playing=true;window.WorkspaceMotion?.resume();resumeTyping();if(mode==='workflow'&&step===workflow().steps.length-1){step=0;render();}$('studio-play').textContent='Pause Ⅱ';schedule();}
 function renderTaskFilters(){
  const options=[...evidence.families,{id:'all',label:'All',description:'Every task'}].filter(f=>f.id==='all'||evidence.cases.some(c=>c.family===f.id));
  $('task-filters').replaceChildren(...options.map(f=>{const b=node('button',`task-filter${f.main?' main-task':''}${family===f.id?' selected':''}`);b.type='button';b.dataset.family=f.id;b.setAttribute('aria-pressed',String(family===f.id));b.append(node('span','',f.label));if(f.main)b.append(node('small','',f.description));return b;}));
@@ -277,12 +293,15 @@ function chooseMode(value){userTouched=true;mode=value;reading=mode==='workflow'
 async function load(){
  $('load-error').hidden=true;
  try{
-  const response=await fetch('static/data/evidence.json?v=e728cdc28db2');if(!response.ok)throw new Error(`HTTP ${response.status}`);
-  evidence=await response.json();if(evidence.schemaVersion!==2||!evidence.workflows?.length||!evidence.cases?.length)throw new Error('Missing recorded workflows');
+  const [response,catalogResponse]=await Promise.all([fetch('static/data/evidence.json?v=ce401bde07ff'),fetch('static/data/task-library.json?v=749e87551c40')]);
+  if(!response.ok||!catalogResponse.ok)throw new Error('Could not load workspace data');
+  evidence=await response.json();const catalog=await catalogResponse.json();if(evidence.schemaVersion!==2||!evidence.workflows?.length||catalog.schemaVersion!==1)throw new Error('Missing workspaces');
+  window.TaskLibrary.init(catalog,selectArchiveTask);workflowIndex=Math.max(0,evidence.workflows.findIndex(w=>w.id==='pairs'));
   const requestedTask=new URLSearchParams(location.search).get('task');const requestedIndex=evidence.workflows.findIndex(w=>w.id===requestedTask);
   if(requestedIndex>=0){workflowIndex=requestedIndex;execution=evidence.workflows[requestedIndex].mode;step=0;}
   workflowChoices();
   $('archive-count').textContent=String(evidence.cases.length);renderTaskFilters();render(false);renderReports();setPanel('code');
+  const requestedRun=new URLSearchParams(location.search).get('run');if(requestedRun&&/^[a-f0-9]{8,64}$/.test(requestedRun)){const priority={Experiments:0,Community:1,Workspaces:2};const matches=catalog.tasks.flatMap(t=>t.outputs.filter(o=>o.sha256.startsWith(requestedRun)).map(o=>({folder:t.id,filename:o.filename,sha256:o.sha256,priority:priority[t.source]??9}))).sort((a,b)=>a.priority-b.priority||a.folder.localeCompare(b.folder)||a.filename.localeCompare(b.filename));if(new Set(matches.map(o=>o.sha256)).size===1)selectArchiveTask(matches[0].folder,matches[0].filename,true);}
   const observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)&&!autoStarted&&!userTouched&&!reduced.matches){autoStarted=true;play();}},{threshold:.25});observer.observe(document.querySelector('.workspace-body'));
  }catch(error){$('load-error').hidden=false;pause();console.error('Could not load recorded workspaces.',error);}
 }
@@ -291,7 +310,7 @@ $('expand-workspace').addEventListener('click',()=>expandWorkspace());
 document.querySelectorAll('.ide-rail [data-panel]').forEach(b=>b.addEventListener('click',()=>setPanel(b.dataset.panel,true)));
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('ide-window').classList.contains('explorer-open')){$('ide-window').classList.remove('explorer-open');return;}if(e.key==='Escape'&&$('ide-window').classList.contains('is-expanded')){expandWorkspace(false);$('expand-workspace').focus();}});
 $('workspace-file-list').addEventListener('click',e=>{const b=e.target.closest('[data-file]');if(!b||mode!=='workflow')return;const found=workflow().steps.slice(0,step+1).map((s,i)=>({s,i})).reverse().find(({s})=>s.file===b.dataset.file);if(found){pause();userTouched=true;step=found.i;render();setPanel('code');}});
-document.querySelectorAll('[data-execution]').forEach(b=>b.addEventListener('click',()=>{pause();userTouched=true;execution=b.dataset.execution;workflowIndex=evidence.workflows.findIndex(w=>w.mode===execution);step=0;previousText='';reading='raw';workflowChoices();render();}));
+document.querySelectorAll('[data-execution]').forEach(b=>b.addEventListener('click',()=>{pause();userTouched=true;execution=b.dataset.execution;workflowIndex=evidence.workflows.findIndex(w=>w.mode===execution&&(execution!=='agent'||w.id==='pairs'));step=0;previousText='';reading='raw';workflowChoices();render();}));
 $('activity-feed').addEventListener('click',e=>{const b=e.target.closest('[data-step]');if(b){userTouched=true;pause();step=Number(b.dataset.step);render();}});
 $('workflow-options').addEventListener('click',e=>{const b=e.target.closest('[data-workflow]');if(!b)return;userTouched=true;workflowIndex=Number(b.dataset.workflow);step=0;previousText='';render();if(innerWidth<=950)setPanel('code');if(!reduced.matches)play();});
 document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>chooseMode(b.dataset.mode)));

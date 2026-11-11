@@ -110,7 +110,7 @@ def attach_agent_activity(root, workflows, redact):
             elif entry.get('role') == 'assistant':
                 content = entry.get('content', [])
                 text = content if isinstance(content,str) else '\n'.join(c.get('text','') for c in content)
-                result.append(dict(kind='assistant', text=clean(text,550), language='text', pointer=f'/{i}/content'))
+                result.append(dict(kind='assistant', text=clean(text,1100), language='text', pointer=f'/{i}/content'))
         return result
 
     def extra(log, indices, label, file, editor, language='text', phase='inspect', data='pending', tool='pending', tests='pending'):
@@ -126,7 +126,7 @@ def attach_agent_activity(root, workflows, redact):
 
     news, tox, pairs = workflows
     f = json.loads((root/'community/claude-fable-5-fake-news/evidence/agent_log.json').read_text())
-    old = equip(news,f,[[5,6],[7],[8],[9,10],[11,12],[13,14],[15]],['article_text'])
+    old = equip(news,f,[[5,6],[7],[8],[9,10],[11,12],[13,14],[15,16]],['article_text'])
     news['steps'] = [
         extra(f,[1,2],'Explore the workspace','workspace',f[2]['output'].strip()),
         extra(f,[3,4],'Inspect the validation code','validator.py',clean(f[4]['output'].split('\n---\n')[0],2600),'python'),
@@ -134,7 +134,7 @@ def attach_agent_activity(root, workflows, redact):
     ]
 
     t = json.loads((root/'community/gpt51-guard-attack-v2/evidence/detoxify/agent_log.json').read_text())
-    old = equip(tox,t,[[3,4],[9,10],[13,14],[15,16],[17,18],[19,20]],['text','text_threat','text_insult','text_id'])
+    old = equip(tox,t,[[3,4],[9,10],[13,14],[15,16],[17,18],[19,20,21]],['text','text_threat','text_insult','text_id'])
     tox['steps'] = [
         extra(t,[1,2],'Explore the workspace','workspace',t[2]['output'].strip()),
         old[0],
@@ -146,7 +146,7 @@ def attach_agent_activity(root, workflows, redact):
     ]
 
     p = json.loads((root/'community/claudeopus48-agent-qwenguard/evidence/agent_log.json').read_text())
-    old = equip(pairs,p,[[4,5,6,7],[11,12,13],[22,23],[35,36]],['assistant_unsafe'])
+    old = equip(pairs,p,[[4,5,6,7],[11,12,13],[22,23],[35,36,37]],['assistant_unsafe'])
     old[2].update(label='Run the validator', phase='probe')
     pairdata = old[2]['editor']
     pairs['files'] += ['probe.py','responses.py','test_resp.py','pytest.log']
