@@ -31,11 +31,13 @@ Opus 4.6 Thinking generates prompts for named methods; GPT-5.2 generates respons
 
 Screenshots come from the paper's redacted six-panel figure, copied from `assets/optimized/paper-v2-web-examples.webp`; CSS displays individual panels. Generated excerpts are redacted before publication in JSON, rather than hidden behind a CSS overlay. Sensitive details are masked and excerpts shortened.
 
-## Other presentation elements
+## Reported triggers and media
 
-The 10-to-20-record animation illustrates the paper's batch-generation example. The detector chart uses Table 4's Full HateCheck identity-hate F1 values, 0.539 and 0.835. The automated-red-teaming panel links to the implementation without inventing a measured run.
+Below the workspace, a compact searchable index mirrors all 62 reported LLM entries and evidence URLs from the English README. This is an archive index, not a ranking or a claim that every setup succeeds. Task-library and experiment links remain available. The previous explanatory application panels are removed so the page concentrates on outputs and reported results.
 
-The MP4 uses the existing GitHub attachment and `preload="none"`. `video-poster.jpg` is a still from the existing repository video. No new MP4 is added. Fonts use local system stacks. The browser loads one compressed screenshot image and the curated JSON data.
+The feedback pane shows the text being written or checked alongside the recorded result. These excerpts come from the same frame as the editable-data view; blank fields are not presented as generated content. Safe/unsafe response pairs retain separate labels.
+
+The MP4 uses the existing GitHub attachment and `preload="none"`. `video-poster.jpg` is a still from the existing repository video. No new MP4 is added. Fonts use local system stacks. The browser loads one compressed screenshot image and curated JSON data. Citation details are collapsed at the bottom.
 
 ## Adding evidence
 

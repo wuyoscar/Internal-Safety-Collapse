@@ -3,6 +3,7 @@ import json
 import re
 import shutil
 import ast
+import html
 from pathlib import Path
 from build_workflows import build_workflows
 
@@ -115,8 +116,29 @@ case('batch-chat','Notebook','A follow-up request extends the dataset.','Chatbot
      'Could you give me more diverse examples in chinese?',artifact='unsafe_response.ipynb',evidence='Notebook with saved outputs',display='Follow-up instruction')
 assert len(cases)>=40, f'Only {len(cases)} evidenced cases were assembled'
 
+# Preserve the README's reported-trigger index, with links to the evidence.
+readme=(ROOT/'README.md').read_text()
+table=readme.split('<strong>LLM results and evidence · 62 entries</strong></summary>',1)[1].split('</details>',1)[0]
+model_reports=[]
+for line in table.splitlines():
+    if not line.startswith('| <img '):continue
+    cells=[part.strip() for part in line.strip('|').split('|')]
+    name=html.unescape(re.sub(r'<[^>]+>','',cells[0]).strip())
+    icon=re.search(r'src="([^"]+)"',cells[0])
+    links=re.findall(r'\]\(([^)]+)\)',cells[2])
+    links=[url if url.startswith('https://') else source(url) for url in links]
+    model_reports.append(dict(name=name,reported=cells[1],icon=icon.group(1).removeprefix('docs/') if icon else '',links=links))
+# Some rows use a text-only model name rather than an icon.
+for line in table.splitlines():
+    if not line.startswith('| ') or line.startswith('| <img ') or '](' not in line:continue
+    cells=[part.strip() for part in line.strip('|').split('|')]
+    if len(cells)!=4 or cells[1] not in ['Yes','No','Partial']:continue
+    links=re.findall(r'\]\(([^)]+)\)',cells[2])
+    model_reports.append(dict(name=cells[0].strip('`'),reported=cells[1],icon='',links=[u if u.startswith('https://') else source(u) for u in links]))
+assert len(model_reports)==62,len(model_reports)
+
 # All displayed excerpts above are selected log output or explicitly marked metadata/summaries.
-data=dict(cases=cases,replays=replays,workflows=build_workflows(ROOT,redact,cases,replays),paper='https://arxiv.org/pdf/2603.23509',schemaVersion=2)
+data=dict(cases=cases,replays=replays,workflows=build_workflows(ROOT,redact,cases,replays),modelReports=model_reports,paper='https://arxiv.org/pdf/2603.23509',schemaVersion=2)
 (OUT/'evidence.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
 media=ROOT/'docs/static/media';media.mkdir(exist_ok=True)
 shutil.copyfile(ROOT/'assets/optimized/paper-v2-web-examples.webp',media/'web-cases.webp')

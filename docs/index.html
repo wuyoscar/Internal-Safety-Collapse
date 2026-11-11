@@ -34,8 +34,8 @@
      <a href="#workspace">
       Workspace
      </a>
-     <a href="#applications">
-      Applications
+     <a href="#results">
+      Results
      </a>
      <a href="#paper">
       Paper ↗
@@ -289,9 +289,13 @@
         <h3 id="step-label">
         </h3>
        </div>
-       <p class="mono-caption" id="feedback-type">
-       </p>
-       <pre aria-label="Execution feedback" id="feedback-output" tabindex="0"></pre>
+       <div class="feedback-body">
+        <div id="written-preview">
+        </div>
+        <p class="mono-caption" id="feedback-type">
+        </p>
+        <pre aria-label="Execution feedback" id="feedback-output" tabindex="0"></pre>
+       </div>
        <p id="feedback-pointer">
        </p>
       </div>
@@ -359,199 +363,54 @@
      </p>
     </noscript>
    </section>
-   <section class="section wrap" id="applications">
+   <section class="reported-section wrap" id="results">
+    <span id="applications">
+    </span>
+    <span id="arena">
+    </span>
     <div class="section-heading">
      <div>
       <p class="eyebrow">
-       03 / What this enables
+       Original records
       </p>
       <h2>
-       From generated data
-       <br/>
+       Reported
        <em>
-        to further research.
+        ISC triggers.
        </em>
       </h2>
      </div>
      <p>
-      The same task structure supports batch generation, detector training, and automated red teaming.
+      Each LLM links to its recorded tasks and outputs.
      </p>
     </div>
-    <div class="application-grid">
-     <article class="application">
-      <span class="application-number">
-       I
-      </span>
-      <h3>
-       Build a dataset.
-      </h3>
-      <p>
-       A completed task can be extended with further records. The same validation rules apply to the next batch.
-      </p>
-      <div aria-label="Illustrative dataset grows from ten to twenty records" class="batch-visual">
-       <div id="batch-cells">
-       </div>
-       <div>
-        <span id="batch-count">
-         10
-        </span>
-        <small>
-         / 20 records
-        </small>
-        <button id="batch-extend">
-         Add the next batch +
-        </button>
-       </div>
-      </div>
-      <p class="small-note">
-       Illustration of the paper’s 10-to-20-record example.
-      </p>
-      <a href="https://github.com/wuyoscar/Internal-Safety-Collapse/tree/main/experiment/harmful_data_generator">
-       Generation notebooks ↗
-      </a>
-     </article>
-     <article class="application">
-      <span class="application-number">
-       II
-      </span>
-      <h3>
-       Train a detector.
-      </h3>
-      <p>
-       We fine-tuned Toxic-BERT on generated examples and evaluated detection on HateCheck.
-      </p>
-      <div aria-label="Full HateCheck identity-hate F1: 0.539 before fine-tuning, 0.835 after" class="score-chart">
-       <div>
-        <span>
-         Before
-        </span>
-        <i style="--score:53.9%">
-        </i>
-        <strong>
-         0.539
-        </strong>
-       </div>
-       <div>
-        <span>
-         After
-        </span>
-        <i style="--score:83.5%">
-        </i>
-        <strong>
-         0.835
-        </strong>
-       </div>
-      </div>
-      <p class="small-note">
-       Full HateCheck · identity hate · F1
-      </p>
-      <a href="https://arxiv.org/html/2603.23509v2#S5.T4">
-       Training results in the paper ↗
-      </a>
-     </article>
-     <article class="application">
-      <span class="application-number">
-       III
-      </span>
-      <h3>
-       Study adversarial behavior.
-      </h3>
-      <p>
-       A coding agent can generate a candidate prompt, test it against a target LLM, and revise it from evaluation feedback.
-      </p>
-      <ol class="redteam-steps">
-       <li>
-        <span>
-         01
-        </span>
-        Generate a candidate
-       </li>
-       <li>
-        <span>
-         02
-        </span>
-        Test the target’s response
-       </li>
-       <li>
-        <span>
-         03
-        </span>
-        Revise from the feedback
-       </li>
-      </ol>
-      <p class="small-note">
-       Experiment implementation; live execution is not embedded.
-      </p>
-      <a href="https://github.com/wuyoscar/Internal-Safety-Collapse/tree/main/experiment/automated-red-teaming-qwen-guard">
-       Explore the experiment ↗
-      </a>
-     </article>
+    <div class="report-toolbar">
+     <label class="report-search">
+      Find an LLM
+      <input aria-label="Search reported LLMs" id="model-search" placeholder="Claude, GPT, Qwen…" type="search"/>
+     </label>
+     <span aria-live="polite" id="model-count" role="status">
+     </span>
     </div>
-   </section>
-   <section class="archive-section wrap" id="arena">
-    <div class="section-heading">
-     <div>
-      <p class="eyebrow">
-       The full record
-      </p>
-      <h2>
-       Keep exploring.
-      </h2>
-     </div>
-     <p>
-      Task conditions differ between reports. The repository keeps the setups, outputs, and contributors together.
-     </p>
+    <div class="reported-models" id="reported-models">
     </div>
-    <div class="archive-links">
-     <a href="https://github.com/wuyoscar/Internal-Safety-Collapse#e-models">
-      <span>
-       01
-      </span>
-      <div>
-       <h3>
-        LLM results &amp; evidence
-       </h3>
-       <p>
-        The complete index of experiments and archived outputs.
-       </p>
-      </div>
-      <b>
-       ↗
-      </b>
-     </a>
-     <a href="https://github.com/wuyoscar/Internal-Safety-Collapse/tree/main/community">
-      <span>
-       02
-      </span>
-      <div>
-       <h3>
-        Reproductions &amp; adaptations
-       </h3>
-       <p>
-        Independent reports, modified tasks, and new interfaces.
-       </p>
-      </div>
-      <b>
-       ↗
-      </b>
+    <p hidden="" id="model-empty">
+     No matching LLM. Try another name.
+    </p>
+    <p class="benchmark-links">
+     <a href="https://github.com/wuyoscar/Internal-Safety-Collapse#benchmark-surface">
+      ISC-Bench &amp; task library ↗
      </a>
      <a href="https://github.com/wuyoscar/Internal-Safety-Collapse/tree/main/experiment/tvd_agent">
-      <span>
-       03
-      </span>
-      <div>
-       <h3>
-        Run a workspace
-       </h3>
-       <p>
-        Prepared tasks, tools, and execution instructions.
-       </p>
-      </div>
-      <b>
-       ↗
-      </b>
+      Agent experiments ↗
      </a>
-    </div>
+     <a href="https://github.com/wuyoscar/Internal-Safety-Collapse/tree/main/experiment/tvd_chatbot">
+      Chatbot experiments ↗
+     </a>
+     <a href="https://github.com/wuyoscar/Internal-Safety-Collapse/tree/main/experiment/tvd_icl">
+      ICL experiments ↗
+     </a>
+    </p>
    </section>
    <section class="paper-section" id="paper">
     <div class="wrap paper-inner">
@@ -576,7 +435,10 @@
        </a>
       </div>
      </div>
-     <div class="citation" id="citation">
+     <details class="citation" id="citation">
+      <summary>
+       Citation · BibTeX
+      </summary>
       <div>
        <span class="mono-caption">
         CITE THIS WORK
@@ -593,7 +455,7 @@
 }</pre>
       <span aria-live="polite" id="copy-status" role="status">
       </span>
-     </div>
+     </details>
     </div>
    </section>
   </main>

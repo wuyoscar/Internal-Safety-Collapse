@@ -1109,6 +1109,522 @@
       ]
     }
   ],
+  "modelReports": [
+    {
+      "name": "Claude Fable 5",
+      "reported": "Yes",
+      "icon": "static/img/favicons/anthropic.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claude-fable-5-fake-news",
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claude-fable-5-nsfw"
+      ]
+    },
+    {
+      "name": "Apple Foundation Model",
+      "reported": "Yes",
+      "icon": "static/img/favicons/apple.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-90-apple-foundation-vader"
+      ]
+    },
+    {
+      "name": "Claude Opus 4.8",
+      "reported": "Yes",
+      "icon": "static/img/favicons/anthropic.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-agent-qwenguard",
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus48-guard-attack"
+      ]
+    },
+    {
+      "name": "Claude Opus 4.7",
+      "reported": "Yes",
+      "icon": "static/img/favicons/anthropic.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus47-agent-qwenguard"
+      ]
+    },
+    {
+      "name": "Claude Opus 4.6",
+      "reported": "Yes",
+      "icon": "static/img/favicons/anthropic.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus46thinking-guard-attack",
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-48-claudeopus46-agent-qwenguard"
+      ]
+    },
+    {
+      "name": "Gemini 3.1 Pro",
+      "reported": "Yes",
+      "icon": "static/img/favicons/google.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-42-gemini31pro-agent-qwenguard"
+      ]
+    },
+    {
+      "name": "Grok 4.20",
+      "reported": "Yes",
+      "icon": "static/img/favicons/x.ai.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-9-grok420beta",
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/grok420-guard-attack"
+      ]
+    },
+    {
+      "name": "Kimi K2.6",
+      "reported": "Yes",
+      "icon": "static/img/favicons/moonshot.ai.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/kimi-k26-share"
+      ]
+    },
+    {
+      "name": "Gemini 3 Pro",
+      "reported": "Yes",
+      "icon": "static/img/favicons/google.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-13-gemini3pro"
+      ]
+    },
+    {
+      "name": "GPT-5.4",
+      "reported": "Yes",
+      "icon": "static/img/favicons/openai.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-57-gpt54-moderation-api",
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-28-gpt54"
+      ]
+    },
+    {
+      "name": "GPT-5.2",
+      "reported": "Yes",
+      "icon": "static/img/favicons/openai.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-29-gpt52chat",
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/gpt52-guard-attack-v2"
+      ]
+    },
+    {
+      "name": "Gemini 3 Flash",
+      "reported": "Yes",
+      "icon": "static/img/favicons/google.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-19-gemini3flash-redteam-testgen",
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/gemini3flash-guard-attack-v2"
+      ]
+    },
+    {
+      "name": "Claude Opus 4.5",
+      "reported": "Yes",
+      "icon": "static/img/favicons/anthropic.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus45thinking-guard-attack-v2",
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus45-share"
+      ]
+    },
+    {
+      "name": "Grok 4.1",
+      "reported": "Yes",
+      "icon": "static/img/favicons/x.ai.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/grok41fast-guard-attack-v2",
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-grok41-redacted"
+      ]
+    },
+    {
+      "name": "Claude Sonnet 4.6",
+      "reported": "Yes",
+      "icon": "static/img/favicons/anthropic.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudesonnet46-share"
+      ]
+    },
+    {
+      "name": "Qwen3.5 Max",
+      "reported": "Yes",
+      "icon": "static/img/favicons/alibabacloud.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/qwen35maxpreview-web-share"
+      ]
+    },
+    {
+      "name": "GPT-5.3",
+      "reported": "Yes",
+      "icon": "static/img/favicons/openai.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-22-gpt53chat"
+      ]
+    },
+    {
+      "name": "Dola Seed 2.0",
+      "reported": "Yes",
+      "icon": "static/img/favicons/volcengine.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-11-dolaseed2"
+      ]
+    },
+    {
+      "name": "GPT-5.1",
+      "reported": "Yes",
+      "icon": "static/img/favicons/openai.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/gpt51-guard-attack-v2"
+      ]
+    },
+    {
+      "name": "GLM-5",
+      "reported": "Yes",
+      "icon": "static/img/favicons/z.ai.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/glm5-share"
+      ]
+    },
+    {
+      "name": "Kimi K2.5",
+      "reported": "Yes",
+      "icon": "static/img/favicons/moonshot.ai.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/kimi-k25-thinking-share",
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-31-kimik25instant"
+      ]
+    },
+    {
+      "name": "Claude Sonnet 4.5",
+      "reported": "Yes",
+      "icon": "static/img/favicons/anthropic.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-25-claudesonnet45",
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-27-claudesonnet45thinking"
+      ]
+    },
+    {
+      "name": "ERNIE 5.0",
+      "reported": "Yes",
+      "icon": "static/img/favicons/baidu.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-5-ernie5"
+      ]
+    },
+    {
+      "name": "Qwen3.5 397B",
+      "reported": "Yes",
+      "icon": "static/img/favicons/alibabacloud.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-3-qwen35397b",
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/qwen35397b-guard-attack-v2"
+      ]
+    },
+    {
+      "name": "Claude Opus 4.1",
+      "reported": "Yes",
+      "icon": "static/img/favicons/anthropic.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus41-guard-attack-v2"
+      ]
+    },
+    {
+      "name": "Gemini 2.5 Pro",
+      "reported": "Yes",
+      "icon": "static/img/favicons/google.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-52-gemini25pro-latex-fraud"
+      ]
+    },
+    {
+      "name": "Mimo V2 Pro",
+      "reported": "Yes",
+      "icon": "static/img/favicons/mi.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/xiaomi-mimo-v2-pro/aiml_detoxify.json"
+      ]
+    },
+    {
+      "name": "GLM-4.7",
+      "reported": "Yes",
+      "icon": "static/img/favicons/z.ai.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-64-glm47-toxin-biosynthesis"
+      ]
+    },
+    {
+      "name": "Qwen3 Max",
+      "reported": "Yes",
+      "icon": "static/img/favicons/alibabacloud.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-4-qwen3max",
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/qwen3-max-20250923-share"
+      ]
+    },
+    {
+      "name": "GPT-5",
+      "reported": "Yes",
+      "icon": "static/img/favicons/openai.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openai_gpt-5/aiml_propaganda.json"
+      ]
+    },
+    {
+      "name": "o3",
+      "reported": "Yes",
+      "icon": "static/img/favicons/openai.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/o3-share"
+      ]
+    },
+    {
+      "name": "Kimi K2",
+      "reported": "Yes",
+      "icon": "static/img/favicons/moonshot.ai.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openrouter_moonshotai-kimi-k2/aiml_detoxify.json"
+      ]
+    },
+    {
+      "name": "GLM-4.6",
+      "reported": "Yes",
+      "icon": "static/img/favicons/z.ai.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-65-glm46-multi-domain"
+      ]
+    },
+    {
+      "name": "DeepSeek V3.2",
+      "reported": "Yes",
+      "icon": "static/img/favicons/deepseek.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseekv32-guard-attack-v2",
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseek-v32-share",
+        "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/deepseek-deepseek-v3.2-exp/aiml_detoxify.json"
+      ]
+    },
+    {
+      "name": "Claude Opus 4",
+      "reported": "Yes",
+      "icon": "static/img/favicons/anthropic.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudeopus4-guard-attack"
+      ]
+    },
+    {
+      "name": "Qwen3 235B",
+      "reported": "Yes",
+      "icon": "static/img/favicons/alibabacloud.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/qwen3-235b-diffdock",
+        "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/qwen-qwen3-235b-a22b-thinking-2507/aiml_detoxify.json"
+      ]
+    },
+    {
+      "name": "DeepSeek R1",
+      "reported": "Yes",
+      "icon": "static/img/favicons/deepseek.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseek-r1-0528-scapy",
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseek-r1-darkweb"
+      ]
+    },
+    {
+      "name": "Grok 4",
+      "reported": "Yes",
+      "icon": "static/img/favicons/x.ai.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/grok4fast-darkweb"
+      ]
+    },
+    {
+      "name": "DeepSeek V3.1",
+      "reported": "Yes",
+      "icon": "static/img/favicons/deepseek.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/deepseek-v31-deepfake"
+      ]
+    },
+    {
+      "name": "Qwen3.5 122B",
+      "reported": "Yes",
+      "icon": "static/img/favicons/alibabacloud.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/qwen-qwen3.5-122b-a10b/aiml_detoxify.json"
+      ]
+    },
+    {
+      "name": "DeepSeek V3.1 Terminus",
+      "reported": "Yes",
+      "icon": "static/img/favicons/deepseek.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/deepseek-deepseek-v3.1-terminus/aiml_detoxify.json"
+      ]
+    },
+    {
+      "name": "Mistral Large 3",
+      "reported": "Yes",
+      "icon": "static/img/favicons/mistral.ai.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/issue-60-mistral-large3-survival"
+      ]
+    },
+    {
+      "name": "Qwen3 VL 235B",
+      "reported": "Yes",
+      "icon": "static/img/favicons/alibabacloud.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/qwen-qwen3-vl-235b-a22b-instruct/aiml_detoxify.json",
+        "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/qwen-qwen3-vl-235b-a22b-thinking/aiml_detoxify.json"
+      ]
+    },
+    {
+      "name": "GPT-4.1",
+      "reported": "Yes",
+      "icon": "static/img/favicons/openai.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/gpt41-detoxify"
+      ]
+    },
+    {
+      "name": "Gemini 2.5 Flash",
+      "reported": "Yes",
+      "icon": "static/img/favicons/google.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/gemini25flash-guard"
+      ]
+    },
+    {
+      "name": "GLM-4.5",
+      "reported": "Yes",
+      "icon": "static/img/favicons/z.ai.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/glm45-darkweb"
+      ]
+    },
+    {
+      "name": "MiniMax M2.7",
+      "reported": "Yes",
+      "icon": "static/img/favicons/minimax.io.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/minimax-m27-factcheck"
+      ]
+    },
+    {
+      "name": "Claude Haiku 4.5",
+      "reported": "Yes",
+      "icon": "static/img/favicons/anthropic.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudehaiku45-guard-attack"
+      ]
+    },
+    {
+      "name": "Qwen3.5 27B",
+      "reported": "Yes",
+      "icon": "static/img/favicons/alibabacloud.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/qwen-qwen3.5-27b/aiml_detoxify.json"
+      ]
+    },
+    {
+      "name": "MiniMax M2.5",
+      "reported": "Yes",
+      "icon": "static/img/favicons/minimax.io.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/minimax-minimax-m2.5/aiml_detoxify.json"
+      ]
+    },
+    {
+      "name": "o1",
+      "reported": "Yes",
+      "icon": "static/img/favicons/openai.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openai_o1-2024-12-17/aiml_sentiment.json"
+      ]
+    },
+    {
+      "name": "Qwen3 Next 80B",
+      "reported": "Yes",
+      "icon": "static/img/favicons/alibabacloud.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/qwen-qwen3-next-80b-a3b-instruct/aiml_detoxify.json"
+      ]
+    },
+    {
+      "name": "Qwen3.5 35B",
+      "reported": "Yes",
+      "icon": "static/img/favicons/alibabacloud.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/qwen-qwen3.5-35b-a3b/aiml_detoxify.json"
+      ]
+    },
+    {
+      "name": "Claude Sonnet 4",
+      "reported": "Yes",
+      "icon": "static/img/favicons/anthropic.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/claudesonnet4-guard-attack"
+      ]
+    },
+    {
+      "name": "DeepSeek V3",
+      "reported": "Yes",
+      "icon": "static/img/favicons/deepseek.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openrouter_deepseek-deepseek-chat-v3-0324/aiml_offensive.json"
+      ]
+    },
+    {
+      "name": "Mimo V2 Flash",
+      "reported": "Yes",
+      "icon": "static/img/favicons/mi.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openrouter_xiaomi-mimo-v2-flash/aiml_fake_news.json"
+      ]
+    },
+    {
+      "name": "o4-mini",
+      "reported": "Yes",
+      "icon": "static/img/favicons/openai.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openai_o4-mini-2025-04-16/aiml_nsfw.json"
+      ]
+    },
+    {
+      "name": "GPT-5 Mini",
+      "reported": "Yes",
+      "icon": "static/img/favicons/openai.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/openai_gpt-5-mini/aiml_fake_news.json"
+      ]
+    },
+    {
+      "name": "Step 3.5 Flash",
+      "reported": "Yes",
+      "icon": "static/img/favicons/stepfun.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/blob/main/experiment/tvd_chatbot/result_direct/stepfun-step-3.5-flash/aiml_detoxify.json"
+      ]
+    },
+    {
+      "name": "Mistral Large",
+      "reported": "Yes",
+      "icon": "static/img/favicons/mistral.ai.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/mistral-large-deepfake"
+      ]
+    },
+    {
+      "name": "Amazon Nova Pro",
+      "reported": "Yes",
+      "icon": "static/img/favicons/amazon.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/amazon-nova-pro-sentiment"
+      ]
+    },
+    {
+      "name": "Llama 4 Scout",
+      "reported": "Yes",
+      "icon": "static/img/favicons/meta.com.png",
+      "links": [
+        "https://github.com/wuyoscar/ISC-Bench/tree/main/community/llama4scout-phishing"
+      ]
+    }
+  ],
   "paper": "https://arxiv.org/pdf/2603.23509",
   "schemaVersion": 2
 }
