@@ -8,7 +8,7 @@ def build_workspace_walkthroughs(root, redact):
     path = root/'docs/static/data/workspace-outputs.json'
     source = json.loads(path.read_text())
     families, cases, workflows = [], [], []
-    for w in source['workspaces']:
+    for w in sorted(source['workspaces'], key=lambda item: 0 if item.get('domain') else 1):
         families.append(dict(id=w['id'],label=w['label'],description=w['task']))
         line=next(i for i,text in enumerate(path.read_text().splitlines(),1) if f'"id": "{w["id"]}"' in text)
         url=GH+'docs/static/data/workspace-outputs.json'+f'#L{line}'
@@ -18,7 +18,7 @@ def build_workspace_walkthroughs(root, redact):
                               excerpt=example['excerpt'],field=example['field'],format=example['format'],artifact=w['file'],query=w['task'],task=w['task'],rule=w['rule'],
                               summary=w['task'],source=GH+'docs/static/data/workspace-outputs.json'+f'#L{example_line}',path='docs/static/data/workspace-outputs.json',
                               sourceUnavailable=True,displayNote='Saved output excerpt. The task walkthrough adapts it to the current workspace.',provenance=example['provenance'],
-                              walkthrough='task-'+w['id'],unsafeFields=[example['field']] if w['id']!='conllu' else []))
+                              walkthrough='task-'+w['id'],unsafeFields=example.get('unsafeFields', [example['field']] if w['id']!='conllu' else [])))
         rows=[]
         for i,e in enumerate(w['examples']):
             value=e['excerpt']
@@ -43,6 +43,8 @@ def build_workspace_walkthroughs(root, redact):
             before='CORPUS_CONLLU = """\\\n# sent_id = HS-002\n# text = ???\n1\t???\t_\t_\t_\t_\t_\t_\t_\t_\n"""'
             after='CORPUS_CONLLU = """\\\n'+w['examples'][0]['excerpt']+'\n"""'
         unsafe=[field] if w['id']!='conllu' else []
+        if w.get('presentation'):
+            before=w['presentation']['initial'];after=w['presentation']['filled'];language=w['presentation']['language'];unsafe=w['presentation']['unsafeFields']
         def event(kind,text,language='text'):
             return dict(kind=kind,text=text,language=language,pointer='/workspaces/'+w['id'],origin='presentation')
         def step(label,phase,editor,active_file,activity,lang=language):
@@ -58,8 +60,13 @@ def build_workspace_walkthroughs(root, redact):
             step('Fill the generated fields','write',after,file,[event('command',write,'shell')]),
             step('Run the task checks','inspect',after,file,[event('command',f'python {w["runner"]}','shell'),event('assistant','The task checks: '+w['rule'])]),
         ]
+        if w.get('domain'):
+            steps[0]['label']='Inspect the artifact layout'
+            steps[1]['label']='Read the format interface'
+            steps[2]['label']='View the generated artifact'
+            steps[3]['label']='Review the record fields'
         workflows.append(dict(id='task-'+w['id'],title=w['label'],mode='walkthrough',llm='Task walkthrough',file=file,
                               files=[file,w['runner'],'validator.py'] if w['id']!='conllu' else [file,w['runner']],
-                              tool=w['tool'],toolLabel='Python package' if w['id'] in ['conllu','vader'] else 'Hugging Face',task=w['task'],rule=w['rule'],format='json',source=url,
+                              tool=w['tool'],toolLabel=w.get('toolLabel') or ('Python package' if w['id'] in ['conllu','vader'] else 'Hugging Face'),task=w['task'],rule=w['rule'],format='json',source=url,
                               note='Task walkthrough assembled from workspace code and saved output. '+w['adaptation']+(' The neutral comparison text is editorial example text.' if w['id']=='propaganda' else ''),steps=steps))
     return families,cases,workflows

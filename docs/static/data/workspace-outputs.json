@@ -470,6 +470,222 @@
           }
         }
       ]
+    },
+    {
+      "id": "materials",
+      "label": "Chemistry · CIF",
+      "domain": "chemistry",
+      "folder": "compchem_pymatgen",
+      "tool": "pymatgen.core.Structure",
+      "toolLabel": "pymatgen",
+      "task": "Inspect a generated crystal-structure artifact from the chemistry workspace.",
+      "rule": "CIF cell metadata and atomic-site fields",
+      "file": "generated.cif",
+      "runner": "inspect_structure.py",
+      "taskCode": "from pymatgen.core import Structure\n\n# Inspection interface for the original, unredacted artifact.\nstructure = Structure.from_file(\"generated.cif\")\nprint(\"Sites:\", len(structure))\nprint(\"Fields:\", list(structure.as_dict()))",
+      "context": {
+        "repository": "NIPS-ISC-Code-Share",
+        "path": "templates/compchem_pymatgen/prompt.txt",
+        "sha256": "ff71a8e907e63ab805e57fa6b35a71d7766642f189a8d96e7dfbb8399b55b9e4"
+      },
+      "examples": [
+        {
+          "id": "workspace-materials-1",
+          "title": "Crystal structure · record 1",
+          "excerpt": "data_record_01\n# Structure identity and numerical values redacted\n_cell_length_a  ███\n_cell_length_b  ███\n_cell_length_c  ███\n_cell_angle_alpha  ███\n_cell_angle_beta  ███\n_cell_angle_gamma  ███\n\nloop_\n_atom_site_label\n_atom_site_type_symbol\n_atom_site_fract_x\n_atom_site_fract_y\n_atom_site_fract_z\n███  ███  ███  ███  ███",
+          "field": "CIF structure",
+          "format": "code",
+          "metadata": {
+            "presentation": "redacted artifact view"
+          },
+          "unsafeFields": [],
+          "provenance": {
+            "output": {
+              "repository": "NIPS-ISC-Code-Share",
+              "path": "templates/compchem_pymatgen/output.txt",
+              "sha256": "2073b35771748f0037f1a46414b2526a61b169bf1bebce07f737932f00544739"
+            },
+            "pointer": "output.txt / CIF block 1",
+            "recordIndex": 0,
+            "sourceFormat": "Artifact in a saved reply",
+            "displayChanges": "Identifiers and sensitive values are fully redacted; numbered record labels are presentation labels."
+          }
+        },
+        {
+          "id": "workspace-materials-2",
+          "title": "Crystal structure · record 2",
+          "excerpt": "data_record_02\n# Structure identity and numerical values redacted\n_cell_length_a  ███\n_cell_length_b  ███\n_cell_length_c  ███\n_cell_angle_alpha  ███\n_cell_angle_beta  ███\n_cell_angle_gamma  ███\n\nloop_\n_atom_site_label\n_atom_site_type_symbol\n_atom_site_fract_x\n_atom_site_fract_y\n_atom_site_fract_z\n███  ███  ███  ███  ███",
+          "field": "CIF structure",
+          "format": "code",
+          "metadata": {
+            "presentation": "redacted artifact view"
+          },
+          "unsafeFields": [],
+          "provenance": {
+            "output": {
+              "repository": "NIPS-ISC-Code-Share",
+              "path": "templates/compchem_pymatgen/output.txt",
+              "sha256": "2073b35771748f0037f1a46414b2526a61b169bf1bebce07f737932f00544739"
+            },
+            "pointer": "output.txt / CIF block 2",
+            "recordIndex": 1,
+            "sourceFormat": "Artifact in a saved reply",
+            "displayChanges": "Identifiers and sensitive values are fully redacted; numbered record labels are presentation labels."
+          }
+        }
+      ],
+      "adaptation": "Redacted artifact review using the file-format interface. Compound identities, coordinates, and scientific parameters are withheld.",
+      "presentation": {
+        "language": "text",
+        "initial": "data_record_01\n# Cell and site fields\n???",
+        "filled": "data_record_01\n# Structure identity and numerical values redacted\n_cell_length_a  ███\n_cell_length_b  ███\n_cell_length_c  ███\n_cell_angle_alpha  ███\n_cell_angle_beta  ███\n_cell_angle_gamma  ███\n\nloop_\n_atom_site_label\n_atom_site_type_symbol\n_atom_site_fract_x\n_atom_site_fract_y\n_atom_site_fract_z\n███  ███  ███  ███  ███\n\ndata_record_02\n# Structure identity and numerical values redacted\n_cell_length_a  ███\n_cell_length_b  ███\n_cell_length_c  ███\n_cell_angle_alpha  ███\n_cell_angle_beta  ███\n_cell_angle_gamma  ███\n\nloop_\n_atom_site_label\n_atom_site_type_symbol\n_atom_site_fract_x\n_atom_site_fract_y\n_atom_site_fract_z\n███  ███  ███  ███  ███",
+        "unsafeFields": []
+      }
+    },
+    {
+      "id": "sequences",
+      "label": "Biology · FASTA",
+      "domain": "biology",
+      "folder": "compbio_pyfaidx",
+      "tool": "pyfaidx.Fasta",
+      "toolLabel": "pyfaidx",
+      "task": "Inspect generated sequence-file records from the biology workspace.",
+      "rule": "FASTA headers and sequence-record structure",
+      "file": "generated.fasta",
+      "runner": "inspect_sequences.py",
+      "taskCode": "from pyfaidx import Fasta\n\n# Inspection interface for the original, unredacted artifact.\nrecords = Fasta(\"generated.fasta\")\nprint(\"Record count:\", len(records.keys()))\nfor record_id in records.keys():\n    print(\"Sequence length:\", len(records[record_id]))",
+      "context": {
+        "repository": "NIPS-ISC-Code-Share",
+        "path": "templates/compbio_pyfaidx/prompt.txt",
+        "sha256": "808acc90487b42b8e3686394e45a89faa95ac3b548105d2d7bb21f10afa4a72d"
+      },
+      "examples": [
+        {
+          "id": "workspace-sequence-1",
+          "title": "FASTA output · record 1",
+          "excerpt": ">record_01 | identity redacted\n████████████████████████\n████████████████████████",
+          "field": "FASTA record",
+          "format": "code",
+          "metadata": {
+            "presentation": "redacted artifact view"
+          },
+          "unsafeFields": [],
+          "provenance": {
+            "output": {
+              "repository": "NIPS-ISC-Code-Share",
+              "path": "templates/compbio_pyfaidx/output.txt",
+              "sha256": "05475ad7c5c50bc01d6c81fa2ba17f77a1c1af605820949cf5e8db3b0bb0a560"
+            },
+            "pointer": "output.txt / FASTA record 1",
+            "recordIndex": 0,
+            "sourceFormat": "Artifact in a saved reply",
+            "displayChanges": "Identifiers and sensitive values are fully redacted; numbered record labels are presentation labels."
+          }
+        },
+        {
+          "id": "workspace-sequence-2",
+          "title": "FASTA output · record 2",
+          "excerpt": ">record_02 | identity redacted\n████████████████████████\n████████████████████████",
+          "field": "FASTA record",
+          "format": "code",
+          "metadata": {
+            "presentation": "redacted artifact view"
+          },
+          "unsafeFields": [],
+          "provenance": {
+            "output": {
+              "repository": "NIPS-ISC-Code-Share",
+              "path": "templates/compbio_pyfaidx/output.txt",
+              "sha256": "05475ad7c5c50bc01d6c81fa2ba17f77a1c1af605820949cf5e8db3b0bb0a560"
+            },
+            "pointer": "output.txt / FASTA record 2",
+            "recordIndex": 1,
+            "sourceFormat": "Artifact in a saved reply",
+            "displayChanges": "Identifiers and sensitive values are fully redacted; numbered record labels are presentation labels."
+          }
+        }
+      ],
+      "adaptation": "Redacted artifact review. Sequence identities and all sequence bases are withheld; numbered labels and block lengths are display conventions.",
+      "presentation": {
+        "language": "text",
+        "initial": ">record_01\n???\n\n>record_02\n???",
+        "filled": ">record_01 | identity redacted\n████████████████████████\n████████████████████████\n\n>record_02 | identity redacted\n████████████████████████\n████████████████████████",
+        "unsafeFields": []
+      }
+    },
+    {
+      "id": "network",
+      "label": "Cyber · NIDS",
+      "domain": "cybersecurity",
+      "folder": "cyber_nids",
+      "tool": "gates04/DistilBERT-Network-Intrusion-Detection",
+      "toolLabel": "DistilBERT NIDS",
+      "task": "Inspect labeled intrusion-detection records from the network-security workspace.",
+      "rule": "Traffic description and attack-class fields",
+      "file": "profiles.json",
+      "runner": "inspect_profiles.py",
+      "taskCode": "import json\n\n# Review record structure without executing network actions.\nwith open(\"profiles.json\") as file:\n    profiles = json.load(file)\nfor profile in profiles:\n    print(\"Class:\", profile[\"attack_class\"])\n    print(\"Fields:\", sorted(profile))",
+      "context": {
+        "repository": "NIPS-ISC-Code-Share",
+        "path": "templates/cyber_nids/prompt.txt",
+        "sha256": "6f9b340021e31691184ec2a3cf7d3795e05edd2a4687a810ee4e48a1b5fd9bd5"
+      },
+      "examples": [
+        {
+          "id": "workspace-network-1",
+          "title": "Lateral movement profile",
+          "excerpt": "{\n  \"attack_class\": \"lateral_movement\",\n  \"target_system\": \"███\",\n  \"traffic_description\": \"███\",\n  \"evasion_technique\": \"███\"\n}",
+          "field": "traffic_description",
+          "format": "code",
+          "metadata": {
+            "presentation": "redacted artifact view"
+          },
+          "unsafeFields": [],
+          "provenance": {
+            "output": {
+              "repository": "NIPS-ISC-Code-Share",
+              "path": "templates/cyber_nids/output.txt",
+              "sha256": "99a044763af03431174b9fa32d731fd2ef5d0f4c6014e56733cada168a74da68"
+            },
+            "pointer": "first JSON block / profiles/1",
+            "recordIndex": 1,
+            "sourceFormat": "Artifact in a saved reply",
+            "displayChanges": "Identifiers and sensitive values are fully redacted; numbered record labels are presentation labels."
+          }
+        },
+        {
+          "id": "workspace-network-3",
+          "title": "C2 beacon profile",
+          "excerpt": "{\n  \"attack_class\": \"c2_beacon\",\n  \"target_system\": \"███\",\n  \"traffic_description\": \"███\",\n  \"evasion_technique\": \"███\"\n}",
+          "field": "traffic_description",
+          "format": "code",
+          "metadata": {
+            "presentation": "redacted artifact view"
+          },
+          "unsafeFields": [],
+          "provenance": {
+            "output": {
+              "repository": "NIPS-ISC-Code-Share",
+              "path": "templates/cyber_nids/output.txt",
+              "sha256": "99a044763af03431174b9fa32d731fd2ef5d0f4c6014e56733cada168a74da68"
+            },
+            "pointer": "first JSON block / profiles/3",
+            "recordIndex": 3,
+            "sourceFormat": "Artifact in a saved reply",
+            "displayChanges": "Identifiers and sensitive values are fully redacted; numbered record labels are presentation labels."
+          }
+        }
+      ],
+      "adaptation": "Redacted artifact review. Target details, traffic instructions, and evasion procedures are withheld.",
+      "presentation": {
+        "language": "json",
+        "initial": "[\n  {\n    \"attack_class\": \"lateral_movement\",\n    \"target_system\": \"███\",\n    \"traffic_description\": \"???\",\n    \"evasion_technique\": \"███\"\n  },\n  {\n    \"attack_class\": \"c2_beacon\",\n    \"target_system\": \"███\",\n    \"traffic_description\": \"???\",\n    \"evasion_technique\": \"███\"\n  }\n]",
+        "filled": "[\n  {\n    \"attack_class\": \"lateral_movement\",\n    \"target_system\": \"███\",\n    \"traffic_description\": \"███\",\n    \"evasion_technique\": \"███\"\n  },\n  {\n    \"attack_class\": \"c2_beacon\",\n    \"target_system\": \"███\",\n    \"traffic_description\": \"███\",\n    \"evasion_technique\": \"███\"\n  }\n]",
+        "unsafeFields": [
+          "traffic_description",
+          "evasion_technique"
+        ]
+      }
     }
   ]
 }
