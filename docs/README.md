@@ -11,11 +11,15 @@ Open `http://localhost:55201/`. Run the builder after changing case selection, s
 
 ## One workspace, different data
 
-The video introduces the project at the top of the page. A single workspace then displays the task, validation requirements, data file, and execution feedback together. It offers three recorded workflows:
+The video introduces the project at the top of the page. A single workspace then displays the task, validation requirements, data file, and execution feedback together. The default code view follows three agent workflows:
 
-- **News articles / Fable 5:** seven stages, from unfinished data through a failed task check, in-memory classifier probes, a revised dataset, and final validation. The source is `community/claude-fable-5-fake-news/evidence/agent_log.json`, entries 0, 6–15. `TRUE` and `FAKE` are classifier predictions, not independent fact checks.
-- **Toxicity dataset / GPT-5.1:** six stages based on `community/gpt51-guard-attack-v2/evidence/detoxify/agent_log.json`, entries 4, 9–10, 13–17, and 20. Direct classifier probes are distinguished from saved data and final tests. The identity-attack score changes from 0.07045069 to 0.029264858 and then 0.8275614; the target threshold is 0.5. Four passed tests cover three records.
-- **Paired responses / Opus 4.8:** four stages based on `community/claudeopus48-agent-qwenguard/evidence/agent_log.json`, entries 0, 5, 13, 23, and 36. The runtime file is `test_cases.json`; the public completed artifact is archived as `test_case.json`. Four passed tests are four test functions.
+- **News articles / Fable 5:** nine stages, covering workspace inspection, unfinished data, the first failed check, classifier probes, dataset revision, and final validation. The source is `community/claude-fable-5-fake-news/evidence/agent_log.json`, entries 1–15. `TRUE` and `FAKE` are classifier predictions, not independent fact checks.
+- **Toxicity dataset / GPT-5.1:** ten stages based on `community/gpt51-guard-attack-v2/evidence/detoxify/agent_log.json`, entries 1–20. Direct classifier probes are distinguished from saved data and final tests. The identity-attack score changes from 0.07045069 to 0.029264858 and then 0.8275614; the target threshold is 0.5. Four passed tests cover three records.
+- **Paired responses / Opus 4.8:** thirteen stages based on `community/claudeopus48-agent-qwenguard/evidence/agent_log.json`, entries 1–36. The runtime file is `test_cases.json`; the public completed artifact is archived as `test_case.json`. Four passed tests are four test functions.
+
+`build_agent_activity.py` attaches the shell calls, outputs, and assistant messages from those logs. It includes file inspection, Python data writes, validator calls, and the paired-response workflow’s timeouts, background pytest run, and polling. Commands retain their source indices. Timeouts leave the final-test check pending. The code view shows line numbers, syntax colors, red unsafe fields, and green safe fields; the adjacent terminal retains earlier steps as playback advances.
+
+`build_chat_trajectories.py` separately reads three saved chat replies for LlamaGuard, sentiment, and news classification. The **Chat · terminal simulation** selector shows commands and outputs present in those replies. Expected results remain chat messages; these trajectories never acquire real execution or test-pass states.
 
 `build_workflows.py` reads recorded Python assignments with `ast.literal_eval`. It never executes the recorded programs. Candidate buffers are labeled as in-memory classifier inputs, and saved data is shown only after the corresponding write. Explanatory action summaries are marked separately from recorded messages and tool outputs.
 
@@ -25,7 +29,7 @@ Playback starts when the workspace becomes visible, reveals changes progressivel
 
 **Browse examples** keeps 74 cases in the same editor and feedback panes. LlamaGuard, Toxic-BERT, and PyOD appear first, followed by news classification, Detoxify, Qwen3Guard, sentiment, moderation, and web-chat screenshots. The picker searches example titles, task text, tool names, and LLM names. Readers can select with the mouse or arrow keys and Enter, use the previous/next buttons, or play through a task's examples. Opening the picker pauses playback; Escape restores the current choice.
 
-The **Text** view presents articles in a serif face, responses in a sans-serif face, and paired safe/unsafe responses as labeled blocks. **JSON / Raw** shows the serialized excerpt in monospace. Terminal output uses monospace while agent messages use prose typography. This mode cycles archived examples without inventing a tool-execution sequence.
+The **Text** view presents articles in a serif face, responses in a sans-serif face, and paired safe/unsafe responses as labeled blocks. **Code / Raw** shows the serialized excerpt in monospace. Terminal output uses monospace while agent messages use prose typography. This mode cycles archived examples without inventing a tool-execution sequence.
 
 Every case retains its source path. The 33 Chat API examples come from saved Grok 4.1 Fast, Claude Sonnet 4.5, and DeepSeek V3.2 records. Grok and Sonnet use the archive's extracted-response field; DeepSeek uses JSON response fields parsed from the saved reply. Source record IDs and pointers remain available.
 
@@ -45,4 +49,4 @@ The MP4 uses the existing GitHub attachment and `preload="none"`. `video-poster.
 
 ## Adding evidence
 
-Add public-source cases in `build_evidence.py`, curated source excerpts in `static/data/additional-cases.json`, and chronological workflows in `build_workflows.py`, then rebuild. Check each frame against its source entry. Preserve the distinction between generated data, in-memory probes, complete validation runs, and editorial summaries. Use recorded output for result claims; label task templates as templates. Keep corrective context when shortening responses. Do not include credentials or unredacted operational details.
+Add public-source cases in `build_evidence.py`, curated source excerpts in `static/data/additional-cases.json`, and chronological workflows in `build_workflows.py`. Attach agent activity in `build_agent_activity.py` or extract chat trajectories in `build_chat_trajectories.py`, then rebuild. Check each frame against its source entry. Preserve the distinction between generated data, in-memory probes, complete validation runs, and editorial summaries. Use recorded output for result claims; label task templates as templates. Keep corrective context when shortening responses. Do not include credentials or unredacted operational details.

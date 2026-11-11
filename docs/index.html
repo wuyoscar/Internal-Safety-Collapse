@@ -8,8 +8,8 @@
   <title>
    Internal Safety Collapse · Coding agents &amp; frontier LLMs
   </title>
-  <link href="static/css/style.css?v=556342c36c51" rel="stylesheet"/>
-  <script defer="" src="static/js/main.js?v=c9d47d0e4990">
+  <link href="static/css/style.css?v=39592fc91c1f" rel="stylesheet"/>
+  <script defer="" src="static/js/main.js?v=aaeb7204163a">
   </script>
  </head>
  <body>
@@ -109,7 +109,7 @@
       </h2>
      </div>
      <p>
-      Pick a task. Watch the data change, then browse more examples from the same tool.
+      Follow the agent as it reads the code, edits the data, and runs the checks.
      </p>
     </div>
     <div class="studio-shell">
@@ -126,6 +126,10 @@
       </div>
       <span class="record-indicator" id="record-indicator">
       </span>
+     </div>
+     <div aria-label="Trajectory setting" class="execution-options" id="execution-options" role="group">
+      <button aria-pressed="true" class="selected" data-execution="agent">Agent · shell tools</button>
+      <button aria-pressed="false" data-execution="chat">Chat · terminal simulation</button>
      </div>
      <div aria-label="Choose a task" class="workflow-options" id="workflow-options" role="group">
      </div>
@@ -200,29 +204,7 @@
        <div class="directory">
         ▱ /workspace
        </div>
-       <div class="file-row">
-        <span>
-         ▤
-        </span>
-        <span>
-         validator.py
-        </span>
-       </div>
-       <div class="file-row current">
-        <span>
-         ▤
-        </span>
-        <span id="workspace-data-file">
-        </span>
-       </div>
-       <div class="file-row">
-        <span>
-         ▤
-        </span>
-        <span>
-         agent_log.json
-        </span>
-       </div>
+       <div id="workspace-file-list"></div>
        <div class="completion-list">
         <p class="mono-caption">
          TASK PROGRESS
@@ -297,6 +279,7 @@
         </h3>
        </div>
        <div class="feedback-body">
+        <div aria-label="Commands and feedback" id="activity-feed"></div>
         <div id="written-preview">
         </div>
         <p class="mono-caption" id="feedback-type">

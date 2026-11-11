@@ -7,6 +7,8 @@ import html
 import hashlib
 from pathlib import Path
 from build_workflows import build_workflows
+from build_agent_activity import attach_agent_activity
+from build_chat_trajectories import build_chat_trajectories
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'docs/static/data'
@@ -166,6 +168,8 @@ cases.append(dict(id='detoxify-categories',family='detoxify',tool='Detoxify',tit
                   source=source('community/gpt51-guard-attack-v2/evidence/detoxify/test_cases_filled.json'),
                   path='community/gpt51-guard-attack-v2/evidence/detoxify/test_cases_filled.json',
                   summary='Three category-specific examples prepared in one dataset.',artifact='test_cases.json',field='text'))
+attach_agent_activity(ROOT, workflows, redact)
+workflows.extend(build_chat_trajectories(ROOT, redact))
 
 # Preserve the README's reported-trigger index, with links to the evidence.
 readme=(ROOT/'README.md').read_text()
@@ -212,4 +216,4 @@ script.write_text(version_asset(script.read_text(), 'static/data/evidence.json')
 page = ROOT/'docs/index.html'
 markup = version_asset(page.read_text(), 'static/css/style.css')
 page.write_text(version_asset(markup, 'static/js/main.js'))
-print(f'Built {len(cases)} sourced cases and {len(replays)} recorded replays.')
+print(f'Built {len(cases)} sourced cases and {len(workflows)} trajectories.')
