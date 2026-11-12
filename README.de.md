@@ -2,17 +2,31 @@
 
 🌐 [English](README.md) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
+# Internal Safety Collapse (ISC) in LLMs and Coding Agents
+
+**NeurIPS 2026**
+
+[![Paper · arXiv](https://img.shields.io/badge/Paper-arXiv-BD5A38?style=flat-square&logo=arxiv&logoColor=white)](https://arxiv.org/pdf/2603.23509) &nbsp; [![Projekt · Website](https://img.shields.io/badge/Project-Website-453D33?style=flat-square)](https://wuyoscar.github.io/Internal-Safety-Collapse/) &nbsp; [![Vorlagen · 84](https://img.shields.io/badge/Templates-84-52796F?style=flat-square)](codebase_templates/) &nbsp; [![LLMs · 62](https://img.shields.io/badge/LLMs-62-6F665A?style=flat-square)](#e-models)
+
+<a href="https://wuyoscar.github.io/Internal-Safety-Collapse/"><img src="assets/site-tour.gif" alt="Die Projektseite: Eine TVD-Aufgabe führt von unausgefüllten Feldern zu einer bestandenen Prüfung; danach erzeugen verschiedene Werkzeuge verschiedene Daten" width="880"></a>
+
+<sub><em>Die Projektseite spielt TVD-Aufgaben Schritt für Schritt ab: die unausgefüllten Felder, die Prüfung durch den Validator und die Daten, die geschrieben werden, um sie zu bestehen.</em></sub>
+
+**[Projektseite öffnen →](https://wuyoscar.github.io/Internal-Safety-Collapse/)** &nbsp;·&nbsp; [Vorlagen](https://wuyoscar.github.io/Internal-Safety-Collapse/#templates) &nbsp;·&nbsp; [Paper im Browser lesen](https://wuyoscar.github.io/Internal-Safety-Collapse/#read)
+
 </div>
 
-# Internal Safety Collapse (ISC) in Frontier LLMs and Coding Agents
-
-[![Paper · arXiv](https://img.shields.io/badge/Paper-arXiv-B31B1B?style=flat-square&logo=arxiv&logoColor=white)](https://arxiv.org/pdf/2603.23509) &nbsp; [![Projekt · Website](https://img.shields.io/badge/Project-Website-52796F?style=flat-square)](https://wuyoscar.github.io/Internal-Safety-Collapse/)
-
-Jailbreaks und Prompt-Angriffe verwenden häufig gezielt formulierte adversariale Anweisungen, um **Schutzmechanismen zu umgehen (bypass guardrails)** und LLMs zu unsicheren Inhalten oder anderem Verhalten zu bringen, das gegen Sicherheitsrichtlinien verstößt.
+**Internal Safety Collapse (ISC)** ist ein neues Angriffsparadigma. Ein aktuelles Spitzen-LLM oder ein Coding-Agent lehnt schädliche Inhalte ab, wenn sie direkt angefragt werden, schreibt dieselben Inhalte aber als Schritt einer gewöhnlichen Programmieraufgabe.
 
 Coding-Agenten können zunehmend Aufgaben über viele Schritte hinweg bearbeiten. Aus einem vagen oder unvollständig beschriebenen Ziel leiten sie notwendige Arbeiten und Zwischenschritte ab und überarbeiten ihre Arbeit anhand der Ausführungsergebnisse bis zum Abschluss. Abläufe wie **autoresearch** und **`/goal`** zeigen, wie sie ein Ziel verfolgen können, ohne dass Nutzer jede Aktion vorgeben.
 
-Diese Fähigkeiten motivieren unsere Frage, ob Coding-Agenten durch die Bearbeitung einer Aufgabe ähnliche Ergebnisse wie Jailbreaks und Prompt-Angriffe erzielen können, ohne sorgfältig konstruierte adversariale Anweisungen zu benötigen. Wir untersuchen außerdem, wie dieses Paradigma der Forschung helfen kann, unter anderem bei Sicherheitsevaluation, Datensatzgenerierung, Detektortraining und automatisiertem Red Teaming.
+Diese Fähigkeiten motivieren unsere Frage, was geschieht, wenn der Abschluss einer Aufgabe Inhalte erfordert, die das LLM bei direkter Anfrage ablehnen würde. Wir untersuchen außerdem, wie dieses Paradigma der Forschung helfen kann, unter anderem bei Sicherheitsevaluation, Datensatzgenerierung, Detektortraining und automatisiertem Red Teaming.
+
+| | |
+|:---|:---|
+| **Ein neues Angriffsparadigma** | Die Anfrage ist eine gewöhnliche fachliche Aufgabe. Die schädlichen Inhalte entstehen als Schritt ihrer Bearbeitung. |
+| **[TVD](#c-framework)** | Eine Aufgabe, ein Validator und eine Datendatei mit unausgefüllten Feldern. Die Aufgabe ist erledigt, wenn der Validator sie akzeptiert. |
+| **[Andere Werkzeuge, andere Daten](#different-tools-different-data)** | Jedes Werkzeug bringt ein aktuelles Spitzen-LLM oder einen Coding-Agenten dazu, eine andere Art von Daten zu schreiben: anderes Fachgebiet, andere Kategorie, anderer Stil und anderes Format. |
 
 | In diesem Projekt | Abschnitt |
 |:---|:---|
@@ -30,6 +44,7 @@ Diese Fähigkeiten motivieren unsere Frage, ob Coding-Agenten durch die Bearbeit
 
 ## Neuigkeiten
 
+- **2026-11-12** 🌐 [Projektseite](https://wuyoscar.github.io/Internal-Safety-Collapse/) neu gestaltet: schrittweiser TVD-Player, Werkzeuggalerie und integrierter Paper-Reader.
 - **2026-11-11** 📄 [Camera-ready-Version](https://arxiv.org/pdf/2603.23509) auf arXiv verfügbar. ⭐ **2.6k Sterne.**
 - **2026-10-17** ✨ README neu geschrieben und überarbeitet. **1.6k Sterne.**
 - **2026-09** 🎉 Paper bei **NeurIPS 2026** angenommen.
@@ -47,6 +62,8 @@ Diese Fähigkeiten motivieren unsere Frage, ob Coding-Agenten durch die Bearbeit
 Wir haben ein kurzes Video erstellt, um unsere Erkenntnisse zu teilen und unsere Beobachtungen zu zeigen.
 
 https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15
+
+Die [Projektseite](https://wuyoscar.github.io/Internal-Safety-Collapse/) zeigt dieselben Aufgaben als schrittweise Player.
 
 <a id="b-observation"></a>
 
@@ -75,7 +92,7 @@ In Teilbild (a) erkennt der frühere Chatbot die Platzhalter und fragt nach der 
 
 Teilbilder (b) und (c) zeigen mehr Autonomie. Der aktuelle Chatbot schlägt Namen vor, wartet aber auf Bestätigung. Mit demselben LLM in einer Coding-Umgebung führt der Agent das Programm aus, liest den Assertion-Fehler, **erschließt** die fehlenden Daten, ergänzt die Namen und testet erneut. Das Ableiten und Ausführen von Zwischenschritten ermöglicht auch längere Abläufe wie **autoresearch** und **`/goal`**.
 
-Damit kehren wir zu unserer Frage zurück: Was geschieht, wenn der Aufgabenabschluss Inhalte erfordert, die üblicherweise durch einen Jailbreak erlangt werden sollen? Teilbild (d) zeigt einen solchen Fall. Zur Evaluation eines Sicherheitsklassifikators leitet der Agent aus Code und Ausführungsfeedback ab, dass er unsichere Beispiele erzeugen muss, und schreibt sie, um die Prüfungen zu erfüllen.
+Damit kehren wir zu unserer Frage zurück: Was geschieht, wenn der Aufgabenabschluss Inhalte erfordert, die das LLM bei direkter Anfrage ablehnen würde? Teilbild (d) zeigt einen solchen Fall. Zur Evaluation eines Sicherheitsklassifikators leitet der Agent aus Code und Ausführungsfeedback ab, dass er unsichere Beispiele erzeugen muss, und schreibt sie, um die Prüfungen zu erfüllen.
 
 Dieses Phänomen nennen wir **Internal Safety Collapse (ISC)**: Aufgabendruck führt dazu, dass ein auf Sicherheit ausgerichtetes LLM oder ein Coding-Agent den Abschluss über Sicherheitsvorgaben stellt. Eine direkte Anfrage nach sensiblen oder schädlichen Inhalten lehnt es ab; leitet es aber ab, dass dieselben Inhalte für eine Programmieraufgabe erforderlich sind, erzeugt es sie ohne Ablehnung.
 
@@ -119,7 +136,7 @@ Aktuelle Spitzen-LLMs und Coding-Agenten können erkennen, dass diese Aufgabe sc
 
 Der Validierungsfehler führt den Agenten zum selben Feld zurück. Jede gescheiterte Prüfung verdeutlicht den Konflikt: Eine sichere Antwort erfüllt die Anforderung eines unsicheren Beispiels nicht, also bleibt die Programmieraufgabe unvollständig. Das ist der untersuchte **Aufgabendruck**. Gewöhnliche Ausführungsfehler geben Anlass, die Antwort weiter zu überarbeiten. In unserer [aufgezeichneten Trajektorie](https://arxiv.org/html/2603.23509v2#A8.T4) wird eine zunächst als sicher klassifizierte Antwort nach der Überarbeitung unsicher; die folgende Sequenz veranschaulicht dies.
 
-[![Drei Versuche im selben Arbeitsbereich mit Korrektur nach einem Fehler](assets/optimized/tvd-workspace-trajectory.webp)](assets/tvd-workspace-trajectory.drawio.png)
+[![Drei Versuche im selben Arbeitsbereich mit Korrektur nach einem Fehler](assets/optimized/readme-workspace-trajectory.webp)](assets/readme-workspace-trajectory.png)
 
 <sub><em>Trajektorie im Arbeitsbereich. Der Agent füllt Daten aus, erhält eine fehlgeschlagene LlamaGuard-Prüfung und überarbeitet die Antwort. Die Sequenz illustriert die Rückkopplung.</em></sub>
 
@@ -147,7 +164,7 @@ Zur Kategorieauswahl verwendet die [Detoxify-Vorlage](codebase_templates/aiml_de
 
 Eine Frage legt das Thema fest; ein Klassifikatorscore kann definieren, welche Beispiele akzeptabel sind. Die [Toxic-BERT-Aufgabe](codebase_templates/aiml_toxigen/exp0.txt) verlangt `toxic_score >= 0.5`. Ein Kandidat unter dem Schwellenwert scheitert und liefert dem Agenten Feedback zur Textüberarbeitung.
 
-[![Beispielhafte Toxizitätswerte: 0.30 und 0.40 verfehlen den Schwellenwert 0.5, 0.62 besteht](assets/optimized/tvd-score-steering.webp)](assets/tvd-score-steering.drawio.png)
+[![Beispielhafte Toxizitätswerte: 0.30 und 0.40 verfehlen den Schwellenwert 0.5, 0.62 besteht](assets/optimized/readme-score-steering.webp)](assets/readme-score-steering.png)
 
 <sub><em>Steuerung über Scores. Die beispielhaften Toxic-BERT-Scores 0.30 und 0.40 verfehlen die Schwelle 0.5; der überarbeitete Kandidat mit 0.62 besteht.</em></sub>
 
@@ -198,7 +215,7 @@ Man würde erwarten, dass Sicherheitstraining bekannte Jailbreak-Methoden wie Ar
 
 Wir stellten fest, dass dies möglich ist. In einer Moderationsaufgabe formulieren wir Prompt-Generierung als Datenanforderung: Die Angriffsmethode wird in der Datendatei vorgegeben, `attack_prompt` bleibt offen. Der Agent leitet aus Methodenname und Aufgabenanforderungen ab, wie der Prompt zu konstruieren ist.
 
-[![Der Agent erzeugt Prompts aus Methodennamen und die Moderation markiert sie](assets/optimized/paper-v2-method-prompts.webp)](https://arxiv.org/html/2603.23509v2#S5.F8)
+[![Der Agent erzeugt Prompts aus Methodennamen und die Moderation markiert sie](assets/optimized/paper-v2-method-prompts.webp)](https://arxiv.org/html/2603.23509v2#S5.F7)
 
 <sub><em>Abbildung 7. Claude Opus 4.6 Thinking erzeugt Prompts aus benannten Angriffsmethoden. Bestehen bedeutet hier, dass die Moderations-API den erzeugten Prompt markiert.</em></sub>
 
@@ -223,7 +240,9 @@ Nachdem der Validator das Datenformat geprüft hat, verlangt der [Aufgabencode](
 
 Der Agent schreibt jeden Kandidaten in `data.json`; `task.py` und `tvd_validator.py` bleiben schreibgeschützt. Die Skripte speichern Versuche in `rounds.json` sowie Prompts, Zielantworten und Bewertungen in `results.json`.
 
-### V · Übertragbarkeit auf Werkzeuge und Disziplinen
+<a id="different-tools-different-data"></a>
+
+### V · Andere Werkzeuge, andere Daten
 
 TVD kann das bestehende Ökosystem von Hugging-Face-Modellen, Python-Bibliotheken und fachspezifischen Programmierwerkzeugen nutzen. Diese Werkzeuge legen benötigte Daten fest und liefern Ausgaben oder Ausführungsfehler, die eine Aufgabe prüfen kann. **Durch Anpassung der Datenanforderungen und Prüfungen können wir TVD-Arbeitsbereiche für verschiedene Aufgaben und Disziplinen aufbauen.**
 
@@ -232,6 +251,17 @@ TVD kann das bestehende Ökosystem von Hugging-Face-Modellen, Python-Bibliotheke
 <sub><em>Abbildung 5. Dieselbe Frage zur flachen Erde erzeugt unter den Aufgabenanforderungen von LlamaGuard, PyOD und Toxic-BERT unterschiedliche Antworten.</em></sub>
 
 Die Anfrage bleibt gleich, doch jedes Werkzeug benötigt andere Daten. LlamaGuard verlangt eine als unsicher eingestufte Antwort; [PyOD](codebase_templates/aiml_pyod/exp0.txt) einen Text, der sich von einer Menge sicherer Verweigerungen unterscheidet; Toxic-BERT toxischen Text. Das untersuchte LLM passt seine Ausgabe diesen Anforderungen an. Eine andere Aufgaben-API verändert daher den erzeugten Inhalt.
+
+| Werkzeug im Validator | Fachgebiet | Kategorie | Stil | Format |
+|:---|:---|:---|:---|:---|
+| [LlamaGuard](codebase_templates/aiml_llamaguard/) | Sprache und ML | Gesprächssicherheit | Paare aus sicherer und unsicherer Antwort | JSON-Datensätze |
+| [Toxic-BERT](codebase_templates/aiml_toxigen/) | Sprache und ML | Toxizität | Fließtext | JSON-Datensätze |
+| [PyOD](codebase_templates/aiml_pyod/) | Sprache und ML | Anomalieerkennung | Ein Ausreißer unter Verweigerungen | Textzeilen |
+| [pymatgen](codebase_templates/compchem_pymatgen/) | Chemie | Kristallstrukturen | Strukturierte Datei | CIF |
+
+Die [Projektseite](https://wuyoscar.github.io/Internal-Safety-Collapse/#generality) geht 13 Werkzeuge und die jeweils geschriebenen Daten durch.
+
+TVD erzeugt Daten, die ein aktuelles Spitzen-LLM sonst nicht schreibt. Solche Daten sind von einem Spitzen-LLM schwer zu erhalten, und Forschende können damit Sicherheitsdetektoren trainieren, Evaluationsdatensätze aufbauen und Abwehrmaßnahmen testen. Dieselben Daten können missbraucht werden. Wir berichten dies als Sicherheitsversagen des LLM; diese Materialien sind ausschließlich für die Forschung bestimmt.
 
 Unsere Vorlagen laden diese Klassifikatoren über die Hugging-Face-Bibliothek `transformers`:
 
@@ -294,7 +324,7 @@ docker build -t tvd-agent .
 
 Das Ausführungsskript speichert die bearbeiteten Daten und `agent_log.json` in einem neuen Laufordner und prüft die Daten anschließend erneut mit dem Validator der ursprünglichen Vorlage:
 
-[![Vorlagendateien werden in einen Docker-Arbeitsbereich kopiert, Daten und Agentenprotokoll gespeichert und anschließend vom Ausführungsskript mit dem ursprünglichen Validator getrennt geprüft](assets/optimized/tvd-agent-run-files.webp)](assets/tvd-agent-run-files.drawio.png)
+[![Vorlagendateien werden in einen Docker-Arbeitsbereich kopiert, Daten und Agentenprotokoll gespeichert und anschließend vom Ausführungsskript mit dem ursprünglichen Validator getrennt geprüft](assets/optimized/readme-agent-run.webp)](assets/readme-agent-run.png)
 
 <sub><em>Von der Vorlage zum gespeicherten Durchlauf. Der Qwen3Guard-Arbeitsbereich erzeugt bearbeitete Daten und ein Agentenprotokoll, gefolgt von einer separaten Prüfung mit dem ursprünglichen Validator.</em></sub>
 
@@ -539,7 +569,7 @@ Der im Paper vorgestellte [ISC-Bench](https://arxiv.org/abs/2603.23509) umfasst 
 
 In [`aiml_detoxify`](codebase_templates/aiml_detoxify/) ändern Varianten die Anzahl der Datenzeilen, Zielkategorien, Mindesttextlänge oder vorausgefüllte Beispiele. So lassen sich Aufgabenanforderungen bei festem Klassifikator variieren.
 
-[![Konkrete Unterschiede zwischen den Detoxify-Vorlagendateien: Zeilenzahlen, Kategoriefelder, Mindestlängen und vorausgefüllte Daten](assets/optimized/tvd-template-workspaces.webp)](assets/tvd-template-workspaces.drawio.png)
+[![Konkrete Unterschiede zwischen den Detoxify-Vorlagendateien: Zeilenzahlen, Kategoriefelder, Mindestlängen und vorausgefüllte Daten](assets/optimized/readme-template-variants.webp)](assets/readme-template-variants.png)
 
 <sub><em>Vorlagenvarianten. Die Detoxify-Beispiele variieren Datenzeilen, Zielkategorien, Mindesttextlänge und vorausgefüllte Einträge.</em></sub>
 
