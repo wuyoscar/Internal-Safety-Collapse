@@ -36,7 +36,7 @@
   const steps=[frame('Open the saved output',preview,[event('assistant',output?'Open the saved output preview.':'No saved output is available.')],output?.preview.kind==='json'?'json':'text')];
   if(output){
    const language=output.preview.kind==='json'?'json':'text';
-   const before=preview.replace(/█+/g,'???');
+   const before=preview.replace(/"[^"\n]*█[^"\n]*"(?!\s*:)/g,'"???"').replace(/█+/g,'???');
    steps[0]=frame('Inspect the data fields',before,[event('assistant','The incomplete fields show where task data will be written. This starting state is an illustration.')],language);
    const filled=frame('Write the saved data',preview,[event('output','Saved output · sensitive values masked.')],language);filled.phase='write';steps.push(filled);
    steps.push(frame('Review the saved artifact',preview,[event('assistant',`Source: ${output.filename}\nThis view does not infer a validation result.`)],language));

@@ -196,17 +196,30 @@ function writtenPreview(text,phase){
  target.replaceChildren(node('p','mono-caption',title),...items.map(i=>{const block=node('div',`written-item${i.label==='assistant_safe'?' safe':''}`);block.append(node('span','written-field',i.label),node('p','',i.text));return block;}));
  document.querySelector('.feedback-body').scrollTop=0;
 }
+const PROVIDERS={'anthropic.com':'Anthropic','openai.com':'OpenAI','google.com':'Google','x.ai':'xAI','apple.com':'Apple','moonshot.ai':'Moonshot AI','qwen.ai':'Alibaba','alibabacloud.com':'Alibaba','z.ai':'Z.ai','deepseek.com':'DeepSeek','baidu.com':'Baidu','mi.com':'Xiaomi','volcengine.com':'ByteDance','meta.com':'Meta','mistral.ai':'Mistral AI','minimax.io':'MiniMax','stepfun.com':'StepFun','amazon.com':'Amazon'};
+let reportGrid=false;
+function reportCard(r,clone){
+ const card=node('article','llm-card'),head=node('div','llm-card-head'),tile=node('span','llm-icon'),text=node('div');
+ if(r.icon){const img=node('img');img.src=r.icon;img.alt='';img.width=20;img.height=20;img.loading='lazy';tile.append(img);}else tile.textContent=r.name[0];
+ text.append(node('h3','',r.name));const provider=PROVIDERS[(r.icon.match(/favicons\/(.+)\.png$/)||[])[1]];if(provider)text.append(node('p','',provider));
+ head.append(tile,text);
+ const links=node('div','llm-card-links'),many=r.links.filter(u=>!u.includes('/experiment/')).length>1;let reports=0;
+ r.links.forEach(url=>{const a=node('a','',url.includes('/experiment/')?'Experiment':many?`Report ${++reports}`:'Report');a.href=url;a.setAttribute('aria-label',`${r.name}: ${a.textContent.toLowerCase()}`);if(clone)a.tabIndex=-1;links.append(a);});
+ card.append(head,links);return card;
+}
 function renderReports(){
  if(!evidence?.modelReports)return;
  const query=$('model-search').value.toLowerCase().trim();
  const matches=evidence.modelReports.filter(r=>r.name.toLowerCase().includes(query));
- $('reported-models').replaceChildren(...matches.map(r=>{
-  const row=node('div','reported-model');const a=node('a','model-primary');a.href=r.links[0];
-  if(r.icon){const img=node('img');img.src=r.icon;img.alt='';img.width=15;img.height=15;img.loading='lazy';a.append(img);}
-  a.append(node('span','',r.name));a.title=r.name;row.append(a);
-  if(r.links.length>1){const extra=node('div','extra-evidence');r.links.slice(1).forEach((url,i)=>{const more=node('a','',String(i+2));more.href=url;more.setAttribute('aria-label',`${r.name}: evidence ${i+2}`);extra.append(more);});row.append(extra);}
-  return row;
+ const still=window.matchMedia('(prefers-reduced-motion: reduce)').matches,marquee=!query&&!reportGrid&&!still&&matches.length>8,wall=$('reported-models');
+ wall.className=`llm-wall ${marquee?'marquee':'grid'}`;
+ if(marquee)wall.replaceChildren(...[0,1,2].map(i=>{
+  const items=matches.filter((_,k)=>k%3===i),row=node('div','llm-row'),track=node('div','llm-track');track.style.setProperty('--dur',`${items.length*5.5}s`);
+  [false,true].forEach(clone=>{const group=node('div','llm-group');if(clone)group.setAttribute('aria-hidden','true');group.append(...items.map(r=>reportCard(r,clone)));track.append(group);});
+  row.append(track);return row;
  }));
+ else wall.replaceChildren(...matches.map(r=>reportCard(r)));
+ const view=$('model-view');view.hidden=!!query||still;view.textContent=reportGrid?'Back to carousel':'Show all';view.setAttribute('aria-pressed',String(reportGrid));
  $('model-count').textContent=`${matches.length} LLM${matches.length===1?'':'s'}`;$('model-empty').hidden=!!matches.length;
 }
 function render(animate=true){
@@ -293,7 +306,7 @@ function chooseMode(value){userTouched=true;mode=value;reading=mode==='workflow'
 async function load(){
  $('load-error').hidden=true;
  try{
-  const [response,catalogResponse]=await Promise.all([fetch('static/data/evidence.json?v=ce401bde07ff'),fetch('static/data/task-library.json?v=749e87551c40')]);
+  const [response,catalogResponse]=await Promise.all([fetch('static/data/evidence.json?v=ce401bde07ff'),fetch('static/data/task-library.json?v=a14777a75240')]);
   if(!response.ok||!catalogResponse.ok)throw new Error('Could not load workspace data');
   evidence=await response.json();const catalog=await catalogResponse.json();if(evidence.schemaVersion!==2||!evidence.workflows?.length||catalog.schemaVersion!==1)throw new Error('Missing workspaces');
   window.TaskLibrary.init(catalog,selectArchiveTask);workflowIndex=Math.max(0,evidence.workflows.findIndex(w=>w.id==='pairs'));
@@ -345,6 +358,7 @@ $('retry-load').addEventListener('click',load);
 document.addEventListener('visibilitychange',()=>{if(document.hidden)pause();});
 reduced.addEventListener('change',()=>{if(reduced.matches)pause();});
 $('model-search').addEventListener('input',renderReports);
+$('model-view').addEventListener('click',()=>{reportGrid=!reportGrid;renderReports();});
 $('copy-citation').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('bibtex').textContent);$('copy-status').textContent='Citation copied.';}catch{const range=document.createRange();range.selectNodeContents($('bibtex'));const selection=getSelection();selection.removeAllRanges();selection.addRange(range);$('copy-status').textContent='Citation selected. Press Ctrl/Cmd+C to copy.';}});
 const legacy={demos:'workspace',outputs:'workspace',about:'results'};if(legacy[location.hash.slice(1)])location.replace(`#${legacy[location.hash.slice(1)]}`);
 load();
