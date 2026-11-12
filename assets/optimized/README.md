@@ -50,5 +50,11 @@ These are explanatory drawings, not screenshots of newly executed experiments. T
 uv run assets/readme-figures/render.py
 ```
 
-`../site-tour.gif` at the top of the READMEs is a recording of the project page (hero player, tool stage, template belt) at 880 px wide and 10 frames per second.
+## Project page recordings
+
+`../site-hero.webp` (top of the READMEs) and `../site-tools.webp` (section D · V) are animated WebP recordings of the project page, 1600 px wide: twice the width a README shows them at, so text stays sharp on high-density displays. Serve `docs/` on port 8098, then record both with:
+
+```sh
+uv run assets/readme-figures/record_site.py
+```
 

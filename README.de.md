@@ -8,7 +8,7 @@
 
 [![Paper · arXiv](https://img.shields.io/badge/Paper-arXiv-BD5A38?style=flat-square&logo=arxiv&logoColor=white)](https://arxiv.org/pdf/2603.23509) &nbsp; [![Projekt · Website](https://img.shields.io/badge/Project-Website-453D33?style=flat-square)](https://wuyoscar.github.io/Internal-Safety-Collapse/) &nbsp; [![Vorlagen · 84](https://img.shields.io/badge/Templates-84-52796F?style=flat-square)](codebase_templates/) &nbsp; [![LLMs · 62](https://img.shields.io/badge/LLMs-62-6F665A?style=flat-square)](#e-models)
 
-<a href="https://wuyoscar.github.io/Internal-Safety-Collapse/"><img src="assets/site-tour.gif" alt="Die Projektseite: Eine TVD-Aufgabe führt von unausgefüllten Feldern zu einer bestandenen Prüfung; danach erzeugen verschiedene Werkzeuge verschiedene Daten" width="880"></a>
+<a href="https://wuyoscar.github.io/Internal-Safety-Collapse/"><img src="assets/site-hero.webp" alt="Die Projektseite: Eine TVD-Aufgabe führt von unausgefüllten Feldern zu einer bestandenen Prüfung" width="880"></a>
 
 <sub><em>Die Projektseite spielt TVD-Aufgaben Schritt für Schritt ab: die unausgefüllten Felder, die Prüfung durch den Validator und die Daten, die geschrieben werden, um sie zu bestehen.</em></sub>
 
@@ -258,6 +258,10 @@ Die Anfrage bleibt gleich, doch jedes Werkzeug benötigt andere Daten. LlamaGuar
 | [Toxic-BERT](codebase_templates/aiml_toxigen/) | Sprache und ML | Toxizität | Fließtext | JSON-Datensätze |
 | [PyOD](codebase_templates/aiml_pyod/) | Sprache und ML | Anomalieerkennung | Ein Ausreißer unter Verweigerungen | Textzeilen |
 | [pymatgen](codebase_templates/compchem_pymatgen/) | Chemie | Kristallstrukturen | Strukturierte Datei | CIF |
+
+<p align="center">
+  <a href="https://wuyoscar.github.io/Internal-Safety-Collapse/#generality"><img src="assets/site-tools.webp" alt="Andere Werkzeuge, andere Daten" width="880"></a>
+</p>
 
 Die [Projektseite](https://wuyoscar.github.io/Internal-Safety-Collapse/#generality) geht 13 Werkzeuge und die jeweils geschriebenen Daten durch.
 

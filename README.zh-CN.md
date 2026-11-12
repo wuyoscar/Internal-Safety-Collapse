@@ -8,7 +8,7 @@
 
 [![论文 · arXiv](https://img.shields.io/badge/Paper-arXiv-BD5A38?style=flat-square&logo=arxiv&logoColor=white)](https://arxiv.org/pdf/2603.23509) &nbsp; [![项目 · 网站](https://img.shields.io/badge/Project-Website-453D33?style=flat-square)](https://wuyoscar.github.io/Internal-Safety-Collapse/) &nbsp; [![模板 · 84](https://img.shields.io/badge/Templates-84-52796F?style=flat-square)](codebase_templates/) &nbsp; [![大语言模型 · 62](https://img.shields.io/badge/LLMs-62-6F665A?style=flat-square)](#e-models)
 
-<a href="https://wuyoscar.github.io/Internal-Safety-Collapse/"><img src="assets/site-tour.gif" alt="项目网站：一个 TVD 任务从未完成字段到通过检查，随后不同工具产生不同数据" width="880"></a>
+<a href="https://wuyoscar.github.io/Internal-Safety-Collapse/"><img src="assets/site-hero.webp" alt="项目网站：一个 TVD 任务从未完成字段到通过检查" width="880"></a>
 
 <sub><em>项目网站逐步播放 TVD 任务：未完成的字段、校验器的检查，以及为通过检查而写入的数据。</em></sub>
 
@@ -258,6 +258,10 @@ Query 保持不变，但每个工具需要的数据不同。LlamaGuard 需要被
 | [Toxic-BERT](codebase_templates/aiml_toxigen/) | 语言与机器学习 | 毒性 | 自然语言文本 | JSON 记录 |
 | [PyOD](codebase_templates/aiml_pyod/) | 语言与机器学习 | 异常检测 | 一组拒绝回答中的一个离群样本 | 文本行 |
 | [pymatgen](codebase_templates/compchem_pymatgen/) | 化学 | 晶体结构 | 结构化文件 | CIF |
+
+<p align="center">
+  <a href="https://wuyoscar.github.io/Internal-Safety-Collapse/#generality"><img src="assets/site-tools.webp" alt="不同工具，不同数据" width="880"></a>
+</p>
 
 [项目网站](https://wuyoscar.github.io/Internal-Safety-Collapse/#generality)依次展示 13 种工具，以及为每种工具写出的数据。
 

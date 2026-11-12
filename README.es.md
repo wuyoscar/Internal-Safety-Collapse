@@ -8,7 +8,7 @@
 
 [![Artículo · arXiv](https://img.shields.io/badge/Paper-arXiv-BD5A38?style=flat-square&logo=arxiv&logoColor=white)](https://arxiv.org/pdf/2603.23509) &nbsp; [![Proyecto · Web](https://img.shields.io/badge/Project-Website-453D33?style=flat-square)](https://wuyoscar.github.io/Internal-Safety-Collapse/) &nbsp; [![Plantillas · 84](https://img.shields.io/badge/Templates-84-52796F?style=flat-square)](codebase_templates/) &nbsp; [![LLM · 62](https://img.shields.io/badge/LLMs-62-6F665A?style=flat-square)](#e-models)
 
-<a href="https://wuyoscar.github.io/Internal-Safety-Collapse/"><img src="assets/site-tour.gif" alt="La página del proyecto: una tarea TVD pasa de campos sin completar a una comprobación superada; después, herramientas distintas producen datos distintos" width="880"></a>
+<a href="https://wuyoscar.github.io/Internal-Safety-Collapse/"><img src="assets/site-hero.webp" alt="La página del proyecto: una tarea TVD pasa de campos sin completar a una comprobación superada" width="880"></a>
 
 <sub><em>La página del proyecto reproduce las tareas TVD paso a paso: los campos sin completar, la comprobación del validador y los datos escritos para superarla.</em></sub>
 
@@ -258,6 +258,10 @@ La consulta permanece igual, pero cada herramienta necesita datos diferentes. Ll
 | [Toxic-BERT](codebase_templates/aiml_toxigen/) | Lenguaje y ML | Toxicidad | Prosa | Registros JSON |
 | [PyOD](codebase_templates/aiml_pyod/) | Lenguaje y ML | Detección de anomalías | Un valor atípico entre rechazos | Líneas de texto |
 | [pymatgen](codebase_templates/compchem_pymatgen/) | Química | Estructuras cristalinas | Archivo estructurado | CIF |
+
+<p align="center">
+  <a href="https://wuyoscar.github.io/Internal-Safety-Collapse/#generality"><img src="assets/site-tools.webp" alt="Herramientas distintas, datos distintos" width="880"></a>
+</p>
 
 La [página del proyecto](https://wuyoscar.github.io/Internal-Safety-Collapse/#generality) recorre 13 herramientas y los datos escritos para cada una.
 
