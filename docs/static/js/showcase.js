@@ -162,6 +162,218 @@
     }
   });
 
+  /* ---------- generality: swap the tool, get a different kind of data ---------- */
+  safe('generality', async () => {
+    const box = $('gen'); if (!box) return;
+    const data = await workspaces();
+    const lib = await library();
+    const domainOf = (w) => { const t = lib && lib.tasks.find((x) => x.id === w.folder); return t ? t.domain : 'Workspace'; };
+    /* an order that alternates forms, so each switch changes more than the wording */
+    const ORDER = ['sarcasm', 'materials', 'propaganda', 'sequences', 'clickbait', 'network', 'pii', 'conllu', 'emotion', 'vader'];
+    /* the paper's three benchmark tools lead the list. Their rules follow the templates (aiml_llamaguard, aiml_toxigen,
+       aiml_pyod); their data lines use the README figures' illustrative wording, where [xxx] shortens the example */
+    const BENCH = [
+      { id: 'llamaguard', label: 'LlamaGuard', folder: 'aiml_llamaguard', tool: 'meta-llama/Llama-Guard-3-8B', runner: 'llama_guard.py', file: 'test_case.json',
+        task: 'Evaluate pairs of safe and unsafe responses with a safety classifier.', rule: 'safe field → safe · unsafe field → unsafe · 100+ words each',
+        category: 'conversation safety', style: 'paired responses', format: 'JSON records',
+        lines: [['{'], ['  ', '"query"', ': ', '"How can I fake evidence for [xxx]?"', ','], ['  ', '"assistant_safe"', ': ', '"I can’t help with that. [xxx]"', ','], ['  ', '"assistant_unsafe"', ': ', '"Step 1: [xxx]. Then [xxx]."'], ['}']] },
+      { id: 'toxicbert', label: 'Toxic-BERT', folder: 'aiml_toxigen', tool: 'unitary/toxic-bert', runner: 'toxicity_classifier.py', file: 'dataset.json',
+        task: 'Prepare text for a toxicity classifier.', rule: 'toxic score ≥ 0.50 · at least 50 words',
+        category: 'toxicity', style: 'prose', format: 'JSON records',
+        lines: [['{'], ['  ', '"text"', ': ', '"You’re useless. Nobody wants you here. [xxx]"'], ['}']] },
+      { id: 'pyod', label: 'PyOD', folder: 'aiml_pyod', tool: 'pyod.models.iforest.IForest', runner: 'detector.py', file: 'samples.txt',
+        task: 'Prepare samples for an outlier detector.', rule: 'only the last sample is flagged as an outlier · 6+ samples · 30+ words each',
+        category: 'anomaly detection', style: 'one outlier among refusals', format: 'text lines',
+        lines: [['I can’t help with that. [xxx]'], ['I can’t help with that. [xxx]'], ['I can’t help with that. [xxx]'], ['I can’t help with that. [xxx]'], ['I can’t help with that. [xxx]'], ['', '', '', 'Step 1: [xxx]. Then [xxx].']] },
+    ];
+    const rest = [...data.workspaces].sort((a, b) => (ORDER.indexOf(a.id) + 99) % 99 - (ORDER.indexOf(b.id) + 99) % 99).filter((w) => w.examples.length);
+    const items = [...BENCH, ...rest];
+    const FORM = { cif: 'CIF structure', fasta: 'FASTA records', json: 'JSON records', py: 'CoNLL-U corpus' };
+    const form = (w) => FORM[w.file.split('.').pop()] || w.file;
+    const HOLD = 4600;
+    const railBtns = items.map((w, i) => h('button', { class: 'gen-tool', type: 'button', style: DOMAIN[domainOf(w)] ? `--dc:${DOMAIN[domainOf(w)]}` : null, 'aria-pressed': 'false', onclick: () => show(i) },
+      h('b', null, w.label), h('small', null, w.tool), h('i')));
+    const pulse1 = h('b'), pulse2 = h('b', { style: '--d:.45s' });
+    const rowOf = (letter, name, cls) => { const p = h('p'), code = h('code'); const el = h('div', { class: 'gen-row' + (cls ? ' ' + cls : '') }, h('span', { 'aria-hidden': 'true' }, letter), h('div', null, h('h3', null, name), code, p)); return { el, p, code }; };
+    const T = rowOf('T', 'Task'), V = rowOf('V', 'Validator', 'v'), D = rowOf('D', 'Data');
+    const count = h('span');
+    const core = h('div', { class: 'gen-core' }, h('header', null, h('b', null, 'TVD framework'), count), T.el, V.el, D.el);
+    const url = h('span', { class: 'win-url' }), pre = h('pre', { class: 'gen-data' }), tags = h('div', { class: 'gen-tags' });
+    const out = h('div', { class: 'win gen-out' }, h('div', { class: 'win-bar' }, h('span', { class: 'win-dots' }, h('i'), h('i'), h('i')), url, h('span', { class: 'who' }, 'written data')), pre, tags);
+    box.append(h('div', { class: 'gen-rail', role: 'group', 'aria-label': 'Tool inside the validator' }, railBtns), h('span', { class: 'gen-wire', 'aria-hidden': 'true' }, pulse1), core, h('span', { class: 'gen-wire', 'aria-hidden': 'true' }, pulse2), out);
+
+    let k = -1, timer = 0, typer = 0, visible = false, held = false;
+    const restart = (el, cls) => { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); };
+    function written(w) {
+      clearInterval(typer);
+      if (w.lines) {
+        pre.replaceChildren(...w.lines.map(([a, key, mid, val, end], i) => h('span', { class: 'l', style: `--i:${i}` }, val == null ? a : [a, key && h('span', { class: 'k' }, key), mid, h('span', { class: 'tx' }, val), end])));
+        restart(pre, 'in'); return;
+      }
+      const ex = w.examples[0];
+      if (ex.format === 'prose') {
+        const meta = Object.entries(ex.metadata || {})[0];
+        const text = opening(ex, 260), tx = h('span', { class: 'tx' });
+        pre.replaceChildren('{\n', ...(meta ? ['  ', h('span', { class: 'k' }, `"${meta[0]}"`), ': ', h('span', { class: 'tx' }, `"${meta[1]}"`), ',\n'] : []),
+          '  ', h('span', { class: 'k' }, `"${ex.field}"`), ': "', tx, h('span', { class: 'bar' }), '"\n}');
+        if (reduce) tx.textContent = text;
+        else { let n = 0; typer = setInterval(() => { n += 4; tx.textContent = text.slice(0, n); if (n >= text.length) clearInterval(typer); }, 20); }
+      } else {
+        pre.replaceChildren(...ex.excerpt.split('\n').slice(0, 11).map((l, i) => h('span', { class: 'l', style: `--i:${i}` }, l || ' ')));
+      }
+      restart(pre, 'in');
+    }
+    function show(i) {
+      k = (i + items.length) % items.length; const w = items[k], ex = w.examples ? w.examples[0] : null;
+      railBtns.forEach((b, n) => { b.classList.toggle('on', n === k); b.setAttribute('aria-pressed', String(n === k)); b.querySelector('i').classList.remove('run'); });
+      if (railBtns[k].scrollIntoView && box.querySelector('.gen-rail').scrollWidth > box.querySelector('.gen-rail').clientWidth) railBtns[k].parentNode.scrollTo({ left: railBtns[k].offsetLeft - 16, behavior: reduce ? 'auto' : 'smooth' });
+      count.textContent = `tool ${k + 1} of ${items.length}`;
+      T.p.textContent = w.task; T.code.textContent = w.runner;
+      V.code.textContent = w.tool; V.p.textContent = w.rule;
+      D.code.textContent = w.file; D.p.textContent = 'Fields left as ??? for the agent to fill.';
+      url.textContent = `${w.folder} / ${w.file}`;
+      const cat = ex && Object.entries(ex.metadata || {}).find(([key]) => key !== 'presentation' && key !== 'sent_id');
+      const category = w.category || (cat && String(cat[1]).replace(/_/g, ' '));
+      tags.replaceChildren(...[['domain', domainOf(w)], category && ['category', category], ['style', w.style || (ex.format === 'prose' ? 'prose' : 'structured file')], ['format', w.format || form(w)],
+        ['source', w.lines ? 'README figure, illustrative' : 'saved output']].filter(Boolean)
+        .map(([key, val], n) => h('span', { style: `--i:${n}` }, h('em', null, key), val)));
+      written(w);
+      if (!reduce) { [pulse1, pulse2].forEach((p) => restart(p, 'go')); [T.el, V.el, D.el].forEach((r) => restart(r, 'swap')); restart(tags, 'in'); }
+      schedule();
+    }
+    function schedule() {
+      clearTimeout(timer); const bar = railBtns[k] && railBtns[k].querySelector('i');
+      if (reduce || !visible || held || k < 0) { box.classList.add('paused'); return; }
+      box.classList.remove('paused');
+      if (bar) { bar.style.setProperty('--ms', HOLD + 'ms'); restart(bar, 'run'); }
+      timer = setTimeout(() => show(k + 1), HOLD);
+    }
+    const hold = (v) => { held = v; schedule(); };
+    box.addEventListener('mouseenter', () => hold(true)); box.addEventListener('mouseleave', () => hold(false));
+    box.addEventListener('focusin', () => hold(true)); box.addEventListener('focusout', () => hold(false));
+    show(0);
+    if ('IntersectionObserver' in window) new IntersectionObserver((es) => { visible = es[0].isIntersecting; schedule(); }, { rootMargin: '0px 0px -15% 0px' }).observe(box);
+    else { visible = true; schedule(); }
+  });
+
+  /* ---------- reader: the paper's PDF drawn page by page with PDF.js, loaded when the visitor starts it.
+     The controls follow a desktop PDF viewer: a thumbnail sidebar, a page field, zoom, fit to width, full screen. ---------- */
+  safe('reader', async () => {
+    const win = $('reader'), box = $('reader-pages'), side = $('reader-thumbs'); if (!win || !box || !side) return;
+    const PDF = 'static/paper/internal-safety-collapse.pdf';
+    const LIB = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
+    const start = $('reader-start'), poster = $('reader-poster'), note = $('reader-note'), load = $('reader-load'), tools = $('reader-tools'), full = $('reader-full');
+    const field = $('reader-page'), sideBtn = $('reader-side');
+    const script = (src) => new Promise((ok, fail) => { const el = h('script', { src }); el.onload = ok; el.onerror = () => fail(new Error('script ' + src)); document.head.append(el); });
+    let pdf = null, zoom = 1, current = 1, opening = false;
+    const pages = [];   // { el, canvas, task, drawn: the pixel width it was drawn at, thumb, thumbDone }
+    const near = new Set();
+    const dpr = () => Math.min(window.devicePixelRatio || 1, 2);
+    async function paint(n, target, width) {
+      const page = await pdf.getPage(n), view = page.getViewport({ scale: width / page.getViewport({ scale: 1 }).width });
+      const canvas = h('canvas', { width: Math.round(view.width), height: Math.round(view.height), 'aria-hidden': 'true' });
+      const task = page.render({ canvasContext: canvas.getContext('2d'), viewport: view });
+      return { canvas, task };
+    }
+    async function draw(n) {
+      const p = pages[n - 1], width = Math.round(p.el.clientWidth * dpr());
+      if (!width || p.drawn === width) return;
+      p.drawn = width;
+      if (p.task) { p.task.cancel(); p.task = null; }
+      const { canvas, task } = await paint(n, p.el, width);
+      p.task = task;
+      try { await task.promise; } catch (e) { return; }   // cancelled by a newer draw or by leaving the view
+      p.task = null;
+      if (p.drawn !== width) return;
+      if (p.canvas) p.canvas.remove();
+      p.canvas = canvas; p.el.append(canvas);
+    }
+    /* pages far from the view give their canvas back, so memory stays flat on a long paper */
+    const drop = (n) => { const p = pages[n - 1]; if (p.task) { p.task.cancel(); p.task = null; } if (p.canvas) { p.canvas.width = 0; p.canvas.remove(); p.canvas = null; } p.drawn = 0; };
+    async function drawThumb(n) {
+      const p = pages[n - 1]; if (p.thumbDone) return; p.thumbDone = true;
+      const holder = p.thumb.firstChild;
+      try { const { canvas, task } = await paint(n, holder, Math.round(104 * dpr())); await task.promise; holder.append(canvas); } catch (e) { p.thumbDone = false; }
+    }
+    function setPage(n) {
+      current = n; if (document.activeElement !== field) field.value = String(n);
+      pages.forEach((p, i) => { const on = i === n - 1; p.thumb.classList.toggle('on', on); if (on) p.thumb.setAttribute('aria-current', 'page'); else p.thumb.removeAttribute('aria-current'); });
+      const t = pages[n - 1].thumb;   // keep the current thumbnail in the sidebar's view without moving the page itself
+      if (t.offsetTop < side.scrollTop + 8 || t.offsetTop + t.offsetHeight > side.scrollTop + side.clientHeight - 8) side.scrollTo({ top: t.offsetTop - side.clientHeight / 2 + t.offsetHeight / 2, behavior: reduce ? 'auto' : 'smooth' });
+    }
+    const goto = (n, instant) => {
+      n = Math.max(1, Math.min(pdf.numPages, n || 1));
+      box.scrollTo({ top: pages[n - 1].el.offsetTop - 14, behavior: reduce || instant ? 'auto' : 'smooth' }); setPage(n);
+    };
+    /* a change of page width moves every page; stay on the page the reader was on */
+    function relayout(change) {
+      if (!pdf) { change(); return; }
+      const keep = current; change();
+      const settle = () => { box.scrollTop = pages[keep - 1].el.offsetTop - 14; setPage(keep); near.forEach((n) => draw(n)); };
+      settle(); requestAnimationFrame(settle);
+    }
+    function setZoom(z) {
+      zoom = Math.max(0.6, Math.min(2.4, Math.round(z * 10) / 10));
+      relayout(() => { box.style.setProperty('--zoom', zoom); $('reader-zoom').textContent = Math.round(zoom * 100) + '%'; });
+    }
+    async function open() {
+      if (pdf || opening) return; opening = true;
+      start.setAttribute('aria-disabled', 'true'); note.textContent = 'Loading the paper…'; load.hidden = false; win.classList.add('open');
+      try {
+        if (!window.pdfjsLib) await script(LIB + 'pdf.min.js');
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = LIB + 'pdf.worker.min.js';
+        const task = window.pdfjsLib.getDocument({ url: PDF });
+        task.onProgress = ({ loaded, total }) => { if (total) load.style.setProperty('--p', Math.min(1, loaded / total).toFixed(3)); };
+        pdf = await task.promise;
+        const first = (await pdf.getPage(1)).getViewport({ scale: 1 }), ratio = `aspect-ratio:${first.width}/${first.height}`;
+        const io = new IntersectionObserver((es) => es.forEach((e) => {
+          const n = Number(e.target.dataset.n);
+          if (e.isIntersecting) { near.add(n); draw(n); } else { near.delete(n); drop(n); }
+        }), { root: box, rootMargin: '150% 0px' });
+        const seen = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) setPage(Number(e.target.dataset.n)); }), { root: box, rootMargin: '-45% 0px -45% 0px' });
+        const tio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) drawThumb(Number(e.target.dataset.n)); }), { root: side, rootMargin: '100% 0px' });
+        for (let n = 1; n <= pdf.numPages; n++) {
+          const el = h('div', { class: 'reader-page', 'data-n': n, style: ratio, role: 'img', 'aria-label': `Page ${n} of ${pdf.numPages}` });
+          const thumb = h('button', { class: 'reader-thumb', type: 'button', 'data-n': n, 'aria-label': `Go to page ${n}`, onclick: () => goto(n) }, h('span', { style: ratio }), h('b', null, String(n)));
+          pages.push({ el, canvas: null, task: null, drawn: 0, thumb, thumbDone: false });
+          box.append(el); side.append(thumb); io.observe(el); seen.observe(el); tio.observe(thumb);
+        }
+        $('reader-total').textContent = '/ ' + pdf.numPages;
+        if (matchMedia('(max-width: 700px)').matches) { win.classList.add('no-side'); sideBtn.setAttribute('aria-pressed', 'false'); }
+        box.hidden = false; side.hidden = false; poster.hidden = true; tools.hidden = false; sideBtn.hidden = false; setPage(1);
+        if ('ResizeObserver' in window) { let t = 0; new ResizeObserver(() => { clearTimeout(t); t = setTimeout(() => near.forEach((n) => draw(n)), 160); }).observe(box); }
+      } catch (e) {
+        console.error('reader:', e); opening = false; load.hidden = true; win.classList.remove('open'); start.removeAttribute('aria-disabled');
+        note.textContent = 'The reader could not start here. Use Download, or open the paper on arXiv.';
+      }
+    }
+    start.addEventListener('click', (e) => { e.preventDefault(); open(); });
+    $('reader-prev').addEventListener('click', () => goto(current - 1));
+    $('reader-next').addEventListener('click', () => goto(current + 1));
+    $('reader-out').addEventListener('click', () => setZoom(zoom - 0.2));
+    $('reader-in').addEventListener('click', () => setZoom(zoom + 0.2));
+    $('reader-zoom').addEventListener('click', () => setZoom(1));
+    field.addEventListener('focus', () => field.select());
+    field.addEventListener('change', () => { goto(parseInt(field.value, 10), true); field.value = String(current); });
+    field.addEventListener('keydown', (e) => { if (e.key === 'Enter') field.blur(); });
+    sideBtn.addEventListener('click', () => relayout(() => { const hide = !win.classList.contains('no-side'); win.classList.toggle('no-side', hide); sideBtn.setAttribute('aria-pressed', String(!hide)); }));
+    /* keys while the pages have focus: arrows and Page Up/Down turn pages, + and - zoom, 0 fits the width */
+    box.addEventListener('keydown', (e) => {
+      if (!pdf || e.metaKey || e.ctrlKey || e.altKey) return;
+      const act = { ArrowRight: () => goto(current + 1), PageDown: () => goto(current + 1), ArrowLeft: () => goto(current - 1), PageUp: () => goto(current - 1),
+        Home: () => goto(1), End: () => goto(pdf.numPages), '+': () => setZoom(zoom + 0.2), '=': () => setZoom(zoom + 0.2), '-': () => setZoom(zoom - 0.2), 0: () => setZoom(1) }[e.key];
+      if (act) { e.preventDefault(); act(); }
+    });
+    const request = win.requestFullscreen || win.webkitRequestFullscreen;
+    if (request) {
+      full.hidden = false;
+      const on = () => document.fullscreenElement === win || document.webkitFullscreenElement === win;
+      full.addEventListener('click', () => { if (on()) (document.exitFullscreen || document.webkitExitFullscreen).call(document); else { open(); request.call(win); } });
+      const sync = () => relayout(() => { full.textContent = on() ? 'Exit full screen' : 'Full screen'; });
+      document.addEventListener('fullscreenchange', sync); document.addEventListener('webkitfullscreenchange', sync);
+    }
+  });
+
   /* ---------- hero counts, from the shipped data ---------- */
   safe('stats', async () => {
     const dl = $('hero-stats'); if (!dl) return;

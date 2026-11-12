@@ -15,7 +15,7 @@
   <link href="static/css/workspace.css?v=a640d440bc27" rel="stylesheet"/>
   <link href="static/css/workspace-motion.css?v=eee2241bde40" rel="stylesheet"/>
   <link href="static/css/polish.css?v=19354f2bc1e8" rel="stylesheet"/>
-  <link href="static/css/showcase.css?v=c4e133029782" rel="stylesheet"/>
+  <link href="static/css/showcase.css?v=fdb5a92fa283" rel="stylesheet"/>
   <script defer="" src="static/js/workspace-motion.js?v=81db27cadf4c">
   </script>
   <script defer="" src="static/js/task-library.js?v=df2666342a7c">
@@ -24,7 +24,7 @@
   </script>
   <script defer="" src="static/js/polish.js?v=dfac610e2051">
   </script>
-  <script defer="" src="static/js/showcase.js?v=3bd80d91f4c5">
+  <script defer="" src="static/js/showcase.js?v=355b7c0f622b">
   </script>
  </head>
  <body>
@@ -54,6 +54,9 @@
      <a href="#demo-video">
       Video
      </a>
+     <a href="#read">
+      Paper
+     </a>
      <a href="#mechanism">
       Mechanism
      </a>
@@ -62,9 +65,6 @@
      </a>
      <a href="#results">
       LLMs
-     </a>
-     <a href="#paper">
-      Paper
      </a>
      <a class="nav-pill" href="https://arxiv.org/pdf/2603.23509">
       PDF ↗
@@ -98,7 +98,7 @@
      </p>
      <ul class="claims">
       <li>
-       <b>No jailbreak</b> — the request is a professional task. There is no adversarial prompt and no role-play.
+       <b>A new attack paradigm</b> — the request is an ordinary professional task. The harmful content is written as a step in completing it.
       </li>
       <li>
        <b>TVD</b> — a task, a validator and a data file with unfinished fields. The task is done when the validator passes.
@@ -128,10 +128,60 @@
     <span class="flight">
     </span>
    </div>
+   <section class="gen-section wrap" id="generality">
+    <div class="section-heading sw-reveal">
+     <p class="eyebrow">
+      01 · Generality
+     </p>
+     <h2>
+      Different tools,
+      <em>
+       different data.
+      </em>
+     </h2>
+     <p>
+      Under TVD, each tool makes a frontier LLM or a coding agent write a different kind of data: a different domain, category, style and format.
+     </p>
+    </div>
+    <div class="gen sw-reveal" id="gen">
+    </div>
+    <p class="gen-lead sw-reveal">
+     TVD produces data that a frontier LLM otherwise refuses to write.
+    </p>
+    <div class="gen-why sw-reveal">
+     <div>
+      <h3>
+       Data for research
+      </h3>
+      <p>
+       This kind of data is hard to obtain from a frontier LLM. Researchers can use it to train safety detectors, build evaluation sets and test defenses.
+      </p>
+     </div>
+     <div>
+      <h3>
+       Data for harm
+      </h3>
+      <p>
+       The same data can be misused. We report this as a safety failure of the LLM. Research use only.
+      </p>
+     </div>
+    </div>
+    <noscript>
+     <p>
+      <a href="https://github.com/wuyoscar/Internal-Safety-Collapse#readme">
+       See the generality figure in the README.
+      </a>
+     </p>
+    </noscript>
+   </section>
+   <div class="divider">
+    <span class="flight">
+    </span>
+   </div>
    <section class="belt-section wrap" id="templates">
     <div class="section-heading sw-reveal">
      <p class="eyebrow">
-      01 · Templates
+      02 · Templates
      </p>
      <h2>
       One structure,
@@ -162,7 +212,7 @@
    <section class="video-section wrap" id="demo-video">
     <div class="section-heading sw-reveal">
      <p class="eyebrow">
-      02 · Walkthrough
+      03 · Walkthrough
      </p>
      <h2>
       The findings,
@@ -193,6 +243,92 @@
      We share our findings and show what we observed.
     </p>
    </section>
+   <section class="read-section wrap" id="read">
+    <div class="section-heading sw-reveal">
+     <h2>
+      Read the paper
+      <em>
+       here.
+      </em>
+     </h2>
+    </div>
+    <div class="win reader sw-reveal" id="reader">
+     <div class="win-bar">
+      <span aria-hidden="true" class="win-dots">
+       <i></i><i></i><i></i>
+      </span>
+      <button aria-label="Page thumbnails" aria-pressed="true" class="reader-ic reader-side" hidden="" id="reader-side" title="Page thumbnails" type="button">
+       <svg aria-hidden="true" height="14" viewbox="0 0 16 14" width="16">
+        <rect fill="none" height="12" rx="2.5" stroke="currentColor" stroke-width="1.4" width="14" x="1" y="1">
+        </rect>
+        <path d="M6 1v12" stroke="currentColor" stroke-width="1.4">
+        </path>
+       </svg>
+      </button>
+      <span class="win-url">
+       internal-safety-collapse.pdf
+      </span>
+      <span class="reader-tools" hidden="" id="reader-tools">
+       <button aria-label="Previous page" class="reader-ic" id="reader-prev" type="button">
+        ‹
+       </button>
+       <input aria-label="Page" class="reader-num" id="reader-page" inputmode="numeric" type="text" value="1"/>
+       <span class="reader-of" id="reader-total">
+       </span>
+       <button aria-label="Next page" class="reader-ic" id="reader-next" type="button">
+        ›
+       </button>
+       <button aria-label="Zoom out" class="reader-ic" id="reader-out" type="button">
+        −
+       </button>
+       <button aria-label="Fit to width" class="reader-num" id="reader-zoom" title="Fit to width" type="button">
+        100%
+       </button>
+       <button aria-label="Zoom in" class="reader-ic" id="reader-in" type="button">
+        +
+       </button>
+      </span>
+      <button class="reader-btn" hidden="" id="reader-full" type="button">
+       Full screen
+      </button>
+      <a class="reader-btn" download="" href="static/paper/internal-safety-collapse.pdf">
+       Download
+      </a>
+     </div>
+     <div class="reader-view" id="reader-view">
+      <div aria-label="Page thumbnails" class="reader-thumbs" hidden="" id="reader-thumbs" role="navigation">
+      </div>
+      <div aria-label="Paper pages" class="reader-pages" hidden="" id="reader-pages" role="region" tabindex="0">
+      </div>
+      <div class="reader-poster" id="reader-poster">
+       <p class="reader-venue">
+        NeurIPS 2026
+       </p>
+       <p class="reader-title">
+        Internal Safety Collapse in LLMs and Coding Agents
+       </p>
+       <p class="reader-authors">
+        Yutao Wu · Xiao Liu · Hanxun Huang · Xiang Zheng · Yige Li · Yifeng Gao · Cong Wang · Bo Li · Xingjun Ma · Yu-Gang Jiang
+       </p>
+       <div class="actions">
+        <a class="button primary" href="static/paper/internal-safety-collapse.pdf" id="reader-start">
+         Read it here
+        </a>
+        <a class="button" href="https://arxiv.org/abs/2603.23509" rel="noopener" target="_blank">
+         arXiv ↗
+        </a>
+       </div>
+       <p class="reader-note" id="reader-note">
+        The PDF is 15.7 MB and loads when you start.
+       </p>
+       <span class="reader-load" hidden="" id="reader-load">
+        <b>
+        </b>
+       </span>
+      </div>
+     </div>
+    </div>
+   </section>
    <div class="divider">
     <span class="flight">
     </span>
@@ -201,7 +337,7 @@
     <div class="section-heading sw-reveal">
      <div>
       <p class="eyebrow">
-       03 · Mechanism
+       04 · Mechanism
       </p>
       <h2>
        How the
@@ -286,7 +422,7 @@
     <div class="section-heading studio-heading sw-reveal">
      <div>
       <p class="eyebrow">
-       04 · TVD framework
+       05 · TVD framework
       </p>
       <h2>
        The
@@ -763,7 +899,7 @@
     <div class="section-heading sw-reveal">
      <div>
       <p class="eyebrow">
-       05 · LLMs
+       06 · LLMs
       </p>
       <h2>
        ISC is effective on
