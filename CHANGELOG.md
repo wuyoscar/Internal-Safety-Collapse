@@ -5,7 +5,7 @@ All notable updates to ISC-Bench are documented here.
 ## 2026-11-12 — Project page and README refresh
 
 - Redesigned the [project page](https://wuyoscar.github.io/Internal-Safety-Collapse/): step-by-step TVD player, tool stage, template belt, and in-page paper reader.
-- Added a recording of the project page to the top of every README and aligned the opening with the page: ISC as a new attack paradigm, and different tools producing different data.
+- Added two 1600 px recordings of the project page to every README (hero player at the top, tool stage in D · V) and aligned the opening with the page: ISC as a new attack paradigm, and different tools producing different data.
 - Redrew the workspace-trajectory, score-feedback, agent-run and Detoxify-variant figures from HTML sources in `assets/readme-figures/`; corrected the README title to the camera-ready title and the Figure 7 link.
 
 ## 2026-10-17 — Docker workspace conversion

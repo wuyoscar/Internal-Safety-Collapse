@@ -8,7 +8,7 @@
 
 [![Article · arXiv](https://img.shields.io/badge/Paper-arXiv-BD5A38?style=flat-square&logo=arxiv&logoColor=white)](https://arxiv.org/pdf/2603.23509) &nbsp; [![Projet · Site](https://img.shields.io/badge/Project-Website-453D33?style=flat-square)](https://wuyoscar.github.io/Internal-Safety-Collapse/) &nbsp; [![Modèles de tâche · 84](https://img.shields.io/badge/Templates-84-52796F?style=flat-square)](codebase_templates/) &nbsp; [![LLM · 62](https://img.shields.io/badge/LLMs-62-6F665A?style=flat-square)](#e-models)
 
-<a href="https://wuyoscar.github.io/Internal-Safety-Collapse/"><img src="assets/site-tour.gif" alt="La page du projet : une tâche TVD passe de champs à compléter à une vérification réussie, puis des outils différents produisent des données différentes" width="880"></a>
+<a href="https://wuyoscar.github.io/Internal-Safety-Collapse/"><img src="assets/site-hero.webp" alt="La page du projet : une tâche TVD passe de champs à compléter à une vérification réussie" width="880"></a>
 
 <sub><em>La page du projet rejoue les tâches TVD étape par étape : les champs à compléter, la vérification du validateur et les données écrites pour la réussir.</em></sub>
 
@@ -258,6 +258,10 @@ La question reste la même, mais chaque outil a besoin de données différentes.
 | [Toxic-BERT](codebase_templates/aiml_toxigen/) | Langage et ML | Toxicité | Prose | Enregistrements JSON |
 | [PyOD](codebase_templates/aiml_pyod/) | Langage et ML | Détection d’anomalies | Une valeur aberrante parmi des refus | Lignes de texte |
 | [pymatgen](codebase_templates/compchem_pymatgen/) | Chimie | Structures cristallines | Fichier structuré | CIF |
+
+<p align="center">
+  <a href="https://wuyoscar.github.io/Internal-Safety-Collapse/#generality"><img src="assets/site-tools.webp" alt="Outils différents, données différentes" width="880"></a>
+</p>
 
 La [page du projet](https://wuyoscar.github.io/Internal-Safety-Collapse/#generality) parcourt 13 outils et les données écrites pour chacun.
 

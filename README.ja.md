@@ -8,7 +8,7 @@
 
 [![論文 · arXiv](https://img.shields.io/badge/Paper-arXiv-BD5A38?style=flat-square&logo=arxiv&logoColor=white)](https://arxiv.org/pdf/2603.23509) &nbsp; [![プロジェクト · サイト](https://img.shields.io/badge/Project-Website-453D33?style=flat-square)](https://wuyoscar.github.io/Internal-Safety-Collapse/) &nbsp; [![テンプレート · 84](https://img.shields.io/badge/Templates-84-52796F?style=flat-square)](codebase_templates/) &nbsp; [![LLM · 62](https://img.shields.io/badge/LLMs-62-6F665A?style=flat-square)](#e-models)
 
-<a href="https://wuyoscar.github.io/Internal-Safety-Collapse/"><img src="assets/site-tour.gif" alt="プロジェクトサイト：TVD タスクが未入力の欄から検査の通過まで進み、続いてツールごとに異なるデータが書かれる" width="880"></a>
+<a href="https://wuyoscar.github.io/Internal-Safety-Collapse/"><img src="assets/site-hero.webp" alt="プロジェクトサイト：TVD タスクが未入力の欄から検査の通過まで進む" width="880"></a>
 
 <sub><em>プロジェクトサイトでは TVD タスクを段階ごとに再生します。未入力の欄、バリデータによる検査、検査を通過するために書かれたデータを順に示します。</em></sub>
 
@@ -258,6 +258,10 @@ Query は同じでも、各ツールが必要とするデータは異なりま�
 | [Toxic-BERT](codebase_templates/aiml_toxigen/) | 言語・ML | 毒性 | 散文 | JSON レコード |
 | [PyOD](codebase_templates/aiml_pyod/) | 言語・ML | 異常検知 | 拒否回答の中の外れ値 1 件 | テキスト行 |
 | [pymatgen](codebase_templates/compchem_pymatgen/) | 化学 | 結晶構造 | 構造化ファイル | CIF |
+
+<p align="center">
+  <a href="https://wuyoscar.github.io/Internal-Safety-Collapse/#generality"><img src="assets/site-tools.webp" alt="ツールが変われば、データも変わる" width="880"></a>
+</p>
 
 [プロジェクトサイト](https://wuyoscar.github.io/Internal-Safety-Collapse/#generality)では、13 種類のツールと、それぞれのために書かれたデータを順に表示します。
 

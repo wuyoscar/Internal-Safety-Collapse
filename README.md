@@ -8,7 +8,7 @@
 
 [![Paper · arXiv](https://img.shields.io/badge/Paper-arXiv-BD5A38?style=flat-square&logo=arxiv&logoColor=white)](https://arxiv.org/pdf/2603.23509) &nbsp; [![Project · Website](https://img.shields.io/badge/Project-Website-453D33?style=flat-square)](https://wuyoscar.github.io/Internal-Safety-Collapse/) &nbsp; [![Templates · 84](https://img.shields.io/badge/Templates-84-52796F?style=flat-square)](codebase_templates/) &nbsp; [![LLMs · 62](https://img.shields.io/badge/LLMs-62-6F665A?style=flat-square)](#e-models)
 
-<a href="https://wuyoscar.github.io/Internal-Safety-Collapse/"><img src="assets/site-tour.gif" alt="The project page: a TVD task goes from unfinished fields to a passing check, then different tools produce different data" width="880"></a>
+<a href="https://wuyoscar.github.io/Internal-Safety-Collapse/"><img src="assets/site-hero.webp" alt="The project page: a TVD task goes from unfinished fields to a passing check" width="880"></a>
 
 <sub><em>The project page plays TVD tasks step by step: the unfinished fields, the validator’s check, and the data written to pass it.</em></sub>
 
@@ -258,6 +258,10 @@ The query stays the same, but each tool needs different data. LlamaGuard require
 | [Toxic-BERT](codebase_templates/aiml_toxigen/) | Language & ML | Toxicity | Prose | JSON records |
 | [PyOD](codebase_templates/aiml_pyod/) | Language & ML | Anomaly detection | One outlier among refusals | Text lines |
 | [pymatgen](codebase_templates/compchem_pymatgen/) | Chemistry | Crystal structures | Structured file | CIF |
+
+<p align="center">
+  <a href="https://wuyoscar.github.io/Internal-Safety-Collapse/#generality"><img src="assets/site-tools.webp" alt="Different tools, different data" width="880"></a>
+</p>
 
 The [project page](https://wuyoscar.github.io/Internal-Safety-Collapse/#generality) steps through 13 tools and the data written for each.
 
