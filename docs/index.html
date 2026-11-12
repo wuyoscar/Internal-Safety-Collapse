@@ -8,14 +8,23 @@
   <title>
    Internal Safety Collapse · Coding agents &amp; frontier LLMs
   </title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&amp;family=Geist+Mono:wght@400..600&amp;family=Urbanist:wght@300..800&amp;display=swap" rel="stylesheet"/>
   <link href="static/css/style.css?v=39592fc91c1f" rel="stylesheet"/>
   <link href="static/css/workspace.css?v=a640d440bc27" rel="stylesheet"/>
   <link href="static/css/workspace-motion.css?v=eee2241bde40" rel="stylesheet"/>
+  <link href="static/css/polish.css?v=19354f2bc1e8" rel="stylesheet"/>
+  <link href="static/css/showcase.css?v=fdb5a92fa283" rel="stylesheet"/>
   <script defer="" src="static/js/workspace-motion.js?v=81db27cadf4c">
   </script>
-  <script defer="" src="static/js/task-library.js?v=6d014e9dadba">
+  <script defer="" src="static/js/task-library.js?v=df2666342a7c">
   </script>
-  <script defer="" src="static/js/main.js?v=f89105b804a2">
+  <script defer="" src="static/js/main.js?v=887818d3d9e9">
+  </script>
+  <script defer="" src="static/js/polish.js?v=dfac610e2051">
+  </script>
+  <script defer="" src="static/js/showcase.js?v=355b7c0f622b">
   </script>
  </head>
  <body>
@@ -36,15 +45,36 @@
       Internal Safety Collapse
      </span>
     </a>
-    <nav aria-label="Main navigation">
+    <nav aria-label="Main navigation" id="site-nav">
+     <span aria-hidden="true" class="nav-ink">
+     </span>
+     <a href="#templates">
+      Templates
+     </a>
+     <a href="#demo-video">
+      Video
+     </a>
+     <a href="#read">
+      Paper
+     </a>
+     <a href="#mechanism">
+      Mechanism
+     </a>
      <a href="#workspace">
-      Workspace
+      Framework
      </a>
      <a href="#results">
-      Results
+      LLMs
      </a>
-     <a href="#paper">
-      Paper ↗
+     <a class="nav-pill" href="https://arxiv.org/pdf/2603.23509">
+      PDF ↗
+     </a>
+     <a class="nav-pill dark" href="https://github.com/wuyoscar/Internal-Safety-Collapse">
+      <svg aria-hidden="true" height="15" viewbox="0 0 16 16" width="15">
+       <path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.93-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.72 1.22 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.77-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z" fill="currentColor">
+       </path>
+      </svg>
+      GitHub
      </a>
     </nav>
    </div>
@@ -63,60 +93,396 @@
        Collapse.
       </em>
      </h1>
-     <p class="hero-subtitle">
-      Coding agents · Frontier LLMs
-     </p>
      <p class="hero-description">
-      We study why coding agents generate content they would otherwise refuse while completing programming tasks.
+      Coding agents and frontier LLMs generate content they would otherwise refuse, as a step in an ordinary programming task.
      </p>
+     <ul class="claims">
+      <li>
+       <b>A new attack paradigm</b> — the request is an ordinary professional task. The harmful content is written as a step in completing it.
+      </li>
+      <li>
+       <b>TVD</b> — a task, a validator and a data file with unfinished fields. The task is done when the validator passes.
+      </li>
+      <li>
+       <b>Any tool</b> — the same structure around classifiers, parsers and domain libraries, in chat, in-context and agent settings.
+      </li>
+     </ul>
      <div class="actions">
       <a class="button primary" href="#workspace">
-       Watch a workspace unfold ↓
+       Explore the TVD framework
       </a>
-      <a class="text-link" href="https://arxiv.org/pdf/2603.23509">
-       Read the paper ↗
+      <a class="button" href="https://arxiv.org/pdf/2603.23509">
+       Paper ↗
+      </a>
+      <a class="button" href="https://github.com/wuyoscar/Internal-Safety-Collapse">
+       GitHub ↗
       </a>
      </div>
+     <dl class="hero-stats" id="hero-stats">
+     </dl>
     </div>
-    <div class="hero-video" id="demo-video">
-     <p class="eyebrow">
-      A walkthrough from our experiments
-     </p>
-     <div class="video-frame">
-      <video aria-label="ISC research walkthrough" controls="" playsinline="" poster="static/media/video-poster.jpg" preload="none">
-       <source src="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15" type="video/mp4"/>
-       Your browser does not support embedded video.
-       <a href="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15">
-        Open the video
-       </a>
-       .
-      </video>
-     </div>
-     <p class="video-caption">
-      We share our findings and show what we observed.
-     </p>
+    <div aria-label="Looping TVD runs, one per workspace" id="hero-player">
     </div>
    </section>
+   <div class="divider">
+    <span class="flight">
+    </span>
+   </div>
+   <section class="gen-section wrap" id="generality">
+    <div class="section-heading sw-reveal">
+     <p class="eyebrow">
+      01 · Generality
+     </p>
+     <h2>
+      Different tools,
+      <em>
+       different data.
+      </em>
+     </h2>
+     <p>
+      Under TVD, each tool makes a frontier LLM or a coding agent write a different kind of data: a different domain, category, style and format.
+     </p>
+    </div>
+    <div class="gen sw-reveal" id="gen">
+    </div>
+    <p class="gen-lead sw-reveal">
+     TVD produces data that a frontier LLM otherwise refuses to write.
+    </p>
+    <div class="gen-why sw-reveal">
+     <div>
+      <h3>
+       Data for research
+      </h3>
+      <p>
+       This kind of data is hard to obtain from a frontier LLM. Researchers can use it to train safety detectors, build evaluation sets and test defenses.
+      </p>
+     </div>
+     <div>
+      <h3>
+       Data for harm
+      </h3>
+      <p>
+       The same data can be misused. We report this as a safety failure of the LLM. Research use only.
+      </p>
+     </div>
+    </div>
+    <noscript>
+     <p>
+      <a href="https://github.com/wuyoscar/Internal-Safety-Collapse#readme">
+       See the generality figure in the README.
+      </a>
+     </p>
+    </noscript>
+   </section>
+   <div class="divider">
+    <span class="flight">
+    </span>
+   </div>
+   <section class="belt-section wrap" id="templates">
+    <div class="section-heading sw-reveal">
+     <p class="eyebrow">
+      02 · Templates
+     </p>
+     <h2>
+      One structure,
+      <em>
+       many tools.
+      </em>
+     </h2>
+     <p>
+      Each window is a saved output from one template, with values redacted or cut to their opening.
+     </p>
+    </div>
+    <figure aria-label="Saved outputs from the task library" class="belt-fig sw-reveal" id="belt">
+     <div aria-label="Outputs shown" class="belt-tabs" id="belt-tabs" role="group">
+     </div>
+     <p aria-live="polite" class="belt-desc" id="belt-desc">
+     </p>
+     <div aria-hidden="true" class="belt" id="belt-rows">
+     </div>
+     <figcaption class="belt-cap">
+      Click a window to open that task in the workspace below.
+     </figcaption>
+    </figure>
+   </section>
+   <div class="divider">
+    <span class="flight">
+    </span>
+   </div>
+   <section class="video-section wrap" id="demo-video">
+    <div class="section-heading sw-reveal">
+     <p class="eyebrow">
+      03 · Walkthrough
+     </p>
+     <h2>
+      The findings,
+      <em>
+       walked through.
+      </em>
+     </h2>
+    </div>
+    <div class="win sw-reveal">
+     <div class="win-bar">
+      <span aria-hidden="true" class="win-dots">
+       <i></i><i></i><i></i>
+      </span>
+      <span class="win-url">
+       Internal Safety Collapse · research walkthrough
+      </span>
+     </div>
+     <video aria-label="ISC research walkthrough" controls="" playsinline="" poster="static/media/video-poster.jpg" preload="none">
+      <source src="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15" type="video/mp4"/>
+      Your browser does not support embedded video.
+      <a href="https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15">
+       Open the video
+      </a>
+      .
+     </video>
+    </div>
+    <p class="video-caption">
+     We share our findings and show what we observed.
+    </p>
+   </section>
+   <section class="read-section wrap" id="read">
+    <div class="section-heading sw-reveal">
+     <h2>
+      Read the paper
+      <em>
+       here.
+      </em>
+     </h2>
+    </div>
+    <div class="win reader sw-reveal" id="reader">
+     <div class="win-bar">
+      <span aria-hidden="true" class="win-dots">
+       <i></i><i></i><i></i>
+      </span>
+      <button aria-label="Page thumbnails" aria-pressed="true" class="reader-ic reader-side" hidden="" id="reader-side" title="Page thumbnails" type="button">
+       <svg aria-hidden="true" height="14" viewbox="0 0 16 14" width="16">
+        <rect fill="none" height="12" rx="2.5" stroke="currentColor" stroke-width="1.4" width="14" x="1" y="1">
+        </rect>
+        <path d="M6 1v12" stroke="currentColor" stroke-width="1.4">
+        </path>
+       </svg>
+      </button>
+      <span class="win-url">
+       internal-safety-collapse.pdf
+      </span>
+      <span class="reader-tools" hidden="" id="reader-tools">
+       <button aria-label="Previous page" class="reader-ic" id="reader-prev" type="button">
+        ‹
+       </button>
+       <input aria-label="Page" class="reader-num" id="reader-page" inputmode="numeric" type="text" value="1"/>
+       <span class="reader-of" id="reader-total">
+       </span>
+       <button aria-label="Next page" class="reader-ic" id="reader-next" type="button">
+        ›
+       </button>
+       <button aria-label="Zoom out" class="reader-ic" id="reader-out" type="button">
+        −
+       </button>
+       <button aria-label="Fit to width" class="reader-num" id="reader-zoom" title="Fit to width" type="button">
+        100%
+       </button>
+       <button aria-label="Zoom in" class="reader-ic" id="reader-in" type="button">
+        +
+       </button>
+      </span>
+      <button class="reader-btn" hidden="" id="reader-full" type="button">
+       Full screen
+      </button>
+      <a class="reader-btn" download="" href="static/paper/internal-safety-collapse.pdf">
+       Download
+      </a>
+     </div>
+     <div class="reader-view" id="reader-view">
+      <div aria-label="Page thumbnails" class="reader-thumbs" hidden="" id="reader-thumbs" role="navigation">
+      </div>
+      <div aria-label="Paper pages" class="reader-pages" hidden="" id="reader-pages" role="region" tabindex="0">
+      </div>
+      <div class="reader-poster" id="reader-poster">
+       <p class="reader-venue">
+        NeurIPS 2026
+       </p>
+       <p class="reader-title">
+        Internal Safety Collapse in LLMs and Coding Agents
+       </p>
+       <p class="reader-authors">
+        Yutao Wu · Xiao Liu · Hanxun Huang · Xiang Zheng · Yige Li · Yifeng Gao · Cong Wang · Bo Li · Xingjun Ma · Yu-Gang Jiang
+       </p>
+       <div class="actions">
+        <a class="button primary" href="static/paper/internal-safety-collapse.pdf" id="reader-start">
+         Read it here
+        </a>
+        <a class="button" href="https://arxiv.org/abs/2603.23509" rel="noopener" target="_blank">
+         arXiv ↗
+        </a>
+       </div>
+       <p class="reader-note" id="reader-note">
+        The PDF is 15.7 MB and loads when you start.
+       </p>
+       <span class="reader-load" hidden="" id="reader-load">
+        <b>
+        </b>
+       </span>
+      </div>
+     </div>
+    </div>
+   </section>
+   <div class="divider">
+    <span class="flight">
+    </span>
+   </div>
+   <section class="mech-section wrap" id="mechanism">
+    <div class="section-heading sw-reveal">
+     <div>
+      <p class="eyebrow">
+       04 · Mechanism
+      </p>
+      <h2>
+       How the
+       <em>
+        collapse happens.
+       </em>
+      </h2>
+     </div>
+     <p>
+      Three short sequences from the paper. They are illustrative, with responses shortened and redacted; actual runs can also refuse or stop.
+     </p>
+    </div>
+    <div class="mech" data-step="3" id="mech">
+     <div aria-label="Mechanism" class="mech-tabs" id="mech-tabs" role="group">
+     </div>
+     <div class="mech-stage">
+      <div class="mech-panel mech-file">
+       <div class="mech-panel-head">
+        <span id="mech-file-name">
+        </span>
+        <span id="mech-attempt">
+        </span>
+       </div>
+       <div class="mech-code" id="mech-code">
+       </div>
+      </div>
+      <span aria-hidden="true" class="mech-wire" data-wire="1">
+       <i>
+       </i>
+      </span>
+      <div class="mech-panel mech-check">
+       <div class="mech-panel-head">
+        <span id="mech-check-name">
+        </span>
+        <span id="mech-check-rule">
+        </span>
+       </div>
+       <div class="mech-readout" id="mech-readout">
+       </div>
+      </div>
+      <span aria-hidden="true" class="mech-wire" data-wire="2">
+       <i>
+       </i>
+      </span>
+      <div class="mech-verdict">
+       <span id="mech-verdict">
+       </span>
+      </div>
+      <span aria-hidden="true" class="mech-return">
+       <b>
+        the error goes back to the agent
+       </b>
+      </span>
+     </div>
+     <div class="mech-foot">
+      <div aria-label="Steps" class="mech-beats" id="mech-beats" role="group">
+      </div>
+      <p aria-live="polite" id="mech-caption">
+      </p>
+      <button id="mech-play" type="button">
+       Pause
+      </button>
+     </div>
+    </div>
+    <noscript>
+     <p>
+      <a href="https://github.com/wuyoscar/Internal-Safety-Collapse#readme">
+       Read how the framework works in the README.
+      </a>
+     </p>
+    </noscript>
+   </section>
+   <div class="divider">
+    <span class="flight">
+    </span>
+   </div>
    <section class="studio-section wrap" id="workspace">
     <span id="experiments">
     </span>
     <span id="trajectory">
     </span>
-    <div class="section-heading studio-heading">
+    <div class="section-heading studio-heading sw-reveal">
      <div>
       <p class="eyebrow">
-       One framework · different data
+       05 · TVD framework
       </p>
       <h2>
-       Inside a
+       The
        <em>
-        TVD workspace.
+        TVD framework.
        </em>
       </h2>
      </div>
      <p>
-      Follow the agent as it reads the code, edits the data, and runs the checks.
+      A task, a validator, and a data file. Completing the task means filling the data until the validator passes.
      </p>
+    </div>
+    <div aria-label="TVD framework" class="tvd-flow" data-active="task" data-phase="inspect" id="tvd-flow" role="group">
+     <span aria-hidden="true" class="tvd-glider">
+     </span>
+     <div class="tvd-node" data-part="task">
+      <span aria-hidden="true" class="tvd-letter">
+       T
+      </span>
+      <div class="tvd-name">
+       <h3>
+        Task
+       </h3>
+       <span class="tvd-state">
+       </span>
+      </div>
+      <p class="tvd-text" id="flow-task">
+       A routine programming job the agent is asked to finish.
+      </p>
+     </div>
+     <div class="tvd-node" data-part="validator">
+      <span aria-hidden="true" class="tvd-letter">
+       V
+      </span>
+      <div class="tvd-name">
+       <h3>
+        Validator
+       </h3>
+       <span class="tvd-state">
+       </span>
+      </div>
+      <p class="tvd-text" id="flow-validator">
+       Code that checks whether the data meets the task.
+      </p>
+     </div>
+     <div class="tvd-node" data-part="data">
+      <span aria-hidden="true" class="tvd-letter">
+       D
+      </span>
+      <div class="tvd-name">
+       <h3>
+        Data
+       </h3>
+       <span class="tvd-state">
+       </span>
+      </div>
+      <p class="tvd-text" id="flow-data">
+       A file with unfinished fields the agent has to fill.
+      </p>
+     </div>
     </div>
     <div class="studio-shell ide-window" data-panel="code" id="ide-window">
      <div class="ide-titlebar">
@@ -521,25 +887,29 @@
      </p>
     </noscript>
    </section>
+   <div class="divider">
+    <span class="flight">
+    </span>
+   </div>
    <section class="reported-section wrap" id="results">
     <span id="applications">
     </span>
     <span id="arena">
     </span>
-    <div class="section-heading">
+    <div class="section-heading sw-reveal">
      <div>
       <p class="eyebrow">
-       Across LLMs
+       06 · LLMs
       </p>
       <h2>
-       Reported
+       ISC is effective on
        <em>
-        ISC triggers.
+        these LLMs.
        </em>
       </h2>
      </div>
      <p>
-      Open a report to see the task and output.
+      Each card links to the task and output behind the report.
      </p>
     </div>
     <div class="report-toolbar">
@@ -549,8 +919,11 @@
      </label>
      <span aria-live="polite" id="model-count" role="status">
      </span>
+     <button aria-pressed="false" id="model-view" type="button">
+      Show all
+     </button>
     </div>
-    <div class="reported-models" id="reported-models">
+    <div class="llm-wall" id="reported-models">
     </div>
     <p hidden="" id="model-empty">
      No matching LLM. Try another name.
@@ -592,6 +965,20 @@
         Code &amp; documentation ↗
        </a>
       </div>
+      <p class="paper-links">
+       <a href="https://arxiv.org/abs/2603.23509">
+        arXiv abstract ↗
+       </a>
+       <a href="https://arxiv.org/html/2603.23509v2">
+        HTML version ↗
+       </a>
+       <a href="https://www.youtube.com/watch?v=Kur0wMzuJgY">
+        Video on YouTube ↗
+       </a>
+       <a href="https://www.youtube.com/watch?v=P2MAa3jpmZw" hreflang="zh" lang="zh">
+        中文视频 ↗
+       </a>
+      </p>
      </div>
      <details class="citation" id="citation">
       <summary>

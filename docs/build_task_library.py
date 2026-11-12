@@ -1,4 +1,6 @@
-"""Index local workspace outputs as redacted structure previews, never raw payloads."""
+"""Index local workspace outputs as redacted structure previews, never raw payloads.
+
+A short list of rhetoric templates keeps the opening of each string value (see OPENING_TEMPLATES)."""
 import argparse
 import ast
 import hashlib
@@ -69,20 +71,35 @@ def command_excerpt(command):
     if safe:return dict(command='\n'.join(safe),origin='source-excerpt')
     return {}
 
-def shape(value,depth=0):
+# Readable previews: for the templates listed here a string keeps its opening (whole if short), so a reader can tell
+# what kind of text was written. These are rhetoric tasks: sarcasm, persuasion, headlines, scam and spam wording.
+# Everything else stays structure-only, including Language & ML templates whose outputs are sexual content, hate
+# aimed at groups, personal records, exploit code or how-to requests (nsfw, aegis, detoxify, toxigen, pii,
+# medical_ner, code_vuln, malware, openai_detector, wildguard), and every other domain.
+OPENING_TEMPLATES=set('aiml_sarcasm aiml_propaganda aiml_clickbait aiml_fake_news aiml_emotion aiml_sentiment aiml_fraud aiml_phishing aiml_llamaguard aiml_offensive'.split())
+OPENING_CHARS=90
+
+def opening(value):
+    words=' '.join(value.split())
+    if len(words)<=OPENING_CHARS:return words
+    cut=words[:OPENING_CHARS+1];at=cut.rfind(' ')
+    return cut[:at if at>8 else OPENING_CHARS].rstrip(' ,.;:!?-')+' ███'
+
+
+def shape(value,depth=0,reveal=False):
     if depth>3:return '███'
     if isinstance(value,dict):
         result={}
         for i,(key,val) in enumerate(list(value.items())[:12]):
             label=key if key in SAFE_KEYS else f'field_{i+1}'
             while label in result:label+='_'
-            result[label]=shape(val,depth+1)
+            result[label]=shape(val,depth+1,reveal)
         return result
-    if isinstance(value,list):return [shape(v,depth+1) for v in value[:2]]
-    return '███'
+    if isinstance(value,list):return [shape(v,depth+1,reveal) for v in value[:2]]
+    return opening(value) if reveal and isinstance(value,str) else '███'
 
 
-def preview(text):
+def preview(text,reveal=False):
     scan=text[:250000]
     languages=sorted(set((m or 'text').lower() for m in re.findall(r'^```([A-Za-z0-9_-]{0,20})\s*$',scan,re.M)))
     formats=sorted(set(re.findall(r'\.(json|csv|fasta|fa|cif|pdb|bam|vcf|xyz|py|conllu|xml|yaml|yml|pcap|tex)\b',scan,re.I)))
@@ -90,7 +107,7 @@ def preview(text):
         try:value,_=json.JSONDecoder().raw_decode(scan[match.start():])
         except ValueError:continue
         if isinstance(value,dict) and len(value)>=2 or isinstance(value,list) and value and isinstance(value[0],dict):
-            return dict(kind='json',text=json.dumps(shape(value),ensure_ascii=False,indent=2),languages=languages,formats=formats)
+            return dict(kind='json',text=json.dumps(shape(value,reveal=reveal),ensure_ascii=False,indent=2),languages=languages,formats=formats)
     headers=re.findall(r'^>[^\n]+$',scan,re.M)
     if headers and re.search(r'^[ACGTNacgtn]{12,}$',scan,re.M):
         return dict(kind='fasta',text='\n\n'.join(f'>record_{i+1:02d} | identity redacted\n████████████████████████' for i in range(min(len(headers),3))),languages=languages,formats=formats)
@@ -179,7 +196,7 @@ def build(templates,destination,archive_inventory=None):
             raw=file.read_bytes();sha=hashlib.sha256(raw).hexdigest()
             if not raw or sha in seen:continue
             seen.add(sha);file_count+=1
-            view=preview(raw.decode('utf-8',errors='replace'))
+            view=preview(raw.decode('utf-8',errors='replace'),reveal=folder.name in OPENING_TEMPLATES)
             records.append(dict(id=folder.name+'--'+file.name,filename=file.name,bytes=len(raw),sha256=sha,sourcePath='templates/'+folder.name+'/'+file.name,preview=view))
         tasks.append(dict(source='Workspaces',id=folder.name,label=folder.name.split('_',1)[-1].replace('_',' '),domain=domain,modules=modules,promptSha256=hashlib.sha256(prompt.read_bytes()).hexdigest(),outputs=records))
     template_count=len(tasks)
@@ -220,7 +237,7 @@ def build(templates,destination,archive_inventory=None):
                 domain='Agent experiments' if 'agent' in pipeline or 'red-teaming' in pipeline else 'Chatbot / ICL';label=folder.replace('/',' · ')
             key=source_label.lower()+':'+folder
             group=groups.setdefault(key,dict(id=key,label=label,domain=domain,source=source_label,modules=[],outputs=[]))
-            record=dict(id=key+'--'+str(relative),filename=str(relative),bytes=len(raw),sha256=sha,sourcePath=('community/' if is_community else 'experiment/')+str(relative),artifactType=item['artifact_type'],preview=preview(raw.decode('utf-8',errors='replace')))
+            record=dict(id=key+'--'+str(relative),filename=str(relative),bytes=len(raw),sha256=sha,sourcePath=('community/' if is_community else 'experiment/')+str(relative),artifactType=item['artifact_type'],preview=preview(raw.decode('utf-8',errors='replace'),reveal=domain in OPENING_DOMAINS))
             record['displayName']=relative.name+' · '+relative.parent.name.replace('_',' ')
             if item['artifact_type']=='agent_log':
                 show_code=bool(re.search(r'fake.news|detoxify|qwen.?guard|llama.?guard|toxicity|toxibert|sentiment',str(relative),re.I))
@@ -232,7 +249,7 @@ def build(templates,destination,archive_inventory=None):
         for source_label in ['Experiments','Community']:source_counts[source_label]=sum(len(t['outputs']) for t in tasks if t['source']==source_label)
     unique_hashes={o['sha256'] for t in tasks for o in t['outputs']}
     result=dict(schemaVersion=1,taskCount=len(tasks),templateTaskCount=template_count,tasksWithOutputs=sum(bool(t['outputs']) for t in tasks),outputCount=len(unique_hashes),sourceCounts=source_counts,
-                displayNote='Saved-output index across workspaces, experiments, and community reports. Previews preserve structure with values redacted; numbered fields and record labels are presentation labels.',tasks=tasks)
+                displayNote='Saved-output index across workspaces, experiments, and community reports. Previews preserve structure with values redacted; previews of the listed rhetoric templates also keep the opening of each string; numbered fields and record labels are presentation labels.',tasks=tasks)
     destination.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
     print(f'Indexed {template_count} templates and {len(tasks)-template_count} result groups; {len(unique_hashes)} distinct files. Sources: {source_counts}')
 

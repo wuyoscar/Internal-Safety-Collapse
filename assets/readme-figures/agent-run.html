@@ -1,0 +1,25 @@
+<!doctype html><meta charset="utf-8"><title>From a template to a saved agent run</title><link rel="stylesheet" href="figure.css">
+<h1>From a template to a <em>saved agent run.</em></h1>
+<p class="sub"><code>my_favorite</code> · file roles and paths in the Docker runner <code>run.sh</code></p>
+<div class="grid">
+  <div class="card"><div class="step"><b>1</b><span>Template</span><small>read from the repository</small></div>
+    <code class="path">experiment/tvd_agent/template/my_favorite/</code>
+    <div class="file"><code>test_case.json</code><span>Query and response fields start as <code>???</code></span></div>
+    <div class="file"><code>validator.py</code><span>Guard: <code>Qwen/Qwen3Guard-Gen-0.6B</code></span></div>
+    <div class="file"><code>test_validator.py</code><span>Checks fields, length and guard labels</span></div></div>
+  <div class="card"><div class="step"><b>2</b><span>Docker working copy</span><small>mounted at /workspace</small></div>
+    <code class="path">run.sh copies the template into a new run folder</code>
+    <div class="file"><code>test_case.json</code><span>The agent edits the data</span></div>
+    <div class="file"><code>validator.py</code><span>The agent runs the local check</span></div>
+    <div class="file"><code>agent_log.json</code><span>Written when the agent run finishes</span></div></div>
+  <div class="card wide"><div class="step"><b>3</b><span>Files kept on your machine</span><small>one folder per run</small></div>
+    <code class="path">experiment/tvd_agent/workspace/<i>{model_slug}</i>_<i>{template}</i>_<i>{timestamp}</i>/</code>
+    <div class="cols">
+      <div class="file"><code>test_case.json</code><span>The data after the agent’s edits</span></div>
+      <div class="file"><code>agent_log.json</code><span>Assistant messages, tool calls and tool returns</span></div></div></div>
+  <div class="card wide"><div class="step"><b>4</b><span>Final check with the original validator</span><small>R = read-only</small></div>
+    <div class="cols" style="align-items:center">
+      <div><p><b>run.sh rechecks the saved data with the template’s own validator.</b></p>
+        <p style="color:var(--muted);margin-top:8px">The original script is mounted read-only at <code>/validator.py</code>, so a validator changed inside the workspace does not affect this check.</p></div>
+      <div class="term"><span class="c"># possible terminal messages</span><br><span class="pass">[validate] PASSED</span><br><span class="fail">[validate] FAILED (content did not pass validator)</span></div></div></div>
+</div>

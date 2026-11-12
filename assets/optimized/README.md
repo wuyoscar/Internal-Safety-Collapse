@@ -40,3 +40,15 @@ Additional B-section illustrations use the same PNG-with-embedded-XML and WebP p
 - `tvd-prompt-generation`: the adversarial-prompt task objective, its two acceptance conditions, and failed/revised candidates in the Qwen3Guard red-teaming workspace. Candidate content is omitted.
 
 These are explanatory drawings, not screenshots of newly executed experiments. Their field names and conditions come from the source links beside each README figure.
+
+
+## Figures rendered from HTML
+
+`readme-agent-run.webp`, `readme-template-variants.webp`, `readme-workspace-trajectory.webp` and `readme-score-steering.webp` replace the earlier `tvd-agent-run-files`, `tvd-template-workspaces`, `tvd-workspace-trajectory` and `tvd-score-steering` illustrations in the READMEs. The earlier draw.io files remain for reference. Their sources are HTML files in `../readme-figures/`, styled with the project page's colours and typefaces. Each preview links to `../readme-<name>.png`. Rebuild all four with:
+
+```sh
+uv run assets/readme-figures/render.py
+```
+
+`../site-tour.gif` at the top of the READMEs is a recording of the project page (hero player, tool stage, template belt) at 880 px wide and 10 frames per second.
+

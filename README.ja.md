@@ -2,17 +2,31 @@
 
 🌐 [English](README.md) · [简体中文](README.zh-CN.md) · **日本語** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
+# Internal Safety Collapse (ISC) in LLMs and Coding Agents
+
+**NeurIPS 2026**
+
+[![論文 · arXiv](https://img.shields.io/badge/Paper-arXiv-BD5A38?style=flat-square&logo=arxiv&logoColor=white)](https://arxiv.org/pdf/2603.23509) &nbsp; [![プロジェクト · サイト](https://img.shields.io/badge/Project-Website-453D33?style=flat-square)](https://wuyoscar.github.io/Internal-Safety-Collapse/) &nbsp; [![テンプレート · 84](https://img.shields.io/badge/Templates-84-52796F?style=flat-square)](codebase_templates/) &nbsp; [![LLM · 62](https://img.shields.io/badge/LLMs-62-6F665A?style=flat-square)](#e-models)
+
+<a href="https://wuyoscar.github.io/Internal-Safety-Collapse/"><img src="assets/site-tour.gif" alt="プロジェクトサイト：TVD タスクが未入力の欄から検査の通過まで進み、続いてツールごとに異なるデータが書かれる" width="880"></a>
+
+<sub><em>プロジェクトサイトでは TVD タスクを段階ごとに再生します。未入力の欄、バリデータによる検査、検査を通過するために書かれたデータを順に示します。</em></sub>
+
+**[プロジェクトサイトを開く →](https://wuyoscar.github.io/Internal-Safety-Collapse/)** &nbsp;·&nbsp; [テンプレート](https://wuyoscar.github.io/Internal-Safety-Collapse/#templates) &nbsp;·&nbsp; [ブラウザで論文を読む](https://wuyoscar.github.io/Internal-Safety-Collapse/#read)
+
 </div>
 
-# Internal Safety Collapse (ISC) in Frontier LLMs and Coding Agents
-
-[![論文 · arXiv](https://img.shields.io/badge/Paper-arXiv-B31B1B?style=flat-square&logo=arxiv&logoColor=white)](https://arxiv.org/pdf/2603.23509) &nbsp; [![プロジェクト · サイト](https://img.shields.io/badge/Project-Website-52796F?style=flat-square)](https://wuyoscar.github.io/Internal-Safety-Collapse/)
-
-Jailbreak や prompt 攻撃では、細工した敵対的指示によって**ガードレールを回避（bypass guardrails）**し、LLM に安全でない内容を生成させたり、安全ポリシーに反する行動を取らせたりすることがよくあります。
+**Internal Safety Collapse（ISC）**は新しい攻撃パラダイムです。最先端の LLM やコーディング Agent は、有害な内容を直接求められると拒否しますが、通常のプログラミングタスクでは、同じ内容をタスク完了の一手順として書きます。
 
 コーディング Agent は、長期にわたるタスクを遂行する能力を高めています。曖昧な目標や詳細が不足した目標から、必要な作業と中間段階を推論し、実行のフィードバックに応じて修正しながら完了を目指せます。**autoresearch** や **`/goal`** は、ユーザーがすべての操作を指定しなくてもタスクを進められる例です。
 
-そこで私たちは、精巧な敵対的指示に頼らず、タスクの遂行を通じてコーディング Agent が jailbreak や prompt 攻撃に似た結果に至るかを調べます。また、このパラダイムが研究コミュニティにどう役立つかを、安全性評価、データセット生成、検出器の学習、自動レッドチーミングなど、幅広い用途で探ります。
+そこで私たちは、タスクの完了に、直接求められれば LLM が拒否する内容が必要な場合に何が起こるかを調べます。また、このパラダイムが研究コミュニティにどう役立つかを、安全性評価、データセット生成、検出器の学習、自動レッドチーミングなど、幅広い用途で探ります。
+
+| | |
+|:---|:---|
+| **新しい攻撃パラダイム** | 依頼は通常の専門的なタスクです。有害な内容は、そのタスクを完了する手順として書かれます。 |
+| **[TVD](#c-framework)** | タスク、バリデータ、未入力の欄を含むデータファイル。バリデータを通過するとタスクは完了します。 |
+| **[ツールが変われば、データも変わる](#different-tools-different-data)** | ツールごとに、最先端の LLM やコーディング Agent が書くデータの種類が変わります。分野、カテゴリ、文体、形式が異なります。 |
 
 | このプロジェクトについて | セクション |
 |:---|:---|
@@ -30,6 +44,7 @@ Jailbreak や prompt 攻撃では、細工した敵対的指示によって**ガ
 
 ## 更新履歴
 
+- **2026-11-12** 🌐 [プロジェクトサイト](https://wuyoscar.github.io/Internal-Safety-Collapse/)を刷新。TVD タスクの段階再生、ツール一覧、ページ内の論文リーダーを追加。
 - **2026-11-11** 📄 [Camera-ready 版](https://arxiv.org/pdf/2603.23509)を arXiv に公開。⭐ **2.6k stars。**
 - **2026-10-17** ✨ README を全面改訂。**1.6k スター。**
 - **2026-09** 🎉 **NeurIPS 2026** に採択。
@@ -47,6 +62,8 @@ Jailbreak や prompt 攻撃では、細工した敵対的指示によって**ガ
 私たちの発見と観察した現象を紹介する短い動画を作りました。
 
 https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15
+
+[プロジェクトサイト](https://wuyoscar.github.io/Internal-Safety-Collapse/)では、同じタスクを段階ごとの再生で確認できます。
 
 <a id="b-observation"></a>
 
@@ -75,7 +92,7 @@ greeting(names)
 
 (b) と (c) では自律性が高まっています。最先端 chatbot は不足する名前を提案しますが、確認を待ちます。同じ LLM をコーディング環境で使う Agent は、プログラムを実行し、アサーションエラーを読み、不足を**推論**し、名前を埋めて再テストします。中間段階を推論して実行する能力は、**autoresearch** や **`/goal`** のような長いワークフローも可能にします。
 
-ここで私たちの問いに戻ります。タスクの完了に、通常は jailbreak で引き出そうとする内容が必要なら、何が起こるでしょうか。(d) はその例です。安全性分類器を評価するため、Agent はコードと実行結果から安全でない例が必要だと推論し、タスクの検証を通すために書き込みます。
+ここで私たちの問いに戻ります。タスクの完了に、直接求められれば LLM が拒否する内容が必要なら、何が起こるでしょうか。(d) はその例です。安全性分類器を評価するため、Agent はコードと実行結果から安全でない例が必要だと推論し、タスクの検証を通すために書き込みます。
 
 この現象を **Internal Safety Collapse（ISC）** と呼びます。タスク圧力によって、アラインメント済みの LLM やコーディング Agent が安全上の制約よりタスク完了を優先します。直接求められれば機微な内容や有害な内容を拒否しても、プログラミングタスクに同じ内容が必要だと推論すると、拒否せず生成します。
 
@@ -119,7 +136,7 @@ Meta のコンテンツ安全性分類器 [LlamaGuard](https://github.com/meta-l
 
 検証エラーにより、Agent は同じ欄を再び修正します。検証に失敗するたび、安全な回答では安全でない例の要件を満たせず、プログラミングタスクが未完了のままだという衝突が明らかになります。これが私たちの調べる**タスク圧力**です。通常の実行エラーが、回答の修正を続ける理由になります。[記録された軌跡](https://arxiv.org/html/2603.23509v2#A8.T4)では、最初は安全と判定された回答が修正後に安全でない回答へ変わりました。下図はこの過程を示します。
 
-[![同じワークスペースで失敗を受けて修正する三段階の例](assets/optimized/tvd-workspace-trajectory.webp)](assets/tvd-workspace-trajectory.drawio.png)
+[![同じワークスペースで失敗を受けて修正する三段階の例](assets/optimized/readme-workspace-trajectory.webp)](assets/readme-workspace-trajectory.png)
 
 <sub><em>ワークスペースの軌跡。Agent がデータを埋め、LlamaGuard の検証失敗を受け、回答を修正します。フィードバックの循環を示す例です。</em></sub>
 
@@ -147,7 +164,7 @@ Meta のコンテンツ安全性分類器 [LlamaGuard](https://github.com/meta-l
 
 Query が題材を指定する一方、分類器のスコアは例の受け入れ条件を定めます。[Toxic-BERT タスク](codebase_templates/aiml_toxigen/exp0.txt)は `toxic_score >= 0.5` を要求します。閾値を下回る候補は検証に失敗し、Agent に修正のフィードバックを返します。
 
-[![0.5 の固定閾値に対して 0.30 と 0.40 が失敗し、0.62 が通過する例](assets/optimized/tvd-score-steering.webp)](assets/tvd-score-steering.drawio.png)
+[![0.5 の固定閾値に対して 0.30 と 0.40 が失敗し、0.62 が通過する例](assets/optimized/readme-score-steering.webp)](assets/readme-score-steering.png)
 
 <sub><em>スコアによる誘導。例示の Toxic-BERT スコア 0.30、0.40 は閾値 0.5 に届かず、修正後の候補 0.62 は通過します。</em></sub>
 
@@ -198,7 +215,7 @@ TVD ワークスペースはデータをまとめて生成・検証できます�
 
 実際に生成できました。コンテンツモデレーションのタスクで、攻撃手法をデータファイルに指定し、`attack_prompt` を未完成にして、生成をデータ要件として表現します。Agent は手法名とタスク要件から prompt の作り方を推論します。
 
-[![Agent が手法名から prompt を生成し、モデレーション API が検出する](assets/optimized/paper-v2-method-prompts.webp)](https://arxiv.org/html/2603.23509v2#S5.F8)
+[![Agent が手法名から prompt を生成し、モデレーション API が検出する](assets/optimized/paper-v2-method-prompts.webp)](https://arxiv.org/html/2603.23509v2#S5.F7)
 
 <sub><em>Figure 7. Claude Opus 4.6 Thinking は指定された攻撃手法から prompt を生成します。ここでの通過は、モデレーション API が生成 prompt にフラグを付けたことを意味します。</em></sub>
 
@@ -223,7 +240,9 @@ TVD ワークスペースはデータをまとめて生成・検証できます�
 
 Agent は各候補を `data.json` に書き込みます。`task.py` と `tvd_validator.py` は読み取り専用です。スクリプトは試行記録を `rounds.json` に、prompt、対象の回答、評価結果を `results.json` に保存します。
 
-### V · ツールと分野をまたぐ一般性
+<a id="different-tools-different-data"></a>
+
+### V · ツールが変われば、データも変わる
 
 TVD は Hugging Face のモデル、Python ライブラリ、専門分野のプログラミングツールという既存のエコシステムを活用できます。各ツールは必要なデータを定め、タスクが検証できる出力や実行エラーを返します。**データ要件と検証を調整することで、さまざまなタスクや分野の TVD ワークスペースを構築できます。**
 
@@ -232,6 +251,17 @@ TVD は Hugging Face のモデル、Python ライブラリ、専門分野のプ�
 <sub><em>Figure 5. 同じ地球平面説の質問でも、LlamaGuard、PyOD、Toxic-BERT のタスク要件により回答が変わります。</em></sub>
 
 Query は同じでも、各ツールが必要とするデータは異なります。LlamaGuard は unsafe と判定される回答、[PyOD](codebase_templates/aiml_pyod/exp0.txt) は安全な拒否回答の集合から外れる文章、Toxic-BERT は有毒な文章を求めます。評価対象の LLM はこれらの要件に合わせて出力するため、タスク API を変えると生成内容も変わります。
+
+| バリデータ内のツール | 分野 | カテゴリ | 文体 | 形式 |
+|:---|:---|:---|:---|:---|
+| [LlamaGuard](codebase_templates/aiml_llamaguard/) | 言語・ML | 会話の安全性 | 安全な回答と安全でない回答の対 | JSON レコード |
+| [Toxic-BERT](codebase_templates/aiml_toxigen/) | 言語・ML | 毒性 | 散文 | JSON レコード |
+| [PyOD](codebase_templates/aiml_pyod/) | 言語・ML | 異常検知 | 拒否回答の中の外れ値 1 件 | テキスト行 |
+| [pymatgen](codebase_templates/compchem_pymatgen/) | 化学 | 結晶構造 | 構造化ファイル | CIF |
+
+[プロジェクトサイト](https://wuyoscar.github.io/Internal-Safety-Collapse/#generality)では、13 種類のツールと、それぞれのために書かれたデータを順に表示します。
+
+TVD は、最先端の LLM が通常は書くことを拒否するデータを生み出します。この種のデータは最先端の LLM から得にくく、研究者は安全性検出器の学習、評価セットの構築、防御の検証に利用できます。同じデータは悪用される可能性もあります。私たちはこれを LLM の安全性の失敗として報告します。本資料は研究目的に限ります。
 
 テンプレートは Hugging Face の `transformers` ライブラリから分類器を読み込みます。
 
@@ -294,7 +324,7 @@ docker build -t tvd-agent .
 
 実行スクリプトは、変更後のデータと `agent_log.json` を新しい実行フォルダに保存し、元のテンプレートのバリデータでデータを再検証します。
 
-[![テンプレートのファイルを Docker ワークスペースにコピーし、データとエージェントのログを保存した後、実行スクリプトが元のバリデータで別途検証する流れ](assets/optimized/tvd-agent-run-files.webp)](assets/tvd-agent-run-files.drawio.png)
+[![テンプレートのファイルを Docker ワークスペースにコピーし、データとエージェントのログを保存した後、実行スクリプトが元のバリデータで別途検証する流れ](assets/optimized/readme-agent-run.webp)](assets/readme-agent-run.png)
 
 <sub><em>テンプレートから実行記録へ。Qwen3Guard ワークスペースは編集済みデータと Agent ログを生成し、その後、元のバリデータで別途検証します。</em></sub>
 
@@ -539,7 +569,7 @@ LLM が TVD タスクを完了するために安全でないデータを生成�
 
 [`aiml_detoxify`](codebase_templates/aiml_detoxify/)の派生形では、データ行数、対象カテゴリ、最低テキスト長、事前入力例を変更します。分類器を固定したままタスク要件を変えられます。
 
-[![Detoxify テンプレートの各ファイルの具体的な違い：行数、カテゴリ欄、最小テキスト長、入力済みデータ](assets/optimized/tvd-template-workspaces.webp)](assets/tvd-template-workspaces.drawio.png)
+[![Detoxify テンプレートの各ファイルの具体的な違い：行数、カテゴリ欄、最小テキスト長、入力済みデータ](assets/optimized/readme-template-variants.webp)](assets/readme-template-variants.png)
 
 <sub><em>テンプレートの派生形。Detoxify の例ではデータ行数、対象カテゴリ、最低テキスト長、事前入力データを変更します。</em></sub>
 

@@ -1,0 +1,64 @@
+/* Shared look for the README figures: the project page's paper, ink and accent tokens. */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Urbanist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap');
+:root { --paper:#faf4e8; --surface:#fefaf0; --ink:#453d33; --muted:#6f665a; --dim:#a89e8c; --accent:#bd5a38; --panel:#f2eadb; --edge:#e7ddc9;
+  --term:#16140e; --term-ink:#ece4d2; --term-dim:#8a8170; --plum:#b9a3d6; --ochre:#e0a94a; --sage:#9fc2a4; }
+* { box-sizing:border-box; margin:0; }
+body { width:1100px; padding:44px 48px 46px; background:var(--paper); color:var(--ink); font:500 17px/1.45 Urbanist, sans-serif;
+  background-image:radial-gradient(60% 50% at 100% 0, #f6e4d3 0, transparent 70%), radial-gradient(50% 45% at 0 100%, #eef0de 0, transparent 70%); }
+h1 { font:400 44px/1.08 Fraunces, serif; letter-spacing:-.02em; }
+h1 em { color:var(--accent); }
+.sub { margin:10px 0 28px; color:var(--muted); font-size:18px; }
+code, .mono { font-family:'Geist Mono', monospace; font-size:.9em; }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.card { background:var(--surface); border:1px solid var(--edge); border-radius:16px; padding:20px 22px 22px; box-shadow:0 1px 0 #fff inset, 0 14px 30px -22px rgba(69,61,51,.45); }
+.card.wide { grid-column:1 / -1; }
+.step { display:flex; align-items:baseline; gap:12px; margin-bottom:14px; }
+.step b { font:italic 400 30px/1 Fraunces, serif; color:var(--accent); }
+.step span { font-weight:700; font-size:19px; }
+.step small { margin-left:auto; color:var(--dim); font:500 13px 'Geist Mono', monospace; }
+.path { display:block; margin-bottom:12px; padding:8px 12px; background:var(--panel); border-radius:9px; font:500 14.5px 'Geist Mono', monospace; overflow-wrap:anywhere; }
+.path i { font-style:normal; color:var(--accent); }
+.file { display:grid; grid-template-columns:auto 1fr; column-gap:12px; align-items:baseline; padding:7px 0; border-top:1px dashed var(--edge); }
+.file:first-of-type { border-top:0; }
+.file code { font-weight:600; white-space:nowrap; }
+.file span { color:var(--muted); font-size:16px; }
+.file span code { color:var(--accent); font-weight:500; }
+.cols { display:grid; grid-template-columns:1fr 1fr; gap:0 34px; }
+.term { background:var(--term); color:var(--term-ink); border-radius:12px; padding:16px 18px; font:500 15px/1.7 'Geist Mono', monospace; }
+.term .c { color:var(--term-dim); } .term .pass { color:var(--plum); } .term .fail { color:var(--ochre); } .term .k { color:#d9b48a; } .term .q { color:var(--ochre); } .term .x { color:var(--sage); }
+.note { margin-top:20px; padding:14px 18px; border-left:3px solid var(--accent); background:var(--panel); border-radius:0 10px 10px 0; color:var(--muted); font-size:16px; }
+.note b { color:var(--ink); }
+.tag { display:inline-block; margin:12px 8px 0 0; padding:3px 10px; border:1px solid var(--edge); border-radius:99px; font:500 13px 'Geist Mono', monospace; color:var(--muted); }
+.tag b { color:var(--ink); font-weight:600; }
+.card h3 { font-size:18px; font-weight:700; margin-bottom:10px; }
+.cols .file { border-top:0; }
+.rows { display:grid; gap:14px; }
+.row { display:grid; grid-template-columns:330px 1fr; gap:24px; align-items:center; padding:18px 22px; }
+.row h3 { margin-bottom:0; }
+.row .tag { margin-top:10px; }
+.row .term { white-space:nowrap; }
+/* trajectory + score figures */
+.stack { display:grid; gap:10px; }
+.pair { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.filewin { background:var(--panel); border-radius:12px; padding:14px 18px; font:500 15px/1.75 'Geist Mono', monospace; }
+.filewin .name, .term .name { display:block; margin-bottom:4px; color:var(--dim); font-size:13px; }
+.term .name { color:var(--term-dim); }
+.filewin .q { color:var(--accent); font-weight:600; } .filewin .s { color:#5d7f63; } .filewin .u { color:var(--accent); }
+.term .s { color:var(--sage); } .term .u { color:#e8917a; }
+.status { margin-left:auto; padding:3px 12px; border-radius:99px; font:600 13px 'Geist Mono', monospace; }
+.status.fail { background:#f6e6c4; color:#8a6410; } .status.pass { background:#e8def3; color:#5f4488; }
+.next { margin:0 0 0 26px; padding:4px 0 4px 16px; border-left:2px dashed var(--accent); color:var(--muted); font-size:16px; }
+.next b { color:var(--ink); }
+.three { display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; }
+.three .card { padding:18px 18px 18px; display:flex; flex-direction:column; gap:12px; }
+.three .step { margin-bottom:0; }
+.three .filewin { font-size:14.5px; line-height:1.6; flex:1; }
+.score { display:flex; align-items:baseline; gap:12px; }
+.score b { font:500 40px/1 'Geist Mono', monospace; }
+.bar { position:relative; height:8px; margin:16px 0 6px; background:#3a352a; border-radius:9px; }
+.bar i { position:absolute; inset:0 auto 0 0; border-radius:9px; }
+.bar::after { content:''; position:absolute; left:50%; top:-6px; bottom:-6px; width:2px; background:var(--term-ink); }
+.scale { display:flex; justify-content:space-between; color:var(--term-dim); font-size:12.5px; }
+.verdict { margin-top:10px; font-weight:600; }
+.req { display:grid; grid-template-columns:1fr 1fr; gap:6px 34px; margin-bottom:16px; }
+.req .file { border-top:0; padding:0; }

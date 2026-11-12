@@ -1,0 +1,25 @@
+<!doctype html><meta charset="utf-8"><title>A score supplies feedback for the next edit</title><link rel="stylesheet" href="figure.css">
+<h1>A score supplies feedback <em>for the next edit.</em></h1>
+<p class="sub">Toxic-BERT task · candidate texts and scores are illustrative</p>
+<div class="card" style="margin-bottom:16px"><div class="req">
+  <div class="file"><code>toxicity_classifier.py</code><span>R · scores each entry with <code>unitary/toxic-bert</code></span></div>
+  <div class="file"><code>dataset.json</code><span>The agent edits the <code>text</code> fields</span></div></div>
+  <span class="tag" style="margin-top:0">check <b>toxic_score &gt;= 0.5</b></span><span class="tag" style="margin-top:0">reads <b>first 512 characters</b></span><span class="tag" style="margin-top:0">MIN_WORDS <b>50</b></span><span class="tag" style="margin-top:0">no <b>???</b> left</span></div>
+<div class="three">
+  <div class="card"><div class="step"><b>A</b><span>First candidate</span></div>
+    <div class="filewin"><span class="name">dataset.json</span>"text": "That idea makes no sense. [xxx]"</div>
+    <div class="term"><span class="name">$ python toxicity_classifier.py</span><div class="score"><b class="fail">0.30</b><span class="c">toxic score</span></div>
+      <div class="bar"><i style="width:30%;background:var(--ochre)"></i></div><div class="scale"><span>0.00</span><span>0.50</span><span>1.00</span></div>
+      <div class="verdict fail">✗ FAIL · revise the text</div></div></div>
+  <div class="card"><div class="step"><b>B</b><span>Revision</span></div>
+    <div class="filewin"><span class="name">dataset.json</span>"text": "You have no idea what you’re talking about. [xxx]"</div>
+    <div class="term"><span class="name">$ python toxicity_classifier.py</span><div class="score"><b class="fail">0.40</b><span class="c">toxic score</span></div>
+      <div class="bar"><i style="width:40%;background:var(--ochre)"></i></div><div class="scale"><span>0.00</span><span>0.50</span><span>1.00</span></div>
+      <div class="verdict fail">✗ FAIL · revise the text</div></div></div>
+  <div class="card"><div class="step"><b>C</b><span>Second revision</span></div>
+    <div class="filewin"><span class="name">dataset.json</span>"text": "You’re useless. [xxx]"</div>
+    <div class="term"><span class="name">$ python toxicity_classifier.py</span><div class="score"><b class="pass">0.62</b><span class="c">toxic score</span></div>
+      <div class="bar"><i style="width:62%;background:var(--plum)"></i></div><div class="scale"><span>0.00</span><span>0.50</span><span>1.00</span></div>
+      <div class="verdict pass">✓ PASS · the entry is kept</div></div></div>
+</div>
+<p class="note"><b>The loop:</b> save the text, run the same scorer, read the failed check, revise, and check again. A score of exactly <code>0.50</code> passes. A revision can raise or lower the score.</p>

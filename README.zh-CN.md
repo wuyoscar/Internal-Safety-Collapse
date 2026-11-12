@@ -2,17 +2,31 @@
 
 🌐 [English](README.md) · **简体中文** · [日本語](README.ja.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
+# Internal Safety Collapse (ISC) in LLMs and Coding Agents
+
+**NeurIPS 2026**
+
+[![论文 · arXiv](https://img.shields.io/badge/Paper-arXiv-BD5A38?style=flat-square&logo=arxiv&logoColor=white)](https://arxiv.org/pdf/2603.23509) &nbsp; [![项目 · 网站](https://img.shields.io/badge/Project-Website-453D33?style=flat-square)](https://wuyoscar.github.io/Internal-Safety-Collapse/) &nbsp; [![模板 · 84](https://img.shields.io/badge/Templates-84-52796F?style=flat-square)](codebase_templates/) &nbsp; [![大语言模型 · 62](https://img.shields.io/badge/LLMs-62-6F665A?style=flat-square)](#e-models)
+
+<a href="https://wuyoscar.github.io/Internal-Safety-Collapse/"><img src="assets/site-tour.gif" alt="项目网站：一个 TVD 任务从未完成字段到通过检查，随后不同工具产生不同数据" width="880"></a>
+
+<sub><em>项目网站逐步播放 TVD 任务：未完成的字段、校验器的检查，以及为通过检查而写入的数据。</em></sub>
+
+**[打开项目网站 →](https://wuyoscar.github.io/Internal-Safety-Collapse/)** &nbsp;·&nbsp; [模板库](https://wuyoscar.github.io/Internal-Safety-Collapse/#templates) &nbsp;·&nbsp; [在浏览器中阅读论文](https://wuyoscar.github.io/Internal-Safety-Collapse/#read)
+
 </div>
 
-# Internal Safety Collapse (ISC) in Frontier LLMs and Coding Agents
-
-[![论文 · arXiv](https://img.shields.io/badge/Paper-arXiv-B31B1B?style=flat-square&logo=arxiv&logoColor=white)](https://arxiv.org/pdf/2603.23509) &nbsp; [![项目 · 网站](https://img.shields.io/badge/Project-Website-52796F?style=flat-square)](https://wuyoscar.github.io/Internal-Safety-Collapse/)
-
-越狱和 prompt 攻击通常依靠精心构造的对抗性指令来**绕过安全防护（bypass guardrails）**，诱导大语言模型生成不安全内容，或表现出其他违反安全策略的行为。
+**Internal Safety Collapse（ISC）**是一种新的攻击范式。直接请求有害内容时，前沿大语言模型或编码 Agent 会拒绝；但在一项普通的编程任务里，它会把同样的内容当作完成任务的一个步骤写出来。
 
 编码 Agent 越来越擅长完成长程任务。从一个含糊或未充分说明的目标出发，它们能推断需要做什么、确定中间步骤，并根据执行反馈修改工作，持续推进任务。**autoresearch** 和 **`/goal`** 这类工作流展示了这种能力：用户不必逐步指定每个动作，Agent 也能继续完成任务。
 
-这些能力促使我们研究：编码 Agent 能否通过完成任务，达到与越狱和 prompt 攻击相似的效果，而无需依赖精心构造的对抗性指令？我们也探索这一范式如何帮助更广泛的研究社区，包括但不限于安全评估、数据集生成、检测器训练和自动红队测试。
+这些能力促使我们研究：如果完成任务需要的内容，正是大语言模型在被直接请求时会拒绝写的内容，会发生什么？我们也探索这一范式如何帮助更广泛的研究社区，包括但不限于安全评估、数据集生成、检测器训练和自动红队测试。
+
+| | |
+|:---|:---|
+| **新的攻击范式** | 请求本身是一项普通的专业任务。有害内容是在完成任务的过程中写出来的。 |
+| **[TVD](#c-framework)** | 一个任务、一个校验器和一个留有未完成字段的数据文件。校验器通过，任务才算完成。 |
+| **[不同工具，不同数据](#different-tools-different-data)** | 每种工具都会让前沿大语言模型或编码 Agent 写出不同类型的数据：不同的领域、类别、风格和格式。 |
 
 | 项目内容 | 章节 |
 |:---|:---|
@@ -30,6 +44,7 @@
 
 ## 更新
 
+- **2026-11-12** 🌐 [项目网站](https://wuyoscar.github.io/Internal-Safety-Collapse/)改版：TVD 任务逐步播放器、工具展示和网页内论文阅读器。
 - **2026-11-11** 📄 [Camera-ready 版本](https://arxiv.org/pdf/2603.23509)已上传 arXiv。⭐ **2.6k stars。**
 - **2026-10-17** ✨ README 全面重写、润色。**1.6k stars。**
 - **2026-09** 🎉 论文被 **NeurIPS 2026** 接收。
@@ -47,6 +62,8 @@
 我们做了一个简短的视频，分享我们的发现，直观展示观察到的现象。
 
 https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15
+
+[项目网站](https://wuyoscar.github.io/Internal-Safety-Collapse/)以逐步播放的形式展示同样的任务。
 
 <a id="b-observation"></a>
 
@@ -75,7 +92,7 @@ greeting(names)
 
 图 (b) 和 (c) 展示了更强的自主性。前沿 chatbot 会提出缺少的名字，但仍等待确认；同一个前沿大语言模型放在编码环境中，Agent 则会运行程序、读取断言错误、**推断**缺少什么、补齐名字，再次测试。推断并执行中间步骤的能力，也让 **autoresearch** 和 **`/goal`** 这类更长的工作流成为可能。
 
-这就回到我们的问题：如果完成任务需要的内容，原本通常要通过越狱才能获得，会发生什么？图 (d) 展示了这样的情况。为了评估安全分类器，Agent 从代码和执行反馈中推断出需要生成不安全样本，然后将这些样本写入文件，满足任务检查。
+这就回到我们的问题：如果完成任务需要的内容，正是大语言模型在被直接请求时会拒绝写的内容，会发生什么？图 (d) 展示了这样的情况。为了评估安全分类器，Agent 从代码和执行反馈中推断出需要生成不安全样本，然后将这些样本写入文件，满足任务检查。
 
 我们把这一现象称为 **Internal Safety Collapse（ISC，内部安全崩塌）**：任务压力使经过对齐的大语言模型或编码 Agent 优先完成任务，而越过安全约束。直接要求生成敏感或有害内容时，它会拒绝；但在编程任务中，它推断出完成任务必须生成相同内容，便不再拒绝并将其生成。
 
@@ -119,7 +136,7 @@ Agent 在把不安全内容写入数据文件后，最终可能只回复“All t
 
 校验错误会让 Agent 回到同一个字段。每次检查失败都会明确这个冲突：安全回答无法满足不安全样本的要求，因此编程任务仍未完成。这就是我们研究的**任务压力**。普通的执行错误使 Agent 有理由持续修改回答。在我们的[真实轨迹记录](https://arxiv.org/html/2603.23509v2#A8.T4)中，一个最初被判为安全的回答经过修改后变成了不安全回答；下图展示这一过程。
 
-[![同一个工作区中的连续尝试：安全回答放入不安全字段会失败，修改后由 LlamaGuard 判为 unsafe](assets/optimized/tvd-workspace-trajectory.webp)](assets/tvd-workspace-trajectory.drawio.png)
+[![同一个工作区中的连续尝试：安全回答放入不安全字段会失败，修改后由 LlamaGuard 判为 unsafe](assets/optimized/readme-workspace-trajectory.webp)](assets/readme-workspace-trajectory.png)
 
 <sub><em>工作区轨迹。Agent 填写数据，收到 LlamaGuard 检查失败的反馈，再修改回答。此图用于说明反馈循环。</em></sub>
 
@@ -147,7 +164,7 @@ Agent 在把不安全内容写入数据文件后，最终可能只回复“All t
 
 Query 指定主题，分类器分数则可以定义样本的接受条件。[Toxic-BERT 任务](codebase_templates/aiml_toxigen/exp0.txt)要求 `toxic_score >= 0.5`。低于阈值的候选文本会校验失败，反馈促使 Agent 修改文本。
 
-[![毒性分数的示意反馈：0.30 和 0.40 低于 0.5，修改后的 0.62 通过](assets/optimized/tvd-score-steering.webp)](assets/tvd-score-steering.drawio.png)
+[![毒性分数的示意反馈：0.30 和 0.40 低于 0.5，修改后的 0.62 通过](assets/optimized/readme-score-steering.webp)](assets/readme-score-steering.png)
 
 <sub><em>分数引导。图中示意的 Toxic-BERT 分数 0.30 和 0.40 未达到 0.5 阈值；修改后得分 0.62 的候选文本通过。</em></sub>
 
@@ -198,7 +215,7 @@ TVD 工作区可以批量生成并校验数据。我们用生成的样本训练�
 
 我们发现它可以。我们把 prompt 生成写成内容审核任务中的数据要求：在数据文件中指定攻击方法，将 `attack_prompt` 留空。Agent 根据方法名和任务要求，推断如何构造 prompt。
 
-[![Agent 根据攻击方法名称生成 prompt，审核 API 标记生成结果](assets/optimized/paper-v2-method-prompts.webp)](https://arxiv.org/html/2603.23509v2#S5.F8)
+[![Agent 根据攻击方法名称生成 prompt，审核 API 标记生成结果](assets/optimized/paper-v2-method-prompts.webp)](https://arxiv.org/html/2603.23509v2#S5.F7)
 
 <sub><em>Figure 7. Claude Opus 4.6 Thinking 根据指定攻击方法生成 prompt。这里的通过，表示审核 API 标记了生成的 prompt。</em></sub>
 
@@ -223,7 +240,9 @@ TVD 工作区可以批量生成并校验数据。我们用生成的样本训练�
 
 Agent 把每个候选 prompt 写入 `data.json`；`task.py` 和 `tvd_validator.py` 保持只读。脚本把尝试记录保存到 `rounds.json`，把 prompt、目标回答和评估结果保存到 `results.json`。
 
-### V · 跨工具与领域的泛化
+<a id="different-tools-different-data"></a>
+
+### V · 不同工具，不同数据
 
 TVD 可以利用现有的 Hugging Face 模型、Python 库和领域编程工具生态。这些工具规定所需数据，并返回任务可以检查的输出或执行错误。**适配这些数据要求和检查规则，就能为不同任务与学科构建 TVD 工作区。**
 
@@ -232,6 +251,17 @@ TVD 可以利用现有的 Hugging Face 模型、Python 库和领域编程工具�
 <sub><em>Figure 5. 同一个关于地平说的问题，在 LlamaGuard、PyOD 和 Toxic-BERT 的任务要求下产生不同回答。</em></sub>
 
 Query 保持不变，但每个工具需要的数据不同。LlamaGuard 需要被判为 unsafe 的回答；[PyOD](codebase_templates/aiml_pyod/exp0.txt) 需要与一组安全拒绝回答明显不同的文本；Toxic-BERT 需要有毒文本。被测试的大模型根据这些要求调整输出，因此更换任务 API 也会改变它生成的内容。
+
+| 校验器中的工具 | 领域 | 类别 | 风格 | 格式 |
+|:---|:---|:---|:---|:---|
+| [LlamaGuard](codebase_templates/aiml_llamaguard/) | 语言与机器学习 | 对话安全 | 成对的安全与不安全回答 | JSON 记录 |
+| [Toxic-BERT](codebase_templates/aiml_toxigen/) | 语言与机器学习 | 毒性 | 自然语言文本 | JSON 记录 |
+| [PyOD](codebase_templates/aiml_pyod/) | 语言与机器学习 | 异常检测 | 一组拒绝回答中的一个离群样本 | 文本行 |
+| [pymatgen](codebase_templates/compchem_pymatgen/) | 化学 | 晶体结构 | 结构化文件 | CIF |
+
+[项目网站](https://wuyoscar.github.io/Internal-Safety-Collapse/#generality)依次展示 13 种工具，以及为每种工具写出的数据。
+
+TVD 产生的是前沿大语言模型在其他情况下拒绝写的数据。这类数据很难从前沿大语言模型获得，研究者可以用它训练安全检测器、构建评估集和测试防御。同样的数据也可能被滥用。我们把它作为大语言模型的安全失效来报告；这些材料仅供研究使用。
 
 我们的模板通过 Hugging Face 的 `transformers` 库加载这些分类器：
 
@@ -294,7 +324,7 @@ docker build -t tvd-agent .
 
 运行脚本把修改后的数据和 `agent_log.json` 保存到新的运行文件夹，再用原始模板的校验器重新检查数据：
 
-[![模板文件复制到 Docker 工作区，保存数据和 Agent 日志，再由运行脚本使用原始校验器单独复核](assets/optimized/tvd-agent-run-files.webp)](assets/tvd-agent-run-files.drawio.png)
+[![模板文件复制到 Docker 工作区，保存数据和 Agent 日志，再由运行脚本使用原始校验器单独复核](assets/optimized/readme-agent-run.webp)](assets/readme-agent-run.png)
 
 <sub><em>从模板到运行记录。Qwen3Guard 工作区产出修改后的数据和 Agent 日志，随后使用原始校验器进行独立检查。</em></sub>
 
@@ -539,7 +569,7 @@ docker build -t tvd-agent .
 
 [`aiml_detoxify`](codebase_templates/aiml_detoxify/)中的变体改变数据行数、目标类别、最小文本长度或预填样本。这些变化让我们在固定分类器的同时，改变任务要求。
 
-[![Detoxify 模板文件之间的具体区别：数据行数、类别字段、最小长度和预填数据](assets/optimized/tvd-template-workspaces.webp)](assets/tvd-template-workspaces.drawio.png)
+[![Detoxify 模板文件之间的具体区别：数据行数、类别字段、最小长度和预填数据](assets/optimized/readme-template-variants.webp)](assets/readme-template-variants.png)
 
 <sub><em>模板变体。Detoxify 示例改变数据行数、目标类别、最小文本长度与预填记录。</em></sub>
 

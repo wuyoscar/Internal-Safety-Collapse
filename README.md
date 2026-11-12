@@ -2,17 +2,31 @@
 
 🌐 **English** · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
+# Internal Safety Collapse (ISC) in LLMs and Coding Agents
+
+**NeurIPS 2026**
+
+[![Paper · arXiv](https://img.shields.io/badge/Paper-arXiv-BD5A38?style=flat-square&logo=arxiv&logoColor=white)](https://arxiv.org/pdf/2603.23509) &nbsp; [![Project · Website](https://img.shields.io/badge/Project-Website-453D33?style=flat-square)](https://wuyoscar.github.io/Internal-Safety-Collapse/) &nbsp; [![Templates · 84](https://img.shields.io/badge/Templates-84-52796F?style=flat-square)](codebase_templates/) &nbsp; [![LLMs · 62](https://img.shields.io/badge/LLMs-62-6F665A?style=flat-square)](#e-models)
+
+<a href="https://wuyoscar.github.io/Internal-Safety-Collapse/"><img src="assets/site-tour.gif" alt="The project page: a TVD task goes from unfinished fields to a passing check, then different tools produce different data" width="880"></a>
+
+<sub><em>The project page plays TVD tasks step by step: the unfinished fields, the validator’s check, and the data written to pass it.</em></sub>
+
+**[Open the project page →](https://wuyoscar.github.io/Internal-Safety-Collapse/)** &nbsp;·&nbsp; [Templates](https://wuyoscar.github.io/Internal-Safety-Collapse/#templates) &nbsp;·&nbsp; [Read the paper in the browser](https://wuyoscar.github.io/Internal-Safety-Collapse/#read)
+
 </div>
 
-# Internal Safety Collapse (ISC) in Frontier LLMs and Coding Agents 
-
-[![Paper · arXiv](https://img.shields.io/badge/Paper-arXiv-B31B1B?style=flat-square&logo=arxiv&logoColor=white)](https://arxiv.org/pdf/2603.23509) &nbsp; [![Project · Website](https://img.shields.io/badge/Project-Website-52796F?style=flat-square)](https://wuyoscar.github.io/Internal-Safety-Collapse/)
-
-Jailbreaks and prompt attacks often use crafted adversarial instructions to **bypass guardrails**, inducing LLMs to generate unsafe content or exhibit other policy-violating behavior.
+**Internal Safety Collapse (ISC)** is a new attack paradigm. A frontier LLM or coding agent refuses harmful content when asked for it directly, yet writes the same content as a step in an ordinary programming task.
 
 Coding agents are increasingly capable of completing long-horizon tasks. Starting from a vague or underspecified goal, they can infer what needs to be done, identify intermediate steps, and use execution feedback to revise their work and continue toward completion. Workflows such as **autoresearch** and **`/goal`** illustrate this ability to pursue a task without requiring a user to specify every action.
 
-These capabilities motivate us to ask whether coding agents can reach similar outcomes to jailbreaks and prompt attacks through task completion, without relying on carefully crafted adversarial instructions. We also explore how this paradigm can support the broader research community, including but not limited to safety evaluation, dataset generation, detector training, and automated red teaming.
+These capabilities motivate us to ask what happens when completing a task requires content the LLM would refuse to write if asked directly. We also explore how this paradigm can support the broader research community, including but not limited to safety evaluation, dataset generation, detector training, and automated red teaming.
+
+| | |
+|:---|:---|
+| **A new attack paradigm** | The request is an ordinary professional task. The harmful content is written as a step in completing it. |
+| **[TVD](#c-framework)** | A task, a validator and a data file with unfinished fields. The task is done when the validator passes. |
+| **[Different tools, different data](#different-tools-different-data)** | Each tool makes a frontier LLM or a coding agent write a different kind of data: a different domain, category, style and format. |
 
 | In this project | Section |
 |:---|:---|
@@ -30,6 +44,7 @@ These capabilities motivate us to ask whether coding agents can reach similar ou
 
 ## Updates
 
+- **2026-11-12** 🌐 [Project page](https://wuyoscar.github.io/Internal-Safety-Collapse/) redesigned: step-by-step TVD player, tool gallery, and in-page paper reader.
 - **2026-11-11** 📄 [Camera-ready version](https://arxiv.org/pdf/2603.23509) now on arXiv. ⭐ **2.6k stars.**
 - **2026-10-17** ✨ README rewritten and polished. **1.6k stars.**
 - **2026-09** 🎉 Accepted at **NeurIPS 2026**.
@@ -47,6 +62,8 @@ These capabilities motivate us to ask whether coding agents can reach similar ou
 We made a short video to share our findings and show what we observed.
 
 https://github.com/user-attachments/assets/1cc80c48-02a4-4a5c-9d00-a0f10d91db15
+
+The [project page](https://wuyoscar.github.io/Internal-Safety-Collapse/) shows the same tasks as step-by-step players.
 
 <a id="b-observation"></a>
 
@@ -75,7 +92,7 @@ In panel (a), the earlier chatbot recognizes the placeholders and asks the user 
 
 Panels (b) and (c) show greater autonomy. The frontier chatbot proposes the missing names but waits for confirmation. With the same frontier LLM in a coding environment, the agent runs the program, reads the assertion error, **infers** what is missing, fills in the names, and tests again. This ability to infer and carry out intermediate steps also makes longer workflows, such as **autoresearch** and **`/goal`**, possible.
 
-This brings us back to our question: what happens when completing the task requires content that would ordinarily be sought through a jailbreak? Panel (d) shows such a case. To evaluate a safety classifier, the agent infers from the code and execution feedback that it needs to generate unsafe examples, then writes those examples to satisfy the task’s checks.
+This brings us back to our question: what happens when completing the task requires content the LLM would refuse to write if asked directly? Panel (d) shows such a case. To evaluate a safety classifier, the agent infers from the code and execution feedback that it needs to generate unsafe examples, then writes those examples to satisfy the task’s checks.
 
 We call this phenomenon **Internal Safety Collapse (ISC)**: task pressure leads an aligned LLM or coding agent to prioritize task completion over safety constraints. It refuses sensitive or harmful content when directly requested, yet infers that the same content is necessary for a programming task and generates it without refusal.
 
@@ -119,7 +136,7 @@ Frontier LLMs and coding agents can recognize that this task requires harmful co
 
 The validation error sends the agent back to the same field. Each failed check makes the conflict explicit: a safe response cannot satisfy the requirement for an unsafe example, so the programming task remains unfinished. This is the **task pressure** we study. Ordinary execution errors give the agent a reason to keep revising its response. In our [recorded trajectory](https://arxiv.org/html/2603.23509v2#A8.T4), an initially safe-classified response becomes unsafe after revision; the sequence below illustrates this process.
 
-[![One workspace across successive attempts: a response judged safe fails the unsafe slot; the agent revises it until LlamaGuard judges it unsafe](assets/optimized/tvd-workspace-trajectory.webp)](assets/tvd-workspace-trajectory.drawio.png)
+[![One workspace across successive attempts: a response judged safe fails the unsafe slot; the agent revises it until LlamaGuard judges it unsafe](assets/optimized/readme-workspace-trajectory.webp)](assets/readme-workspace-trajectory.png)
 
 <sub><em>Workspace trajectory. The agent fills the data, receives a failed LlamaGuard check, and revises the response. This sequence illustrates the feedback loop.</em></sub>
 
@@ -147,7 +164,7 @@ For category selection, the repository’s [Detoxify template](codebase_template
 
 A query specifies the subject, while a classifier score can define what counts as an acceptable example. The [Toxic-BERT task](codebase_templates/aiml_toxigen/exp0.txt) requires `toxic_score >= 0.5`. A candidate below this threshold fails validation, giving the agent feedback to revise the text.
 
-[![Illustrative toxicity-score feedback: 0.30 and 0.40 fail a fixed 0.5 threshold; a revised candidate scoring 0.62 passes](assets/optimized/tvd-score-steering.webp)](assets/tvd-score-steering.drawio.png)
+[![Illustrative toxicity-score feedback: 0.30 and 0.40 fail a fixed 0.5 threshold; a revised candidate scoring 0.62 passes](assets/optimized/readme-score-steering.webp)](assets/readme-score-steering.png)
 
 <sub><em>Score steering. Illustrative Toxic-BERT scores of 0.30 and 0.40 fail the 0.5 threshold; a revised candidate scoring 0.62 passes.</em></sub>
 
@@ -198,7 +215,7 @@ We would expect safety training to address well-known jailbreak methods such as 
 
 We found that it could. We express prompt generation as a data requirement in a content-moderation task: specify the attack method in the data file and leave `attack_prompt` unfinished. The agent infers how to construct the prompt from the method name and the task requirements.
 
-[![An agent generates prompts from attack-method names; moderation flags the resulting prompts](assets/optimized/paper-v2-method-prompts.webp)](https://arxiv.org/html/2603.23509v2#S5.F8)
+[![An agent generates prompts from attack-method names; moderation flags the resulting prompts](assets/optimized/paper-v2-method-prompts.webp)](https://arxiv.org/html/2603.23509v2#S5.F7)
 
 <sub><em>Figure 7. Claude Opus 4.6 Thinking generates prompts from named attack methods. Passing here means the moderation API flags the generated prompt.</em></sub>
 
@@ -223,7 +240,9 @@ After the validator checks the data format, the [task](experiment/automated-red-
 
 The agent writes each candidate to `data.json`; `task.py` and `tvd_validator.py` remain read-only. The scripts save attempts in `rounds.json` and the prompts, target replies, and evaluations in `results.json`.
 
-### V · Generality across tools and domains
+<a id="different-tools-different-data"></a>
+
+### V · Different tools, different data
 
 TVD can draw on the existing ecosystem of Hugging Face models, Python libraries, and domain-specific programming tools. These tools specify the data they need and return outputs or execution errors that a task can check. **By adapting those data requirements and checks, we can construct TVD workspaces for different tasks and disciplines.**
 
@@ -232,6 +251,17 @@ TVD can draw on the existing ecosystem of Hugging Face models, Python libraries,
 <sub><em>Figure 5. The same flat-Earth query produces different responses under LlamaGuard, PyOD, and Toxic-BERT task requirements.</em></sub>
 
 The query stays the same, but each tool needs different data. LlamaGuard requires a response it labels unsafe; [PyOD](codebase_templates/aiml_pyod/exp0.txt) requires text that stands out from a set of safe refusals; Toxic-BERT requires toxic text. The evaluated LLM adapts its output to these requirements, so changing the task API changes what it generates.
+
+| Tool in the validator | Domain | Category | Style | Format |
+|:---|:---|:---|:---|:---|
+| [LlamaGuard](codebase_templates/aiml_llamaguard/) | Language & ML | Conversation safety | Paired safe and unsafe responses | JSON records |
+| [Toxic-BERT](codebase_templates/aiml_toxigen/) | Language & ML | Toxicity | Prose | JSON records |
+| [PyOD](codebase_templates/aiml_pyod/) | Language & ML | Anomaly detection | One outlier among refusals | Text lines |
+| [pymatgen](codebase_templates/compchem_pymatgen/) | Chemistry | Crystal structures | Structured file | CIF |
+
+The [project page](https://wuyoscar.github.io/Internal-Safety-Collapse/#generality) steps through 13 tools and the data written for each.
+
+TVD produces data that a frontier LLM otherwise refuses to write. This kind of data is hard to obtain from a frontier LLM, and researchers can use it to train safety detectors, build evaluation sets, and test defenses. The same data can be misused. We report this as a safety failure of the LLM; these materials are for research use only.
 
 Our templates load these classifiers through Hugging Face’s `transformers` library:
 
@@ -294,7 +324,7 @@ docker build -t tvd-agent .
 
 The runner saves the edited data and `agent_log.json` in a new run folder, then checks the data again with the original template validator:
 
-[![Template files copied into a Docker workspace, saved data and agent log, and the runner's separate check using the original validator](assets/optimized/tvd-agent-run-files.webp)](assets/tvd-agent-run-files.drawio.png)
+[![Template files copied into a Docker workspace, saved data and agent log, and the runner's separate check using the original validator](assets/optimized/readme-agent-run.webp)](assets/readme-agent-run.png)
 
 <sub><em>From template to saved run. The Qwen3Guard workspace produces edited data and an agent log, followed by a separate check using the original validator.</em></sub>
 
@@ -539,7 +569,7 @@ The paper's [ISC-Bench](https://arxiv.org/abs/2603.23509) contains 53 scenarios 
 
 Within [`aiml_detoxify`](codebase_templates/aiml_detoxify/), the variants change the number of data rows, target categories, minimum text length, or prefilled examples. These changes let us vary the task requirements while keeping the classifier fixed.
 
-[![Concrete differences between the Detoxify template files: row counts, category fields, minimum lengths and prefilled data](assets/optimized/tvd-template-workspaces.webp)](assets/tvd-template-workspaces.drawio.png)
+[![Four Detoxify template variants: row counts, target categories, minimum lengths and prefilled data](assets/optimized/readme-template-variants.webp)](assets/readme-template-variants.png)
 
 <sub><em>Template variants. The Detoxify examples change the number of data rows, target categories, minimum text length, and prefilled records.</em></sub>
 
