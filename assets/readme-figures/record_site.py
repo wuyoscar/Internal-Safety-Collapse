@@ -25,7 +25,7 @@ from playwright.sync_api import sync_playwright
 URL = sys.argv[1] if len(sys.argv) > 1 else "http://localhost:8098/"
 ASSETS = pathlib.Path(__file__).resolve().parent.parent
 W, H, OUT_W = 1080, 790, 1600
-FIRST = ("aiml_sarcasm", "aiml_sentiment", "aiml_clickbait", "aiml_emotion")  # mild first card
+FIRST = ("aiml_sarcasm", "aiml_sentiment", "aiml_clickbait", "aiml_emotion")  # mild card to record
 SEED_JS = """(() => { let a = %d >>> 0; Math.random = () => { a |= 0; a = a + 0x6D2B79F5 | 0;
 let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
 return ((t ^ t >>> 14) >>> 0) / 4294967296; }; })();"""
@@ -59,21 +59,30 @@ with tempfile.TemporaryDirectory() as tmp, sync_playwright() as p:
     tmp = pathlib.Path(tmp)
     browser = p.chromium.launch(channel="chrome", headless=True)
     page = None
-    for seed in range(1, 40):  # the hero shuffles its cards; pick a seed whose first card is mild
+    for seed in range(1, 40):  # the hero shuffles its cards; pick a seed whose second card is mild
         context = browser.new_context(viewport={"width": W, "height": H}, device_scale_factor=2)
         context.add_init_script(SEED_JS % seed)
         page = context.new_page()
         page.goto(URL, wait_until="domcontentloaded")
         page.wait_for_selector("#hero-player .hp-frame", timeout=15000)
+        # Skip the page-load entrance: wait for the first card to finish, then start with the second one.
+        for state in ("3", "0"):
+            page.wait_for_function(f"document.querySelector('#hero-player .hp-frame').dataset.s === '{state}'", timeout=20000)
         if page.inner_text("#hero-player .win-url").split(" / ")[0].strip() in FIRST:
             break
         context.close()
         page = None
     if page is None:
-        sys.exit("no seed gave a suitable first card")
+        sys.exit("no seed gave a suitable card")
     cdp = page.context.new_cdp_session(page)
-    page.evaluate("document.fonts.ready")
-    hero = shoot(page, cdp, tmp / "hero", 6.4)
+    hero = shoot(page, cdp, tmp / "hero", 4.7)  # one card, from ??? to PASS; the loop restarts on the same card
+    # The card fades in for the first ~0.45 s. Move those frames to the end so the file opens on the
+    # complete card with its ??? fields, and the fade reads as the swap before the loop restarts.
+    elapsed, cut = 0.0, 0
+    while elapsed < 0.45:
+        elapsed += hero[cut][1]
+        cut += 1
+    hero = hero[cut:] + hero[:cut]
 
     top = "(s => document.querySelector(s).getBoundingClientRect().top + scrollY - 118)"
     page.evaluate(f"window.scrollTo({{top: {top}('#generality h2'), behavior: 'instant'}})")
