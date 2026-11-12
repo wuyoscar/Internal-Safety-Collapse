@@ -1,5 +1,7 @@
 # README mechanism figures: sources and display conventions
 
+> The READMEs now show `readme-workspace-trajectory` and `readme-score-steering`, redrawn from HTML in `assets/readme-figures/` using the sources below. The `tvd-*.drawio.png` files named here are the earlier versions.
+
 The six workspace diagrams use native draw.io elements embedded in their `.drawio.png` files. Their WebP display copies are lossless. They illustrate task structure and agent actions using the source contracts below.
 
 ## Display conventions

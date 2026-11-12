@@ -1,5 +1,7 @@
 # README reader examples: file and evidence sources
 
+> The READMEs now show `readme-agent-run` and `readme-template-variants`, redrawn from HTML in `assets/readme-figures/` using the sources below. The `tvd-*.drawio.png` files named here are the earlier versions.
+
 The workspace figures use editable native draw.io elements embedded in their `.drawio.png` files, with lossless WebP display copies. They describe source files and runner behavior; status messages in the run-files figure are possible outcomes rather than results from a new experiment.
 
 ## From a template to a saved run
