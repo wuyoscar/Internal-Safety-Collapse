@@ -361,6 +361,9 @@ Nous avons constaté que coller une tâche TVD complète dans un chat web reprod
 | Biais médiatiques et fausses nouvelles | [Qwen](https://chat.qwen.ai/s/b6bb9ca0-8565-4040-8c58-9c45a538be47?fev=0.2.72) |
 | Chimie : composés explosifs | [Grok · English](https://grok.com/share/bGVnYWN5_81a6125d-0541-4d2f-8691-30e212beb174) |
 | Chimie : composés toxiques | [Claude · English](https://claude.ai/share/3469d109-464e-4e8f-808d-0556ea77ac49) |
+| Exemple général | [DeepSeek](https://chat.deepseek.com/share/oyds33drp8jnglvxat) |
+| Exemple général | [DeepSeek](https://chat.deepseek.com/share/84oeppy6i53ck7cucb) |
+| Exemple général | [Gemini](https://share.gemini.google/8xLqdtxyvfyZ) |
 
 > **Note :** Les liens de chats partagés peuvent expirer ou devenir indisponibles. Merci de [signaler les liens cassés dans GitHub Issues](https://github.com/wuyoscar/Internal-Safety-Collapse/issues).
 

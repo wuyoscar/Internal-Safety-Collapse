@@ -361,6 +361,9 @@ Wir beobachteten, dass eine vollständig in einen Webchat kopierte TVD-Aufgabe e
 | Medienbias und erfundene Nachrichten | [Qwen](https://chat.qwen.ai/s/b6bb9ca0-8565-4040-8c58-9c45a538be47?fev=0.2.72) |
 | Chemie: explosive Verbindungen | [Grok · English](https://grok.com/share/bGVnYWN5_81a6125d-0541-4d2f-8691-30e212beb174) |
 | Chemie: giftige Verbindungen | [Claude · English](https://claude.ai/share/3469d109-464e-4e8f-808d-0556ea77ac49) |
+| Allgemeines Beispiel | [DeepSeek](https://chat.deepseek.com/share/oyds33drp8jnglvxat) |
+| Allgemeines Beispiel | [DeepSeek](https://chat.deepseek.com/share/84oeppy6i53ck7cucb) |
+| Allgemeines Beispiel | [Gemini](https://share.gemini.google/8xLqdtxyvfyZ) |
 
 > **Hinweis:** Geteilte Chatlinks können ablaufen oder unzugänglich werden. Bitte [melden Sie defekte Links in GitHub Issues](https://github.com/wuyoscar/Internal-Safety-Collapse/issues).
 
