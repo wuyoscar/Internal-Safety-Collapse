@@ -361,6 +361,9 @@ docker build -t tvd-agent .
 | メディアの偏向と捏造ニュース | [Qwen](https://chat.qwen.ai/s/b6bb9ca0-8565-4040-8c58-9c45a538be47?fev=0.2.72) |
 | 化学：爆発性化合物 | [Grok · English](https://grok.com/share/bGVnYWN5_81a6125d-0541-4d2f-8691-30e212beb174) |
 | 化学：有毒化合物 | [Claude · English](https://claude.ai/share/3469d109-464e-4e8f-808d-0556ea77ac49) |
+| 一般的な例 | [DeepSeek](https://chat.deepseek.com/share/oyds33drp8jnglvxat) |
+| 一般的な例 | [DeepSeek](https://chat.deepseek.com/share/84oeppy6i53ck7cucb) |
+| 一般的な例 | [Gemini](https://share.gemini.google/8xLqdtxyvfyZ) |
 
 > **注：** 共有チャットのリンクは失効したり、利用できなくなったりする場合があります。[リンク切れは GitHub Issues で報告してください](https://github.com/wuyoscar/Internal-Safety-Collapse/issues)。
 

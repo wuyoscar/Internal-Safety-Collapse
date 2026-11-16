@@ -361,6 +361,9 @@ We found that pasting a complete TVD task into a web chat can reproduce part of 
 | Media bias and fabricated news | [Qwen](https://chat.qwen.ai/s/b6bb9ca0-8565-4040-8c58-9c45a538be47?fev=0.2.72) |
 | Chemistry: explosive compounds | [Grok · English](https://grok.com/share/bGVnYWN5_81a6125d-0541-4d2f-8691-30e212beb174) |
 | Chemistry: toxic compounds | [Claude · English](https://claude.ai/share/3469d109-464e-4e8f-808d-0556ea77ac49) |
+| General example | [DeepSeek](https://chat.deepseek.com/share/oyds33drp8jnglvxat) |
+| General example | [DeepSeek](https://chat.deepseek.com/share/84oeppy6i53ck7cucb) |
+| General example | [Gemini](https://share.gemini.google/8xLqdtxyvfyZ) |
 
 > **Note:** Shared-chat links may expire or become unavailable. Please [report broken links in GitHub Issues](https://github.com/wuyoscar/Internal-Safety-Collapse/issues).
 
